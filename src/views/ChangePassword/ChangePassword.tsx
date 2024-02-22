@@ -23,7 +23,7 @@ const ChangePassword = () => {
             id="new_password"
             placeholder="New password"
           />
-          <label htmlFor="confirm_password">Re-enter your new password</label>
+          <label htmlFor="confirm_password">Re-enter your new password.</label>
           <input
             type="password"
             name="confirm_password"
