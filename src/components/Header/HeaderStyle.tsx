@@ -53,6 +53,7 @@ const HeaderStyle = styled.header`
     padding: 0.8rem 2rem;
     border-radius: 4px;
     cursor: pointer;
+    text-decoration: none;
   }
   .header-right-signup-btn {
     background-color: var(--orange-color);
@@ -61,6 +62,7 @@ const HeaderStyle = styled.header`
     padding: 0.8rem 2rem;
     border-radius: 4px;
     cursor: pointer;
+    text-decoration: none;
   }
 `;
 
