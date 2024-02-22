@@ -6,6 +6,9 @@ import vanImage from "../../assets/van-image.png";
 import cartImage from "../../assets/cart-image.png";
 import userImage from "../../assets/user-image.png";
 import shopImage from "../../assets/shop-image.png";
+import ironImage from "../../assets/products/iron.png";
+import platesImage from "../../assets/products/plates.png";
+import microscopeImage from "../../assets/products/microscope.png";
 import { LandingPageMainWrapper } from "./LandingPageStye";
 
 export default function LandingPage() {
@@ -93,6 +96,51 @@ export default function LandingPage() {
             </div>
             <div className="landing-page-second-section-right-wrapper">
               <img src={landingPageImage2} alt="traidr-buying-and-selling" />
+            </div>
+          </div>
+          <div className="trending-sales-section">
+            <div className="trending-sales-section-heading">
+              <h1>Trending Sales</h1>
+            </div>
+            <div className="trending-sales-product-wrapper">
+              <div className="each-product-wrapper">
+                <div className="each-product-image">
+                  <img src={ironImage} alt="" />
+                </div>
+                <p className="each-product-title">Pressing Iron</p>
+                <p className="each-product-description">
+                  This is a very good pressing iron
+                </p>
+                <span className="each-product-price">N50,000</span>
+              </div>
+              <div className="each-product-wrapper">
+                <div className="each-product-image">
+                  <img src={platesImage} alt="" />
+                </div>
+                <p className="each-product-title">Plates</p>
+                <p className="each-product-description">Stainelss plates</p>
+                <span className="each-product-price">N50,000</span>
+              </div>
+              <div className="each-product-wrapper">
+                <div className="each-product-image">
+                  <img src={microscopeImage} alt="" />
+                </div>
+                <p className="each-product-title">Pressing Iron</p>
+                <p className="each-product-description">
+                  This is a very good pressing iron
+                </p>
+                <span className="each-product-price">N50,000</span>
+              </div>
+              <div className="each-product-wrapper">
+                <div className="each-product-image">
+                  <img src={ironImage} alt="" />
+                </div>
+                <p className="each-product-title">Pressing Iron</p>
+                <p className="each-product-description">
+                  This is a very good pressing iron
+                </p>
+                <span className="each-product-price">N50,000</span>
+              </div>
             </div>
           </div>
         </div>

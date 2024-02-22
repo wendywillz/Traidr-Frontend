@@ -1,0 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+.logo {
+  padding-bottom: 2rem;
+}
+
+.text {
+  font: inter;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  padding-bottom: 2rem;
+}
+
+.contact {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 4rem;
+}
+
+.contact-item {
+  display: flex;
+  padding: 0 4rem 0 0;
+}
+
+.footer-text {
+  margin: 0;
+  text-wrap: nowrap;
+  padding: 0 0 0 10px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 4rem;
+}
+
+.footer-heading {
+  color: rgba(224, 79, 22, 1);
+}
+
+hr {
+  margin-bottom: 2rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-end {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+/* h5 {
+  padding-right: 3rem;
+  font-weight: 400;
+  font-size: 18px;
+} */
+
+.last {
+  margin-top: 2rem;
+}
+
+.img {
+  width: 90%;
+  height: 90%;
+}

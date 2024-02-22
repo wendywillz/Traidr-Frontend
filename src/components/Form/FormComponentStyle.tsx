@@ -17,10 +17,11 @@ const FormComponentStyle = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 45%;
+    width: 40%;
     min-height: 80%;
-    padding: 3.5rem;
+    padding: 4rem 3.5rem;
     border-radius: 5px;
+    margin: 1rem auto;
     background-color: #fff;
   }
   .form-component-wrapper {
@@ -30,10 +31,9 @@ const FormComponentStyle = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    gap: 1rem;
   }
   .form-component-logo-wrapper {
-    flex-basis: 10%;
+    height: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,26 +43,27 @@ const FormComponentStyle = styled.div`
     font-weight: 600;
   }
   .form-component {
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     width: 100%;
   }
   .form-component fieldset {
     width: 100%;
     border: none;
-    margin: 1rem 0;
+    margin: 0.5rem 0;
   }
   .form-component fieldset label {
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 600;
     display: block;
     margin-bottom: 0.5rem;
   }
   .form-component fieldset input {
     width: 100%;
     padding: 1rem;
+    height: 2.5rem;
     border-radius: 5px;
     border: 1px solid var(--input-border-color);
     outline: none;
@@ -71,6 +72,24 @@ const FormComponentStyle = styled.div`
     }
     &::placeholder {
       color: var(--input-placeholder-color);
+    }
+  }
+
+  .username-input-wrapper {
+    margin: 1rem 0 !important;
+  }
+  .password-input-wrapper {
+    margin-bottom: 1rem !important;
+  }
+  .form-component select {
+    width: 100%;
+    padding: 0.5rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--input-border-color);
+    outline: none;
+    &:focus {
+      border: 1px solid var(--orange-color);
     }
   }
   .form-component .error-message {
@@ -90,6 +109,19 @@ const FormComponentStyle = styled.div`
   .or-wrapper img {
     width: 100%;
     object-fit: cover;
+  }
+  .extra-text {
+    font-size: 0.9rem;
+    font-weight: 400;
+    text-align: center;
+    color: var(--normal-text-color);
+  }
+  .link-to-text {
+    color: var(--orange-color);
+    text-decoration: underline;
+  }
+  .reset-password-input-wrapper {
+    margin-bottom: 3rem !important;
   }
 `;
 

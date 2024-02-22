@@ -1,21 +1,14 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import FormComponent from "../../components/Form/FormComponent";
 import axiosInstance from "../../utils/axiosInstance";
-import orImage from "../../assets/or.png";
-import GoogleSignup from "./component/GoogleSignup";
-export default function LoginPage() {
+import "./reset.css"
+export default function ResetPasswordPage() {
   const navigate = useNavigate();
+
   const [userEmail, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const handleUserEmail = (event: ChangeEvent<HTMLInputElement>) => {
-    setEmail((event.currentTarget as HTMLInputElement).value);
-  };
-  const handlePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setPassword((event.currentTarget as HTMLInputElement).value);
-  };
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -56,42 +49,34 @@ export default function LoginPage() {
   return (
     <>
       <FormComponent
-        button_text="LOG IN"
-        extraText="Don't have an account yet?"
-        linkText="Signup here"
-        linkPath="/signup"
-        formTitle="Welcome back to Traidr"
+        button_text="Send reset instructions"
+        extraText="Go back to"
+        linkText="Sign in"
+        linkPath="/login"
+        formTitle="Reset your password"
         children={{
           formElements: (
             <>
               {error && <div className="error-message">{error} </div>}
-              <fieldset className="username-input-wrapper">
-                <label htmlFor="username">Username</label>
-                <input
-                  type="text"
-                  id="username"
-                  value={userEmail}
-                  placeholder="BabalolaYu@gmail.com"
-                  onChange={handleUserEmail}
-                />
-              </fieldset>
-              <fieldset className="password-input-wrapper">
+
+              <fieldset className="input-wrapper">
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   id="password"
                   value={password}
                   placeholder="********"
-                  onChange={handlePassword}
                 />
-                <Link className="forgot-password" to={"/forgot-password"}>
-                  Forgot Password
-                </Link>
               </fieldset>
-              <div className="or-wrapper">
-                <img src={orImage} alt="" />
-              </div>
-              <GoogleSignup />
+              <fieldset className="reset-password-input-wrapper">
+                <label htmlFor="password">Conirm Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  placeholder="********"
+                />
+              </fieldset>
             </>
           ),
         }}
