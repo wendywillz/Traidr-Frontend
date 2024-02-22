@@ -1,20 +1,29 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FormComponent from "../../components/Form/FormComponent";
 import axiosInstance from "../../utils/axiosInstance";
 import orImage from "../../assets/or.png";
 import GoogleSignup from "./component/GoogleSignup";
-export default function LoginPage() {
+
+export default function SignupPage() {
   const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
   const [userEmail, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [aboutUs, setAboutUs] = useState("");
   const [error, setError] = useState("");
 
+  const handleUserName = (event: ChangeEvent<HTMLInputElement>) => {
+    setUserName((event.currentTarget as HTMLInputElement).value);
+  };
   const handleUserEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail((event.currentTarget as HTMLInputElement).value);
   };
   const handlePassword = (event: ChangeEvent<HTMLInputElement>) => {
     setPassword((event.currentTarget as HTMLInputElement).value);
+  };
+  const handleAboutUs = (event: ChangeEvent<HTMLSelectElement>) => {
+    setAboutUs((event.currentTarget as HTMLSelectElement).value);
   };
 
   const handleSubmit = async (event: FormEvent) => {
@@ -56,26 +65,38 @@ export default function LoginPage() {
   return (
     <>
       <FormComponent
-        button_text="LOG IN"
-        extraText="Don't have an account yet?"
-        linkText="Signup here"
-        linkPath="/signup"
-        formTitle="Welcome back to Traidr"
+        button_text="SIGN UP"
+        extraText="Already have an account?"
+        linkText="Log in here"
+        linkPath="/login"
+        formTitle="Create an Account"
         children={{
           formElements: (
             <>
               {error && <div className="error-message">{error} </div>}
-              <fieldset className="username-input-wrapper">
-                <label htmlFor="username">Username</label>
+              <fieldset className="input-wrapper">
+                <label htmlFor="name"> Name</label>
                 <input
                   type="text"
-                  id="username"
-                  value={userEmail}
-                  placeholder="BabalolaYu@gmail.com"
-                  onChange={handleUserEmail}
+                  id="name"
+                  value={userName}
+                  placeholder="Babalola"
+                  onChange={handleUserName}
+                  required
                 />
               </fieldset>
-              <fieldset className="password-input-wrapper">
+              <fieldset className="input-wrapper">
+                <label htmlFor="email"> Email Address</label>
+                <input
+                  type="text"
+                  id="email"
+                  value={userEmail}
+                  placeholder="babalola@gmail.com"
+                  onChange={handleUserEmail}
+                  required
+                />
+              </fieldset>
+              <fieldset className="input-wrapper">
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
@@ -84,9 +105,20 @@ export default function LoginPage() {
                   placeholder="********"
                   onChange={handlePassword}
                 />
-                <Link className="forgot-password" to={"/forgot-password"}>
-                  Forgot Password
-                </Link>
+              </fieldset>
+              <fieldset className="input-wrapper">
+                <label htmlFor="password">How did you hear about us</label>
+                <select
+                  className="how-did-you-hear"
+                  value={aboutUs}
+                  onChange={handleAboutUs}
+                >
+                  <option value="select">Select</option>
+                  <option value="facebook">Facebook</option>
+                  <option value="instagram">Instagram</option>
+                  <option value="linkedin">LinkedIn</option>
+                  <option value="twitter">Twitter</option>
+                </select>
               </fieldset>
               <div className="or-wrapper">
                 <img src={orImage} alt="" />

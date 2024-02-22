@@ -3,16 +3,25 @@ import traidrLogo from "../../assets/traidr-logo-orange.png";
 import { ReactNode } from "react";
 import MainButton from "../button/mainButton.tsx";
 import FormComponentStyle from "./FormComponentStyle.tsx";
+import { Link } from "react-router-dom";
 
 interface formChildrenProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   children: { formElements: ReactNode };
   formTitle: string;
+  button_text: string;
+  extraText?: string;
+  linkText?: string;
+  linkPath?: string;
 }
 export default function FormComponent({
   children,
   handleSubmit,
   formTitle,
+  button_text,
+  extraText,
+  linkText,
+  linkPath,
 }: formChildrenProps) {
   const { formElements } = children;
   return (
@@ -25,8 +34,13 @@ export default function FormComponent({
           <p className="form-component-title">{formTitle}</p>
           <form className="form-component" onSubmit={handleSubmit}>
             {formElements}
-            <MainButton button_text="LOG IN" />
+            <MainButton button_text={button_text} />
           </form>
+          {extraText && (
+            <p className="extra-text">
+              {extraText} <Link  className="link-to-text" to={linkPath ?? ""}>{linkText}</Link>
+            </p>
+          )}
         </div>
       </div>
     </FormComponentStyle>

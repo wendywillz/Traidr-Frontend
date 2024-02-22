@@ -22,7 +22,7 @@ export const LandingPageMainWrapper = styled.div`
     align-items: center;
     width: 100%;
     margin: 2rem 0;
-    @media (min-width: 768px) {
+    @media (min-width: 1400px) {
       flex-direction: row;
       gap: 2rem;
       justify-content: space-between;
@@ -34,7 +34,7 @@ export const LandingPageMainWrapper = styled.div`
     gap: 1rem;
     align-items: center;
     text-align: center;
-    @media (min-width: 768px) {
+    @media (min-width: 1400px) {
       flex-basis: 50%;
       text-align: left;
     }
@@ -82,7 +82,7 @@ export const LandingPageMainWrapper = styled.div`
     justify-content: center;
     align-items: center;
     display: none;
-    @media (min-width: 768px) {
+    @media (min-width: 1400px) {
       display: flex;
       flex-basis: 50%;
     }
@@ -99,7 +99,7 @@ export const LandingPageMainWrapper = styled.div`
     align-items: center;
     width: 100%;
     margin: 2rem 0;
-    @media (min-width: 768px) {
+    @media (min-width: 1400px) {
       flex-direction: row;
       gap: 2rem;
       justify-content: space-between;
@@ -112,7 +112,7 @@ export const LandingPageMainWrapper = styled.div`
     gap: 1rem;
     align-items: center;
     text-align: center;
-    @media (min-width: 768px) {
+    @media (min-width: 1400px) {
       flex-basis: 45%;
       text-align: left;
     }
@@ -156,7 +156,7 @@ export const LandingPageMainWrapper = styled.div`
   }
   .landing-page-second-section-right-wrapper {
     display: none;
-    @media (min-width: 768px) {
+    @media (min-width: 1400px) {
       display: flex;
       flex-basis: 55%;
     }
@@ -164,5 +164,68 @@ export const LandingPageMainWrapper = styled.div`
   .landing-page-second-section-right-wrapper img {
     width: 100%;
     object-fit: cover;
+  }
+
+  // trending sales section
+  .trending-sales-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 2rem 0;
+  }
+  .trending-sales-section-heading {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin: 2rem 0;
+  }
+  .trending-sales-section-heading h1 {
+    color: var(--normal-text-color);
+    text-align: left;
+  }
+  .trending-sales-product-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .each-product-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    min-height: 350px;
+    max-height: 350px;
+    margin: 1rem 0;
+  }
+  .each-product-image {
+    min-height: 70%;
+    height: 70%;
+    max-height: 70%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+  }
+  .each-product-image img {
+    object-fit: cover;
+  }
+  .each-product-title {
+    font-weight: 600;
+  }
+  .each-product-description {
+    margin-top: 0.5rem;
+    color: var(--normal-text-color);
+  }
+  .each-product-price {
+    color: var(--price-green-color);
+    font-weight: 600;
   }
 `;
