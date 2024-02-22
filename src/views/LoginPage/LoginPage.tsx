@@ -1,9 +1,9 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import FormComponent from "../../components/Header/Form/FormComponent";
-import axiosInstance from " ../utils/axiosInstance";
+import FormComponent from "../../components/Form/FormComponent";
+import axiosInstance from "../../utils/axiosInstance";
 import orImage from "../../assets/or.png";
-import GoogleSignup from "./GoogleSignup";
+import GoogleSignup from "./component/GoogleSignup";
 export default function LoginPage() {
   const navigate = useNavigate();
   const [userEmail, setEmail] = useState("");
