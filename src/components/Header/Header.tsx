@@ -1,6 +1,7 @@
 import traidrLogo from "../../assets/traidr-logo-orange.png";
 import "./HeaderStyle.tsx";
 import HeaderStyle from "./HeaderStyle.tsx";
+import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <HeaderStyle>
@@ -14,12 +15,12 @@ export default function Header() {
         </div>
         <div className="header-right-btn-wrapper">
           <i className="fa-solid fa-bars small-screen-icon"></i>
-          <button type="submit" className="header-right-login-btn big-screen">
+          <Link to="/login" className="header-right-login-btn big-screen">
             Login
-          </button>
-          <button type="submit" className="header-right-signup-btn big-screen">
+          </Link>
+          <Link to="/signup" className="header-right-signup-btn big-screen">
             Sign Up
-          </button>
+          </Link>
         </div>
       </div>
     </HeaderStyle>

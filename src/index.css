@@ -13,7 +13,7 @@ select,
 textarea {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 h1,
@@ -27,7 +27,7 @@ h6 {
   font-size: 3.5rem;
 }
 p {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 1.5;
 }
 /* global.css */
@@ -36,5 +36,6 @@ p {
   --black-color: #000;
   --normal-text-color: #00000080;
   --input-placeholder-color: #00000080;
+  --input-border-color: #bdbdbd;
   --price-green-color: #219653;
 }

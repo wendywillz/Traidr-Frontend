@@ -7,6 +7,7 @@ import cartImage from "../../assets/cart-image.png";
 import userImage from "../../assets/user-image.png";
 import shopImage from "../../assets/shop-image.png";
 import { LandingPageMainWrapper } from "./LandingPageStye";
+
 export default function LandingPage() {
   return (
     <>
