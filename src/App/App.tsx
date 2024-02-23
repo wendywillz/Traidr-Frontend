@@ -3,6 +3,7 @@ import LandingPage from "../views/LandingPage/LandingPage";
 import LoginPage from "../views/LoginPage/LoginPage";
 import SignupPage from "../views/SignupPage/SignupPage";
 import ResetPasswordPage from "../views/Reset-your-passsword/ResetPasswordPage";
+import ChangePassword from "../views/ChangePassword/ChangePassword";
 function App() {
   return (
     <Routes>
@@ -10,6 +11,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
+      <Route path="/change-password" element={<ChangePassword />} />
     </Routes>
   );
 }
