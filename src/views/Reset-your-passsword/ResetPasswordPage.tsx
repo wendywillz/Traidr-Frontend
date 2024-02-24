@@ -2,7 +2,7 @@ import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import FormComponent from "../../components/Form/FormComponent";
 import axiosInstance from "../../utils/axiosInstance";
-import "./reset.css"
+// import "./reset.css"
 export default function ResetPasswordPage() {
   const navigate = useNavigate();
 
