@@ -64,6 +64,19 @@ const HeaderStyle = styled.header`
     cursor: pointer;
     text-decoration: none;
   }
+
+  .shop-header-right-btn-wrapper {
+    flex-basis: 40%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 2rem;
+  }
+
+  .shop-profile-header-icon {
+    font-size: 2rem;
+  }
 `;
 
 export default HeaderStyle;
