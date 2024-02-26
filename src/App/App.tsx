@@ -4,6 +4,7 @@ import LoginPage from "../views/LoginPage/LoginPage";
 import SignupPage from "../views/SignupPage/SignupPage";
 import ResetPasswordPage from "../views/Reset-your-passsword/ResetPasswordPage";
 import ChangePassword from "../views/ChangePassword/ChangePassword";
+import ShopProfile from "../views/ShopProfile/ShopProfile";
 function App() {
   return (
     <Routes>
@@ -12,6 +13,7 @@ function App() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/change-password" element={<ChangePassword />} />
+      <Route path="/shop-profile" element={<ShopProfile />} />
     </Routes>
   );
 }
