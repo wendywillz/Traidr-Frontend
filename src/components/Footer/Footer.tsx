@@ -1,9 +1,14 @@
 import FooterStyle from "./FooterStyle";
 import traidrLogo from "../../assets/traidr-logo-orange.png";
+import { Link } from "react-router-dom";
+import mailIcon from "../../assets/mail.png";
+import phoneIcon from "../../assets/mail.png";
+import faxIcon from "../../assets/fax.png";
+import locationIcon from "../../assets/location.png";
 const Footer = () => {
   return (
     <FooterStyle>
-      <div className="footer-inneer">
+      <div className="footer-inner">
         <img className="footer-logo" src={traidrLogo} alt="footer logo" />
         <p className="footer-text">
           We are a lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
@@ -13,7 +18,7 @@ const Footer = () => {
 
         <div className="footer-contact">
           <div className="footer-contact-item">
-            <img className="footer-image" src="/phonr.png" alt="phone icon" />
+            <img className="footer-image" src={phoneIcon} alt="phone icon" />
             <div className="paragraph-text">
               <p>Tel</p>
               <p>310-437-2766</p>
@@ -21,7 +26,7 @@ const Footer = () => {
           </div>
 
           <div className="footer-contact-item">
-            <img className="footer-image" src="/mail.png" alt="mail icon" />
+            <img className="footer-image" src={mailIcon} alt="mail icon" />
             <div className="paragraph-text">
               <p>Mail</p>
               <p>unreal@outlook.com</p>
@@ -31,7 +36,7 @@ const Footer = () => {
           <div className="footer-contact-item">
             <img
               className="footer-image"
-              src="/location.png"
+              src={locationIcon}
               alt="location icon"
             />
             <div className="paragraph-text">
@@ -41,7 +46,7 @@ const Footer = () => {
           </div>
 
           <div className="footer-contact-item">
-            <img className="footer-image" src="/Ifax.png" alt="fax icon" />
+            <img className="footer-image" src={faxIcon} alt="fax icon" />
             <div className="paragraph-text">
               <p>Fax</p>
               <p>+1-000-0000</p>
@@ -49,74 +54,46 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="footer-nav">
-          <div className="footer-nav-inner">
-            <h3>About</h3>
-            <h4>About us</h4>
-            <h4>Blog</h4>
-            <h4>Careers</h4>
-            <h4>Jobs</h4>
-            <h4>In Press</h4>
+        <div className="footer-links">
+          <div className="footer-nav-inner ">
+            <p>About</p>
+            <Link to={""}>About us</Link>
+            <Link to={""}>Blog</Link>
+            <Link to={""}>Careers</Link>
+            <Link to={""}>Jobs</Link>
+            <Link to={""}>In Press</Link>
           </div>
 
           <div className="footer-nav-inner">
-            <h3>Support</h3>
-            <h4>Contact us</h4>
-            <h4>Online Chat</h4>
-            <h4>WhatsApp</h4>
-            <h4>Telegram</h4>
-            <h4>Ticketing</h4>
+            <p>SupportLink</p>
+            <Link to={""}>Contact us</Link>
+            <Link to={""}>Online Chat</Link>
+            <Link to={""}>WhatsApp</Link>
+            <Link to={""}>Telegram</Link>
+            <Link to={""}>Ticketing</Link>
           </div>
 
           <div className="footer-nav-inner">
-            <h3>FAQ</h3>
-            <h4>Account</h4>
-            <h4>Manage Deliveries</h4>
-            <h4>Orders</h4>
-            <h4>Payments</h4>
-            <h4>Returns</h4>
+            <p>FAQ</p>
+            <Link to={""}>Account</Link>
+            <Link to={""}>Manage Deliveries</Link>
+            <Link to={""}>Orders</Link>
+            <Link to={""}>Payments</Link>
+            <Link to={""}>Returns</Link>
           </div>
+        </div>
+        <hr className="footer-horizontal-rule"></hr>
 
-          <div className="footer-nav-inner">
-            <h3 className="footer-orange-heading">About</h3>
-            <h4>About Us</h4>
-            <h4>Blog</h4>
-            <h4>Careers</h4>
-            <h4>Jobs</h4>
-            <h4>In Press</h4>
+        <div className="footer-end">
+          <div className="footer-nav-end">
+            <Link to={""}>About Us</Link>
+            <Link to={""}>Privacy Policy</Link>
+            <Link to={""}>Contact</Link>
+            <Link to={""}>Privacy Policy</Link>
+            <Link to={""}>Sitemap</Link>
+            <Link to={""}>Terms of Use</Link>
           </div>
-
-          <div className="footer-nav-inner">
-            <h3 className="footer-orange-heading">Support</h3>
-            <h4>Contact Us</h4>
-            <h4>Online Chat</h4>
-            <h4>WhatsApp</h4>
-            <h4>Telegram</h4>
-            <h4>Ticketing</h4>
-          </div>
-
-          <div className="footer-nav-inner">
-            <h3 className="footer-orange-heading">Account</h3>
-            <h4>Manage Deliveries</h4>
-            <h4>Orders</h4>
-            <h4>Payment</h4>
-            <h4>Returns</h4>
-          </div>
-
-          <hr className="footer-horizontal-rule"></hr>
-
-          <div className="footer-end">
-            <div className="footer-nav-end">
-              <h5 className="footer-nav-last-end">About Us</h5>
-              <h5>Contact</h5>
-              <h5>Privacy Policy</h5>
-              <h5>Sitemap</h5>
-              <h5>Terms of Use</h5>
-            </div>
-            <div className="footer-last">
-              <img src="/prod.png" alt="product icon" />
-            </div>
-          </div>
+          <div className="footer-last">© 2000-2024, All Rights Reserved</div>
         </div>
       </div>
     </FooterStyle>

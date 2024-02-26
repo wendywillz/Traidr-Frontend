@@ -7,6 +7,7 @@ const HeaderStyle = styled.header`
   padding: 0rem 2rem;
   height: 4rem;
   margin-bottom: 2rem;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
   .header-inner {
     display: flex;
@@ -63,6 +64,19 @@ const HeaderStyle = styled.header`
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
+  }
+
+  .shop-header-right-btn-wrapper {
+    flex-basis: 40%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 2rem;
+  }
+
+  .shop-profile-header-icon {
+    font-size: 2rem;
   }
 `;
 
