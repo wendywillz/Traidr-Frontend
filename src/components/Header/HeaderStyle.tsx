@@ -4,7 +4,7 @@ const HeaderStyle = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0rem 3rem;
+  padding: 0rem 2rem;
   height: 4rem;
   margin-bottom: 2rem;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);

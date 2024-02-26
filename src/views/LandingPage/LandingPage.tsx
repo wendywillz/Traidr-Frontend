@@ -10,7 +10,7 @@ import ironImage from "../../assets/products/iron.png";
 import platesImage from "../../assets/products/plates.png";
 import microscopeImage from "../../assets/products/microscope.png";
 import { LandingPageMainWrapper } from "./LandingPageStye";
-
+import Footer from "../../components/Footer/Footer";
 export default function LandingPage() {
   return (
     <>
@@ -145,6 +145,7 @@ export default function LandingPage() {
           </div>
         </div>
       </LandingPageMainWrapper>
+      <Footer />
     </>
   );
 }
