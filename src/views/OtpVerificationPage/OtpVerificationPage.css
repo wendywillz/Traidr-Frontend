@@ -1,0 +1,80 @@
+.container {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.img-logo {
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+}
+
+.firstheader {
+    text-align: center;
+}
+
+.firstpara {
+    text-align: center;
+}
+
+.otp-input {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.otp-input input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.mainbutton {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .container {
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .img-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .otp-input {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .otp-input input {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+        margin: 5px;
+    }
+}
