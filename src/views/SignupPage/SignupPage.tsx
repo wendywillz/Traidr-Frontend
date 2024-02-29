@@ -39,6 +39,7 @@ export default function SignupPage() {
         name: userName,
         email: userEmail,
         password: password,
+        hearAboutUs: aboutUs
       });
 
       if (res && res.status === 200) {
