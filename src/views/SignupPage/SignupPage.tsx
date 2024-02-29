@@ -35,15 +35,17 @@ export default function SignupPage() {
     }
 
     try {
-      const res = await axiosInstance.post("/users/login", {
+      const res = await axiosInstance.post("/users/createUser", {
+        name: userName,
         email: userEmail,
         password: password,
+        hearAboutUs: aboutUs
       });
 
       if (res && res.status === 200) {
-        if (res.data.token) {
-          localStorage.setItem("token", res.data.token);
-          navigate(`/dashboard`);
+        if (res.data.otpSentSuccessfully) {
+          localStorage.setItem("signupOTp", res.data.otpSentSuccessfully);
+          navigate(`/otp-verification`);
         } else if (res.data.inValidPassword) {
           setError("Invalid password");
           setEmail("");

@@ -28,6 +28,16 @@ const HeaderStyle = styled.header`
   .traidr-header-logo {
     width: 6rem;
   }
+  .user-profile-img-wrapper {
+    height: 4rem;
+    width: 4rem;
+  }
+
+  .user-profile-img-wrapper img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
   .header-right-btn-wrapper {
     flex-basis: 40%;
     display: flex;
