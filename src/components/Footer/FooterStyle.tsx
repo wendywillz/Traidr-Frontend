@@ -68,7 +68,7 @@ const FooterStyle = styled.div`
     text-decoration: none;
   }
   .footer-nav-inner a:hover {
-    color: var(--orange-color);
+    color: var(--orange-color) !important;
   }
   .footer-nav-inner a:visited {
     color: var(--orange-color);

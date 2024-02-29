@@ -84,12 +84,14 @@ export const LandingPageMainWrapper = styled.div`
     display: none;
     @media (min-width: 1400px) {
       display: flex;
+      width: 100%;
       flex-basis: 50%;
     }
   }
   .landing-page-right-wrapper img {
-    width: 100%;
+    max-width: 100%;
     object-fit: cover;
+    height: auto
   }
 
   //   second section
