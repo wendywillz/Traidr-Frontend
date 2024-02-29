@@ -42,9 +42,9 @@ export default function SignupPage() {
       });
 
       if (res && res.status === 200) {
-        if (res.data.token) {
-          localStorage.setItem("token", res.data.otpSentSuccessfully);
-          navigate(`/dashboard`);
+        if (res.data.otpSentSuccessfully) {
+          localStorage.setItem("signupOTp", res.data.otpSentSuccessfully);
+          navigate(`/otp-verification`);
         } else if (res.data.inValidPassword) {
           setError("Invalid password");
           setEmail("");
