@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FormComponent from "../../components/Form/FormComponent";
 import axiosInstance from "../../utils/axiosInstance";
 
+
 export default function EnterOtpPage() {
   const navigate = useNavigate();
 
@@ -17,10 +18,11 @@ export default function EnterOtpPage() {
     }
 
     try {
-      const email = localStorage.getItem("signupOtp");
+      const email = localStorage.getItem("signupOTp");
+      console.log("emaul", email);
       const res = await axiosInstance.post("/users-otp/verify", {
         otp,
-        email
+        email,
       });
 
       if (res && res.status === 200) {

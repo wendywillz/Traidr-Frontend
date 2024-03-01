@@ -39,12 +39,13 @@ export default function SignupPage() {
         name: userName,
         email: userEmail,
         password: password,
-        hearAboutUs: aboutUs
+        hearAboutUs: aboutUs,
       });
 
       if (res && res.status === 200) {
         if (res.data.otpSentSuccessfully) {
           localStorage.setItem("signupOTp", res.data.otpSentSuccessfully);
+          console.log("otp", res.data.otpSentSuccessfully);
           navigate(`/otp-verification`);
         } else if (res.data.inValidPassword) {
           setError("Invalid password");
