@@ -3,26 +3,52 @@ import "./HeaderStyle.tsx";
 import HeaderStyle from "./HeaderStyle.tsx";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { BsBell } from "react-icons/bs";
+import { useState } from "react";
+import { FaUserCircle } from "react-icons/fa";
+
 import { ContextProvider } from "../../utils/ProtectedRoute.tsx";
 export default function Header() {
+  const [notificationCount, setNotificationCount] = useState(0);
+
+  const handleNotificationClick = () => {
+    setNotificationCount(0);
+  };
   const location = useLocation();
   const { userData } = ContextProvider();
   return (
     <HeaderStyle>
       <div className="header-inner">
         <div className="logo-wrapper">
-          <img
-            src={traidrLogo}
-            alt="traidr-logo"
-            className="traidr-header-logo"
-          />
+          <Link to={"/"}>
+            <img
+              src={traidrLogo}
+              alt="traidr-logo"
+              className="traidr-header-logo"
+            />
+          </Link>
         </div>
         <div className="header-right-btn-wrapper">
           <i className="fa-solid fa-bars small-screen-icon"></i>
           {location.pathname.includes("dashboard") ? (
             <>
+              <div
+                className="shop-profile-notification-wrapper"
+                onClick={handleNotificationClick}
+              >
+                <BsBell />
+                {notificationCount > 0 && (
+                  <div className="notification-badge">{notificationCount}</div>
+                )}
+              </div>
               <div className="user-profile-img-wrapper">
-                <img src={userData?.imagePath} alt="" />
+                {userData && userData.profileImage ? (
+                  <img src={userData?.profileImage} alt="" />
+                ) : (
+                  <div className="shop-profile-header-icon">
+                    <FaUserCircle />
+                  </div>
+                )}
               </div>
               <Link
                 to="/dashboard/start-selling"
@@ -31,13 +57,40 @@ export default function Header() {
                 Start Selling
               </Link>
             </>
-          ) : (
+          ) : location.pathname === "/" ? (
             <>
               <Link to="/login" className="header-right-login-btn big-screen">
                 Login
               </Link>
               <Link to="/signup" className="header-right-signup-btn big-screen">
                 Sign Up
+              </Link>
+            </>
+          ) : (
+            <>
+              <div
+                className="shop-profile-notification-wrapper"
+                onClick={handleNotificationClick}
+              >
+                <BsBell />
+                {notificationCount > 0 && (
+                  <div className="notification-badge">{notificationCount}</div>
+                )}
+              </div>
+              <div className="user-profile-img-wrapper">
+                {userData && userData.profileImage ? (
+                  <img src={userData?.profileImage} alt="" />
+                ) : (
+                  <div className="shop-profile-header-icon">
+                    <FaUserCircle />
+                  </div>
+                )}
+              </div>
+              <Link
+                to="/dashboard/start-selling"
+                className="header-right-signup-btn big-screen"
+              >
+                Start Selling
               </Link>
             </>
           )}

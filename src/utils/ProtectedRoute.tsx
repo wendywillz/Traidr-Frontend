@@ -15,7 +15,7 @@ interface ProtectedRouteChilren {
 interface userData {
   name: string;
   email: string;
-  imagePath: string;
+  profileImage: string;
   phoneNumber: number;
   isAdmin: string;
   isSeller: string;

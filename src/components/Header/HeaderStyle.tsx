@@ -25,6 +25,9 @@ const HeaderStyle = styled.header`
     align-items: center;
     justify-content: flex-start;
   }
+  logo-wrapper a {
+    text-decoration: none;
+  }
   .traidr-header-logo {
     width: 6rem;
   }
@@ -85,8 +88,27 @@ const HeaderStyle = styled.header`
     margin-right: 2rem;
   }
 
-  .shop-profile-header-icon {
+  .shop-profile-header-icon,
+  .shop-profile-notification-wrapper {
     font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .shop-profile-notification-wrapper > *,
+  .shop-profile-header-icon > * {
+    cursor: pointer;
+  }
+  .notification-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--orange-color);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
   }
 `;
 

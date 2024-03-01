@@ -1,33 +1,29 @@
-
-// import { DashboardMain, DashboardContainer } from '../../styles/UserDashboardStyles/Dashboard.styled'
-// import SearchBar from './SearchBar/SearchBar'
-
-// import AllProducts from './Products/AllProducts'
-// import SideBar from '../SideBar/SideBar'
-
-import { DashboardMain, DashboardContainer, DashBoardTitle } from "../DashboardStyles/Dashboard.styled"
-import SearchBar from "./SearchBar"
-import AllProducts from "./AllProducts"
-import SideBar from "./SideBar"
-import Header from "../../../components/ShopHeader/ShopHeader"
-
-{/*This is for the whole dashboard. The final should include the  imported navigation bar and side bar */}
+import {
+  DashboardMain,
+  DashboardContainer,
+  DashBoardTitle,
+} from "../DashboardStyles/Dashboard.styled";
+import SearchBar from "./SearchBar";
+import AllProducts from "./AllProducts";
+import SideBar from "./SideBar";
+import Header from "../../../components/Header/Header";
+{
+  /*This is for the whole dashboard. The final should include the  imported navigation bar and side bar */
+}
 const Dashboard = () => {
   return (
     <>
-    <Header/>
-    <DashboardContainer>
-      <SideBar/>
+      <Header />
+      <DashboardContainer>
+        <SideBar />
         <DashboardMain>
-          <SearchBar/>
+          <SearchBar />
           <DashBoardTitle>TRENDING SALES</DashBoardTitle>
-          <AllProducts/>
+          <AllProducts />
         </DashboardMain>
-
-
-    </DashboardContainer>
+      </DashboardContainer>
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

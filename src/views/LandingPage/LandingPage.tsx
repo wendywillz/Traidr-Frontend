@@ -11,7 +11,10 @@ import platesImage from "../../assets/products/plates.png";
 import microscopeImage from "../../assets/products/microscope.png";
 import { LandingPageMainWrapper } from "./LandingPageStye";
 import Footer from "../../components/Footer/Footer";
+import { useLocation } from "react-router-dom";
 export default function LandingPage() {
+  const location = useLocation();
+  console.log("location",location.pathname);
   return (
     <>
       <Header />
