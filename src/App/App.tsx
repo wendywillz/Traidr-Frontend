@@ -7,7 +7,8 @@ import ChangePassword from "../views/ChangePassword/ChangePassword";
 import ShopProfile from "../views/ShopProfile/ShopProfile";
 import Dashboard from "../views/Dashboard/DashboardCompnents/Dashboard";
 import ProtectedRoute from "../utils/ProtectedRoute";
-import EnterOtpPage from "../views/Enter-otp/EnterOtpPage";
+import EnterOtpPage from "../views/Enter-otp/EnterOtpPage"
+import StockYourShop from "../views/StockYourShopPage/StockYourShop";
 function App() {
   return (
     <Routes>
@@ -28,6 +29,7 @@ function App() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
+      <Route path="/stock-your-shop" element={<StockYourShop/>}/>
     </Routes>
   );
 }
