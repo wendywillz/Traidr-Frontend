@@ -32,8 +32,8 @@ export default function LoginPage() {
       });
 
       if (res && res.status === 200) {
-        if (res.data.token) {
-          localStorage.setItem("token", res.data.token);
+        if (res.data.successfulLogin) {
+          localStorage.setItem("token", res.data.successfulLogin);
           navigate(`/dashboard`);
         } else if (res.data.inValidPassword) {
           setError("Invalid password");

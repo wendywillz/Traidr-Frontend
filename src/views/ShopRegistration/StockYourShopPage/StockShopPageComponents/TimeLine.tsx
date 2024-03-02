@@ -1,5 +1,5 @@
 import { StockShopTimeline } from "../StockShopPageStyles/StockShop.styled"
-import timeline from "../../../assets/stock_shop_page_assets/Timeline.png"
+import timeline from "../../../../assets/stock_shop_page_assets/Timeline.png"
 const TimeLine = () => {
   return (
     <StockShopTimeline>
