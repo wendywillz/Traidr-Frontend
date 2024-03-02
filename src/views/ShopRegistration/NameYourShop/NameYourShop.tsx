@@ -1,7 +1,13 @@
 import Header from "../../../components/Header/Header";
 import FormStepComponent from "../../../components/FormStepComponent/FormStepComponent";
 import NameYourShopStyle from "./NameYourShopStyle";
+import SmallButton from "../../../components/button/smallButton/smallButton";
+import { FormEvent } from "react";
+
 function NameYourShopComponent() {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
   return (
     <>
       <Header />
@@ -10,7 +16,7 @@ function NameYourShopComponent() {
         <div className="shop-name-your-shop-inner">
           <h2>Shop Preferences</h2>
           <p>Let's get started Tell us more about your Shop.</p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <fieldset>
               <label htmlFor="shopName">Name of Shop:</label>
               <input type="text" placeholder="Empress Ki" id="shopName" />
@@ -34,6 +40,7 @@ function NameYourShopComponent() {
                 <option value="Dollar">Dollar</option>
               </select>
             </fieldset>
+            <SmallButton button_text="Save and Continue" type="submit" />
           </form>
         </div>
       </NameYourShopStyle>

@@ -8,7 +8,7 @@ import ShopProfile from "./views/ShopProfile/ShopProfile";
 import Dashboard from "./views/Dashboard/DashboardCompnents/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import EnterOtpPage from "./views/Enter-otp/EnterOtpPage";
-import ShopRegistration from "./views/ShopRegistration/NameYourShop/NameYourShop";
+import ShopRegistrationPage from "./views/ShopRegistration/ShopRegistrationPage";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
           </ProtectedRoute>
         }
       />
-      <Route path="/shop-registration" element={<ShopRegistration />} />
+      <Route path="/shop-registration" element={<ShopRegistrationPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
