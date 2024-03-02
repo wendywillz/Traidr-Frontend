@@ -5,6 +5,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import orImage from "../../assets/or.png";
 import GoogleSignup from "./component/GoogleSignup";
 
+
 export default function SignupPage() {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
@@ -47,12 +48,12 @@ export default function SignupPage() {
           localStorage.setItem("signupOTp", res.data.otpSentSuccessfully);
           console.log("otp", res.data.otpSentSuccessfully);
           navigate(`/otp-verification`);
-        } else if (res.data.inValidPassword) {
-          setError("Invalid password");
+        } else if (res.data.emailExistError) {
+          setError(res.data.emailExistError);
           setEmail("");
           setPassword("");
-        } else if (res.data.userNotFoundError) {
-          setError("User not found, invalid email");
+        } else if (res.data.unableToCreateUser) {
+          setError(res.data.unableToCreateUser);
           setEmail("");
           setPassword("");
         }

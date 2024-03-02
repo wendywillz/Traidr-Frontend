@@ -1,13 +1,15 @@
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "../views/LandingPage/LandingPage";
-import LoginPage from "../views/LoginPage/LoginPage";
-import SignupPage from "../views/SignupPage/SignupPage";
-import ResetPasswordPage from "../views/Reset-your-passsword/ResetPasswordPage";
-import ChangePassword from "../views/ChangePassword/ChangePassword";
-import ShopProfile from "../views/ShopProfile/ShopProfile";
-import Dashboard from "../views/Dashboard/DashboardCompnents/Dashboard";
-import ProtectedRoute from "../utils/ProtectedRoute";
-import EnterOtpPage from "../views/Enter-otp/EnterOtpPage";
+import LandingPage from "./views/LandingPage/LandingPage";
+import LoginPage from "./views/LoginPage/LoginPage";
+import SignupPage from "./views/SignupPage/SignupPage";
+import ResetPasswordPage from "./views/Reset-your-passsword/ResetPasswordPage";
+import ChangePassword from "./views/ChangePassword/ChangePassword";
+import ShopProfile from "./views/ShopProfile/ShopProfile";
+import Dashboard from "./views/Dashboard/DashboardCompnents/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import EnterOtpPage from "./views/Enter-otp/EnterOtpPage";
+import ShopRegistration from "./views/ShopRegistration/NameYourShop/NameYourShop";
+
 function App() {
   return (
     <Routes>
@@ -24,6 +26,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="/shop-registration" element={<ShopRegistration />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />

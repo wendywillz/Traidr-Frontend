@@ -1,3 +1,4 @@
+import userDataInterface from "../../interfaces/userInterface.tsx";
 import traidrLogo from "../../assets/traidr-logo-orange.png";
 import "./HeaderStyle.tsx";
 import HeaderStyle from "./HeaderStyle.tsx";
@@ -6,8 +7,11 @@ import { useLocation } from "react-router-dom";
 import { BsBell } from "react-icons/bs";
 import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
-import { ContextProvider } from "../../utils/ProtectedRoute.tsx";
+interface userState {
+  user: userDataInterface;
+}
 export default function Header() {
   const [notificationCount, setNotificationCount] = useState(0);
 
@@ -15,7 +19,7 @@ export default function Header() {
     setNotificationCount(0);
   };
   const location = useLocation();
-  const { userData } = ContextProvider();
+  const userData = useSelector((state: userState) => state.user);
   return (
     <HeaderStyle>
       <div className="header-inner">
