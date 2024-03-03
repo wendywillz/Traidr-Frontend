@@ -9,6 +9,8 @@ import Dashboard from "./views/Dashboard/DashboardCompnents/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import EnterOtpPage from "./views/Enter-otp/EnterOtpPage";
 import ShopRegistrationPage from "./views/ShopRegistration/ShopRegistrationPage";
+import StockYourShop from "./views/ShopRegistration/StockYourShopPage/StockYourShop";
+import ShopSecurityPage from "./views/ShopSecurityPage/ShopSecurityPage";
 
 function App() {
   return (
@@ -28,10 +30,11 @@ function App() {
       <Route path="/shop-registration" element={<ShopRegistrationPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
-      <Route path="/shop-profile" element={<ShopProfile />} />
-      <Route path="/change-password" element={<ChangePassword />} />
+      <Route path="/stock-your-shop" element={<StockYourShop />} />
+      <Route path="/shop-security-page" element={<ShopSecurityPage />} />
     </Routes>
   );
 }

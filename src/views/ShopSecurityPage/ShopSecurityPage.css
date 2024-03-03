@@ -1,0 +1,58 @@
+.content {
+    padding:111px;
+    margin-top: 75px;
+}
+
+.content-paras {
+    margin-left:16px;
+    margin-right:16px;
+    font-weight: 500;
+    font-family: Inter;
+    line-height: 28px;
+}
+
+.title-header {
+    font-size: 1.5em;
+    text-align: center;
+    font-family: "Outfit", sans-serif;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.title-para {
+    margin-bottom: 30px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.title-para2 {
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+}
+
+
+.bold-title {
+    color:black;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 758px) {
+    .content {
+        padding: 0 20px; 
+    }
+
+    .title-header {
+        font-size: 1.2em; 
+    }
+
+    .title-para, .title-para2 {
+        width: auto; 
+        margin-left: 5px; 
+        margin-right: 5px;
+    }
+
+   
+    .bold-title {
+        width:auto;
+        font-size: 18px; 
+    }
+}
