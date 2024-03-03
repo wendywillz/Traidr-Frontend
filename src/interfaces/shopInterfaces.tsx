@@ -1,9 +1,14 @@
-export interface NameYourShopProps {
-  nameYourShop: string;
-  currency: string;
-  category: string;
+export interface NameYourShopFormDetails {
+  shopName: string;
+  shopCurrency: string;
+  shopCategory: string;
 }
-export interface StockYourShopProps {
+
+export interface nameYourShopState {
+  nameYourShop: NameYourShopFormDetails;
+}
+
+export interface StockYourShopFormDetails {
   photosURL: string;
   vidoesURL: string;
   title: string;
@@ -11,7 +16,7 @@ export interface StockYourShopProps {
   description: string;
   price: string;
 }
-export interface HowYouWillGetPaidProps {
+export interface HowYouWillGetPaidFormDetails {
   paymentDetails: string;
   legalBusinessAddress: {
     country: string;
