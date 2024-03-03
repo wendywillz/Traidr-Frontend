@@ -10,7 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import EnterOtpPage from "./views/Enter-otp/EnterOtpPage";
 import ShopRegistrationPage from "./views/ShopRegistration/ShopRegistrationPage";
 import StockYourShop from "./views/ShopRegistration/StockYourShopPage/StockYourShop";
-import ShopSecurityPage from "./views/ShopSecurityPage/ShopSecurityPage";
+import ShopSecurityPage from "./views/ShopRegistration/ShopSecurityPage/ShopSecurityPage";
 
 function App() {
   return (

@@ -8,7 +8,7 @@ function FormStepComponent() {
   // );
   const nameYourShop = localStorage.getItem("nameYourShop");
   const stockYourShop = localStorage.getItem("stockYourShop");
-  const howYouGetPaid = localStorage.getItem("howYouGetPaid");
+  //const howYouGetPaid = localStorage.getItem("howYouGetPaid");
 
   return (
     <FormStepComponentWrapper>
@@ -30,14 +30,14 @@ function FormStepComponent() {
           )}
           <p>Stock Your Shop</p>
         </div>
-        <div className="form-step">
+        {/* <div className="form-step">
           {howYouGetPaid ? (
             <FaCircleCheck className="step-icon" />
           ) : (
             <FaCircle className="step-icon" />
           )}
           <p>How you'll get paid</p>
-        </div>
+        </div> */}
         <div className="form-step">
           <FaCircle className="step-icon" />
           <p>Shop Security</p>

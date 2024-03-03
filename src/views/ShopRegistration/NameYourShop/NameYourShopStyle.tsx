@@ -9,10 +9,10 @@ const NameYourShopStyle = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    margin: 2rem auto;
+    padding: 0 2rem;
+    margin: 1rem auto;
     @media (min-width: 768px) {
-      width: 90%;
+      width: 80%;
     }
     @media (min-width: 1500px) {
       max-width: 1500px;
@@ -24,7 +24,7 @@ const NameYourShopStyle = styled.div`
   .shop-name-your-shop-inner form {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 100%;
     margin: 2rem auto;
   }
   .name-your-shop-form-inner {
