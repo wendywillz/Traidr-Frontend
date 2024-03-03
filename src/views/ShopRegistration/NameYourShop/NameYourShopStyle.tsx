@@ -26,42 +26,52 @@ const NameYourShopStyle = styled.div`
     flex-direction: column;
     width: 80%;
     margin: 2rem auto;
-    gap: 2rem;
+  }
+  .name-your-shop-form-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
     @media (min-width: 768px) {
       flex-direction: row;
       flex-wrap: wrap;
     }
   }
-  .shop-name-your-shop-inner form fieldset {
+  .name-your-shop-form-inner fieldset {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     border: none;
     @media (min-width: 768px) {
-      flex-basis: 45%;
-
+      flex-basis: 48%;
     }
   }
-  .shop-name-your-shop-inner form fieldset label {
+  .name-your-shop-form-inner fieldset label {
     font-weight: 600;
   }
-  .shop-name-your-shop-inner form fieldset input {
+  .name-your-shop-form-inner fieldset input {
     border: 1px solid var(--input-border-color);
     border-radius: 4px;
     padding: 0.5rem;
     width: 100%;
     height: 3rem;
   }
-  .shop-name-your-shop-inner form fieldset input::placeholder {
+  .name-your-shop-form-inner fieldset input::placeholder {
     color: var(--input-placeholder-color);
   }
 
-  .shop-name-your-shop-inner form fieldset select {
+  .name-your-shop-form-inner fieldset select {
     border: 1px solid var(--input-border-color);
     border-radius: 4px;
     padding: 0.5rem;
     width: 100%;
     height: 3rem;
+  }
+  .submit-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5rem;
   }
 `;
 
