@@ -1,7 +1,7 @@
 import "./FormComponentStyle.tsx";
 import traidrLogo from "../../assets/traidr-logo-orange.png";
 import { ReactNode } from "react";
-import MainButton from "../button/mainButton.tsx";
+import MainButton from "../button/MainButton/mainButton.tsx";
 import FormComponentStyle from "./FormComponentStyle.tsx";
 import { Link } from "react-router-dom";
 
