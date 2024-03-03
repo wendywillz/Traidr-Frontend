@@ -161,108 +161,112 @@ const StockYourShop = () => {
       <Header />
       <FormStepComponent />
       <StockShopMain>
-        <PageDescription />
+        <div className="stock-your-shop-inner">
+          {" "}
+          <PageDescription />
+          <StockShopMainForm onSubmit={handleSubmit}>
+            <Upload>
+              <UploadInstructions>
+                <h3 className="stock-shop-page-upload-instructions-title">
+                  Photos
+                </h3>
+                <p className="stock-shop-page-upload-instructions-description">
+                  Add some Aesthetic Photos for your Shop
+                </p>
+                <p className="stock-shop-page-upload-instructions-tips">
+                  Tips:
+                </p>
+                <ul className="stock-shop-page-upload-instructions-tips-list">
+                  <li className="stock-shop-page-upload-instructions-tips-list-item">
+                    Use natural light and no flash
+                  </li>
+                  <li className="stock-shop-page-upload-instructions-tips-list-item">
+                    Include a common object for scale
+                  </li>
+                  <li className="stock-shop-page-upload-instructions-tips-list-item">
+                    Show the item being held, worn or used
+                  </li>
+                  <li className="stock-shop-page-upload-instructions-tips-list-item">
+                    Shoot against a clean simple background
+                  </li>
+                  <li className="stock-shop-page-upload-instructions-tips-list-item">
+                    Add photots to your variations so buyers can see all their
+                    options
+                  </li>
+                </ul>
+              </UploadInstructions>
 
-        <StockShopMainForm onSubmit={handleSubmit}>
-          <Upload>
-            <UploadInstructions>
-              <h3 className="stock-shop-page-upload-instructions-title">
-                Photos
-              </h3>
-              <p className="stock-shop-page-upload-instructions-description">
-                Add some Aesthetic Photos for your Shop
-              </p>
-              <p className="stock-shop-page-upload-instructions-tips">Tips:</p>
-              <ul className="stock-shop-page-upload-instructions-tips-list">
-                <li className="stock-shop-page-upload-instructions-tips-list-item">
-                  Use natural light and no flash
-                </li>
-                <li className="stock-shop-page-upload-instructions-tips-list-item">
-                  Include a common object for scale
-                </li>
-                <li className="stock-shop-page-upload-instructions-tips-list-item">
-                  Show the item being held, worn or used
-                </li>
-                <li className="stock-shop-page-upload-instructions-tips-list-item">
-                  Shoot against a clean simple background
-                </li>
-                <li className="stock-shop-page-upload-instructions-tips-list-item">
-                  Add photots to your variations so buyers can see all their
-                  options
-                </li>
-              </ul>
-            </UploadInstructions>
+              <UploadPhoto>
+                {/*This whole div would have a visible border */}
+                <img src={photoIcon} className="stock-shop-page-upload-icon" />
+                <label
+                  className="stock-shop-page-upload-photo-label"
+                  htmlFor="photoInput"
+                >
+                  Add a Photo
+                </label>
+                <input
+                  className="stock-shop-page-upload-photo-input"
+                  type="file"
+                  accept="image/*"
+                  id="photoInput"
+                  name="photo"
+                  onChange={handlePhotoUpload}
+                />
+              </UploadPhoto>
+            </Upload>
 
-            <UploadPhoto>
-              {/*This whole div would have a visible border */}
-              <img src={photoIcon} className="stock-shop-page-upload-icon" />
-              <label
-                className="stock-shop-page-upload-photo-label"
-                htmlFor="photoInput"
-              >
-                Add a Photo
-              </label>
-              <input
-                className="stock-shop-page-upload-photo-input"
-                type="file"
-                accept="image/*"
-                id="photoInput"
-                name="photo"
-                onChange={handlePhotoUpload}
-              />
-            </UploadPhoto>
-          </Upload>
+            <Upload>
+              <UploadInstructions>
+                <h3 className="stock-shop-page-upload-instructions-title">
+                  Videos
+                </h3>
+                <p className="stock-shop-page-upload-instructions-description">
+                  Add some Aesthetic Videos for your Shop
+                </p>
+                <p className="stock-shop-page-upload-instructions-tips">
+                  Tips:
+                </p>
+                <ul className="stock-shop-page-upload-instructions-tips-list">
+                  <li className="stock-shop-page-upload-instructions-tips-list-item">
+                    Film wearable items on a model or show a functional item
+                    being used
+                  </li>
+                  <li className="stock-shop-page-upload-instructions-tips-list-item">
+                    Adjust your settings to record high resolution videos - aim
+                    for 1080p or higher
+                  </li>
+                  <li className="stock-shop-page-upload-instructions-tips-list-item">
+                    Crop your video after you upload it to get the right
+                    dimensions
+                  </li>
+                </ul>
+              </UploadInstructions>
 
-          <Upload>
-            <UploadInstructions>
-              <h3 className="stock-shop-page-upload-instructions-title">
-                Videos
-              </h3>
-              <p className="stock-shop-page-upload-instructions-description">
-                Add some Aesthetic Videos for your Shop
-              </p>
-              <p className="stock-shop-page-upload-instructions-tips">Tips:</p>
-              <ul className="stock-shop-page-upload-instructions-tips-list">
-                <li className="stock-shop-page-upload-instructions-tips-list-item">
-                  Film wearable items on a model or show a functional item being
-                  used
-                </li>
-                <li className="stock-shop-page-upload-instructions-tips-list-item">
-                  Adjust your settings to record high resolution videos - aim
-                  for 1080p or higher
-                </li>
-                <li className="stock-shop-page-upload-instructions-tips-list-item">
-                  Crop your video after you upload it to get the right
-                  dimensions
-                </li>
-              </ul>
-            </UploadInstructions>
+              <UploadVideo>
+                {/*This whole div would have a visible border */}
+                <img src={videoIcon} className="stock-shop-page-upload-icon" />
+                <label
+                  className="stock-shop-page-upload-video-label"
+                  htmlFor="videoInput"
+                >
+                  Add a Video
+                </label>
+                <input
+                  className="stock-shop-page-upload-video-input"
+                  type="file"
+                  accept="video/*"
+                  id="videoInput"
+                  name="video"
+                  onChange={handleVideoUpload}
+                />
+                <p className="stock-shop-page-upload-max-file-size">
+                  Max file size: 100mb
+                </p>
+              </UploadVideo>
+            </Upload>
 
-            <UploadVideo>
-              {/*This whole div would have a visible border */}
-              <img src={videoIcon} className="stock-shop-page-upload-icon" />
-              <label
-                className="stock-shop-page-upload-video-label"
-                htmlFor="videoInput"
-              >
-                Add a Video
-              </label>
-              <input
-                className="stock-shop-page-upload-video-input"
-                type="file"
-                accept="video/*"
-                id="videoInput"
-                name="video"
-                onChange={handleVideoUpload}
-              />
-              <p className="stock-shop-page-upload-max-file-size">
-                Max file size: 100mb
-              </p>
-            </UploadVideo>
-          </Upload>
-
-          <FormContainer>
-            <form>
+            <FormContainer>
               <FormTitleAndDescription>
                 <h3 className="stock-shop-page-form-title">Listing Details</h3>
                 <p className="stock-shop-page-form-description">
@@ -362,17 +366,13 @@ const StockYourShop = () => {
                   </textarea>
                 </div>
               </ListingDetailsForm>
-              <div className="submit-button-wrapper">
-                <SmallButton
-                  button_text="Cancel"
-                  whiteBg={true}
-                  type="button"
-                />
-                <SmallButton button_text="Save and Continue" type="submit" />
-              </div>
-            </form>
-          </FormContainer>
-        </StockShopMainForm>
+            </FormContainer>
+            <div className="submit-button-wrapper">
+              <SmallButton button_text="Cancel" whiteBg={true} type="button" />
+              <SmallButton button_text="Save and Continue" type="submit" />
+            </div>
+          </StockShopMainForm>
+        </div>
       </StockShopMain>
     </>
   );
