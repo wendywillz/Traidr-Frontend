@@ -20,7 +20,6 @@ function App() {
           <ProtectedRoute>
             <Routes>
               <Route index element={<Dashboard />} />
-              <Route path="change-password" element={<ChangePassword />} />
               <Route path="shop-profile" element={<ShopProfile />} />
             </Routes>
           </ProtectedRoute>
@@ -31,6 +30,8 @@ function App() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
+      <Route path="/shop-profile" element={<ShopProfile />} />
+      <Route path="/change-password" element={<ChangePassword />} />
     </Routes>
   );
 }

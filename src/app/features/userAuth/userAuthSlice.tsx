@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import userDataInterface from "../../../interfaces/userInterface";
+
 const initialState = {} as userDataInterface;
 
-export const userAuthSlice = createSlice({
+const userAuthSlice = createSlice({
   name: "user",
   initialState,
   reducers: {

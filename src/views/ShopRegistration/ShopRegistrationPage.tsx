@@ -1,8 +1,8 @@
 import NameYourShopComponent from "./NameYourShop/NameYourShop";
 import StockYourShop from "./StockYourShopPage/StockYourShop";
 import useMultiStepForm from "../../components/HandleMultipleForm/HandleMultipleForm";
-import SmallButton from "../../components/button/smallButton/smallButton";
-
+import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
+import { NextIcon, PrevIcon } from "./ShopRegistrationPageStyle";
 export default function ShopRegistrationPage() {
   const steps = [<NameYourShopComponent />, <StockYourShop />];
   const { next, back, currentStep, currentStepIndex } = useMultiStepForm(steps);
@@ -10,23 +10,21 @@ export default function ShopRegistrationPage() {
     <>
       {currentStep}
       {currentStepIndex === 0 ? (
-        <SmallButton button_text="Next" onClick={next} type="button" />
+        <NextIcon>
+          <FaAngleRight onClick={next} className="next-icon" />
+        </NextIcon>
       ) : currentStepIndex >= steps.length - 1 ? (
-        <SmallButton
-          button_text="Go to previous"
-          whiteBg={true}
-          onClick={back}
-          type="button"
-        />
+        <PrevIcon>
+          <FaAngleLeft onClick={back} className="prev-icon" />
+        </PrevIcon>
       ) : (
         <>
-          <SmallButton button_text="Next" onClick={next} type="button" />
-          <SmallButton
-            button_text="Go to previous"
-            whiteBg={true}
-            onClick={back}
-            type="button"
-          />
+          <NextIcon>
+            <FaAngleRight onClick={next} className="next-icon" />
+          </NextIcon>
+          <PrevIcon>
+            <FaAngleLeft onClick={back} className="prev-icon" />
+          </PrevIcon>
         </>
       )}
     </>

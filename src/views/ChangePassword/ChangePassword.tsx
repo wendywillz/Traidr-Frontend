@@ -1,6 +1,7 @@
 import "./ChangePassword.css";
 
 const ChangePassword = () => {
+  
   return (
     <div className="all-content">
       <div className="container-password">

@@ -46,11 +46,11 @@ export default function EnterOtpPage() {
   return (
     <>
       <FormComponent
-        button_text="Send reset instructions"
+        button_text="Verify OTP"
         extraText="Go back to"
         linkText="Sign in"
         linkPath="/login"
-        formTitle="Reset your otp"
+        formTitle="Enter OTP sent to your email address"
         children={{
           formElements: (
             <>

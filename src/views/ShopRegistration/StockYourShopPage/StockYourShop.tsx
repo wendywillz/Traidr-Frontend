@@ -14,7 +14,6 @@ import {
 import {
   StockShopMain,
   StockShopMainForm,
-  BaseButtons,
 } from "./StockShopPageStyles/StockShop.styled";
 
 //Component imports
@@ -24,11 +23,10 @@ import FormStepComponent from "../../../components/FormStepComponent/FormStepCom
 //Media imports
 import photoIcon from "../../../assets/stock_shop_page_assets/upload_pic_icon.png";
 import videoIcon from "../../../assets/stock_shop_page_assets/upload_video_icon.png";
-
+import SmallButton from "../../../components/button/smallButton/smallButton";
 //package imports
 import { useState, FormEvent, useRef, ChangeEvent } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 interface ListingDetails {
   title: string;
@@ -264,122 +262,116 @@ const StockYourShop = () => {
           </Upload>
 
           <FormContainer>
-            <FormTitleAndDescription>
-              <h3 className="stock-shop-page-form-title">Listing Details</h3>
-              <p className="stock-shop-page-form-description">
-                Tell the world about your item and why they'll love it
-              </p>
-            </FormTitleAndDescription>
-            <ListingDetailsForm>
-              <div className="stock-shop-page-listing-details-form-field">
-                <div className="stock-shop-label-title-and-description">
-                  <label
-                    className="stock-shop-page-listing-details-label"
-                    htmlFor="titleInput"
-                  >
-                    Title*
-                  </label>
-                  <p className="stock-shop-page-listing-details-label-description">
-                    Include keywords that buyers would use to search for your
-                    item
-                  </p>
+            <form>
+              <FormTitleAndDescription>
+                <h3 className="stock-shop-page-form-title">Listing Details</h3>
+                <p className="stock-shop-page-form-description">
+                  Tell the world about your item and why they'll love it
+                </p>
+              </FormTitleAndDescription>
+              <ListingDetailsForm>
+                <div className="stock-shop-page-listing-details-form-field">
+                  <div className="stock-shop-label-title-and-description">
+                    <label
+                      className="stock-shop-page-listing-details-label"
+                      htmlFor="titleInput"
+                    >
+                      Title*
+                    </label>
+                    <p className="stock-shop-page-listing-details-label-description">
+                      Include keywords that buyers would use to search for your
+                      item
+                    </p>
+                  </div>
+                  <input
+                    className="stock-shop-page-listing-details-input"
+                    type="text"
+                    id="titleInput"
+                    name="title"
+                    ref={titleRef}
+                  />
                 </div>
-                <input
-                  className="stock-shop-page-listing-details-input"
-                  type="text"
-                  id="titleInput"
-                  name="title"
-                  ref={titleRef}
-                />
-              </div>
 
-              <div className="stock-shop-page-listing-details-form-field">
-                <div className="stock-shop-label-title-and-description">
-                  <label
-                    className="stock-shop-page-listing-details-label"
-                    htmlFor="priceInput"
-                  >
-                    Price*
-                  </label>
-                  <p className="stock-shop-page-listing-details-label-description">
-                    Include how much your item costs
-                  </p>
+                <div className="stock-shop-page-listing-details-form-field">
+                  <div className="stock-shop-label-title-and-description">
+                    <label
+                      className="stock-shop-page-listing-details-label"
+                      htmlFor="priceInput"
+                    >
+                      Price*
+                    </label>
+                    <p className="stock-shop-page-listing-details-label-description">
+                      Include how much your item costs
+                    </p>
+                  </div>
+                  <input
+                    className="stock-shop-page-listing-details-input"
+                    type="number"
+                    id="priceInput"
+                    name="price"
+                    ref={priceRef}
+                  />
                 </div>
-                <input
-                  className="stock-shop-page-listing-details-input"
-                  type="number"
-                  id="priceInput"
-                  name="price"
-                  ref={priceRef}
-                />
-              </div>
 
-              <div className="stock-shop-page-listing-details-form-field">
-                <div className="stock-shop-label-title-and-description">
-                  <label
-                    className="stock-shop-page-listing-details-label"
-                    htmlFor="categoryInput"
-                  >
-                    Category*
-                  </label>
-                  <p className="stock-shop-page-listing-details-label-description">
-                    Type a two- or three-word description of your item to get
-                    category suggestions that will help more shoppers find it.{" "}
-                  </p>
+                <div className="stock-shop-page-listing-details-form-field">
+                  <div className="stock-shop-label-title-and-description">
+                    <label
+                      className="stock-shop-page-listing-details-label"
+                      htmlFor="categoryInput"
+                    >
+                      Category*
+                    </label>
+                    <p className="stock-shop-page-listing-details-label-description">
+                      Type a two- or three-word description of your item to get
+                      category suggestions that will help more shoppers find it.{" "}
+                    </p>
+                  </div>
+                  <input
+                    className="stock-shop-page-listing-details-input"
+                    type="text"
+                    id="categoryInput"
+                    name="category"
+                    ref={categoryRef}
+                  />
                 </div>
-                <input
-                  className="stock-shop-page-listing-details-input"
-                  type="text"
-                  id="categoryInput"
-                  name="category"
-                  ref={categoryRef}
-                />
-              </div>
 
-              <div className="stock-shop-page-listing-details-form-field">
-                <div className="stock-shop-label-title-and-description">
-                  <label
-                    className="stock-shop-page-listing-details-label"
-                    htmlFor="descriptionInput"
+                <div className="stock-shop-page-listing-details-form-field">
+                  <div className="stock-shop-label-title-and-description">
+                    <label
+                      className="stock-shop-page-listing-details-label"
+                      htmlFor="descriptionInput"
+                    >
+                      Description*
+                    </label>
+                    <p className="stock-shop-page-listing-details-label-description">
+                      Start with a brief overview that describes your item’s
+                      finest features. Shoppers will only see the first few
+                      lines of your description at first, so make it count!{" "}
+                      <br /> <br />
+                      Not sure what else to say? Shoppers also like hearing
+                      about your process, and the story behind this item.{" "}
+                    </p>
+                  </div>
+                  <textarea
+                    className="stock-shop-page-listing-details-textarea"
+                    id="descriptionInput"
+                    name="description"
+                    ref={descriptionRef}
                   >
-                    Description*
-                  </label>
-                  <p className="stock-shop-page-listing-details-label-description">
-                    Start with a brief overview that describes your item’s
-                    finest features. Shoppers will only see the first few lines
-                    of your description at first, so make it count! <br />{" "}
-                    <br />
-                    Not sure what else to say? Shoppers also like hearing about
-                    your process, and the story behind this item.{" "}
-                  </p>
+                    {" "}
+                  </textarea>
                 </div>
-                <textarea
-                  className="stock-shop-page-listing-details-textarea"
-                  id="descriptionInput"
-                  name="description"
-                  ref={descriptionRef}
-                >
-                  {" "}
-                </textarea>
+              </ListingDetailsForm>
+              <div className="submit-button-wrapper">
+                <SmallButton
+                  button_text="Cancel"
+                  whiteBg={true}
+                  type="button"
+                />
+                <SmallButton button_text="Save and Continue" type="submit" />
               </div>
-            </ListingDetailsForm>
+            </form>
           </FormContainer>
-
-          <BaseButtons>
-            <Link
-              to="/"
-              className="stock-shop-page-cancel-button"
-              type="button"
-            >
-              Cancel
-            </Link>
-            <button
-              className="stock-shop-page-save-and-continue-button"
-              type="submit"
-            >
-              Save and continue
-            </button>
-          </BaseButtons>
         </StockShopMainForm>
       </StockShopMain>
     </>
