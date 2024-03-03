@@ -20,30 +20,56 @@ import {
 import PageDescription from "./StockShopPageComponents/PageDescription";
 import Header from "../../../components/Header/Header";
 import FormStepComponent from "../../../components/FormStepComponent/FormStepComponent";
+import { ErrorMessage } from "./stockShopStyle";
 //Media imports
 import photoIcon from "../../../assets/stock_shop_page_assets/upload_pic_icon.png";
 import videoIcon from "../../../assets/stock_shop_page_assets/upload_video_icon.png";
 import SmallButton from "../../../components/button/smallButton/smallButton";
 //package imports
-import { useState, FormEvent, useRef, ChangeEvent } from "react";
-import axios from "axios";
+import { useState, FormEvent, ChangeEvent } from "react";
 
 interface ListingDetails {
-  title: string;
-  price: number;
-  category: string;
-  description: string;
+  productTitle: string;
+  productPrice: number;
+  productCategory: string;
+  productDescription: string;
 }
 
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
   //Logic for handling the photo upload
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [listingDetails, setListingDetails] = useState<ListingDetails>({
+    productTitle: "",
+    productPrice: 0,
+    productCategory: "",
+    productDescription: "",
+  });
+
+  const handleListingDetails = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = event.target;
+    setListingDetails({
+      ...listingDetails,
+      [name]: value,
+    });
+  };
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
     const uploadedPhoto = event.target.files[0];
-    if (uploadedPhoto) setPhotoFile(uploadedPhoto);
-    // console.log(photoFile);
+    const maxSize = 3 * 1024 * 1024;
+    if (uploadedPhoto.size > maxSize) {
+      setErrorMessage("File size exceeds 3mb");
+      return;
+    } else {
+      setPhotoFile(uploadedPhoto);
+      console.log("photo", photoFile);
+      return;
+    }
   };
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,18 +84,6 @@ const StockYourShop = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
   //Logic for handling the listing Details
-  const titleRef = useRef<HTMLInputElement>(null);
-  const priceRef = useRef<HTMLInputElement>(null);
-  const categoryRef = useRef<HTMLInputElement>(null);
-  const descriptionRef = useRef<HTMLTextAreaElement>(null);
-  // const descriptionRef = useRef<HTMLInputElement>(null)
-
-  const listingDetails: ListingDetails = {
-    title: "",
-    price: 0,
-    category: "",
-    description: "",
-  };
 
   /////////////////////////////////////////////////////////////////////////////////
   //submitting the whole form
@@ -78,83 +92,30 @@ const StockYourShop = () => {
 
     ///////////////////////////
     //Data from the photo upload
-    const photoUploadFormData = new FormData();
-    photoUploadFormData.append("photo", photoFile as Blob);
-    console.log(`PHOTO ADDED`);
-    console.log(photoFile);
+    const listingDetailsData = new FormData();
+    listingDetailsData.append("photo", photoFile as Blob);
 
     ///////////////////////////
     //Data from the videoupload
     const videoUploadFormData = new FormData();
     videoUploadFormData.append("video", videoFile as Blob);
-    console.log(`VIDEO ADDED`);
-    console.log(videoFile);
 
-    ///////////////////////////////////
-    //data from the listing details form
+    listingDetailsData.append("productTitle", listingDetails.productTitle);
+    listingDetailsData.append(
+      "productPrice",
+      listingDetails.productPrice.toString()
+    );
+    listingDetailsData.append(
+      "productCategory",
+      listingDetails.productCategory
+    );
+    listingDetailsData.append(
+      "productDescription",
+      listingDetails.productDescription
+    );
 
-    if (titleRef.current !== null)
-      listingDetails.title = titleRef.current.value;
-
-    if (priceRef.current !== null)
-      listingDetails.price = parseInt(priceRef.current.value);
-
-    if (categoryRef.current !== null)
-      listingDetails.category = categoryRef.current.value;
-
-    if (descriptionRef.current !== null)
-      listingDetails.description = descriptionRef.current.value;
-    console.log(`LISTING DETAILS ADDED`);
-    console.log(listingDetails);
-    const listingDetailsData = new FormData();
-    listingDetailsData.append("title", listingDetails.title);
-    listingDetailsData.append("price", listingDetails.price.toString());
-    listingDetailsData.append("category", listingDetails.category);
-    listingDetailsData.append("description", listingDetails.description);
-
-    console.log(`CHECKING THE FORM DATA`);
-    console.log(`PHOTO FORM DATA`);
-    console.log(photoUploadFormData);
-    console.log(`VIDEO FORM DATA`);
-    console.log(videoUploadFormData);
-    console.log(`LISTING DETAILS FORM DATA`);
-    console.log(listingDetailsData);
-
-    //////////////////////////
-    //USING AXIOS TO POST
-
-    //Uploading the photo
-    try {
-      await axios.post("/upload-photo", { data: photoUploadFormData });
-      console.log(`Photo has been uploaded successfully`);
-    } catch (error) {
-      console.error(`Error uploading photo: ${error}`);
-    }
-
-    //Uploading the video
-    try {
-      await axios.post("/upload-video", { data: videoUploadFormData });
-      console.log(`Video has been uploaded sucessfully`);
-    } catch (error) {
-      console.error(`Error uploading video: ${error}`);
-    }
-
-    //Submitting the Listing Details
-    try {
-      await axios.post("/listing-details", { data: listingDetailsData });
-      console.log(`Listing Details have been sucessfully submitted`);
-    } catch (error) {
-      console.error(`Error submitting listting details: ${error}`);
-    }
+    console.log("Listing Details Data", listingDetailsData);
   };
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //The cancel button
-  //   const handleFormCancel = () => {
-  //     const navigate = useNavigate();
-  //     return navigate("/");
-  //   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <>
@@ -213,6 +174,10 @@ const StockYourShop = () => {
                   name="photo"
                   onChange={handlePhotoUpload}
                 />
+                <p className="stock-shop-page-upload-max-file-size">
+                  Max file size: 3mb
+                </p>
+                {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
               </UploadPhoto>
             </Upload>
 
@@ -291,8 +256,9 @@ const StockYourShop = () => {
                     className="stock-shop-page-listing-details-input"
                     type="text"
                     id="titleInput"
-                    name="title"
-                    ref={titleRef}
+                    name="productTitle"
+                    value={listingDetails.productTitle}
+                    onChange={handleListingDetails}
                   />
                 </div>
 
@@ -312,8 +278,9 @@ const StockYourShop = () => {
                     className="stock-shop-page-listing-details-input"
                     type="number"
                     id="priceInput"
-                    name="price"
-                    ref={priceRef}
+                    name="productPrice"
+                    value={listingDetails.productPrice}
+                    onChange={handleListingDetails}
                   />
                 </div>
 
@@ -330,13 +297,15 @@ const StockYourShop = () => {
                       category suggestions that will help more shoppers find it.{" "}
                     </p>
                   </div>
-                  <input
-                    className="stock-shop-page-listing-details-input"
-                    type="text"
-                    id="categoryInput"
-                    name="category"
-                    ref={categoryRef}
-                  />
+                  <select
+                    name="productCategory"
+                    value={listingDetails.productCategory}
+                    onChange={handleListingDetails}
+                  >
+                    <option value={"furniture"}>Furniture</option>
+                    <option value={"Electronics"}>Electronics</option>
+                    <option value={"Home Appliances"}>Home Appliances</option>
+                  </select>
                 </div>
 
                 <div className="stock-shop-page-listing-details-form-field">
@@ -359,8 +328,8 @@ const StockYourShop = () => {
                   <textarea
                     className="stock-shop-page-listing-details-textarea"
                     id="descriptionInput"
-                    name="description"
-                    ref={descriptionRef}
+                    name="productDescription"
+                    onChange={handleListingDetails}
                   >
                     {" "}
                   </textarea>
