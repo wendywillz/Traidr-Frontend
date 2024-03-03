@@ -9,31 +9,29 @@ import Dashboard from "./views/Dashboard/DashboardCompnents/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import EnterOtpPage from "./views/Enter-otp/EnterOtpPage";
 import ShopRegistrationPage from "./views/ShopRegistration/ShopRegistrationPage";
-import MobilePopUp from "./components/MobileScreenPopUp/MobilePopUp";
 
 function App() {
   return (
-    <MobilePopUp />
-    // <Routes>
-    //   <Route path="/" element={<LandingPage />} />
-    //   <Route
-    //     path="/dashboard/*"
-    //     element={
-    //       <ProtectedRoute>
-    //         <Routes>
-    //           <Route index element={<Dashboard />} />
-    //           <Route path="change-password" element={<ChangePassword />} />
-    //           <Route path="shop-profile" element={<ShopProfile />} />
-    //         </Routes>
-    //       </ProtectedRoute>
-    //     }
-    //   />
-    //   <Route path="/shop-registration" element={<ShopRegistrationPage />} />
-    //   <Route path="/login" element={<LoginPage />} />
-    //   <Route path="/signup" element={<SignupPage />} />
-    //   <Route path="/reset-password" element={<ResetPasswordPage />} />
-    //   <Route path="/otp-verification" element={<EnterOtpPage />} />
-    // </Routes>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route
+        path="/dashboard/*"
+        element={
+          <ProtectedRoute>
+            <Routes>
+              <Route index element={<Dashboard />} />
+              <Route path="change-password" element={<ChangePassword />} />
+              <Route path="shop-profile" element={<ShopProfile />} />
+            </Routes>
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/shop-registration" element={<ShopRegistrationPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
+      <Route path="/otp-verification" element={<EnterOtpPage />} />
+    </Routes>
   );
 }
 
