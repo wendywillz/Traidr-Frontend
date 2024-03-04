@@ -3,12 +3,9 @@ import FormStepComponent from "../../../components/FormStepComponent/FormStepCom
 import NameYourShopStyle from "./NameYourShopStyle";
 import SmallButton from "../../../components/button/smallButton/smallButton";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import {
-  NameYourShopFormDetails,
-  nameYourShopState,
-} from "../../../interfaces/shopInterfaces";
+import { NameYourShopFormDetails } from "../../../interfaces/shopInterfaces";
 import { updatedNameYourShop } from "../../../app/features/shopRegistration/nameYourShopSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function NameYourShopComponent() {
   const [nameYourShop, setNameYourShop] = useState<NameYourShopFormDetails>({
@@ -27,7 +24,7 @@ function NameYourShopComponent() {
   }, []);
 
   const dispatch = useDispatch();
-  const check = useSelector((state: nameYourShopState) => state.nameYourShop);
+  //const check = useSelector((state: nameYourShopState) => state.nameYourShop);
   const handleNameYourShopForm = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -39,7 +36,7 @@ function NameYourShopComponent() {
     e.preventDefault();
     localStorage.setItem("nameYourShop", JSON.stringify(nameYourShop));
     dispatch(updatedNameYourShop(nameYourShop));
-    console.log("checking", check);
+    //console.log("checking", check);
   };
   return (
     <>
