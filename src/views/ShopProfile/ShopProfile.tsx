@@ -3,7 +3,6 @@ import { ShopProfileMainWrapper } from "./ShopProfilePageStle";
 import shoppingImage from "../../assets/shop-profile-assets/shopping-bag.png";
 import aestheticImage from "../../assets/shop-profile-assets/aesthetic-swimsuit.png";
 import SmallButton from "../../components/button/smallButton/smallButton";
-import shoppingAddItem from "../../assets/shop-profile-assets/shopping-add-item.png";
 
 export default function ShopProfile() {
   return (
