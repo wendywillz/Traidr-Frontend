@@ -60,7 +60,6 @@ const ShopSecurityPage = () => {
                 I have read and agree to the above terms and conditions.
               </label>
             </div>
-            <p> checkbox is {isChecked ? "checked" : "not cheked"}</p>
             <div className="submit-button-wrapper reduced-margin">
               <SmallButton button_text="Cancel" whiteBg={true} type="button" />
               <SmallButton button_text="Open your Shop" type="submit" />

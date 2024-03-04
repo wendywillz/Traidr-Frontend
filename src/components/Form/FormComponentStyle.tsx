@@ -120,7 +120,8 @@ const FormComponentStyle = styled.div`
     color: var(--orange-color);
     text-decoration: underline;
   }
-  .reset-password-input-wrapper {
+  .reset-password-input-wrapper,
+  .change-password-input {
     margin-bottom: 3rem !important;
   }
 `;
