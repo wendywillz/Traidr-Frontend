@@ -31,6 +31,7 @@ export default function ChangePasswordPage() {
     }
 
     try {
+      console.log("passwordInputs", passwordInputs);
       const res = await axiosInstance.post("/users/change-password", {
         passwordInputs,
       });
