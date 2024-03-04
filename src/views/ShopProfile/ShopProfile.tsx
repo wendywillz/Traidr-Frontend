@@ -1,7 +1,8 @@
 import Header from "../../components/Header/Header";
 import { ShopProfileMainWrapper } from "./ShopProfilePageStle";
-import shoppingImage from "../../assets/shopping-bag.png";
-import cameraImage from "../../assets/camera.png";
+import shoppingImage from "../../assets/shop-profile-assets/shopping-bag.png";
+import aestheticImage from "../../assets/shop-profile-assets/aesthetic-swimsuit.png";
+import SmallButton from "../../components/button/smallButton/smallButton";
 
 export default function ShopProfile() {
   return (
@@ -42,39 +43,20 @@ export default function ShopProfile() {
             </div>
             <div className="shop-profile-photos">
               <div className="shop-profile-photos-each">
-                <img src={cameraImage} alt="take-photo-of-products" />
-                <p>Add a Photo</p>
+                <img src={aestheticImage} alt="take-photo-of-products" />
+                <p>Aesthetic Swimsuit <br />N 20,000</p>
               </div>
-              <div className="shop-profile-photos-each">
-                <img src={cameraImage} alt="take-photo-of-products" />
-                <p>Add a Photo</p>
-              </div>
-              <div className="shop-profile-photos-each">
-                <img src={cameraImage} alt="take-photo-of-products" />
-                <p>Add a Photo</p>
+              <div className="shop-profile-photos-each-2">
+                {/* <img src={shoppingAddItem} alt="add-new-item" /> */}
+
+                <p><span>+</span><br />Add a new Item</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="shop-profile-description-price">
-          <div className="shop-profile-description">
-            <h3>Description*</h3>
-            <div className="shop-profile-description-para">
-              <p>
-                Include keywords that buyers will use to search for your items
-              </p>
-              <input type="text" />
-            </div>
-          </div>
-
-          <div className="shop-profile-description-para-price">
-            <h3>Prices*</h3>
-            <input type="text" />
-          </div>
-        </div>
         <div className="shop-profile-upload-btn">
-          <button type="submit">Upload Item</button>
+          <SmallButton button_text={"upload Item"} type={"button"}></SmallButton>
         </div>
       </ShopProfileMainWrapper>
     </>

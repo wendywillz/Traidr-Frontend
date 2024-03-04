@@ -22,7 +22,6 @@ function App() {
           <ProtectedRoute>
             <Routes>
               <Route index element={<Dashboard />} />
-              <Route path="shop-profile" element={<ShopProfile />} />
             </Routes>
           </ProtectedRoute>
         }
@@ -35,6 +34,7 @@ function App() {
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/stock-your-shop" element={<StockYourShop />} />
       <Route path="/shop-security-page" element={<ShopSecurityPage />} />
+      <Route path="/shop-profile" element={<ShopProfile />} />
     </Routes>
   );
 }
