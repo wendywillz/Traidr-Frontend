@@ -6,7 +6,7 @@ export const FormContainer = styled.div`
   border: 1px solid grey;
   border-radius: 1rem;
   margin-bottom: 6vh;
-  
+
   .submit-button-wrapper {
     display: flex;
     justify-content: space-between;
@@ -62,13 +62,11 @@ export const ListingDetailsForm = styled.div`
   }
 
   .stock-shop-page-listing-details-input {
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    padding: 0.5rem;
     width: 45rem;
-    height: 5vh;
-    margin-top: 4vh;
-    border: 1px solid grey;
-    color: grey;
-    border-radius: 0.5rem;
-    /* opacity: 30%; */
+    height: 3rem;
   }
 
   .stock-shop-page-listing-details-textarea {

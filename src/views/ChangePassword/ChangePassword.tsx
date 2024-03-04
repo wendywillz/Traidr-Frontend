@@ -1,110 +1,142 @@
-import { useState } from "react";
-import "./ChangePassword.css";
+import { useState, FormEvent, ChangeEvent } from "react";
+import FormComponent from "../../components/Form/FormComponent";
+import axiosInstance from "../../utils/axiosInstance";
 
-const ChangePassword = () => {
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+export default function ChangePasswordPage() {
+  const [passwordInputs, setPasswordInputs] = useState({
+    currentPassword: "",
+    newPassword: "",
+    confirmNewPassword: "",
+  });
+  const [error, setError] = useState("");
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const handlepasswordInputsChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === "current_password") setCurrentPassword(value);
-    if (name === "new_password") setNewPassword(value);
-    if (name === "confirm_password") setConfirmPassword(value);
+    setPasswordInputs({ ...passwordInputs, [name]: value });
   };
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    if (newPassword !== confirmPassword) {
-      setErrorMessage("New passwords do not match");
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    if (
+      !passwordInputs.currentPassword ||
+      !passwordInputs.newPassword ||
+      !passwordInputs.confirmNewPassword
+    ) {
+      setError("All fields are required, try again");
+      return;
+    }
+    if (passwordInputs.newPassword !== passwordInputs.confirmNewPassword) {
+      setError("Passwords do not match, try again");
       return;
     }
 
     try {
-      const response = await fetch("/api/change-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          currentPassword,
-          newPassword,
-        }),
+      const res = await axiosInstance.post("/users/change-password", {
+        passwordInputs,
       });
-      const data = await response.json();
-      if (response.ok) {
-        // Password changed successfully
-        console.log(data.message);
+
+      if (res && res.status === 200) {
+        if (res.data.noTokenError) {
+          setError("Session expired, please login again.");
+          setPasswordInputs({
+            currentPassword: "",
+            newPassword: "",
+            confirmNewPassword: "",
+          });
+        } else if (res.data.userNotFoundError) {
+          setError(res.data.userNotFoundError);
+          setPasswordInputs({
+            currentPassword: "",
+            newPassword: "",
+            confirmNewPassword: "",
+          });
+        } else if (res.data.invalidPasswordError) {
+          setError(res.data.invalidPasswordError);
+          setPasswordInputs({
+            currentPassword: "",
+            newPassword: "",
+            confirmNewPassword: "",
+          });
+        } else if (res.data.passwordChangedSuccessfully) {
+          setError(res.data.passwordChangedSuccessfully);
+          setPasswordInputs({
+            currentPassword: "",
+            newPassword: "",
+            confirmNewPassword: "",
+          });
+        }
       } else {
-        setErrorMessage(data.message || "Something went wrong");
+        setError("Internal Server Error");
+        setPasswordInputs({
+          currentPassword: "",
+          newPassword: "",
+          confirmNewPassword: "",
+        });
       }
     } catch (error) {
-      console.error("Error:", error);
-      setErrorMessage("Something went wrong");
+      setError("Internal Server Error");
+      setPasswordInputs({
+        currentPassword: "",
+        newPassword: "",
+        confirmNewPassword: "",
+      });
     }
+
+    // redirect to a different page based on user type
   };
-
   return (
-    <div className="all-content">
-      <div className="container-password">
-        <h2 className="Pass-word">Passwords</h2>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
-        <p className="change-p">
-          Please enter your current password to change your password
-        </p>
-        <form className="form-case" onSubmit={handleSubmit}>
-          <label className="label-case" htmlFor="current_password">
-            Your current password
-          </label>
-          <input
-            className="input-case"
-            type="password"
-            name="current_password"
-            id="current_password"
-            placeholder="Current password"
-            value={currentPassword}
-            onChange={handleChange}
-          />
-          <label className="label-case" htmlFor="new_password">
-            New password
-          </label>
-          <input
-            className="input-case"
-            type="password"
-            name="new_password"
-            id="new_password"
-            placeholder="New password"
-            value={newPassword}
-            onChange={handleChange}
-          />
-          <div className="form-text">
-            Your new password must be 8-20 characters long.
-          </div>
-          <label className="label-case" htmlFor="confirm_password">
-            Re-enter your new password
-          </label>
-          <input
-            className="input-case"
-            type="password"
-            name="confirm_password"
-            id="confirm_password"
-            placeholder="Confirm password"
-            value={confirmPassword}
-            onChange={handleChange}
-          />
-          <span className="span-button">
-            <button type="submit" className="btn-1">
-              Save Change
-            </button>
-            <button type="button" className="btn-2">
-              Cancel
-            </button>
-          </span>
-        </form>
-      </div>
-    </div>
-  );
-};
+    <>
+      <FormComponent
+        button_text="Proceed"
+        extraText="Go"
+        linkText="back"
+        linkPath="/dashboard"
+        formTitle="Change Password"
+        children={{
+          formElements: (
+            <>
+              {error && <div className="error-message">{error} </div>}
 
-export default ChangePassword;
+              <fieldset className="input-wrapper">
+                <label htmlFor="currentPassword">Current Password</label>
+                <input
+                  type="password"
+                  id="currentPassword"
+                  value={passwordInputs.currentPassword}
+                  name="currentPassword"
+                  placeholder="********"
+                  onChange={handlepasswordInputsChange}
+                />
+              </fieldset>
+
+              <fieldset className="input-wrapper">
+                <label htmlFor="newPassword">New Password</label>
+                <input
+                  type="password"
+                  id="newPassword"
+                  value={passwordInputs.newPassword}
+                  name="newPassword"
+                  placeholder="********"
+                  onChange={handlepasswordInputsChange}
+                />
+              </fieldset>
+
+              <fieldset className="input-wrapper change-password-input">
+                <label htmlFor="confirmNewPassword">Confirm New Password</label>
+                <input
+                  type="password"
+                  id="confirmNewPassword"
+                  value={passwordInputs.confirmNewPassword}
+                  name="confirmNewPassword"
+                  placeholder="********"
+                  onChange={handlepasswordInputsChange}
+                />
+              </fieldset>
+            </>
+          ),
+        }}
+        handleSubmit={handleSubmit}
+      ></FormComponent>
+    </>
+  );
+}

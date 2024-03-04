@@ -37,6 +37,18 @@
 
 .bold-title {
   color: var(--black-color);
+  font-weight: 700;
+  margin-top: 1rem;
+}
+.terms-and-condition-wrapper {
+  margin: 2rem 0;
+  display: flex;
+  gap: 1rem;
+}
+.terms-and-condition-checkbox {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-left: 0;
 }
 
 @media screen and (max-width: 758px) {

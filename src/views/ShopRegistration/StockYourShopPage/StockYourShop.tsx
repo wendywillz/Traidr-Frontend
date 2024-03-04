@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //Style imports
 
 import {
   Upload,
   UploadInstructions,
-  UploadPhoto,
-  UploadVideo,
+  UploadFile,
 } from "./StockShopPageStyles/Uploads.styled";
 import {
   FormContainer,
@@ -20,23 +20,29 @@ import {
 import PageDescription from "./StockShopPageComponents/PageDescription";
 import Header from "../../../components/Header/Header";
 import FormStepComponent from "../../../components/FormStepComponent/FormStepComponent";
-import { ErrorMessage } from "./stockShopStyle";
+import {
+  ErrorMessage,
+  CategorySelectStyle,
+  UploadedPhotoName,
+} from "./stockShopStyle";
 //Media imports
 import photoIcon from "../../../assets/stock_shop_page_assets/upload_pic_icon.png";
 import videoIcon from "../../../assets/stock_shop_page_assets/upload_video_icon.png";
 import SmallButton from "../../../components/button/smallButton/smallButton";
 //package imports
-import { useState, FormEvent, ChangeEvent } from "react";
-
-interface ListingDetails {
-  productTitle: string;
-  productPrice: number;
-  productCategory: string;
-  productDescription: string;
-}
-
+import { useState, FormEvent, ChangeEvent, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateStockYourShop } from "../../../app/features/shopRegistration/stockYourShopSlice";
+import {
+  ListingDetails,
+  stockYourShopState,
+} from "../../../interfaces/shopInterfaces";
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
+  const dispatch = useDispatch();
+  const checkState = useSelector(
+    (state: stockYourShopState) => state.stockYourShop
+  );
   //Logic for handling the photo upload
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [listingDetails, setListingDetails] = useState<ListingDetails>({
@@ -45,6 +51,22 @@ const StockYourShop = () => {
     productCategory: "",
     productDescription: "",
   });
+
+  // checking if the stockYourShop details are in the local storage
+  // useEffect(() => {
+  //   const storedStockYourShop = localStorage.getItem("stockYourShop")!;
+  //   if (storedStockYourShop) {
+  //     console.log("storedStockYourShop", storedStockYourShop);
+  //     setListingDetails(JSON.parse(storedStockYourShop));
+  //   }
+  // }, []);
+  useEffect(() => {
+    const storedListingDetails = localStorage.getItem("listingDetails")!;
+    if (storedListingDetails) {
+      console.log("storedListingDetails", storedListingDetails);
+      setListingDetails(JSON.parse(storedListingDetails));
+    }
+  }, []);
 
   const handleListingDetails = (
     event: ChangeEvent<
@@ -57,7 +79,21 @@ const StockYourShop = () => {
       [name]: value,
     });
   };
+
   const [photoFile, setPhotoFile] = useState<File | null>(null);
+  const [displayUploadedPhotoName, setDisplayUploadedPhotoName] =
+    useState<string>();
+
+  // checking if the displayUploadedPhotoName is in the local storage
+  useEffect(() => {
+    const storedUploadedPhotoName = localStorage.getItem(
+      "displayUploadedPhotoName"
+    );
+    if (storedUploadedPhotoName) {
+      setDisplayUploadedPhotoName(JSON.parse(storedUploadedPhotoName));
+    }
+  }, []);
+
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
     const uploadedPhoto = event.target.files[0];
@@ -67,6 +103,7 @@ const StockYourShop = () => {
       return;
     } else {
       setPhotoFile(uploadedPhoto);
+      setDisplayUploadedPhotoName(uploadedPhoto.name);
       console.log("photo", photoFile);
       return;
     }
@@ -75,10 +112,33 @@ const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
   //Logic for handling the Video upload
   const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [displayUploadedVideoName, setDisplayUploadedVideoName] =
+    useState<string>();
+  const [videoDisplayError, setVideoDisplayError] = useState<string>();
+
+  // checking if the displayUploadedVideoName is in the local storage
+  useEffect(() => {
+    const storedUploadedVideoName = localStorage.getItem(
+      "displayUploadedVideoName"
+    );
+    if (storedUploadedVideoName) {
+      setDisplayUploadedVideoName(JSON.parse(storedUploadedVideoName));
+    }
+  }, []);
+
   const handleVideoUpload = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
     const uploadedVideo = event.target.files[0];
-    if (uploadedVideo) setVideoFile(uploadedVideo);
+    const maxSize = 10 * 1024 * 1024;
+    if (uploadedVideo.size > maxSize) {
+      setVideoDisplayError("File size exceeds 10mb");
+      return;
+    } else {
+      setVideoFile(uploadedVideo);
+      setDisplayUploadedVideoName(uploadedVideo.name);
+
+      return;
+    }
     // console.log(videoFile);
   };
 
@@ -93,12 +153,15 @@ const StockYourShop = () => {
     ///////////////////////////
     //Data from the photo upload
     const listingDetailsData = new FormData();
-    listingDetailsData.append("photo", photoFile as Blob);
+    if (!photoFile) {
+      setErrorMessage("Please upload a photo of your product");
+      return;
+    }
+    listingDetailsData.append("productPhoto", photoFile as Blob);
 
     ///////////////////////////
     //Data from the videoupload
-    const videoUploadFormData = new FormData();
-    videoUploadFormData.append("video", videoFile as Blob);
+    if (videoFile) listingDetailsData.append("productVideo", videoFile as Blob);
 
     listingDetailsData.append("productTitle", listingDetails.productTitle);
     listingDetailsData.append(
@@ -113,8 +176,24 @@ const StockYourShop = () => {
       "productDescription",
       listingDetails.productDescription
     );
-
-    console.log("Listing Details Data", listingDetailsData);
+    for (const [key, value] of listingDetailsData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+    // setting the photo name and video name in the local storage
+    localStorage.setItem(
+      "displayUploadedPhotoName",
+      JSON.stringify(photoFile.name)
+    );
+    localStorage.setItem(
+      "displayUploadedVideoName",
+      JSON.stringify(videoFile?.name)
+    );
+    console.log("listing Details", listingDetails);
+    // setting the listing details in the local storage
+    dispatch(updateStockYourShop(listingDetails));
+    console.log("checking", checkState);
+    localStorage.setItem("listingDetails", JSON.stringify(listingDetails));
+    //localStorage.setItem("stockYourShop", JSON.stringify(listingDetailsData));
   };
 
   return (
@@ -157,15 +236,13 @@ const StockYourShop = () => {
                 </ul>
               </UploadInstructions>
 
-              <UploadPhoto>
+              <UploadFile>
                 {/*This whole div would have a visible border */}
                 <img src={photoIcon} className="stock-shop-page-upload-icon" />
-                <label
-                  className="stock-shop-page-upload-photo-label"
-                  htmlFor="photoInput"
-                >
-                  Add a Photo
-                </label>
+                <span className="stock-shop-page-upload-photo-label">
+                  Click to add a Photo
+                </span>
+                <span className="max-file-size">(Maximum file size: 3mb)</span>
                 <input
                   className="stock-shop-page-upload-photo-input"
                   type="file"
@@ -173,12 +250,15 @@ const StockYourShop = () => {
                   id="photoInput"
                   name="photo"
                   onChange={handlePhotoUpload}
+                  required
                 />
-                <p className="stock-shop-page-upload-max-file-size">
-                  Max file size: 3mb
-                </p>
+                {displayUploadedPhotoName && (
+                  <UploadedPhotoName>
+                    {displayUploadedPhotoName}
+                  </UploadedPhotoName>
+                )}
                 {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-              </UploadPhoto>
+              </UploadFile>
             </Upload>
 
             <Upload>
@@ -208,27 +288,31 @@ const StockYourShop = () => {
                 </ul>
               </UploadInstructions>
 
-              <UploadVideo>
+              <UploadFile>
                 {/*This whole div would have a visible border */}
                 <img src={videoIcon} className="stock-shop-page-upload-icon" />
-                <label
-                  className="stock-shop-page-upload-video-label"
-                  htmlFor="videoInput"
-                >
-                  Add a Video
-                </label>
+                <span className="stock-shop-page-upload-photo-label">
+                  Click to add a Video
+                </span>
                 <input
-                  className="stock-shop-page-upload-video-input"
+                  className="stock-shop-page-upload-photo-input"
                   type="file"
                   accept="video/*"
                   id="videoInput"
                   name="video"
                   onChange={handleVideoUpload}
                 />
-                <p className="stock-shop-page-upload-max-file-size">
-                  Max file size: 100mb
-                </p>
-              </UploadVideo>
+
+                <span className="max-file-size">(Maximum file size: 10mb)</span>
+                {displayUploadedVideoName && (
+                  <UploadedPhotoName>
+                    {displayUploadedVideoName}
+                  </UploadedPhotoName>
+                )}
+                {videoDisplayError && (
+                  <ErrorMessage>{videoDisplayError}</ErrorMessage>
+                )}
+              </UploadFile>
             </Upload>
 
             <FormContainer>
@@ -259,6 +343,7 @@ const StockYourShop = () => {
                     name="productTitle"
                     value={listingDetails.productTitle}
                     onChange={handleListingDetails}
+                    required
                   />
                 </div>
 
@@ -281,6 +366,7 @@ const StockYourShop = () => {
                     name="productPrice"
                     value={listingDetails.productPrice}
                     onChange={handleListingDetails}
+                    required
                   />
                 </div>
 
@@ -297,15 +383,19 @@ const StockYourShop = () => {
                       category suggestions that will help more shoppers find it.{" "}
                     </p>
                   </div>
-                  <select
+                  <CategorySelectStyle
                     name="productCategory"
                     value={listingDetails.productCategory}
                     onChange={handleListingDetails}
+                    required
                   >
+                    <option value={""} selected>
+                      Select your category
+                    </option>
                     <option value={"furniture"}>Furniture</option>
                     <option value={"Electronics"}>Electronics</option>
                     <option value={"Home Appliances"}>Home Appliances</option>
-                  </select>
+                  </CategorySelectStyle>
                 </div>
 
                 <div className="stock-shop-page-listing-details-form-field">
@@ -330,6 +420,8 @@ const StockYourShop = () => {
                     id="descriptionInput"
                     name="productDescription"
                     onChange={handleListingDetails}
+                    required
+                    value={listingDetails.productDescription}
                   >
                     {" "}
                   </textarea>
