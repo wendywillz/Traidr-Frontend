@@ -29,7 +29,7 @@ const Product = ({product}: ProductProps) => {
             <img className="user-dashboard-heart-icon" src={heartIcon}/>
         </ProductNameContainer>   
        
-        <p className="user-dashboard-individual-product-description">{product.description}</p>
+        <p className="user-dashboard-individual-product-description">{product.description.substring(0, 45)}...</p>
         <h6 className="user-dashboard-individual-product-price">₦{product.price.toLocaleString()}</h6>
 
         </IndividualProductContainer>

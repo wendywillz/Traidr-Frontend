@@ -28,7 +28,7 @@ export const productsDummy: Products[] = [
     {
         productName: "Binatone Dual Steam Irons",
         image: irons,
-        description: " A two-piece set of brand new steam irons",
+        description: "A two-piece set of brand new steam irons. Guaranteed to make your clothes smoother without the typical damaging effects of most irons",
         price: 50000
     },
     {
@@ -40,7 +40,7 @@ export const productsDummy: Products[] = [
     {
         productName: "Wooden Lounge Chair",
         image: chair,
-        description: "A wooden lounge chair with a pillow",
+        description: "A wooden lounge chair with a pillow. Perfect for living rooms, balconies and lounge areas. \n Made with grade-A mahogany. Pillows made with silk.",
         price: 150000
     },
     {
@@ -58,7 +58,7 @@ export const productsDummy: Products[] = [
     {
         productName: "Baby Chair",
         image: blueChair,
-        description: "A straw baby chair with blue pillows",
+        description: "A straw baby chair with blue pillows that is guaranteed to make your little one has happy as can be. \n Parents everywhere rave about the quality of this chair, claiming it makes their babies as calm as can be.",
         price: 100000
     },
     {
