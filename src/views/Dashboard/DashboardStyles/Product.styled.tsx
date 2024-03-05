@@ -63,7 +63,7 @@ export const ProductNameContainer = styled.div`
     .user-dashboard-heart-icon{
         /* margin-left: 0.3rem; */
         width: 1rem;
-        height: 1.5vh; 
+        height: 1.7vh; 
         
         padding-top:0.5vh;
         /* border: none; */   
