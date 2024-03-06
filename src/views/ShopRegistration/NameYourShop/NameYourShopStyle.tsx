@@ -33,35 +33,65 @@ const NameYourShopStyle = styled.div`
     justify-content: space-between;
     width: 100%;
     gap: 1rem;
+
     @media (min-width: 768px) {
       flex-direction: row;
-      flex-wrap: wrap;
+      align-items: stretch;
     }
   }
-  .name-your-shop-form-inner fieldset {
+  .name-your-shop-form-inner > * {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .left-name-yourshop,
+  .right-name-your-shop {
+    flex: 1;
+    @media (min-width: 768px) {
+      flex-basis: 48%;
+      height: 100%;
+      min-width: 48%;
+      max-width: 48%;
+    }
+  }
+  .right-name-your-shop {
+    height: 100%;
+  }
+  .right-name-your-shop fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: none;
+  }
+  .right-name-your-shop fieldset textarea {
+    width: 100%;
+    min-height: 15rem;
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    padding: 0.5rem;
+  }
+  .left-name-yourshop fieldset {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     border: none;
-    @media (min-width: 768px) {
-      flex-basis: 48%;
-    }
   }
-  .name-your-shop-form-inner fieldset label {
+  .left-name-yourshop fieldset label,
+  .right-name-your-shop fieldset {
     font-weight: 600;
   }
-  .name-your-shop-form-inner fieldset input {
+  .left-name-yourshop fieldset input {
     border: 1px solid var(--input-border-color);
     border-radius: 4px;
     padding: 0.5rem;
     width: 100%;
     height: 3rem;
   }
-  .name-your-shop-form-inner fieldset input::placeholder {
+  .left-name-yourshop fieldset input::placeholder {
     color: var(--input-placeholder-color);
   }
 
-  .name-your-shop-form-inner fieldset select {
+  .left-name-yourshop fieldset select {
     border: 1px solid var(--input-border-color);
     border-radius: 4px;
     padding: 0.5rem;

@@ -3,4 +3,5 @@ export default interface SmallButtonProps {
   whiteBg?: boolean;
   type: "submit" | "button" | "reset";
   onClick?: () => void;
+  disabled?: boolean;
 }

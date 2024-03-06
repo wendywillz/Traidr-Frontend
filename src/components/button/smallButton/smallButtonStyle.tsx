@@ -13,7 +13,12 @@ const SmallButtonStyle = styled.button<SmallButtonProps>`
   margin: 0.5rem 0;
   border: 1px solid var(--orange-color);
   transition: all 0.3s ease-in-out;
-
+  &:disabled {
+    background-color: grey;
+    color: #000;
+    cursor: not-allowed;
+    border: 1px solid grey;
+  }
   ${(props) =>
     props.whiteBg &&
     `

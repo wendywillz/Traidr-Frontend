@@ -1,5 +1,5 @@
 import NameYourShopComponent from "./NameYourShop/NameYourShop";
-import StockYourShop from "./StockYourShopPage/StockYourShop";
+import TellUsAboutYourShopComponent from "./TellUsAboutYourShop/TellUsAboutYourShop";
 import useMultiStepForm from "../../components/HandleMultipleForm/HandleMultipleForm";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import { NextIcon, PrevIcon } from "./ShopRegistrationPageStyle";
@@ -8,7 +8,7 @@ import ShopSecurityPage from "./ShopSecurityPage/ShopSecurityPage";
 export default function ShopRegistrationPage() {
   const steps = [
     <NameYourShopComponent />,
-    <StockYourShop />,
+    <TellUsAboutYourShopComponent />,
     <ShopSecurityPage />,
   ];
   const { next, back, currentStep, currentStepIndex } = useMultiStepForm(steps);

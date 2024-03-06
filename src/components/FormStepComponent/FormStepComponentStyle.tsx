@@ -45,6 +45,11 @@ const FormStepComponentWrapper = styled.div`
     font-size: 1rem;
     text-align: center;
   }
+  .grey-color {
+    color: grey;
+    font-size: 2rem;
+    box-shadow: 5px 5px 10px #00000080;
+  }
 `;
 
 export default FormStepComponentWrapper;
