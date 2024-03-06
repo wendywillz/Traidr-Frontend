@@ -90,6 +90,8 @@ export const ShopProfileMainWrapper = styled.div`
     justify-content: space-between;
     margin: -2rem 0 0 2rem;
     img {
+      width: 14rem;
+      height: 14rem;
       margin-bottom: 0.5rem;
     }
     p {
