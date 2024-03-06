@@ -31,7 +31,7 @@ const ShopProfile = () => {
           <div className="shop-profile-productpicture">
             <label htmlFor="fileInput">
               <div className="upload-box-content" onClick={handleProfileImage}>
-                {profileImage ? (
+                {!profileImage ? (
                   <img
                     src={profileImage}
                     alt="shop-profile-image"
@@ -39,7 +39,11 @@ const ShopProfile = () => {
                     height="300"
                   />
                 ) : (
-                  <span>Click here to upload a picture</span>
+                  <div>
+                    <span style={{ fontSize: "2rem" }}>+</span>
+                    <br />
+                    <span>Add New Photo</span>
+                  </div>
                 )}
               </div>
             </label>
@@ -51,6 +55,7 @@ const ShopProfile = () => {
               onChange={handleProfileImage}
             />
           </div>
+
           <div className="shop-profile-productname">
             <h3>Empress Ki Stores</h3>
             <input type="text" placeholder="+ Add a Short Description" />

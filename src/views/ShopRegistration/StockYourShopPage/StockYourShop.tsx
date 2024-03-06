@@ -36,12 +36,16 @@ import {
   ListingDetails,
   stockYourShopState,
 } from "../../../interfaces/shopInterfaces";
+<<<<<<< HEAD
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../../utils/axiosInstance";
+=======
+//import { useParams } from "react-router-dom";
+>>>>>>> 02b99eb (shop picture updated)
 
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
-  const { shopId } = useParams();
+  //const { shopId } = useParams();
   const dispatch = useDispatch();
   const checkState = useSelector(
     (state: stockYourShopState) => state.stockYourShop
