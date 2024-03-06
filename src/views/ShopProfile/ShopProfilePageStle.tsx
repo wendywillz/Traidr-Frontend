@@ -99,19 +99,19 @@ export const ShopProfileMainWrapper = styled.div`
   }
 
   .shop-profile-photos-each {
-    max-width:100%;
+    max-width: 100%;
     height: 14rem;
     border-radius: 5px;
     margin: 0 2rem 0 0;
     outline: 1px solid var(--normal-text-color);
-    p{
-        font-size: 1rem;
-        margin-left: 0.3rem
+    p {
+      font-size: 1rem;
+      margin-left: 0.3rem;
     }
   }
 
   .shop-profile-photos-each-2 {
-    max-width:100%;
+    max-width: 100%;
     height: 14rem;
     padding: 2.5rem;
     border-radius: 5px;
@@ -120,17 +120,18 @@ export const ShopProfileMainWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    span{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-       font-size: 7rem;
-       font-weight: 200;
-       margin-bottom: -3rem;
+    cursor: pointer;
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7rem;
+      font-weight: 200;
+      margin-bottom: -3rem;
     }
-    p{
-        align-items: center;
-        font-size: 1rem;
+    p {
+      align-items: center;
+      font-size: 1rem;
     }
   }
 

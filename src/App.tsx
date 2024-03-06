@@ -27,7 +27,11 @@ function App() {
                 element={<ShopRegistrationPage />}
               />
               <Route path="change-password" element={<ChangePassword />} />
-              <Route path="shop-profile" element={<ShopProfile />} />
+              <Route path="shop-profile/:shopId" element={<ShopProfile />} />
+              <Route
+                path="stock-your-shop/:shopId"
+                element={<StockYourShop />}
+              />
             </Routes>
           </ProtectedRoute>
         }
@@ -36,7 +40,6 @@ function App() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
-      <Route path="/stock-your-shop" element={<StockYourShop />} />
       <Route path="/shop-security-page" element={<ShopSecurityPage />} />
     </Routes>
   );

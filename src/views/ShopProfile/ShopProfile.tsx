@@ -3,10 +3,12 @@ import { ShopProfileMainWrapper } from "./ShopProfilePageStle";
 import aestheticImage from "../../assets/shop-profile-assets/aesthetic-swimsuit.png";
 import SmallButton from "../../components/button/smallButton/smallButton";
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ShopProfile = () => {
+  const { shopId } = useParams();
   const [profileImage, setProfileImage] = useState("null");
-
+  const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleProfileImage = (e: any) => {
     const file = e.target.files[0];
@@ -18,29 +20,42 @@ const ShopProfile = () => {
 
     reader.readAsDataURL(file);
   };
+  const handleNavigate = () => {
+    navigate(`/dashboard/stock-your-shop/${shopId}`);
+  };
   return (
     <>
       <Header />
       <ShopProfileMainWrapper>
-      <div className="shop-profile-product-logo">
-
-      <div className="shop-profile-productpicture">
-      <label htmlFor="fileInput">
-        <div className="upload-box-content" onClick={handleProfileImage}>
-          {profileImage ? (
-            <img src={profileImage} alt="shop-profile-image" width="300" height="300"/>
-          ) : (
-            <span>Click here to upload a picture</span>
-          )}
+        <div className="shop-profile-product-logo">
+          <div className="shop-profile-productpicture">
+            <label htmlFor="fileInput">
+              <div className="upload-box-content" onClick={handleProfileImage}>
+                {profileImage ? (
+                  <img
+                    src={profileImage}
+                    alt="shop-profile-image"
+                    width="300"
+                    height="300"
+                  />
+                ) : (
+                  <span>Click here to upload a picture</span>
+                )}
+              </div>
+            </label>
+            <input
+              type="file"
+              id="fileInput"
+              style={{ display: "none" }}
+              accept="image/*"
+              onChange={handleProfileImage}
+            />
+          </div>
+          <div className="shop-profile-productname">
+            <h3>Empress Ki Stores</h3>
+            <input type="text" placeholder="+ Add a Short Description" />
+          </div>
         </div>
-      </label>
-      <input type="file" id="fileInput" style={{ display: 'none' }} accept="image/*" onChange={handleProfileImage} />
-    </div>
-        <div className="shop-profile-productname">
-          <h3>Empress Ki Stores</h3>
-          <input type="text" placeholder="+ Add a Short Description" />
-        </div>
-    </div>
 
         <div className="shop-profile-product-uploads">
           <h3>Upload Images</h3>
@@ -72,7 +87,10 @@ const ShopProfile = () => {
                   Aesthetic Swimsuit <br />N 20,000
                 </p>
               </div>
-              <div className="shop-profile-photos-each-2">
+              <div
+                className="shop-profile-photos-each-2"
+                onClick={handleNavigate}
+              >
                 <p>
                   <span>+</span>
                   <br />

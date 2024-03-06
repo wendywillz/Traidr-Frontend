@@ -14,7 +14,7 @@ interface userState {
 }
 export default function Header() {
   const [notificationCount, setNotificationCount] = useState(0);
-
+  const token = localStorage.getItem("token");
   const handleNotificationClick = () => {
     setNotificationCount(0);
   };
@@ -62,14 +62,53 @@ export default function Header() {
               </Link>
             </>
           ) : location.pathname === "/" ? (
-            <>
-              <Link to="/login" className="header-right-login-btn big-screen">
-                Login
-              </Link>
-              <Link to="/signup" className="header-right-signup-btn big-screen">
-                Sign Up
-              </Link>
-            </>
+            token ? (
+              <>
+                <div
+                  className="shop-profile-notification-wrapper"
+                  onClick={handleNotificationClick}
+                >
+                  <BsBell />
+                  {notificationCount > 0 && (
+                    <div className="notification-badge">
+                      {notificationCount}
+                    </div>
+                  )}
+                </div>
+                <div className="user-profile-img-wrapper">
+                  {userData && userData.profileImage ? (
+                    <img src={userData?.profileImage} alt="" />
+                  ) : (
+                    <div className="shop-profile-header-icon">
+                      <FaUserCircle />
+                    </div>
+                  )}
+                </div>
+                <Link
+                  to="/dashboard/start-selling"
+                  className="header-right-signup-btn big-screen"
+                >
+                  Start Selling
+                </Link>
+              </>
+            ) : (
+              <>
+                <>
+                  <Link
+                    to="/login"
+                    className="header-right-login-btn big-screen"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="header-right-signup-btn big-screen"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              </>
+            )
           ) : (
             <>
               <div
