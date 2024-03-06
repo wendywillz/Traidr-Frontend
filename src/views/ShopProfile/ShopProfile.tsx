@@ -2,11 +2,25 @@ import Header from "../../components/Header/Header";
 import { ShopProfileMainWrapper } from "./ShopProfilePageStle";
 import aestheticImage from "../../assets/shop-profile-assets/aesthetic-swimsuit.png";
 import SmallButton from "../../components/button/smallButton/smallButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ShopProfile = () => {
   const [profileImage, setProfileImage] = useState("null");
+  const [shopOwnerName, setShopOwnerName] = useState("");
 
+  useEffect(() => {
+    fetchShopOwnerName();
+  }, []);
+
+  const fetchShopOwnerName = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/");
+      const data = await response.json();
+      setShopOwnerName(data.shopOwnerName);
+    } catch (error) {
+      console.error("Error fetching shop owner name:", error);
+    }
+  };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleProfileImage = (e: any) => {
     const file = e.target.files[0];
@@ -22,25 +36,36 @@ const ShopProfile = () => {
     <>
       <Header />
       <ShopProfileMainWrapper>
-      <div className="shop-profile-product-logo">
-
-      <div className="shop-profile-productpicture">
-      <label htmlFor="fileInput">
-        <div className="upload-box-content" onClick={handleProfileImage}>
-          {profileImage ? (
-            <img src={profileImage} alt="shop-profile-image" width="300" height="300"/>
-          ) : (
-            <span>Click here to upload a picture</span>
-          )}
+        <div className="shop-profile-product-logo">
+          <div className="shop-profile-productpicture">
+            <label htmlFor="fileInput">
+              <div className="upload-box-content" onClick={handleProfileImage}>
+                {profileImage ? (
+                  <img
+                    src={profileImage}
+                    alt="shop-profile-image"
+                    width="300"
+                    height="300"
+                  />
+                ) : (
+                  <span>Click here to upload a picture</span>
+                )}
+              </div>
+            </label>
+            <input
+              type="file"
+              id="fileInput"
+              style={{ display: "none" }}
+              accept="image/*"
+              onChange={handleProfileImage}
+            />
+          </div>
+          <div className="shop-profile-productname">
+            {/* <h3>{shopOwnerName}</h3> */}
+            <h3>Empress Ki Store</h3>
+            <input type="text" placeholder="+ Add a Short Description" />
+          </div>
         </div>
-      </label>
-      <input type="file" id="fileInput" style={{ display: 'none' }} accept="image/*" onChange={handleProfileImage} />
-    </div>
-        <div className="shop-profile-productname">
-          <h3>Empress Ki Stores</h3>
-          <input type="text" placeholder="+ Add a Short Description" />
-        </div>
-    </div>
 
         <div className="shop-profile-product-uploads">
           <h3>Upload Images</h3>
