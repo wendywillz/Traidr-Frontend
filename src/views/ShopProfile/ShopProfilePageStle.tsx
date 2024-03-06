@@ -6,10 +6,10 @@ export const ShopProfileMainWrapper = styled.div`
 
   .shop-profile-product-logo {
     img {
+      width: 15rem;
+      height: 15rem;
       border: 1px solid var(--normal-text-color);
       border-radius: 5px;
-      padding: 4rem;
-      background-color: lightgray;
     }
   }
 

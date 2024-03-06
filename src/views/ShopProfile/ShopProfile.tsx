@@ -1,22 +1,46 @@
 import Header from "../../components/Header/Header";
 import { ShopProfileMainWrapper } from "./ShopProfilePageStle";
-import shoppingImage from "../../assets/shop-profile-assets/shopping-bag.png";
 import aestheticImage from "../../assets/shop-profile-assets/aesthetic-swimsuit.png";
 import SmallButton from "../../components/button/smallButton/smallButton";
+import { useState } from "react";
 
-export default function ShopProfile() {
+const ShopProfile = () => {
+  const [profileImage, setProfileImage] = useState("null");
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleProfileImage = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setProfileImage(reader.result as string);
+    };
+
+    reader.readAsDataURL(file);
+  };
   return (
     <>
       <Header />
       <ShopProfileMainWrapper>
-        <div className="shop-profile-product-logo">
-          <img src={shoppingImage} alt="shopping-product" />
+      <div className="shop-profile-product-logo">
 
-          <div className="shop-profile-productname">
-            <h3>Empress Ki Stores</h3>
-            <input type="text" placeholder="+ Add a Short Description" />
-          </div>
+      <div className="shop-profile-productpicture">
+      <label htmlFor="fileInput">
+        <div className="upload-box-content" onClick={handleProfileImage}>
+          {profileImage ? (
+            <img src={profileImage} alt="shop-profile-image" width="300" height="300"/>
+          ) : (
+            <span>Click here to upload a picture</span>
+          )}
         </div>
+      </label>
+      <input type="file" id="fileInput" style={{ display: 'none' }} accept="image/*" onChange={handleProfileImage} />
+    </div>
+        <div className="shop-profile-productname">
+          <h3>Empress Ki Stores</h3>
+          <input type="text" placeholder="+ Add a Short Description" />
+        </div>
+    </div>
 
         <div className="shop-profile-product-uploads">
           <h3>Upload Images</h3>
@@ -44,21 +68,30 @@ export default function ShopProfile() {
             <div className="shop-profile-photos">
               <div className="shop-profile-photos-each">
                 <img src={aestheticImage} alt="take-photo-of-products" />
-                <p>Aesthetic Swimsuit <br />N 20,000</p>
+                <p>
+                  Aesthetic Swimsuit <br />N 20,000
+                </p>
               </div>
               <div className="shop-profile-photos-each-2">
-                {/* <img src={shoppingAddItem} alt="add-new-item" /> */}
-
-                <p><span>+</span><br />Add a new Item</p>
+                <p>
+                  <span>+</span>
+                  <br />
+                  Add a new Item
+                </p>
               </div>
             </div>
           </div>
         </div>
 
         <div className="shop-profile-upload-btn">
-          <SmallButton button_text={"upload Item"} type={"button"}></SmallButton>
+          <SmallButton
+            button_text={"upload Item"}
+            type={"button"}
+          ></SmallButton>
         </div>
       </ShopProfileMainWrapper>
     </>
   );
-}
+};
+
+export default ShopProfile;
