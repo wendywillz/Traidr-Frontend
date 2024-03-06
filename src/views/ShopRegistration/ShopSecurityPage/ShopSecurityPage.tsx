@@ -56,7 +56,8 @@ const ShopSecurityPage = () => {
           shopOwner: userData.userId,
         });
         if (res && res.data.shopCreated) {
-          console.log("done");
+
+          console.log("hop created", res.data.shopCreadted);
           localStorage.removeItem("nameYourShop");
           localStorage.removeItem("tellUsAboutYourShop");
           localStorage.removeItem("shopSecurity");
@@ -64,7 +65,7 @@ const ShopSecurityPage = () => {
           dispatch(clearTellUsAboutYourShop());
           dispatch(clearTermsAndCoditions());
           persistor.purge();
-          navigate(`/dashboard/shop-profile/${res.data.shopId}`);
+          navigate(`/dashboard/shop-profile/${res.data.shopCreated.shopId}`);
         }
       }
     } catch (error) {
