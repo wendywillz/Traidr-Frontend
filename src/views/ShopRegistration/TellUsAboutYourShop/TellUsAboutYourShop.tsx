@@ -6,8 +6,17 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { TellUsAboutYourShopFormDetails } from "../../../interfaces/shopInterfaces";
 import { updateTellUsAboutYourShop } from "../../../app/features/shopRegistration/tellUsAboutYourShopSlice";
 import { useDispatch } from "react-redux";
+// import useMultiStepForm from "../../../components/HandleMultipleForm/HandleMultipleForm";
+// import NameYourShopComponent from "../NameYourShop/NameYourShop";
+// import ShopSecurityPage from "../ShopSecurityPage/ShopSecurityPage";
 
 function TellUsAboutYourShopComponent() {
+  // const steps = [
+  //   <NameYourShopComponent />,
+  //   <TellUsAboutYourShopComponent />,
+  //   <ShopSecurityPage />,
+  // ];
+  //const { next } = useMultiStepForm(steps);
   const [tellUsAboutYourShop, SetTellUsAboutYourShop] =
     useState<TellUsAboutYourShopFormDetails>({
       shopCountry: "",
@@ -53,6 +62,7 @@ function TellUsAboutYourShopComponent() {
       JSON.stringify(tellUsAboutYourShop)
     );
     dispatch(updateTellUsAboutYourShop(tellUsAboutYourShop));
+    //next();
   };
   return (
     <>

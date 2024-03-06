@@ -19,7 +19,6 @@ import {
 //Component imports
 import PageDescription from "./StockShopPageComponents/PageDescription";
 import Header from "../../../components/Header/Header";
-import FormStepComponent from "../../../components/FormStepComponent/FormStepComponent";
 import {
   ErrorMessage,
   CategorySelectStyle,
@@ -37,8 +36,11 @@ import {
   ListingDetails,
   stockYourShopState,
 } from "../../../interfaces/shopInterfaces";
+import { useParams } from "react-router-dom";
+
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
+  const { shopId } = useParams();
   const dispatch = useDispatch();
   const checkState = useSelector(
     (state: stockYourShopState) => state.stockYourShop
@@ -199,7 +201,6 @@ const StockYourShop = () => {
   return (
     <>
       <Header />
-      <FormStepComponent />
       <StockShopMain>
         <div className="stock-your-shop-inner">
           {" "}

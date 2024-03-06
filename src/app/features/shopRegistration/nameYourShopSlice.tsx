@@ -13,7 +13,7 @@ export const nameYourShopSlice = createSlice({
       return Object.assign(state, nameYourShop);
     },
     clearNameYourShop: (state) => {
-      return Object.assign(state, {} as NameYourShopFormDetails);
+      return Object.assign(state, {});
     },
   },
 });

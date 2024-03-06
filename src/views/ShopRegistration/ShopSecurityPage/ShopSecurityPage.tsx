@@ -14,6 +14,7 @@ import axiosInstance from "../../../utils/axiosInstance";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import userDataInterface from "../../../interfaces/userInterface";
+import { persistor } from "../../../app/store";
 const ShopSecurityPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -62,7 +63,8 @@ const ShopSecurityPage = () => {
           dispatch(clearNameYourShop());
           dispatch(clearTellUsAboutYourShop());
           dispatch(clearTermsAndCoditions());
-          navigate("/dashboard/shop-profile");
+          persistor.purge();
+          navigate(`/dashboard/shop-profile/${res.data.shopId}`);
         }
       }
     } catch (error) {

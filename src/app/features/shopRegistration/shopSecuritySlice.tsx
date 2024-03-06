@@ -14,7 +14,7 @@ export const shopSecuritySlice = createSlice({
       return Object.assign(state, shopSecurity);
     },
     clearTermsAndCoditions: (state) => {
-      return Object.assign(state, {} as ShopSecurityInterface);
+      return Object.assign(state, {});
     },
   },
 });

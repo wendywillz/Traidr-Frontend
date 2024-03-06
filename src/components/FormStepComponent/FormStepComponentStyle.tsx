@@ -5,15 +5,17 @@ const FormStepComponentWrapper = styled.div`
   flex-direction: column;
   .form-step-component {
     width: 100%;
-    position: relative;
     margin: 2rem auto;
     display: flex;
     gap: 1rem;
     justify-content: space-between;
     align-items: stretch;
-    @media (max-width: 768px) {
-      width: 90%;
+    @media (min-width: 768px) {
+      width: 75%;
     }
+  }
+  .form-step-component > * {
+    flex: 1;
   }
 
   .form-step {
@@ -25,21 +27,47 @@ const FormStepComponentWrapper = styled.div`
     position: relative;
   }
 
+  .form-step-start {
+    align-items: flex-start;
+  }
+  .form-step-end {
+    align-items: flex-end;
+  }
+  .first-wrapper {
+    position: relative;
+  }
+  .second-wrapper {
+    position: relative;
+  }
   .base-line {
-    width: 75%;
+    width: 145%;
     height: 2px;
     position: absolute;
     border: none;
     top: 20%;
     right: 0;
-    left: 0;
+    left: 7%;
     margin: auto;
+  }
+  .base-line-orange {
     background-color: var(--orange-color);
+  }
+  .base-line-grey {
+    background-color: grey;
+  }
+  .base-line2 {
+    width: 150%;
+    height: 2px;
+    position: absolute;
+    border: none;
+    top: 20%;
+    left: 53%;
   }
   .step-icon {
     font-size: 2rem;
     color: var(--orange-color);
   }
+
   .form-step p {
     color: var(--normal-text-color);
     font-size: 1rem;
@@ -48,7 +76,7 @@ const FormStepComponentWrapper = styled.div`
   .grey-color {
     color: grey;
     font-size: 2rem;
-    box-shadow: 5px 5px 10px #00000080;
+    //box-shadow: 5px 5px 10px #00000080;
   }
 `;
 
