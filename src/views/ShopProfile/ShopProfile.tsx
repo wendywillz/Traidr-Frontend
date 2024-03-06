@@ -1,6 +1,5 @@
 import Header from "../../components/Header/Header";
 import { ShopProfileMainWrapper } from "./ShopProfilePageStle";
-import aestheticImage from "../../assets/shop-profile-assets/aesthetic-swimsuit.png";
 import SmallButton from "../../components/button/smallButton/smallButton";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -82,12 +81,6 @@ const ShopProfile = () => {
               </p>
             </div>
             <div className="shop-profile-photos">
-              <div className="shop-profile-photos-each">
-                <img src={aestheticImage} alt="take-photo-of-products" />
-                <p>
-                  Aesthetic Swimsuit <br />N 20,000
-                </p>
-              </div>
               <div
                 className="shop-profile-photos-each-2"
                 onClick={handleNavigate}

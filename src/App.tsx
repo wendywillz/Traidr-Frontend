@@ -41,6 +41,7 @@ function App() {
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/shop-security-page" element={<ShopSecurityPage />} />
+      <Route path="shop-profile/" element={<ShopProfile />} />
     </Routes>
   );
 }
