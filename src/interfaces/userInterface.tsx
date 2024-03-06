@@ -1,4 +1,5 @@
 export default interface userData {
+  userId: string;
   name: string;
   email: string;
   profileImage: string;

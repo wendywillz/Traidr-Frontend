@@ -12,8 +12,12 @@ export const nameYourShopSlice = createSlice({
       console.log("initial state", initialState);
       return Object.assign(state, nameYourShop);
     },
+    clearNameYourShop: (state) => {
+      return Object.assign(state, {} as NameYourShopFormDetails);
+    },
   },
 });
 
-export const { updatedNameYourShop } = nameYourShopSlice.actions;
+export const { updatedNameYourShop, clearNameYourShop } =
+  nameYourShopSlice.actions;
 export default nameYourShopSlice.reducer;

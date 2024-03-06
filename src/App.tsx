@@ -22,19 +22,22 @@ function App() {
           <ProtectedRoute>
             <Routes>
               <Route index element={<Dashboard />} />
+              <Route
+                path="shop-registration"
+                element={<ShopRegistrationPage />}
+              />
+              <Route path="change-password" element={<ChangePassword />} />
+              <Route path="shop-profile" element={<ShopProfile />} />
             </Routes>
           </ProtectedRoute>
         }
       />
-      <Route path="/shop-registration" element={<ShopRegistrationPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
-      <Route path="/change-password" element={<ChangePassword />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/stock-your-shop" element={<StockYourShop />} />
       <Route path="/shop-security-page" element={<ShopSecurityPage />} />
-      <Route path="shop-profile" element={<ShopProfile />} />
     </Routes>
   );
 }

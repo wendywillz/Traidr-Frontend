@@ -13,8 +13,12 @@ export const shopSecuritySlice = createSlice({
       console.log("initial state", initialState);
       return Object.assign(state, shopSecurity);
     },
+    clearTermsAndCoditions: (state) => {
+      return Object.assign(state, {} as ShopSecurityInterface);
+    },
   },
 });
 
-export const { updateTermsAndCondition } = shopSecuritySlice.actions;
+export const { updateTermsAndCondition, clearTermsAndCoditions } =
+  shopSecuritySlice.actions;
 export default shopSecuritySlice.reducer;

@@ -4,6 +4,7 @@ export default function SmallButton({
   button_text,
   whiteBg,
   onClick,
+  disabled,
 }: SmallButtonProps) {
   return (
     <SmallButtonStyle
@@ -11,6 +12,7 @@ export default function SmallButton({
       whiteBg={whiteBg}
       button_text={button_text}
       onClick={onClick}
+      disabled={disabled}
     >
       {button_text}
     </SmallButtonStyle>

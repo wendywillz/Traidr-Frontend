@@ -5,10 +5,10 @@ export const NextIcon = styled.div`
   right: 0;
   top: 50%;
   margin: 1rem;
-  background-color: var(--orange-color);
+  background-color: #ffff;
   .next-icon {
     font-size: 2rem;
-    color: var(--normal-text-color);
+    color: var(--orange-color);
     cursor: pointer;
   }
 `;
@@ -18,10 +18,11 @@ export const PrevIcon = styled.div`
   left: 0;
   top: 50%;
   margin: 1rem;
-  background-color: var(--orange-color);
+  background-color: #ffff;
+  drop-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   .prev-icon {
     font-size: 2rem;
-    color: var(--normal-text-color);
+    color: var(--orange-color);
     cursor: pointer;
   }
 `;

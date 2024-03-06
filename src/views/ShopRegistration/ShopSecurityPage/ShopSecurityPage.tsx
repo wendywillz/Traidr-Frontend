@@ -2,25 +2,82 @@ import "./ShopSecurityPage.css";
 import FormStepComponent from "../../../components/FormStepComponent/FormStepComponent";
 import SmallButton from "../../../components/button/smallButton/smallButton";
 import Header from "../../../components/Header/Header";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateTermsAndCondition } from "../../../app/features/shopRegistration/shopSecuritySlice";
+import {
+  updateTermsAndCondition,
+  clearTermsAndCoditions,
+} from "../../../app/features/shopRegistration/shopSecuritySlice";
+import { clearNameYourShop } from "../../../app/features/shopRegistration/nameYourShopSlice";
+import { clearTellUsAboutYourShop } from "../../../app/features/shopRegistration/tellUsAboutYourShopSlice";
+import axiosInstance from "../../../utils/axiosInstance";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import userDataInterface from "../../../interfaces/userInterface";
 const ShopSecurityPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userData = useSelector(
+    (state: { user: userDataInterface }) => state.user
+  );
 
   const [isChecked, setisChecked] = useState(false);
+  useEffect(() => {
+    const storedShopSecurity = JSON.parse(
+      localStorage.getItem("shopSecurity")!
+    );
+    if (storedShopSecurity) {
+      setisChecked(storedShopSecurity);
+    }
+  }, []);
 
-  const handleisChecked = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleisChecked = async (e: ChangeEvent<HTMLInputElement>) => {
     setisChecked(e.target.checked);
     localStorage.setItem("shopSecurity", JSON.stringify(e.target.checked));
     dispatch(updateTermsAndCondition({ isChecked: e.target.checked }));
+  };
+
+  const handleSubmitOpenYourShop = async (e: FormEvent) => {
+    e.preventDefault();
+    try {
+      const nameYourShop = JSON.parse(localStorage.getItem("nameYourShop")!);
+      const tellUsAboutYourShop = JSON.parse(
+        localStorage.getItem("tellUsAboutYourShop")!
+      );
+      const shopSecurity = JSON.parse(localStorage.getItem("shopSecurity")!);
+      if (!nameYourShop || !tellUsAboutYourShop || !shopSecurity) {
+        alert("Please complete all sections of the form");
+      } else {
+        console.log("done", userData);
+        const res = await axiosInstance.post("/shop/create-shop", {
+          ...nameYourShop,
+          ...tellUsAboutYourShop,
+          shopOwner: userData.userId,
+        });
+        if (res && res.data.shopCreated) {
+          console.log("done");
+          localStorage.removeItem("nameYourShop");
+          localStorage.removeItem("tellUsAboutYourShop");
+          localStorage.removeItem("shopSecurity");
+          dispatch(clearNameYourShop());
+          dispatch(clearTellUsAboutYourShop());
+          dispatch(clearTermsAndCoditions());
+          navigate("/dashboard/shop-profile");
+        }
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
   };
   return (
     <>
       <Header />
       <FormStepComponent />
       <div className="shop-security-content">
-        <div className="shop-security-content-inner">
+        <form
+          onSubmit={handleSubmitOpenYourShop}
+          className="shop-security-content-inner"
+        >
           <h4>Keep your shop safe</h4>
           <div className="content-paras">
             <p className="title-para">
@@ -62,10 +119,14 @@ const ShopSecurityPage = () => {
             </div>
             <div className="submit-button-wrapper reduced-margin">
               <SmallButton button_text="Cancel" whiteBg={true} type="button" />
-              <SmallButton button_text="Open your Shop" type="submit" />
+              <SmallButton
+                button_text="Open your Shop"
+                type="submit"
+                disabled={isChecked ? false : true}
+              />
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

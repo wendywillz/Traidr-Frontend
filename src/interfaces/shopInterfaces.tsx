@@ -2,6 +2,7 @@ export interface NameYourShopFormDetails {
   shopName: string;
   shopCurrency: string;
   shopCategory: string;
+  shopDescription: string;
 }
 
 export interface nameYourShopState {
@@ -29,12 +30,10 @@ export interface stockYourShopState {
 export interface ShopSecurityInterface {
   isChecked: boolean;
 }
-export interface HowYouWillGetPaidFormDetails {
-  paymentDetails: string;
-  legalBusinessAddress: {
-    country: string;
-    streetAddress: string;
-    state: string;
-    zip: string;
-  };
+export interface TellUsAboutYourShopFormDetails {
+  shopCountry: string;
+  shopStreetAddress: string;
+  shopCity: string;
+  shopState: string;
+  shopZipCode: string;
 }
