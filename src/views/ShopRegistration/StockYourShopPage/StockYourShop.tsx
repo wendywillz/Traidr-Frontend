@@ -37,6 +37,7 @@ import {
   stockYourShopState,
 } from "../../../interfaces/shopInterfaces";
 import { useParams } from "react-router-dom";
+import axiosInstance from "../../../utils/axiosInstance";
 
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,50 +152,64 @@ const StockYourShop = () => {
   //submitting the whole form
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    try {
+      ///////////////////////////
+      //Data from the photo upload
+      const listingDetailsData = new FormData();
+      if (!photoFile) {
+        setErrorMessage("Please upload a photo of your product");
+        return;
+      }
+      listingDetailsData.append("productPhoto", photoFile as Blob);
 
-    ///////////////////////////
-    //Data from the photo upload
-    const listingDetailsData = new FormData();
-    if (!photoFile) {
-      setErrorMessage("Please upload a photo of your product");
-      return;
+      ///////////////////////////
+      //Data from the videoupload
+      if (videoFile)
+        listingDetailsData.append("productVideo", videoFile as Blob);
+
+      listingDetailsData.append("productTitle", listingDetails.productTitle);
+      listingDetailsData.append(
+        "productPrice",
+        listingDetails.productPrice.toString()
+      );
+      listingDetailsData.append(
+        "productCategory",
+        listingDetails.productCategory
+      );
+      listingDetailsData.append(
+        "productDescription",
+        listingDetails.productDescription
+      );
+      for (const [key, value] of listingDetailsData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+      // setting the photo name and video name in the local storage
+      localStorage.setItem(
+        "displayUploadedPhotoName",
+        JSON.stringify(photoFile.name)
+      );
+      localStorage.setItem(
+        "displayUploadedVideoName",
+        JSON.stringify(videoFile?.name)
+      );
+      console.log("listing Details", listingDetails);
+      console.log("listing Data", listingDetailsData);
+      // setting the listing details in the local storage
+      dispatch(updateStockYourShop(listingDetails));
+      console.log("checking", checkState);
+      localStorage.setItem("listingDetails", JSON.stringify(listingDetails));
+
+      const res = await axiosInstance.post(
+        `/products/add-product/${shopId}`,
+        listingDetailsData
+      );
+      if (res && res.data.productAdded) {
+        console.log(res.data);
+      }
+    } catch (error) {
+      console.log("product error", error);
     }
-    listingDetailsData.append("productPhoto", photoFile as Blob);
 
-    ///////////////////////////
-    //Data from the videoupload
-    if (videoFile) listingDetailsData.append("productVideo", videoFile as Blob);
-
-    listingDetailsData.append("productTitle", listingDetails.productTitle);
-    listingDetailsData.append(
-      "productPrice",
-      listingDetails.productPrice.toString()
-    );
-    listingDetailsData.append(
-      "productCategory",
-      listingDetails.productCategory
-    );
-    listingDetailsData.append(
-      "productDescription",
-      listingDetails.productDescription
-    );
-    for (const [key, value] of listingDetailsData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-    // setting the photo name and video name in the local storage
-    localStorage.setItem(
-      "displayUploadedPhotoName",
-      JSON.stringify(photoFile.name)
-    );
-    localStorage.setItem(
-      "displayUploadedVideoName",
-      JSON.stringify(videoFile?.name)
-    );
-    console.log("listing Details", listingDetails);
-    // setting the listing details in the local storage
-    dispatch(updateStockYourShop(listingDetails));
-    console.log("checking", checkState);
-    localStorage.setItem("listingDetails", JSON.stringify(listingDetails));
     //localStorage.setItem("stockYourShop", JSON.stringify(listingDetailsData));
   };
 

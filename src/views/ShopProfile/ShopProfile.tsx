@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const ShopProfile = () => {
   const { shopId } = useParams();
+  console.log("shopId", shopId);
   const [profileImage, setProfileImage] = useState("null");
   const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

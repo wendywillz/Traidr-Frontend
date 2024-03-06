@@ -55,7 +55,7 @@ export default function Header() {
                 )}
               </div>
               <Link
-                to="/dashboard/start-selling"
+                to="/dashboard/shop-registration"
                 className="header-right-signup-btn big-screen"
               >
                 Start Selling
@@ -85,7 +85,7 @@ export default function Header() {
                   )}
                 </div>
                 <Link
-                  to="/dashboard/start-selling"
+                  to="/dashboard/shop-registration"
                   className="header-right-signup-btn big-screen"
                 >
                   Start Selling
