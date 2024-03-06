@@ -1,6 +1,5 @@
 import Header from "../../components/Header/Header";
 import { ShopProfileMainWrapper } from "./ShopProfilePageStle";
-import aestheticImage from "../../assets/shop-profile-assets/aesthetic-swimsuit.png";
 import SmallButton from "../../components/button/smallButton/smallButton";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -32,7 +31,7 @@ const ShopProfile = () => {
           <div className="shop-profile-productpicture">
             <label htmlFor="fileInput">
               <div className="upload-box-content" onClick={handleProfileImage}>
-                {profileImage ? (
+                {!profileImage ? (
                   <img
                     src={profileImage}
                     alt="shop-profile-image"
@@ -40,7 +39,11 @@ const ShopProfile = () => {
                     height="300"
                   />
                 ) : (
-                  <span>Click here to upload a picture</span>
+                  <div>
+                    <span style={{ fontSize: "2rem" }}>+</span>
+                    <br />
+                    <span>Add New Photo</span>
+                  </div>
                 )}
               </div>
             </label>
@@ -52,6 +55,7 @@ const ShopProfile = () => {
               onChange={handleProfileImage}
             />
           </div>
+
           <div className="shop-profile-productname">
             <h3>Empress Ki Stores</h3>
             <input type="text" placeholder="+ Add a Short Description" />
@@ -82,12 +86,6 @@ const ShopProfile = () => {
               </p>
             </div>
             <div className="shop-profile-photos">
-              <div className="shop-profile-photos-each">
-                <img src={aestheticImage} alt="take-photo-of-products" />
-                <p>
-                  Aesthetic Swimsuit <br />N 20,000
-                </p>
-              </div>
               <div
                 className="shop-profile-photos-each-2"
                 onClick={handleNavigate}
