@@ -36,7 +36,7 @@ import {
   ListingDetails,
   stockYourShopState,
 } from "../../../interfaces/shopInterfaces";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../../../utils/axiosInstance";
 
 const StockYourShop = () => {
@@ -46,6 +46,7 @@ const StockYourShop = () => {
   const checkState = useSelector(
     (state: stockYourShopState) => state.stockYourShop
   );
+  const navigate = useNavigate();
   //Logic for handling the photo upload
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [listingDetails, setListingDetails] = useState<ListingDetails>({
@@ -204,7 +205,7 @@ const StockYourShop = () => {
         listingDetailsData
       );
       if (res && res.data.productAdded) {
-        console.log(res.data);
+        navigate(`/dashboard/shop-profile/${shopId}`);
       }
     } catch (error) {
       console.log("product error", error);
