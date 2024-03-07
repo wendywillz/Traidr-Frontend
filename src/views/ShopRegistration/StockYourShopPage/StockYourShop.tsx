@@ -31,14 +31,15 @@ import SmallButton from "../../../components/button/smallButton/smallButton";
 //package imports
 import { useState, FormEvent, ChangeEvent, useEffect } from "react";
 import { ListingDetails } from "../../../interfaces/shopInterfaces";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import SuccessModal from "../../SuccessModal/SuccessModalComponent";
 import axiosInstance from "../../../utils/axiosInstance";
 
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
   const { shopId } = useParams();
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   //Logic for handling the photo upload
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [listingDetails, setListingDetails] = useState<ListingDetails>({
@@ -47,7 +48,7 @@ const StockYourShop = () => {
     productCategory: "",
     productDescription: "",
   });
-
+  const [displayPopup, setDisplayPopup] = useState(false);
   useEffect(() => {
     const storedListingDetails = localStorage.getItem("listingDetails")!;
     if (storedListingDetails) {
@@ -186,10 +187,11 @@ const StockYourShop = () => {
         listingDetailsData
       );
       if (res && res.data.productAdded) {
-        navigate(`/dashboard/shop-profile/${shopId}`);
         localStorage.removeItem("listingDetails");
         localStorage.removeItem("displayUploadedPhotoName");
         localStorage.removeItem("displayUploadedVideoName");
+        setDisplayPopup(true);
+        //navigate(`/dashboard/shop-profile/${shopId}`);
       }
     } catch (error) {
       console.log("product error", error);
@@ -201,6 +203,7 @@ const StockYourShop = () => {
   return (
     <>
       <Header />
+      <SuccessModal isOpen={displayPopup} shopId={shopId} />
       <StockShopMain>
         <div className="stock-your-shop-inner">
           {" "}

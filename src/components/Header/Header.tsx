@@ -2,7 +2,7 @@ import userDataInterface from "../../interfaces/userInterface.tsx";
 import traidrLogo from "../../assets/traidr-logo-orange.png";
 import "./HeaderStyle.tsx";
 import HeaderStyle from "./HeaderStyle.tsx";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { BsBell } from "react-icons/bs";
 import { useState } from "react";
@@ -13,8 +13,10 @@ interface userState {
   user: userDataInterface;
 }
 export default function Header() {
+  const { shopId } = useParams();
   const [notificationCount, setNotificationCount] = useState(0);
   const token = localStorage.getItem("token");
+  const products = localStorage.getItem("shopProducts");
   const handleNotificationClick = () => {
     setNotificationCount(0);
   };
@@ -54,12 +56,21 @@ export default function Header() {
                   </div>
                 )}
               </div>
-              <Link
-                to="/dashboard/shop-registration"
-                className="header-right-signup-btn big-screen"
-              >
-                Start Selling
-              </Link>
+              {products ? (
+                <Link
+                  to={`/dashboard/shop-profile/${shopId}`}
+                  className="header-right-signup-btn big-screen"
+                >
+                  Go to Shop
+                </Link>
+              ) : (
+                <Link
+                  to="/dashboard/shop-registration"
+                  className="header-right-signup-btn big-screen"
+                >
+                  Start Selling
+                </Link>
+              )}
             </>
           ) : location.pathname === "/" ? (
             token ? (
