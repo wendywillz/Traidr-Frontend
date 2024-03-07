@@ -155,8 +155,6 @@ export const ShopProfileMainWrapper = styled.div`
   }
 
   .upload-box-content {
-    width: 12rem;
-    height: 12rem;
     border-radius: 5px;
     outline: 1px solid var(--normal-text-color);
     display: flex;
@@ -164,9 +162,10 @@ export const ShopProfileMainWrapper = styled.div`
     justify-content: center;
     cursor: pointer;
     span {
+      width: 10rem;
+      height: 5rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
     }
 `;

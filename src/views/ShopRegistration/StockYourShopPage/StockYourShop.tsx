@@ -41,7 +41,7 @@ import axiosInstance from "../../../utils/axiosInstance";
 
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
-  //const { shopId } = useParams();
+  const { shopId } = useParams();
   const dispatch = useDispatch();
   const checkState = useSelector(
     (state: stockYourShopState) => state.stockYourShop
