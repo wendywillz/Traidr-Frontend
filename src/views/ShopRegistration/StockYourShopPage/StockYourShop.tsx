@@ -30,22 +30,14 @@ import videoIcon from "../../../assets/stock_shop_page_assets/upload_video_icon.
 import SmallButton from "../../../components/button/smallButton/smallButton";
 //package imports
 import { useState, FormEvent, ChangeEvent, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { updateStockYourShop } from "../../../app/features/shopRegistration/stockYourShopSlice";
-import {
-  ListingDetails,
-  stockYourShopState,
-} from "../../../interfaces/shopInterfaces";
+import { ListingDetails } from "../../../interfaces/shopInterfaces";
 import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../../../utils/axiosInstance";
 
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
   const { shopId } = useParams();
-  const dispatch = useDispatch();
-  const checkState = useSelector(
-    (state: stockYourShopState) => state.stockYourShop
-  );
+
   const navigate = useNavigate();
   //Logic for handling the photo upload
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -56,18 +48,9 @@ const StockYourShop = () => {
     productDescription: "",
   });
 
-  // checking if the stockYourShop details are in the local storage
-  // useEffect(() => {
-  //   const storedStockYourShop = localStorage.getItem("stockYourShop")!;
-  //   if (storedStockYourShop) {
-  //     console.log("storedStockYourShop", storedStockYourShop);
-  //     setListingDetails(JSON.parse(storedStockYourShop));
-  //   }
-  // }, []);
   useEffect(() => {
     const storedListingDetails = localStorage.getItem("listingDetails")!;
     if (storedListingDetails) {
-      console.log("storedListingDetails", storedListingDetails);
       setListingDetails(JSON.parse(storedListingDetails));
     }
   }, []);
@@ -106,9 +89,9 @@ const StockYourShop = () => {
       setErrorMessage("File size exceeds 3mb");
       return;
     } else {
+      setErrorMessage("");
       setPhotoFile(uploadedPhoto);
       setDisplayUploadedPhotoName(uploadedPhoto.name);
-      console.log("photo", photoFile);
       return;
     }
   };
@@ -138,6 +121,7 @@ const StockYourShop = () => {
       setVideoDisplayError("File size exceeds 10mb");
       return;
     } else {
+      setVideoDisplayError("");
       setVideoFile(uploadedVideo);
       setDisplayUploadedVideoName(uploadedVideo.name);
 
@@ -181,9 +165,9 @@ const StockYourShop = () => {
         "productDescription",
         listingDetails.productDescription
       );
-      for (const [key, value] of listingDetailsData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
+      // for (const [key, value] of listingDetailsData.entries()) {
+      //   console.log(`${key}: ${value}`);
+      // }
       // setting the photo name and video name in the local storage
       localStorage.setItem(
         "displayUploadedPhotoName",
@@ -193,11 +177,8 @@ const StockYourShop = () => {
         "displayUploadedVideoName",
         JSON.stringify(videoFile?.name)
       );
-      console.log("listing Details", listingDetails);
-      console.log("listing Data", listingDetailsData);
       // setting the listing details in the local storage
-      dispatch(updateStockYourShop(listingDetails));
-      console.log("checking", checkState);
+
       localStorage.setItem("listingDetails", JSON.stringify(listingDetails));
 
       const res = await axiosInstance.post(
@@ -206,6 +187,9 @@ const StockYourShop = () => {
       );
       if (res && res.data.productAdded) {
         navigate(`/dashboard/shop-profile/${shopId}`);
+        localStorage.removeItem("listingDetails");
+        localStorage.removeItem("displayUploadedPhotoName");
+        localStorage.removeItem("displayUploadedVideoName");
       }
     } catch (error) {
       console.log("product error", error);

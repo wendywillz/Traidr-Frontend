@@ -1,33 +1,10 @@
 import Header from "../../components/Header/Header";
 import { ShopProfileMainWrapper } from "./ShopProfilePageStle";
-import SmallButton from "../../components/button/smallButton/smallButton";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../utils/axiosInstance";
+import { shopInterface, shopProductsInterface } from "../../interfaces/shopInterfaces";
 
-interface shopProductsInterface {
-  id: number;
-  productTitle: string;
-  productDescription: string;
-  productCategory: string;
-  productImage: string;
-  productVideo: string;
-  productPrice: number;
-  shopId: string;
-}
-
-interface shopInterface {
-  shopName: string;
-  shopCurrency: string;
-  shopDescription: string;
-  shopCategory: string;
-  shopCountry: string;
-  shopStreetAddress: string;
-  shopCity: string;
-  shopState: string;
-  shopZipCode: string;
-  shopOwner: string;
-}
 const ShopProfile = () => {
   const { shopId } = useParams();
   const [profileImage, setProfileImage] = useState<string | null>(null); // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -64,15 +41,12 @@ const ShopProfile = () => {
     const file = e.target.files[0];
     const reader = new FileReader();
 
-      reader.onload = () => {
-        setProfileImage(reader.result as string);
-      };
+    reader.onload = () => {
+      setProfileImage(reader.result as string);
+    };
 
-      reader.readAsDataURL(file);
-    }
+    reader.readAsDataURL(file);
   };
-
-
   const handleNavigate = () => {
     navigate(`/dashboard/stock-your-shop/${shopId}`);
   };
@@ -83,7 +57,10 @@ const ShopProfile = () => {
       <ShopProfileMainWrapper>
         <div className="shop-profile-product-logo">
           <div className="shop-profile-productpicture">
-            <div className="upload-box-content" onClick={() => document.getElementById('fileInput')?.click()}>
+            <div
+              className="upload-box-content"
+              onClick={() => document.getElementById("fileInput")?.click()}
+            >
               {!profileImage ? (
                 <div>
                   <span style={{ fontSize: "2rem" }}>+</span>
@@ -91,10 +68,7 @@ const ShopProfile = () => {
                   <span>Add New Photo</span>
                 </div>
               ) : (
-                <img
-                  src={profileImage}
-                  alt="shop-profile-image"
-                />
+                <img src={profileImage} alt="shop-profile-image" />
               )}
             </div>
             <input
@@ -166,18 +140,9 @@ const ShopProfile = () => {
             </div>
           </div>
         </div>
-
-        <div className="shop-profile-upload-btn">
-          <SmallButton
-            button_text={"upload Item"}
-            type={"button"}
-          ></SmallButton>
-        </div>
       </ShopProfileMainWrapper>
     </>
   );
 };
 
 export default ShopProfile;
-
-

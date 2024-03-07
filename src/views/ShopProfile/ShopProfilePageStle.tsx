@@ -90,7 +90,6 @@ export const ShopProfileMainWrapper = styled.div`
     grid-template-columns: 1fr;
     gap: 1rem;
     justify-content: space-between;
-    background-color: green;
     @media (min-width: 768px) {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }

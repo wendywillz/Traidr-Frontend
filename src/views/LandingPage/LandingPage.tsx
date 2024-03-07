@@ -7,14 +7,23 @@ import cartImage from "../../assets/cart-image.png";
 import userImage from "../../assets/user-image.png";
 import shopImage from "../../assets/shop-image.png";
 import ironImage from "../../assets/products/iron.png";
-import platesImage from "../../assets/products/plates.png";
-import microscopeImage from "../../assets/products/microscope.png";
 import { LandingPageMainWrapper } from "./LandingPageStye";
 import Footer from "../../components/Footer/Footer";
-import { useLocation } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
+import { useEffect, useState } from "react";
+import { shopProductsInterface } from "../../interfaces/shopInterfaces";
+
 export default function LandingPage() {
-  const location = useLocation();
-  console.log("location",location.pathname);
+  const [products, setProducts] = useState<shopProductsInterface[]>();
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+      const res = await axiosInstance.get("/products/get-all-products");
+      if (res && res.data.products) {
+        setProducts(res.data.products);
+      }
+    };
+    fetchAllProducts();
+  }, []);
   return (
     <>
       <Header />
@@ -116,34 +125,28 @@ export default function LandingPage() {
                 </p>
                 <span className="each-product-price">N50,000</span>
               </div>
-              <div className="each-product-wrapper">
-                <div className="each-product-image">
-                  <img src={platesImage} alt="" />
-                </div>
-                <p className="each-product-title">Plates</p>
-                <p className="each-product-description">Stainelss plates</p>
-                <span className="each-product-price">N50,000</span>
-              </div>
-              <div className="each-product-wrapper">
-                <div className="each-product-image">
-                  <img src={microscopeImage} alt="" />
-                </div>
-                <p className="each-product-title">Pressing Iron</p>
-                <p className="each-product-description">
-                  This is a very good pressing iron
-                </p>
-                <span className="each-product-price">N50,000</span>
-              </div>
-              <div className="each-product-wrapper">
-                <div className="each-product-image">
-                  <img src={ironImage} alt="" />
-                </div>
-                <p className="each-product-title">Pressing Iron</p>
-                <p className="each-product-description">
-                  This is a very good pressing iron
-                </p>
-                <span className="each-product-price">N50,000</span>
-              </div>
+              {products &&
+                products.map((product) => {
+                  return (
+                    <div
+                      className="each-product-wrapper"
+                      key={product.productId}
+                    >
+                      <div className="each-product-image">
+                        <img src={product.productImage} alt="" />
+                      </div>
+                      <p className="each-product-title">
+                        {product.productTitle}
+                      </p>
+                      <p className="each-product-description">
+                        {product.productDescription}
+                      </p>
+                      <span className="each-product-price">
+                        N{product.productPrice}
+                      </span>
+                    </div>
+                  );
+                })}
             </div>
           </div>
         </div>

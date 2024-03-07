@@ -215,9 +215,10 @@ export const LandingPageMainWrapper = styled.div`
     justify-content: center;
     background-color: #f2f2f2;
     border-radius: 5px;
+    overflow: hidden;
   }
   .each-product-image img {
-    object-fit: cover;
+    object-fit: contain;
   }
   .each-product-title {
     font-weight: 600;
