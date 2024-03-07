@@ -140,57 +140,6 @@ export const ShopProfileMainWrapper = styled.div`
     }
   }
 
-  .shop-profile-description-price {
-    h3 {
-      color: var(--black-color);
-      font-weight: 400;
-    }
-    p {
-      color: var(--normal-text-color);
-      font-weight: 200;
-      font-size: 1rem;
-      line-height: 1.5rem;
-      width: 13rem;
-    }
-  }
-
-  .shop-profile-description {
-    margin-top: 7rem;
-    h3 {
-      color: var(--black-color);
-      font-weight: 400;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-  }
-
-  .shop-profile-description-para {
-    display: flex;
-    input {
-      width: 60%;
-      margin-left: 5rem;
-      border-radius: 5px;
-      border: 1px solid var(--normal-text-color);
-    }
-  }
-
-  .shop-profile-description-para-price {
-    display: flex;
-    margin-top: 5rem;
-    h3 {
-      color: var(--black-color);
-      font-weight: 400;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    input {
-      width: 60%;
-      margin-left: 11.5rem;
-      border-radius: 5px;
-      border: 1px solid var(--normal-text-color);
-    }
-  }
-
   .shop-profile-upload-btn {
     display: flex;
     justify-content: flex-start;
@@ -207,4 +156,19 @@ export const ShopProfileMainWrapper = styled.div`
       transition: all 0.3s ease-in-out;
     }
   }
+
+  .upload-box-content {
+    border-radius: 5px;
+    outline: 1px solid var(--normal-text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    span {
+      width: 10rem;
+      height: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 `;

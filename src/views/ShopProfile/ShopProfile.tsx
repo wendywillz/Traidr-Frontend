@@ -30,8 +30,7 @@ interface shopInterface {
 }
 const ShopProfile = () => {
   const { shopId } = useParams();
-  console.log("shopId", shopId);
-  const [profileImage, setProfileImage] = useState("null");
+  const [profileImage, setProfileImage] = useState<string | null>(null); // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [products, setProducts] = useState<shopProductsInterface[]>();
   const [shop, setShop] = useState<shopInterface>();
   const navigate = useNavigate();
@@ -65,36 +64,39 @@ const ShopProfile = () => {
     const file = e.target.files[0];
     const reader = new FileReader();
 
-    reader.onload = () => {
-      setProfileImage(reader.result as string);
-    };
+      reader.onload = () => {
+        setProfileImage(reader.result as string);
+      };
 
-    reader.readAsDataURL(file);
+      reader.readAsDataURL(file);
+    }
   };
+
 
   const handleNavigate = () => {
     navigate(`/dashboard/stock-your-shop/${shopId}`);
   };
+
   return (
     <>
       <Header />
       <ShopProfileMainWrapper>
         <div className="shop-profile-product-logo">
           <div className="shop-profile-productpicture">
-            <label htmlFor="fileInput">
-              <div className="upload-box-content" onClick={handleProfileImage}>
-                {profileImage ? (
-                  <img
-                    src={profileImage}
-                    alt="shop-profile-image"
-                    width="300"
-                    height="300"
-                  />
-                ) : (
-                  <span>Click here to upload a picture</span>
-                )}
-              </div>
-            </label>
+            <div className="upload-box-content" onClick={() => document.getElementById('fileInput')?.click()}>
+              {!profileImage ? (
+                <div>
+                  <span style={{ fontSize: "2rem" }}>+</span>
+                  <br />
+                  <span>Add New Photo</span>
+                </div>
+              ) : (
+                <img
+                  src={profileImage}
+                  alt="shop-profile-image"
+                />
+              )}
+            </div>
             <input
               type="file"
               id="fileInput"
@@ -103,6 +105,7 @@ const ShopProfile = () => {
               onChange={handleProfileImage}
             />
           </div>
+
           <div className="shop-profile-productname">
             {shop && (
               <>
@@ -176,3 +179,5 @@ const ShopProfile = () => {
 };
 
 export default ShopProfile;
+
+
