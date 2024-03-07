@@ -22,7 +22,7 @@ const SmallButtonStyle = styled.button<SmallButtonProps>`
   ${(props) =>
     props.whiteBg &&
     `
-    background-color: #ffffff; // Changed from #ffff to #ffffff for correct white color
+    background-color: #ffffff; // Corrected from #ffff to #ffffff for correct white color
     color: var(--orange-color);
  `}
 `;

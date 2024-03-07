@@ -10,7 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import EnterOtpPage from "./views/Enter-otp/EnterOtpPage";
 import ShopRegistrationPage from "./views/ShopRegistration/ShopRegistrationPage";
 import StockYourShop from "./views/ShopRegistration/StockYourShopPage/StockYourShop";
-import ShopSecurityPage from "./views/ShopRegistration/ShopSecurityPage/ShopSecurityPage";
+import SuccessModal from "./views/SuccessModal/SuccessModalComponent";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         element={
           <ProtectedRoute>
             <Routes>
-              <Route index element={<Dashboard />} />
+              <Route path={"shop/:shopId"} element={<Dashboard />} />
               <Route
                 path="shop-registration"
                 element={<ShopRegistrationPage />}
@@ -40,8 +40,8 @@ function App() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
-      <Route path="/shop-security-page" element={<ShopSecurityPage />} />
-      <Route path="shop-profile/" element={<ShopProfile />} />
+      <Route path="/success-modal" element={<SuccessModal />} />
+      {/* <Route path="/shop-profile/" element={<ShopProfile />} /> */}
     </Routes>
   );
 }

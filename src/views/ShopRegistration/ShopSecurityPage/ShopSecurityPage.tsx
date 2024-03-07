@@ -65,6 +65,7 @@ const ShopSecurityPage = () => {
           dispatch(clearTellUsAboutYourShop());
           dispatch(clearTermsAndCoditions());
           persistor.purge();
+          persistor.flush();
           navigate(`/dashboard/shop-profile/${res.data.shopCreated.shopId}`);
         }
       }

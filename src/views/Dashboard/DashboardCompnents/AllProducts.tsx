@@ -1,25 +1,33 @@
+import { shopProductsInterface } from "../../../interfaces/shopInterfaces";
+import axiosInstance from "../../../utils/axiosInstance";
 import { AllProductsContainer } from "../DashboardStyles/Product.styled";
 import Product from "./Product";
-import { productsDummy } from "./dummyData";
-
-const AllProducts = () => {
+import { useEffect, useState } from "react";
+interface productsProps {
+  shopId: string;
+}
+const AllProducts = ({ shopId }: productsProps) => {
+  const [products, setProducts] = useState<shopProductsInterface[]>();
+  // fetch product from the database
+  useEffect(() => {
+    const fetchShopProducts = async () => {
+      const res = await axiosInstance.get(`/products/get-products/${shopId}`);
+      if (res && res.data.products) {
+        console.log("products", res.data.products);
+        setProducts(res.data.products);
+      }
+    };
+    fetchShopProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <AllProductsContainer>
-      {productsDummy.map((product, index) => {
-        return <Product product={product} key={index} />;
-      })}
+      {products &&
+        products.map((product) => {
+          return <Product product={product} key={product.productId} />;
+        })}
     </AllProductsContainer>
   );
 };
 
 export default AllProducts;
-
-//Notes:
-
-// <div className='user-dashboard-all-products-whole-container'>
-//     {/*NOTE!!!: THIS DIV WILL NOT CONTAIN THE TRENDING SALES HEADING OR THE SEARCH BAR */}
-//     {/*Inside this div is where you map and return a <Product> tag for each individual product and pass in as props the image, title, price and description */}
-//     {/*Also, you flex the contents of this div, the flex direction should be row and the you wrap the contents of this div */}
-//     <div className='user-dashboard-individual-product-whole-container'>Product 1</div>
-//     <div className='user-dashboard-individual-product-whole-container'> Product 2</div>
-// </div>
