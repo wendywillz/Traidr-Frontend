@@ -37,3 +37,27 @@ export interface TellUsAboutYourShopFormDetails {
   shopState: string;
   shopZipCode: string;
 }
+
+export interface shopProductsInterface {
+  productId: string;
+  productTitle: string;
+  productDescription: string;
+  productCategory: string;
+  productImage: string;
+  productVideo: string;
+  productPrice: number;
+  shopId: string;
+}
+
+export interface shopInterface {
+  shopName: string;
+  shopCurrency: string;
+  shopDescription: string;
+  shopCategory: string;
+  shopCountry: string;
+  shopStreetAddress: string;
+  shopCity: string;
+  shopState: string;
+  shopZipCode: string;
+  shopOwner: string;
+}

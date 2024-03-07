@@ -34,8 +34,8 @@ export default function LoginPage() {
       if (res && res.status === 200) {
         if (res.data.successfulLogin) {
           localStorage.setItem("token", res.data.successfulLogin);
-          
-          navigate(`/dashboard`);
+
+          navigate(`/`);
         } else if (res.data.inValidPassword) {
           setError("Invalid password");
           setEmail("");

@@ -1,27 +1,52 @@
 import Header from "../../components/Header/Header";
 import { ShopProfileMainWrapper } from "./ShopProfilePageStle";
-import SmallButton from "../../components/button/smallButton/smallButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import axiosInstance from "../../utils/axiosInstance";
+import { shopInterface, shopProductsInterface } from "../../interfaces/shopInterfaces";
 
 const ShopProfile = () => {
   const { shopId } = useParams();
   const [profileImage, setProfileImage] = useState<string | null>(null); // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [products, setProducts] = useState<shopProductsInterface[]>();
+  const [shop, setShop] = useState<shopInterface>();
   const navigate = useNavigate();
 
-  const handleProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
+  // fetch shop from database
+  useEffect(() => {
+    const fetchShopDetail = async () => {
+      const res = await axiosInstance.get(`/shop/get-shop/${shopId}`);
+      if (res && res.data.shop) {
+        setShop(res.data.shop);
+      }
+    };
+    fetchShopDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // fetch product from the database
+  useEffect(() => {
+    const fetchShopProducts = async () => {
+      const res = await axiosInstance.get(`/products/get-products/${shopId}`);
+      if (res && res.data.products) {
+        console.log("products", res.data.products);
+        setProducts(res.data.products);
+      }
+    };
+    fetchShopProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-      reader.onload = () => {
-        setProfileImage(reader.result as string);
-      };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleProfileImage = (e: any) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
 
-      reader.readAsDataURL(file);
-    }
+    reader.onload = () => {
+      setProfileImage(reader.result as string);
+    };
+
+    reader.readAsDataURL(file);
   };
-
   const handleNavigate = () => {
     navigate(`/dashboard/stock-your-shop/${shopId}`);
   };
@@ -32,7 +57,10 @@ const ShopProfile = () => {
       <ShopProfileMainWrapper>
         <div className="shop-profile-product-logo">
           <div className="shop-profile-productpicture">
-            <div className="upload-box-content" onClick={() => document.getElementById('fileInput')?.click()}>
+            <div
+              className="upload-box-content"
+              onClick={() => document.getElementById("fileInput")?.click()}
+            >
               {!profileImage ? (
                 <div>
                   <span style={{ fontSize: "2rem" }}>+</span>
@@ -40,10 +68,7 @@ const ShopProfile = () => {
                   <span>Add New Photo</span>
                 </div>
               ) : (
-                <img
-                  src={profileImage}
-                  alt="shop-profile-image"
-                />
+                <img src={profileImage} alt="shop-profile-image" />
               )}
             </div>
             <input
@@ -56,8 +81,12 @@ const ShopProfile = () => {
           </div>
 
           <div className="shop-profile-productname">
-            <h3>Empress Ki Stores</h3>
-            <input type="text" placeholder="+ Add a Short Description" />
+            {shop && (
+              <>
+                <h3>{shop.shopName}</h3>
+                <span>{shop.shopDescription}</span>
+              </>
+            )}
           </div>
         </div>
 
@@ -95,15 +124,21 @@ const ShopProfile = () => {
                   Add a new Item
                 </p>
               </div>
+              {products &&
+                products.map((product) => (
+                  <div className="shop-profile-photos-each">
+                    <img
+                      src={product.productImage}
+                      alt="take-photo-of-products"
+                    />
+                    <p>
+                      {product.productTitle} <br />
+                      {product.productPrice}
+                    </p>
+                  </div>
+                ))}
             </div>
           </div>
-        </div>
-
-        <div className="shop-profile-upload-btn">
-          <SmallButton
-            button_text={"upload Item"}
-            type={"button"}
-          ></SmallButton>
         </div>
       </ShopProfileMainWrapper>
     </>
@@ -111,5 +146,3 @@ const ShopProfile = () => {
 };
 
 export default ShopProfile;
-
-

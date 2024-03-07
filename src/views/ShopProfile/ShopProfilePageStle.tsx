@@ -85,14 +85,13 @@ export const ShopProfileMainWrapper = styled.div`
   }
 
   .shop-profile-photos {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: 1rem;
     justify-content: space-between;
-    margin: -2rem 0 0 2rem;
-    img {
-      width: 14rem;
-      height: 14rem;
-      margin-bottom: 0.5rem;
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
     p {
       color: var(--black-color);
@@ -101,11 +100,17 @@ export const ShopProfileMainWrapper = styled.div`
   }
 
   .shop-profile-photos-each {
-    max-width: 100%;
-    height: 14rem;
     border-radius: 5px;
-    margin: 0 2rem 0 0;
+    flex-direction: column;
     outline: 1px solid var(--normal-text-color);
+    img {
+      flex-basis: 90%;
+      max-width: 100%;
+      height: 80%;
+      min-height: 80%;
+      max-height: 80%;
+      flex: 1;
+    }
     p {
       font-size: 1rem;
       margin-left: 0.3rem;
@@ -113,11 +118,8 @@ export const ShopProfileMainWrapper = styled.div`
   }
 
   .shop-profile-photos-each-2 {
-    max-width: 100%;
-    height: 14rem;
     padding: 2.5rem;
     border-radius: 5px;
-    margin: 0 1.5rem 0 0;
     outline: 1px solid var(--normal-text-color);
     display: flex;
     align-items: center;
