@@ -6,47 +6,46 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const ShopProfile = () => {
   const { shopId } = useParams();
-  console.log("shopId", shopId);
-  const [profileImage, setProfileImage] = useState("null");
+  const [profileImage, setProfileImage] = useState<string | null>(null); // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const navigate = useNavigate();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleProfileImage = (e: any) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
 
-    reader.onload = () => {
-      setProfileImage(reader.result as string);
-    };
+  const handleProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
 
-    reader.readAsDataURL(file);
+      reader.onload = () => {
+        setProfileImage(reader.result as string);
+      };
+
+      reader.readAsDataURL(file);
+    }
   };
+
   const handleNavigate = () => {
     navigate(`/dashboard/stock-your-shop/${shopId}`);
   };
+
   return (
     <>
       <Header />
       <ShopProfileMainWrapper>
         <div className="shop-profile-product-logo">
           <div className="shop-profile-productpicture">
-            <label htmlFor="fileInput">
-              <div className="upload-box-content" onClick={handleProfileImage}>
-                {!profileImage ? (
-                  <img
-                    src={profileImage}
-                    alt="shop-profile-image"
-                    width="300"
-                    height="300"
-                  />
-                ) : (
-                  <div>
-                    <span style={{ fontSize: "2rem" }}>+</span>
-                    <br />
-                    <span>Add New Photo</span>
-                  </div>
-                )}
-              </div>
-            </label>
+            <div className="upload-box-content" onClick={() => document.getElementById('fileInput')?.click()}>
+              {!profileImage ? (
+                <div>
+                  <span style={{ fontSize: "2rem" }}>+</span>
+                  <br />
+                  <span>Add New Photo</span>
+                </div>
+              ) : (
+                <img
+                  src={profileImage}
+                  alt="shop-profile-image"
+                />
+              )}
+            </div>
             <input
               type="file"
               id="fileInput"
@@ -112,3 +111,5 @@ const ShopProfile = () => {
 };
 
 export default ShopProfile;
+
+
