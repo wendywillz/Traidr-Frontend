@@ -11,6 +11,8 @@ import EnterOtpPage from "./views/Enter-otp/EnterOtpPage";
 import ShopRegistrationPage from "./views/ShopRegistration/ShopRegistrationPage";
 import StockYourShop from "./views/ShopRegistration/StockYourShopPage/StockYourShop";
 import SuccessModal from "./views/SuccessModal/SuccessModalComponent";
+import SortByModal from "./views/SortByModal/SortByModal";
+import UserProfileModal from "./views/UserProfileModal/UserProfileModal";
 
 function App() {
   return (
@@ -41,7 +43,11 @@ function App() {
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/success-modal" element={<SuccessModal />} />
-      {/* <Route path="/shop-profile/" element={<ShopProfile />} /> */}
+      {/* <Route path="dashboard2/shop-profile" element={<ShopProfile />} /> */}
+      {/* <Route path="/test/sort-by-modal" element={<SortByModal/>}/>
+      <Route path="/test/user-profile-modal" element={<UserProfileModal/>}/>
+      <Route path="/test/dashboard" element={<Dashboard/>}/> */}
+      
     </Routes>
   );
 }
