@@ -137,7 +137,7 @@ const ShopProfile = () => {
                 products.map((product) => (
                   <div className="shop-profile-photos-each">
                     <img
-                      src={product.productImage}
+                      src={product.productImages[0]}
                       alt="take-photo-of-products"
                     />
                     <p>

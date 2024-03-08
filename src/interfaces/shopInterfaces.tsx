@@ -43,7 +43,7 @@ export interface shopProductsInterface {
   productTitle: string;
   productDescription: string;
   productCategory: string;
-  productImage: string;
+  productImages: string[];
   productVideo: string;
   productPrice: number;
   shopId: string;
