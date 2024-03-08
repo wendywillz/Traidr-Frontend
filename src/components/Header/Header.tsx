@@ -9,6 +9,8 @@ import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
+import UserProfileModal from "../../views/UserProfileModal/UserProfileModal.tsx";
+
 interface userState {
   user: userDataInterface;
 }
@@ -22,7 +24,17 @@ export default function Header() {
   };
   const location = useLocation();
   const userData = useSelector((state: userState) => state.user);
+
+  const[profileModalVisibility, setProfileModalVisibility ] = useState(false)
+  
+  const toggleProfileModal = ()=>{
+    setProfileModalVisibility(!profileModalVisibility)
+  }
+
+
   return (
+    <>
+     {profileModalVisibility && <UserProfileModal/>}
     <HeaderStyle>
       <div className="header-inner">
         <div className="logo-wrapper">
@@ -49,10 +61,10 @@ export default function Header() {
               </div>
               <div className="user-profile-img-wrapper">
                 {userData && userData.profileImage ? (
-                  <img src={userData?.profileImage} alt="" />
+                  <img src={userData?.profileImage} alt="" onClick={toggleProfileModal}/>
                 ) : (
                   <div className="shop-profile-header-icon">
-                    <FaUserCircle />
+                    <FaUserCircle onClick={toggleProfileModal} />
                   </div>
                 )}
               </div>
@@ -88,10 +100,10 @@ export default function Header() {
                 </div>
                 <div className="user-profile-img-wrapper">
                   {userData && userData.profileImage ? (
-                    <img src={userData?.profileImage} alt="" />
+                    <img src={userData?.profileImage} alt="" onClick={toggleProfileModal}/>
                   ) : (
                     <div className="shop-profile-header-icon">
-                      <FaUserCircle />
+                      <FaUserCircle onClick={toggleProfileModal}/>
                     </div>
                   )}
                 </div>
@@ -151,5 +163,6 @@ export default function Header() {
         </div>
       </div>
     </HeaderStyle>
+    </>
   );
 }
