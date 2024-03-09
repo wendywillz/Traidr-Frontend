@@ -133,7 +133,7 @@ export default function LandingPage() {
                       key={product.productId}
                     >
                       <div className="each-product-image">
-                        <img src={product.productImage} alt="" />
+                        <img src={product.productImages[0]} alt="" />
                       </div>
                       <p className="each-product-title">
                         {product.productTitle}
