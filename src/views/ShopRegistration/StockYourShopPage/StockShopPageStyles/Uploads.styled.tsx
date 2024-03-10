@@ -17,7 +17,6 @@ export const MultipleUploads = styled.div`
   flex-direction: column;
   width: 70%;
   flex-wrap: wrap;
-  background-color: green;
   @media (min-width: 768px) {
     flex-direction: row;
   }
