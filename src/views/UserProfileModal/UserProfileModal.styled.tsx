@@ -60,6 +60,10 @@ export const ModalHeader = styled.div`
         margin-top:1vh;
         
     }
+    .user-profile-modal-user-visit-profile:hover{
+        font-size:1.2vw;
+        font-weight: 350;
+    }
 `
 
 export const ModalBody = styled.div`
@@ -89,5 +93,9 @@ export const ModalBody = styled.div`
         color:black;
         font-size: 1vw;
         margin-top:0.5vh;
+        text-decoration:none;
+    }
+    .user-profile-modal-link-text:hover{
+        font-size: 1.1vw;
     }
 `

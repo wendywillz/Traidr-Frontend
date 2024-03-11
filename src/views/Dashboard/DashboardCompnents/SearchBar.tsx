@@ -1,9 +1,18 @@
 
 import { SearchBarContainer, SearchField, SortButton } from '../DashboardStyles/SearchBar.styled'
-import { useState } from 'react'
+import { VoidFunctionComponent, useState } from 'react'
 import SortByModal from '../../SortByModal/SortByModal'
 
-const SearchBar = () => {
+
+interface Props{
+  ascendSort: ()=>void;
+  descendSort: ()=>void;
+  originalOrder: ()=>void;
+  
+  
+  
+}
+const SearchBar = ({ascendSort, descendSort, originalOrder}: Props) => {
   const [sortByModalVisibility, setSortByModalVisibility] = useState(false)
 
 const toggleSetByModal = ()=>{
@@ -23,7 +32,7 @@ const toggleSetByModal = ()=>{
         </SortButton>
         
     </SearchBarContainer>
-    {sortByModalVisibility && <SortByModal/>}
+    {sortByModalVisibility && <SortByModal ascendSort={ascendSort} descendSort={descendSort} originalOrder={originalOrder}/>}
     </>
   )
 }
