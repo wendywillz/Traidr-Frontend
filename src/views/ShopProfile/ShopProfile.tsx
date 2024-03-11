@@ -137,7 +137,7 @@ const ShopProfile = () => {
                       alt="take-photo-of-products"
                     />
                     <p>
-                      {product.productTitle} <br />N{product.productPrice}
+                      {product.productTitle} <br />₦{product.productPrice}
                     </p>
                   </div>
                 ))}

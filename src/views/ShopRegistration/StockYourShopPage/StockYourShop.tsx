@@ -37,6 +37,7 @@ import { ListingDetails } from "../../../interfaces/shopInterfaces";
 import { useParams } from "react-router-dom";
 import SuccessModal from "../../SuccessModal/SuccessModalComponent";
 import axiosInstance from "../../../utils/axiosInstance";
+import { fetchShopCategories } from "../../../api/shop";
 
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,6 +55,7 @@ const StockYourShop = () => {
   const [photoFiles, setPhotoFiles] = useState<File[]>([]);
   const [photoDataURLs, setPhotoDataURLs] = useState<string[]>([]);
   const [displayPopup, setDisplayPopup] = useState(false);
+  const [categories, setCategories] = useState([]);
   // checking if the listing details is in the local storage
   useEffect(() => {
     const storedListingDetails = localStorage.getItem("listingDetails")!;
@@ -70,6 +72,13 @@ const StockYourShop = () => {
     if (storedUploadedPhotoURL) {
       setPhotoDataURLs(JSON.parse(storedUploadedPhotoURL));
     }
+  }, []);
+
+  // fetching shop categories
+  useEffect(() => {
+    fetchShopCategories().then((res) => {
+      setCategories(res);
+    });
   }, []);
 
   const handleListingDetails = (
@@ -432,9 +441,11 @@ const StockYourShop = () => {
                     <option value={""} selected>
                       Select your category
                     </option>
-                    <option value={"furniture"}>Furniture</option>
-                    <option value={"Electronics"}>Electronics</option>
-                    <option value={"Home Appliances"}>Home Appliances</option>
+                    {categories.map((category: string) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
                   </CategorySelectStyle>
                 </div>
 

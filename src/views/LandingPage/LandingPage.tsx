@@ -6,20 +6,24 @@ import vanImage from "../../assets/van-image.png";
 import cartImage from "../../assets/cart-image.png";
 import userImage from "../../assets/user-image.png";
 import shopImage from "../../assets/shop-image.png";
-import ironImage from "../../assets/products/iron.png";
 import { LandingPageMainWrapper } from "./LandingPageStye";
 import Footer from "../../components/Footer/Footer";
 import { useEffect, useState } from "react";
 import { shopProductsInterface } from "../../interfaces/shopInterfaces";
 import { fetchAllProducts } from "../../api/product";
-
+import AllProductsCard from "../../components/ProductsCard/AllProductsCard";
+import { AllProductsWrapper } from "../../components/ProductsCard/AllProductsStyle";
+import dummyProducts from "../../assets/products/dummy.png";
 export default function LandingPage() {
   const [products, setProducts] = useState<shopProductsInterface[]>();
+
+  // fetching all products
   useEffect(() => {
     fetchAllProducts().then((res) => {
       setProducts(res);
     });
   }, []);
+
   return (
     <>
       <Header />
@@ -111,38 +115,27 @@ export default function LandingPage() {
               <h1>Trending Sales</h1>
             </div>
             <div className="trending-sales-product-wrapper">
-              <div className="each-product-wrapper">
-                <div className="each-product-image">
-                  <img src={ironImage} alt="" />
-                </div>
-                <p className="each-product-title">Pressing Iron</p>
-                <p className="each-product-description">
-                  This is a very good pressing iron
-                </p>
-                <span className="each-product-price">N50,000</span>
-              </div>
-              {products &&
+              {products?.length ? (
                 products.map((product) => {
                   return (
-                    <div
-                      className="each-product-wrapper"
+                    <AllProductsCard
                       key={product.productId}
-                    >
-                      <div className="each-product-image">
-                        <img src={product.productImages[0]} alt="" />
-                      </div>
-                      <p className="each-product-title">
-                        {product.productTitle}
-                      </p>
-                      <p className="each-product-description">
-                        {product.productDescription}
-                      </p>
-                      <span className="each-product-price">
-                        N{product.productPrice}
-                      </span>
-                    </div>
+                      product={product}
+                    />
                   );
-                })}
+                })
+              ) : (
+                <AllProductsWrapper>
+                  <div className="each-product-image">
+                    <img src={dummyProducts} alt="" />
+                  </div>
+                  <p className="each-product-title">Dummy Product</p>
+                  <p className="each-product-description">
+                    This is a placeholder for the product description
+                  </p>
+                  <span className="each-product-price">₦100000</span>
+                </AllProductsWrapper>
+              )}
             </div>
           </div>
         </div>
