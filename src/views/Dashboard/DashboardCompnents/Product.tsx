@@ -37,7 +37,7 @@ const Product = ({ product }: ProductProps) => {
 };
 
 {
-  /* Later on, clicking each photograph should take you somewere? I think. */
+  /* Later on, clicking each photograph should take you somewhere? I think. */
 }
 
 export default Product;
