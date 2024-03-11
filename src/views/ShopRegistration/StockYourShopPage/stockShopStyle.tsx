@@ -17,6 +17,5 @@ export const CategorySelectStyle = styled.select`
 export const UploadedPhotoName = styled.span`
   font-size: 0.9rem;
   margin-top: .5rem;
-  color: green;
   font-weight: 600;
 `;

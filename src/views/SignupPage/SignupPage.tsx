@@ -5,7 +5,6 @@ import axiosInstance from "../../utils/axiosInstance";
 import orImage from "../../assets/or.png";
 import GoogleSignup from "./component/GoogleSignup";
 
-
 export default function SignupPage() {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
@@ -61,6 +60,7 @@ export default function SignupPage() {
         setError("Internal Server Error");
       }
     } catch (error) {
+      console.log("error", error);
       setError("Internal Server Error");
     }
 

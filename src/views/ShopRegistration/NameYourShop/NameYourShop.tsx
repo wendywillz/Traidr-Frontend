@@ -6,24 +6,19 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { NameYourShopFormDetails } from "../../../interfaces/shopInterfaces";
 import { updatedNameYourShop } from "../../../app/features/shopRegistration/nameYourShopSlice";
 import { useDispatch } from "react-redux";
-//import useMultiStepForm from "../../../components/HandleMultipleForm/HandleMultipleForm";
-//import ShopSecurityPage from "../ShopSecurityPage/ShopSecurityPage";
-//import TellUsAboutYourShopComponent from "../TellUsAboutYourShop/TellUsAboutYourShop";
+import { fetchShopCategories } from "../../../api/shop";
 
 function NameYourShopComponent() {
-  // const steps = [
-  //   <NameYourShopComponent />,
-  //   <TellUsAboutYourShopComponent />,
-  //   <ShopSecurityPage />,
-  // ];
-  //const { next } = useMultiStepForm(steps);
-
   const [nameYourShop, setNameYourShop] = useState<NameYourShopFormDetails>({
     shopName: "",
     shopCategory: "",
     shopCurrency: "NGN",
     shopDescription: "",
   });
+
+  const [categories, setCategories] = useState([]);
+
+  // checlng if the shop details is in the local storage
   useEffect(() => {
     const storedNameYourShop = JSON.parse(
       localStorage.getItem("nameYourShop")!
@@ -31,6 +26,13 @@ function NameYourShopComponent() {
     if (storedNameYourShop) {
       setNameYourShop(storedNameYourShop);
     }
+  }, []);
+
+  // fetching shop categories
+  useEffect(() => {
+    fetchShopCategories().then((res) => {
+      setCategories(res);
+    });
   }, []);
 
   function checkInput() {
@@ -93,10 +95,15 @@ function NameYourShopComponent() {
                     <option value="" selected>
                       Select your shop category
                     </option>
-                    <option value="Furniture">Furniture</option>
+                    {categories.map((category: string) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                    {/* <option value="Furniture">Furniture</option>
                     <option value="Electronics and Gadget">
                       Electronics and Gadget
-                    </option>
+                    </option> */}
                   </select>
                 </fieldset>
 
