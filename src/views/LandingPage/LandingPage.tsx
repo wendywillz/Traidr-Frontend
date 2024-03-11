@@ -9,20 +9,16 @@ import shopImage from "../../assets/shop-image.png";
 import ironImage from "../../assets/products/iron.png";
 import { LandingPageMainWrapper } from "./LandingPageStye";
 import Footer from "../../components/Footer/Footer";
-import axiosInstance from "../../utils/axiosInstance";
 import { useEffect, useState } from "react";
 import { shopProductsInterface } from "../../interfaces/shopInterfaces";
+import { fetchAllProducts } from "../../api/product";
 
 export default function LandingPage() {
   const [products, setProducts] = useState<shopProductsInterface[]>();
   useEffect(() => {
-    const fetchAllProducts = async () => {
-      const res = await axiosInstance.get("/products/get-all-products");
-      if (res && res.data.products) {
-        setProducts(res.data.products);
-      }
-    };
-    fetchAllProducts();
+    fetchAllProducts().then((res) => {
+      setProducts(res);
+    });
   }, []);
   return (
     <>
