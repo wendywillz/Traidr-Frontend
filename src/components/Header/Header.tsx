@@ -9,6 +9,8 @@ import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
+import UserProfileModal from "../../views/UserProfileModal/UserProfileModal.tsx";
+
 interface userState {
   user: userDataInterface;
 }
@@ -22,58 +24,127 @@ export default function Header() {
   };
   const location = useLocation();
   const userData = useSelector((state: userState) => state.user);
+  // useEffect(() => {
+
+  // }, []);
+
+  const [profileModalVisibility, setProfileModalVisibility] = useState(false);
+
+  const toggleProfileModal = () => {
+    setProfileModalVisibility(!profileModalVisibility);
+  };
+
   return (
-    <HeaderStyle>
-      <div className="header-inner">
-        <div className="logo-wrapper">
-          <Link to={"/"}>
-            <img
-              src={traidrLogo}
-              alt="traidr-logo"
-              className="traidr-header-logo"
-            />
-          </Link>
-        </div>
-        <div className="header-right-btn-wrapper">
-          <i className="fa-solid fa-bars small-screen-icon"></i>
-          {location.pathname.includes("dashboard") ? (
-            <>
-              <div
-                className="shop-profile-notification-wrapper"
-                onClick={handleNotificationClick}
-              >
-                <BsBell />
-                {notificationCount > 0 && (
-                  <div className="notification-badge">{notificationCount}</div>
-                )}
-              </div>
-              <div className="user-profile-img-wrapper">
-                {userData && userData.profileImage ? (
-                  <img src={userData?.profileImage} alt="" />
+    <>
+      {profileModalVisibility && <UserProfileModal />}
+      <HeaderStyle>
+        <div className="header-inner">
+          <div className="logo-wrapper">
+            <Link to={"/"}>
+              <img
+                src={traidrLogo}
+                alt="traidr-logo"
+                className="traidr-header-logo"
+              />
+            </Link>
+          </div>
+          <div className="header-right-btn-wrapper">
+            <i className="fa-solid fa-bars small-screen-icon"></i>
+            {location.pathname.includes("dashboard") ? (
+              <>
+                <div
+                  className="shop-profile-notification-wrapper"
+                  onClick={handleNotificationClick}
+                >
+                  <BsBell />
+                  {notificationCount > 0 && (
+                    <div className="notification-badge">
+                      {notificationCount}
+                    </div>
+                  )}
+                </div>
+                <div className="user-profile-img-wrapper">
+                  {userData && userData.profileImage ? (
+                    <img
+                      src={userData?.profileImage}
+                      alt=""
+                      onClick={toggleProfileModal}
+                    />
+                  ) : (
+                    <div className="shop-profile-header-icon">
+                      <FaUserCircle onClick={toggleProfileModal} />
+                    </div>
+                  )}
+                </div>
+                {products ? (
+                  <Link
+                    to={`/dashboard/shop-profile/${shopId}`}
+                    className="header-right-signup-btn big-screen"
+                  >
+                    Go to Shop
+                  </Link>
                 ) : (
-                  <div className="shop-profile-header-icon">
-                    <FaUserCircle />
-                  </div>
+                  <Link
+                    to="/dashboard/shop-registration"
+                    className="header-right-signup-btn big-screen"
+                  >
+                    Start Selling
+                  </Link>
                 )}
-              </div>
-              {products ? (
-                <Link
-                  to={`/dashboard/shop-profile/${shopId}`}
-                  className="header-right-signup-btn big-screen"
-                >
-                  Go to Shop
-                </Link>
+              </>
+            ) : location.pathname === "/" ? (
+              token ? (
+                <>
+                  <div
+                    className="shop-profile-notification-wrapper"
+                    onClick={handleNotificationClick}
+                  >
+                    <BsBell />
+                    {notificationCount > 0 && (
+                      <div className="notification-badge">
+                        {notificationCount}
+                      </div>
+                    )}
+                  </div>
+                  <div className="user-profile-img-wrapper">
+                    {userData && userData.profileImage ? (
+                      <img
+                        src={userData?.profileImage}
+                        alt=""
+                        onClick={toggleProfileModal}
+                      />
+                    ) : (
+                      <div className="shop-profile-header-icon">
+                        <FaUserCircle onClick={toggleProfileModal} />
+                      </div>
+                    )}
+                  </div>
+                  <Link
+                    to="/dashboard/shop-registration"
+                    className="header-right-signup-btn big-screen"
+                  >
+                    Start Selling
+                  </Link>
+                </>
               ) : (
-                <Link
-                  to="/dashboard/shop-registration"
-                  className="header-right-signup-btn big-screen"
-                >
-                  Start Selling
-                </Link>
-              )}
-            </>
-          ) : location.pathname === "/" ? (
-            token ? (
+                <>
+                  <>
+                    <Link
+                      to="/login"
+                      className="header-right-login-btn big-screen"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to="/signup"
+                      className="header-right-signup-btn big-screen"
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                </>
+              )
+            ) : (
               <>
                 <div
                   className="shop-profile-notification-wrapper"
@@ -96,60 +167,16 @@ export default function Header() {
                   )}
                 </div>
                 <Link
-                  to="/dashboard/shop-registration"
+                  to="/dashboard/start-selling"
                   className="header-right-signup-btn big-screen"
                 >
                   Start Selling
                 </Link>
               </>
-            ) : (
-              <>
-                <>
-                  <Link
-                    to="/login"
-                    className="header-right-login-btn big-screen"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/signup"
-                    className="header-right-signup-btn big-screen"
-                  >
-                    Sign Up
-                  </Link>
-                </>
-              </>
-            )
-          ) : (
-            <>
-              <div
-                className="shop-profile-notification-wrapper"
-                onClick={handleNotificationClick}
-              >
-                <BsBell />
-                {notificationCount > 0 && (
-                  <div className="notification-badge">{notificationCount}</div>
-                )}
-              </div>
-              <div className="user-profile-img-wrapper">
-                {userData && userData.profileImage ? (
-                  <img src={userData?.profileImage} alt="" />
-                ) : (
-                  <div className="shop-profile-header-icon">
-                    <FaUserCircle />
-                  </div>
-                )}
-              </div>
-              <Link
-                to="/dashboard/start-selling"
-                className="header-right-signup-btn big-screen"
-              >
-                Start Selling
-              </Link>
-            </>
-          )}
+            )}
+          </div>
         </div>
-      </div>
-    </HeaderStyle>
+      </HeaderStyle>
+    </>
   );
 }

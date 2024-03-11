@@ -5,6 +5,9 @@ import {
   Upload,
   UploadInstructions,
   UploadFile,
+  MultipleUploads,
+  UploadedImagesPreview,
+  UploadVideoFile,
 } from "./StockShopPageStyles/Uploads.styled";
 import {
   FormContainer,
@@ -48,11 +51,24 @@ const StockYourShop = () => {
     productCategory: "",
     productDescription: "",
   });
+  const [photoFiles, setPhotoFiles] = useState<File[]>([]);
+  const [photoDataURLs, setPhotoDataURLs] = useState<string[]>([]);
   const [displayPopup, setDisplayPopup] = useState(false);
+  // checking if the listing details is in the local storage
   useEffect(() => {
     const storedListingDetails = localStorage.getItem("listingDetails")!;
     if (storedListingDetails) {
       setListingDetails(JSON.parse(storedListingDetails));
+    }
+  }, []);
+
+  // checking uploaded photo in local storage
+  useEffect(() => {
+    const storedUploadedPhotoURL = localStorage.getItem(
+      "displayUploadedPhotoName"
+    )!;
+    if (storedUploadedPhotoURL) {
+      setPhotoDataURLs(JSON.parse(storedUploadedPhotoURL));
     }
   }, []);
 
@@ -68,33 +84,32 @@ const StockYourShop = () => {
     });
   };
 
-  const [photoFile, setPhotoFile] = useState<File | null>(null);
-  const [displayUploadedPhotoName, setDisplayUploadedPhotoName] =
-    useState<string>();
-
-  // checking if the displayUploadedPhotoName is in the local storage
-  useEffect(() => {
-    const storedUploadedPhotoName = localStorage.getItem(
-      "displayUploadedPhotoName"
-    );
-    if (storedUploadedPhotoName) {
-      setDisplayUploadedPhotoName(JSON.parse(storedUploadedPhotoName));
-    }
-  }, []);
-
   const handlePhotoUpload = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
-    const uploadedPhoto = event.target.files[0];
+    const files = Array.from(event.target.files);
     const maxSize = 3 * 1024 * 1024;
-    if (uploadedPhoto.size > maxSize) {
-      setErrorMessage("File size exceeds 3mb");
-      return;
-    } else {
-      setErrorMessage("");
-      setPhotoFile(uploadedPhoto);
-      setDisplayUploadedPhotoName(uploadedPhoto.name);
-      return;
-    }
+
+    const validFiles = files.filter((file) => {
+      if (file.size > maxSize) {
+        setErrorMessage("File size exceeds 3mb");
+        return false;
+      } else {
+        setErrorMessage("");
+        return true;
+      }
+    });
+
+    setPhotoFiles((prevFiles) => [...prevFiles, ...validFiles]);
+
+    // Read each file as a data URL and update the state
+    validFiles.forEach((file) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPhotoDataURLs((prevURLs) => [...prevURLs, reader.result as string]);
+      };
+
+      reader.readAsDataURL(file);
+    });
   };
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -142,11 +157,14 @@ const StockYourShop = () => {
       ///////////////////////////
       //Data from the photo upload
       const listingDetailsData = new FormData();
-      if (!photoFile) {
+      if (!photoFiles) {
         setErrorMessage("Please upload a photo of your product");
         return;
       }
-      listingDetailsData.append("productPhoto", photoFile as Blob);
+      photoFiles.forEach((file) => {
+        // Use the same key for all files to send them as an array
+        listingDetailsData.append("productPhoto", file);
+      });
 
       ///////////////////////////
       //Data from the videoupload
@@ -166,14 +184,7 @@ const StockYourShop = () => {
         "productDescription",
         listingDetails.productDescription
       );
-      // for (const [key, value] of listingDetailsData.entries()) {
-      //   console.log(`${key}: ${value}`);
-      // }
-      // setting the photo name and video name in the local storage
-      localStorage.setItem(
-        "displayUploadedPhotoName",
-        JSON.stringify(photoFile.name)
-      );
+
       localStorage.setItem(
         "displayUploadedVideoName",
         JSON.stringify(videoFile?.name)
@@ -181,7 +192,10 @@ const StockYourShop = () => {
       // setting the listing details in the local storage
 
       localStorage.setItem("listingDetails", JSON.stringify(listingDetails));
-
+      localStorage.setItem(
+        "displayUploadedPhotoName",
+        JSON.stringify(photoDataURLs)
+      );
       const res = await axiosInstance.post(
         `/products/add-product/${shopId}`,
         listingDetailsData
@@ -239,30 +253,44 @@ const StockYourShop = () => {
                   </li>
                 </ul>
               </UploadInstructions>
+              <MultipleUploads>
+                <UploadFile>
+                  {/*This whole div would have a visible border */}
+                  <img
+                    src={photoIcon}
+                    className="stock-shop-page-upload-icon"
+                  />
+                  <span className="stock-shop-page-upload-photo-label">
+                    Click to add a Photo
+                  </span>
+                  <span className="max-file-size">
+                    (Maximum file size: 3mb)
+                  </span>
+                  <input
+                    className="stock-shop-page-upload-photo-input"
+                    type="file"
+                    accept="image/*"
+                    id="photoInput"
+                    name="photo"
+                    onChange={handlePhotoUpload}
+                    required
+                  />
 
-              <UploadFile>
-                {/*This whole div would have a visible border */}
-                <img src={photoIcon} className="stock-shop-page-upload-icon" />
-                <span className="stock-shop-page-upload-photo-label">
-                  Click to add a Photo
-                </span>
-                <span className="max-file-size">(Maximum file size: 3mb)</span>
-                <input
-                  className="stock-shop-page-upload-photo-input"
-                  type="file"
-                  accept="image/*"
-                  id="photoInput"
-                  name="photo"
-                  onChange={handlePhotoUpload}
-                  required
-                />
-                {displayUploadedPhotoName && (
-                  <UploadedPhotoName>
-                    {displayUploadedPhotoName}
-                  </UploadedPhotoName>
-                )}
-                {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-              </UploadFile>
+                  {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+                </UploadFile>
+                <UploadedImagesPreview>
+                  <UploadedImagesPreview>
+                    {photoDataURLs &&
+                      photoDataURLs.map((dataURL, index) => (
+                        <img
+                          key={index}
+                          src={dataURL}
+                          alt={`Uploaded photo ${index}`}
+                        />
+                      ))}
+                  </UploadedImagesPreview>
+                </UploadedImagesPreview>
+              </MultipleUploads>
             </Upload>
 
             <Upload>
@@ -292,31 +320,38 @@ const StockYourShop = () => {
                 </ul>
               </UploadInstructions>
 
-              <UploadFile>
+              <UploadVideoFile>
                 {/*This whole div would have a visible border */}
-                <img src={videoIcon} className="stock-shop-page-upload-icon" />
-                <span className="stock-shop-page-upload-photo-label">
-                  Click to add a Video
-                </span>
-                <input
-                  className="stock-shop-page-upload-photo-input"
-                  type="file"
-                  accept="video/*"
-                  id="videoInput"
-                  name="video"
-                  onChange={handleVideoUpload}
-                />
+                <div>
+                  <img
+                    src={videoIcon}
+                    className="stock-shop-page-upload-icon"
+                  />
+                  <span className="stock-shop-page-upload-photo-label">
+                    Click to add a Video
+                  </span>
+                  <input
+                    className="stock-shop-page-upload-photo-input"
+                    type="file"
+                    accept="video/*"
+                    id="videoInput"
+                    name="video"
+                    onChange={handleVideoUpload}
+                  />
 
-                <span className="max-file-size">(Maximum file size: 10mb)</span>
-                {displayUploadedVideoName && (
-                  <UploadedPhotoName>
-                    {displayUploadedVideoName}
-                  </UploadedPhotoName>
-                )}
-                {videoDisplayError && (
-                  <ErrorMessage>{videoDisplayError}</ErrorMessage>
-                )}
-              </UploadFile>
+                  <span className="max-file-size">
+                    (Maximum file size: 10mb)
+                  </span>
+                  {displayUploadedVideoName && (
+                    <UploadedPhotoName>
+                      {displayUploadedVideoName}
+                    </UploadedPhotoName>
+                  )}
+                  {videoDisplayError && (
+                    <ErrorMessage>{videoDisplayError}</ErrorMessage>
+                  )}
+                </div>
+              </UploadVideoFile>
             </Upload>
 
             <FormContainer>

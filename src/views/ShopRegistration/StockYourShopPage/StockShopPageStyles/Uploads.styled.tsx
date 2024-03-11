@@ -12,10 +12,19 @@ export const Upload = styled.div`
   margin-bottom: 6vh;
 `;
 
+export const MultipleUploads = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  flex-wrap: wrap;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+`;
 export const UploadInstructions = styled.div`
   /* border: 1px solid orange; */
   margin-right: 10rem;
-  width: 20rem;
+  width: 30%;
 
   .stock-shop-page-upload-instructions-title {
     font-size: 1.5vw;
@@ -42,6 +51,7 @@ export const UploadInstructions = styled.div`
     color: grey;
     font-size: 0.95vw;
     font-weight: 300;
+    width: 100%;
     margin-top: 1vh;
     /* border: 1px solid red; */
   }
@@ -49,6 +59,7 @@ export const UploadInstructions = styled.div`
   .stock-shop-page-upload-instructions-tips-list-item {
     margin-left: 1rem;
     margin-bottom: 1vh;
+    width: 100%;
   }
 `;
 
@@ -56,13 +67,58 @@ export const UploadInstructions = styled.div`
 export const UploadFile = styled.div`
   border: 1px solid grey;
   border-radius: 0.5rem;
-  width: 15rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
+  width: 35%;
+  .stock-shop-page-upload-icon {
+    height: 4rem;
+    margin-bottom: 0.5rem;
+  }
+  .stock-shop-page-upload-photo-label {
+    display: block;
+  }
+  .stock-shop-page-upload-photo-input {
+    display: block;
+    margin-top: 2rem;
+    width: 90%;
+    position: absolute;
+    height: 90%;
+    margin: auto;
+    opacity: 0;
+    cursor: pointer;
+    border: 2px solid var(--input-border-color);
+  }
+  .max-file-size {
+    color: grey;
+    font-size: 0.8rem;
+  }
+`;
+export const UploadVideoFile = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 70%;
+  align-items: flex-start;
+  justify-content: center;
+  div {
+    border: 1px solid grey;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    @media (min-width: 768px) {
+      width: 35%;
+    }
+  }
 
   .stock-shop-page-upload-icon {
     height: 4rem;
@@ -85,5 +141,24 @@ export const UploadFile = styled.div`
   .max-file-size {
     color: grey;
     font-size: 0.8rem;
+  }
+`;
+
+export const UploadedImagesPreview = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  @media (min-width: 768px) {
+    flex-direction: row;
+    flex-basis: 65%;
+  }
+  div {
+    flex-basis: 30%;
+    img {
+      width: 100%;
+      min-height: 100%;
+      max-height: 100%;
+      object-fit: cover;
+    }
   }
 `;

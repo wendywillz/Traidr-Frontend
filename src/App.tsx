@@ -10,7 +10,6 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import EnterOtpPage from "./views/Enter-otp/EnterOtpPage";
 import ShopRegistrationPage from "./views/ShopRegistration/ShopRegistrationPage";
 import StockYourShop from "./views/ShopRegistration/StockYourShopPage/StockYourShop";
-import SuccessModal from "./views/SuccessModal/SuccessModalComponent";
 
 function App() {
   return (
@@ -40,8 +39,7 @@ function App() {
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
-      <Route path="/success-modal" element={<SuccessModal />} />
-      {/* <Route path="/shop-profile/" element={<ShopProfile />} /> */}
+      
     </Routes>
   );
 }

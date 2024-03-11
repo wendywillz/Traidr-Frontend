@@ -15,7 +15,7 @@ const Product = ({ product }: ProductProps) => {
       <IndividualProductContainer>
         <img
           className="user-dashboard-individual-product-image"
-          src={product.productImage}
+          src={product.productImages[0]}
         />
 
         <ProductNameContainer>
