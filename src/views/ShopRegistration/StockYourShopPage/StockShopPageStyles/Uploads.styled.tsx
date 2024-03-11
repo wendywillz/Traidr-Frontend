@@ -4,28 +4,40 @@ import styled from "styled-components";
 export const Upload = styled.div`
   width: 70rem;
   height: 40vh;
-  padding: 7vh 2.5rem;
+  padding: 2.5rem !important;
   display: flex;
-  flex-direction: row;
+  gap: 5rem;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: space-between;
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
   border: 1px solid grey;
   border-radius: 1rem;
-  margin-bottom: 6vh;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-bottom: 3rem;
 `;
 
 export const MultipleUploads = styled.div`
   display: flex;
   flex-direction: column;
-  width: 70%;
   flex-wrap: wrap;
+  overflow: hidden;
+  gap: 1rem;
   @media (min-width: 768px) {
     flex-direction: row;
+    max-width: 70%;
+    width: 70%;
+    min-height: 100%;
   }
 `;
 export const UploadInstructions = styled.div`
-  /* border: 1px solid orange; */
-  margin-right: 10rem;
-  width: 30%;
-
+  @media (min-width: 768px) {
+    min-width: 30%;
+    max-width: 30%;
+  }
   .stock-shop-page-upload-instructions-title {
     font-size: 1.5vw;
     font-weight: 600;
@@ -52,8 +64,6 @@ export const UploadInstructions = styled.div`
     font-size: 0.95vw;
     font-weight: 300;
     width: 100%;
-    margin-top: 1vh;
-    /* border: 1px solid red; */
   }
 
   .stock-shop-page-upload-instructions-tips-list-item {
@@ -73,7 +83,11 @@ export const UploadFile = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 35%;
+  @media (min-width: 768px) {
+    min-width: 29%;
+    max-width: 29%;
+    max-height: 100%;
+  }
   .stock-shop-page-upload-icon {
     height: 4rem;
     margin-bottom: 0.5rem;
@@ -116,7 +130,7 @@ export const UploadVideoFile = styled.div`
     position: relative;
     width: 100%;
     @media (min-width: 768px) {
-      width: 35%;
+      width: 30%;
     }
   }
 
@@ -148,17 +162,31 @@ export const UploadedImagesPreview = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  min-height: 100%;
+  overflow: visible;
   @media (min-width: 768px) {
     flex-direction: row;
-    flex-basis: 65%;
-  }
-  div {
-    flex-basis: 30%;
-    img {
-      width: 100%;
-      min-height: 100%;
-      max-height: 100%;
-      object-fit: cover;
+    min-width: 68%;
+    max-width: 68%;
+    div {
+      flex-basis: 30%;
+      min-width: 30%;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      max-width: 30%;
+      padding: 1rem;
+      height: 100%;
+      cursor: pointer;
+      border: 1px solid grey;
+      img {
+        width: 100%;
+        height: 100%;
+        oveflow: hidden;
+        object-fit: contain;
+      }
     }
   }
 `;

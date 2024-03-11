@@ -6,17 +6,9 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { NameYourShopFormDetails } from "../../../interfaces/shopInterfaces";
 import { updatedNameYourShop } from "../../../app/features/shopRegistration/nameYourShopSlice";
 import { useDispatch } from "react-redux";
-//import useMultiStepForm from "../../../components/HandleMultipleForm/HandleMultipleForm";
-//import ShopSecurityPage from "../ShopSecurityPage/ShopSecurityPage";
-//import TellUsAboutYourShopComponent from "../TellUsAboutYourShop/TellUsAboutYourShop";
 
 function NameYourShopComponent() {
-  // const steps = [
-  //   <NameYourShopComponent />,
-  //   <TellUsAboutYourShopComponent />,
-  //   <ShopSecurityPage />,
-  // ];
-  //const { next } = useMultiStepForm(steps);
+
 
   const [nameYourShop, setNameYourShop] = useState<NameYourShopFormDetails>({
     shopName: "",

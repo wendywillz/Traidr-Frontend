@@ -2,12 +2,13 @@ import Header from "../../components/Header/Header";
 import { ShopProfileMainWrapper } from "./ShopProfilePageStle";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axiosInstance from "../../utils/axiosInstance";
 import {
   shopInterface,
   shopProductsInterface,
 } from "../../interfaces/shopInterfaces";
 import SmallButton from "../../components/button/smallButton/smallButton";
+import { fetchShopDetail } from "../../api/shop";
+import { fetchAllProducts } from "../../api/product";
 
 const ShopProfile = () => {
   const { shopId } = useParams();
@@ -18,27 +19,22 @@ const ShopProfile = () => {
 
   // fetch shop from database
   useEffect(() => {
-    const fetchShopDetail = async () => {
-      const res = await axiosInstance.get(`/shop/get-shop/${shopId}`);
-      if (res && res.data.shop) {
-        setShop(res.data.shop);
+    fetchShopDetail(shopId!).then((res) => {
+      if (res) {
+        setShop(res);
       }
-    };
-    fetchShopDetail();
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // fetch product from the database
   useEffect(() => {
-    const fetchShopProducts = async () => {
-      const res = await axiosInstance.get(`/products/get-products/${shopId}`);
-      if (res && res.data.products) {
-        console.log("products", res.data.products);
-        setProducts(res.data.products);
-        localStorage.setItem("shopProducts", JSON.stringify(res.data.products));
+    fetchAllProducts().then((res) => {
+      if (res) {
+        setProducts(res);
+        localStorage.setItem("shopProducts", JSON.stringify(res));
       }
-    };
-    fetchShopProducts();
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
