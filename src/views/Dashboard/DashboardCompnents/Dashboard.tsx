@@ -22,7 +22,6 @@ const Dashboard = () => {
   useEffect(() => {
     fetchProductsByShopId(shopId!).then((res) => {
       if (res) {
-        console.log("res", res);
         setDisplayedProducts(res);
       }
     });

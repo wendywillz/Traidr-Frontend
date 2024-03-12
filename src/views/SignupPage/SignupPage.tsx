@@ -4,7 +4,7 @@ import FormComponent from "../../components/Form/FormComponent";
 import axiosInstance from "../../utils/axiosInstance";
 import orImage from "../../assets/or.png";
 import GoogleSignup from "./component/GoogleSignup";
-
+import Loader from "../../components/Loader/Loader";
 export default function SignupPage() {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
@@ -12,7 +12,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [aboutUs, setAboutUs] = useState("");
   const [error, setError] = useState("");
-
+  const [isloading, setIsLoading] = useState(false);
   const handleUserName = (event: ChangeEvent<HTMLInputElement>) => {
     setUserName((event.currentTarget as HTMLInputElement).value);
   };
@@ -28,8 +28,9 @@ export default function SignupPage() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-
+    setIsLoading(true);
     if (!userEmail || !password) {
+      setIsLoading(false);
       setError("All fields are required, try again");
       return;
     }
@@ -44,14 +45,19 @@ export default function SignupPage() {
 
       if (res && res.status === 200) {
         if (res.data.otpSentSuccessfully) {
+          setIsLoading(false);
+          setError("");
+          setEmail("");
+          setPassword("");
           localStorage.setItem("signupOTp", res.data.otpSentSuccessfully);
-          console.log("otp", res.data.otpSentSuccessfully);
           navigate(`/otp-verification`);
         } else if (res.data.emailExistError) {
+          setIsLoading(false);
           setError(res.data.emailExistError);
           setEmail("");
           setPassword("");
         } else if (res.data.unableToCreateUser) {
+          setIsLoading(false);
           setError(res.data.unableToCreateUser);
           setEmail("");
           setPassword("");
@@ -60,6 +66,8 @@ export default function SignupPage() {
         setError("Internal Server Error");
       }
     } catch (error) {
+      setEmail("");
+      setPassword("");
       console.log("error", error);
       setError("Internal Server Error");
     }
@@ -74,6 +82,8 @@ export default function SignupPage() {
         linkText="Log in here"
         linkPath="/login"
         formTitle="Create an Account"
+        isLoading={isloading}
+        loaderComponent={<Loader />}
         children={{
           formElements: (
             <>

@@ -6,8 +6,8 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { NameYourShopFormDetails } from "../../../interfaces/shopInterfaces";
 import { updatedNameYourShop } from "../../../app/features/shopRegistration/nameYourShopSlice";
 import { useDispatch } from "react-redux";
-import { fetchShopCategories } from "../../../api/shop";
-
+import { fetchProductsCategories } from "../../../api/product";
+import Loader from "../../../components/Loader/Loader";
 function NameYourShopComponent() {
   const [nameYourShop, setNameYourShop] = useState<NameYourShopFormDetails>({
     shopName: "",
@@ -15,7 +15,7 @@ function NameYourShopComponent() {
     shopCurrency: "NGN",
     shopDescription: "",
   });
-
+  const [isLoading, setIsLoading] = useState(false);
   const [categories, setCategories] = useState([]);
 
   // checlng if the shop details is in the local storage
@@ -30,7 +30,7 @@ function NameYourShopComponent() {
 
   // fetching shop categories
   useEffect(() => {
-    fetchShopCategories().then((res) => {
+    fetchProductsCategories().then((res) => {
       setCategories(res);
     });
   }, []);
@@ -57,8 +57,10 @@ function NameYourShopComponent() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     localStorage.setItem("nameYourShop", JSON.stringify(nameYourShop));
     dispatch(updatedNameYourShop(nameYourShop));
+    setIsLoading(false);
     //next();
     //console.log("checking", check);
   };
@@ -141,6 +143,8 @@ function NameYourShopComponent() {
                 button_text="Save and Continue"
                 type="submit"
                 disabled={checkInput()}
+                isLoading={isLoading}
+                loaderComponent={<Loader />}
               />
             </div>
           </form>

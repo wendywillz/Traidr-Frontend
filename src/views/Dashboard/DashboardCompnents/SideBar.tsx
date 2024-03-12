@@ -7,14 +7,14 @@ import {
 } from "../DashboardStyles/SideBar.styled";
 import arrow from "../../../assets/dashboard-assets/inverted_caret.png";
 import orangeArrow from "../../../assets/dashboard-assets/orange_inverted_caret.png";
-import { fetchShopCategories } from "../../../api/shop";
+import { fetchProductsCategories } from "../../../api/product";
 import { useEffect, useState } from "react";
 const SideBar = () => {
   const [categories, setCategories] = useState([]);
 
   // fetching shop categories
   useEffect(() => {
-    fetchShopCategories().then((res) => {
+    fetchProductsCategories().then((res) => {
       setCategories(res);
     });
   }, []);

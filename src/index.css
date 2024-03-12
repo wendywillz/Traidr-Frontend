@@ -41,6 +41,7 @@ p {
 /* global.css */
 :root {
   --orange-color: #e04f16;
+  --hover-color: #a52f01;
   --black-color: #000;
   --normal-text-color: #00000080;
   --input-placeholder-color: #00000080;

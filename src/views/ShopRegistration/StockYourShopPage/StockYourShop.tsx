@@ -35,9 +35,10 @@ import SmallButton from "../../../components/button/smallButton/smallButton";
 import { useState, FormEvent, ChangeEvent, useEffect } from "react";
 import { ListingDetails } from "../../../interfaces/shopInterfaces";
 import { useParams } from "react-router-dom";
-import SuccessModal from "../../SuccessModal/SuccessModalComponent";
+import SuccessModal from "../../../components/SuccessModal/SuccessModalComponent";
 import axiosInstance from "../../../utils/axiosInstance";
-import { fetchShopCategories } from "../../../api/shop";
+import { fetchProductsCategories } from "../../../api/product";
+import Loader from "../../../components/Loader/Loader";
 
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,6 +57,7 @@ const StockYourShop = () => {
   const [photoDataURLs, setPhotoDataURLs] = useState<string[]>([]);
   const [displayPopup, setDisplayPopup] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   // checking if the listing details is in the local storage
   useEffect(() => {
     const storedListingDetails = localStorage.getItem("listingDetails")!;
@@ -76,7 +78,7 @@ const StockYourShop = () => {
 
   // fetching shop categories
   useEffect(() => {
-    fetchShopCategories().then((res) => {
+    fetchProductsCategories().then((res) => {
       setCategories(res);
     });
   }, []);
@@ -162,11 +164,14 @@ const StockYourShop = () => {
   //submitting the whole form
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     try {
       ///////////////////////////
       //Data from the photo upload
+      setIsLoading(true);
       const listingDetailsData = new FormData();
       if (!photoFiles) {
+        setIsLoading(false);
         setErrorMessage("Please upload a photo of your product");
         return;
       }
@@ -210,6 +215,7 @@ const StockYourShop = () => {
         listingDetailsData
       );
       if (res && res.data.productAdded) {
+        setIsLoading(false);
         localStorage.removeItem("listingDetails");
         localStorage.removeItem("displayUploadedPhotoName");
         localStorage.removeItem("displayUploadedVideoName");
@@ -217,6 +223,7 @@ const StockYourShop = () => {
         //navigate(`/dashboard/shop-profile/${shopId}`);
       }
     } catch (error) {
+      setIsLoading(false);
       console.log("product error", error);
     }
 
@@ -481,7 +488,12 @@ const StockYourShop = () => {
             </FormContainer>
             <div className="submit-button-wrapper">
               <SmallButton button_text="Cancel" whiteBg={true} type="button" />
-              <SmallButton button_text="Save and Continue" type="submit" />
+              <SmallButton
+                button_text="Save and Continue"
+                type="submit"
+                isLoading={isLoading}
+                loaderComponent={<Loader />}
+              />
             </div>
           </StockShopMainForm>
         </div>

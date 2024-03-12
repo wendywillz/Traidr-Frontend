@@ -7,9 +7,3 @@ export const fetchShopDetail = async (shopId: string) => {
   }
 };
 
-export const fetchShopCategories = async () => {
-  const res = await axiosInstance.get(`/shop/get-shop-categories`);
-  if (res && res.data.shopCategories) {
-    return res.data.shopCategories;
-  }
-};
