@@ -3,6 +3,10 @@ import styled from "styled-components";
 const HeaderStyle = styled.header`
   display: flex;
   justify-content: center;
+  position: sticky;
+  background-color: #fff;
+  z-index: 100;
+  top: 0;
   align-items: center;
   padding: 0rem 2rem;
   height: 4rem;

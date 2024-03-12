@@ -11,7 +11,7 @@ import EnterOtpPage from "./views/Enter-otp/EnterOtpPage";
 import ShopRegistrationPage from "./views/ShopRegistration/ShopRegistrationPage";
 import StockYourShop from "./views/ShopRegistration/StockYourShopPage/StockYourShop";
 import Description from "./views/Description/DescriptionComponents/Description";
-
+import SuccessModal from "./components/SuccessModal/SuccessModalComponent";
 function App() {
   return (
     <Routes>
@@ -41,8 +41,7 @@ function App() {
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/description" element={<Description />} />
-      {/* <Route path="/description/:productId" element={<Description />} /> */}
-      
+      <Route path="/success-modal" element={<SuccessModal />} />
     </Routes>
   );
 }

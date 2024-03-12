@@ -35,8 +35,10 @@ import SmallButton from "../../../components/button/smallButton/smallButton";
 import { useState, FormEvent, ChangeEvent, useEffect } from "react";
 import { ListingDetails } from "../../../interfaces/shopInterfaces";
 import { useParams } from "react-router-dom";
-import SuccessModal from "../../SuccessModal/SuccessModalComponent";
+import SuccessModal from "../../../components/SuccessModal/SuccessModalComponent";
 import axiosInstance from "../../../utils/axiosInstance";
+import { fetchProductsCategories } from "../../../api/product";
+import Loader from "../../../components/Loader/Loader";
 
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,6 +56,8 @@ const StockYourShop = () => {
   const [photoFiles, setPhotoFiles] = useState<File[]>([]);
   const [photoDataURLs, setPhotoDataURLs] = useState<string[]>([]);
   const [displayPopup, setDisplayPopup] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   // checking if the listing details is in the local storage
   useEffect(() => {
     const storedListingDetails = localStorage.getItem("listingDetails")!;
@@ -70,6 +74,13 @@ const StockYourShop = () => {
     if (storedUploadedPhotoURL) {
       setPhotoDataURLs(JSON.parse(storedUploadedPhotoURL));
     }
+  }, []);
+
+  // fetching shop categories
+  useEffect(() => {
+    fetchProductsCategories().then((res) => {
+      setCategories(res);
+    });
   }, []);
 
   const handleListingDetails = (
@@ -153,11 +164,14 @@ const StockYourShop = () => {
   //submitting the whole form
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     try {
       ///////////////////////////
       //Data from the photo upload
+      setIsLoading(true);
       const listingDetailsData = new FormData();
       if (!photoFiles) {
+        setIsLoading(false);
         setErrorMessage("Please upload a photo of your product");
         return;
       }
@@ -201,6 +215,7 @@ const StockYourShop = () => {
         listingDetailsData
       );
       if (res && res.data.productAdded) {
+        setIsLoading(false);
         localStorage.removeItem("listingDetails");
         localStorage.removeItem("displayUploadedPhotoName");
         localStorage.removeItem("displayUploadedVideoName");
@@ -208,6 +223,7 @@ const StockYourShop = () => {
         //navigate(`/dashboard/shop-profile/${shopId}`);
       }
     } catch (error) {
+      setIsLoading(false);
       console.log("product error", error);
     }
 
@@ -254,41 +270,42 @@ const StockYourShop = () => {
                 </ul>
               </UploadInstructions>
               <MultipleUploads>
-                <UploadFile>
-                  {/*This whole div would have a visible border */}
-                  <img
-                    src={photoIcon}
-                    className="stock-shop-page-upload-icon"
-                  />
-                  <span className="stock-shop-page-upload-photo-label">
-                    Click to add a Photo
-                  </span>
-                  <span className="max-file-size">
-                    (Maximum file size: 3mb)
-                  </span>
-                  <input
-                    className="stock-shop-page-upload-photo-input"
-                    type="file"
-                    accept="image/*"
-                    id="photoInput"
-                    name="photo"
-                    onChange={handlePhotoUpload}
-                    required
-                  />
+                {photoDataURLs.length < 3 && (
+                  <UploadFile>
+                    {/*This whole div would have a visible border */}
+                    <img
+                      src={photoIcon}
+                      className="stock-shop-page-upload-icon"
+                    />
+                    <span className="stock-shop-page-upload-photo-label">
+                      Click to add a Photo
+                    </span>
+                    <span className="max-file-size">
+                      (Maximum file size: 3mb)
+                    </span>
+                    <input
+                      className="stock-shop-page-upload-photo-input"
+                      type="file"
+                      accept="image/*"
+                      id="photoInput"
+                      name="photo"
+                      onChange={handlePhotoUpload}
+                      required
+                    />
 
-                  {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-                </UploadFile>
+                    {errorMessage && (
+                      <ErrorMessage>{errorMessage}</ErrorMessage>
+                    )}
+                  </UploadFile>
+                )}
+
                 <UploadedImagesPreview>
-                  <UploadedImagesPreview>
-                    {photoDataURLs &&
-                      photoDataURLs.map((dataURL, index) => (
-                        <img
-                          key={index}
-                          src={dataURL}
-                          alt={`Uploaded photo ${index}`}
-                        />
-                      ))}
-                  </UploadedImagesPreview>
+                  {photoDataURLs &&
+                    photoDataURLs.map((dataURL, index) => (
+                      <div key={index}>
+                        <img src={dataURL} alt={`Uploaded photo ${index}`} />
+                      </div>
+                    ))}
                 </UploadedImagesPreview>
               </MultipleUploads>
             </Upload>
@@ -431,9 +448,11 @@ const StockYourShop = () => {
                     <option value={""} selected>
                       Select your category
                     </option>
-                    <option value={"furniture"}>Furniture</option>
-                    <option value={"Electronics"}>Electronics</option>
-                    <option value={"Home Appliances"}>Home Appliances</option>
+                    {categories.map((category: string) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
                   </CategorySelectStyle>
                 </div>
 
@@ -469,7 +488,12 @@ const StockYourShop = () => {
             </FormContainer>
             <div className="submit-button-wrapper">
               <SmallButton button_text="Cancel" whiteBg={true} type="button" />
-              <SmallButton button_text="Save and Continue" type="submit" />
+              <SmallButton
+                button_text="Save and Continue"
+                type="submit"
+                isLoading={isLoading}
+                loaderComponent={<Loader />}
+              />
             </div>
           </StockShopMainForm>
         </div>

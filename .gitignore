@@ -7,6 +7,12 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 .env
+.env.development
+.env.local
+package-lock.json
+**yarn
+**.
+package-lock.json
 
 node_modules
 dist

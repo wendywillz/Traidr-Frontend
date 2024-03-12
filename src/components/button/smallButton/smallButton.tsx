@@ -5,6 +5,8 @@ export default function SmallButton({
   whiteBg,
   onClick,
   disabled,
+  isLoading,
+  loaderComponent,
 }: SmallButtonProps) {
   return (
     <SmallButtonStyle
@@ -14,7 +16,7 @@ export default function SmallButton({
       onClick={onClick}
       disabled={disabled}
     >
-      {button_text}
+      {isLoading ? loaderComponent : button_text}
     </SmallButtonStyle>
   );
 }
