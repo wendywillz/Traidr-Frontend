@@ -6,6 +6,7 @@ import {
 } from "../DescriptionStyles/Description.styled"
 import Header from "../../../components/Header/Header"
 import Reviews from "./Reviews"
+import TopDescription from "../../../components/TopDescription/TopDescription";
 // import AllProducts from "../../Dashboard/DashboardCompnents/AllProducts"
 // import { DashboardContainer } from "../../Dashboard/DashboardStyles/Dashboard.styled"
 // import { useParams } from "react-router-dom"
@@ -16,7 +17,7 @@ export default function Description() {
     <>
         <Header />
         <DescriptionContainer>
-            <DescriptionTop>Top</DescriptionTop>
+            <TopDescription />
             <DescriptionMain>
                 <Reviews />
             </DescriptionMain>
