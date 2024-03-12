@@ -11,7 +11,7 @@ export const DescriptionTop = styled.div`
 `
 
 export const DescriptionMain = styled.div`
-    background-color: blue;
+    // background-color: blue;
     display: block;  
 `
 
