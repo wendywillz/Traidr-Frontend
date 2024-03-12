@@ -1,7 +1,7 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import FormComponent from "../../components/Form/FormComponent";
 import axiosInstance from "../../utils/axiosInstance";
-
+import Loader from "../../components/Loader/Loader";
 export default function ChangePasswordPage() {
   const [passwordInputs, setPasswordInputs] = useState({
     currentPassword: "",
@@ -9,7 +9,7 @@ export default function ChangePasswordPage() {
     confirmNewPassword: "",
   });
   const [error, setError] = useState("");
-
+  const [isloading, setIsLoading] = useState(false);
   const handlepasswordInputsChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setPasswordInputs({ ...passwordInputs, [name]: value });
@@ -17,6 +17,7 @@ export default function ChangePasswordPage() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
     if (
       !passwordInputs.currentPassword ||
       !passwordInputs.newPassword ||
@@ -38,6 +39,7 @@ export default function ChangePasswordPage() {
 
       if (res && res.status === 200) {
         if (res.data.noTokenError) {
+          setIsLoading(false);
           setError("Session expired, please login again.");
           setPasswordInputs({
             currentPassword: "",
@@ -45,6 +47,7 @@ export default function ChangePasswordPage() {
             confirmNewPassword: "",
           });
         } else if (res.data.userNotFoundError) {
+          setIsLoading(false);
           setError(res.data.userNotFoundError);
           setPasswordInputs({
             currentPassword: "",
@@ -52,6 +55,7 @@ export default function ChangePasswordPage() {
             confirmNewPassword: "",
           });
         } else if (res.data.invalidPasswordError) {
+          setIsLoading(false);
           setError(res.data.invalidPasswordError);
           setPasswordInputs({
             currentPassword: "",
@@ -59,6 +63,7 @@ export default function ChangePasswordPage() {
             confirmNewPassword: "",
           });
         } else if (res.data.passwordChangedSuccessfully) {
+          setIsLoading(false);
           setError(res.data.passwordChangedSuccessfully);
           setPasswordInputs({
             currentPassword: "",
@@ -67,6 +72,7 @@ export default function ChangePasswordPage() {
           });
         }
       } else {
+        setIsLoading(false);
         setError("Internal Server Error");
         setPasswordInputs({
           currentPassword: "",
@@ -75,6 +81,7 @@ export default function ChangePasswordPage() {
         });
       }
     } catch (error) {
+      setIsLoading(false);
       setError("Internal Server Error");
       setPasswordInputs({
         currentPassword: "",
@@ -93,6 +100,8 @@ export default function ChangePasswordPage() {
         linkText="back"
         linkPath="/dashboard"
         formTitle="Change Password"
+        isLoading={isloading}
+        loaderComponent={<Loader />}
         children={{
           formElements: (
             <>

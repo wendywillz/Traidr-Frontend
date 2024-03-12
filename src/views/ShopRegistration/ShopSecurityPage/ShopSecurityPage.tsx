@@ -15,13 +15,14 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import userDataInterface from "../../../interfaces/userInterface";
 import { persistor } from "../../../app/store";
+import Loader from "../../../components/Loader/Loader";
 const ShopSecurityPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userData = useSelector(
     (state: { user: userDataInterface }) => state.user
   );
-
+  const [isLoading, setIsLoading] = useState(false);
   const [isChecked, setisChecked] = useState(false);
   useEffect(() => {
     const storedShopSecurity = JSON.parse(
@@ -40,6 +41,7 @@ const ShopSecurityPage = () => {
 
   const handleSubmitOpenYourShop = async (e: FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       const nameYourShop = JSON.parse(localStorage.getItem("nameYourShop")!);
       const tellUsAboutYourShop = JSON.parse(
@@ -56,8 +58,8 @@ const ShopSecurityPage = () => {
           shopOwner: userData.userId,
         });
         if (res && res.data.shopCreated) {
-
           console.log("hop created", res.data.shopCreadted);
+          setIsLoading(false);
           localStorage.removeItem("nameYourShop");
           localStorage.removeItem("tellUsAboutYourShop");
           localStorage.removeItem("shopSecurity");
@@ -70,6 +72,7 @@ const ShopSecurityPage = () => {
         }
       }
     } catch (error) {
+      setIsLoading(false);
       console.log("error", error);
     }
   };
@@ -127,6 +130,8 @@ const ShopSecurityPage = () => {
                 button_text="Open your Shop"
                 type="submit"
                 disabled={isChecked ? false : true}
+                isLoading={isLoading}
+                loaderComponent={<Loader />}
               />
             </div>
           </div>

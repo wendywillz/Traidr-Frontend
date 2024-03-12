@@ -4,11 +4,13 @@ import FormComponent from "../../components/Form/FormComponent";
 import axiosInstance from "../../utils/axiosInstance";
 import orImage from "../../assets/or.png";
 import GoogleSignup from "./component/GoogleSignup";
+import Loader from "../../components/Loader/Loader";
 export default function LoginPage() {
   const navigate = useNavigate();
   const [userEmail, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isloading, setIsLoading] = useState(false);
 
   const handleUserEmail = (event: ChangeEvent<HTMLInputElement>) => {
     setEmail((event.currentTarget as HTMLInputElement).value);
@@ -19,8 +21,9 @@ export default function LoginPage() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-
+    setIsLoading(true);
     if (!userEmail || !password) {
+      setIsLoading(false);
       setError("All fields are required, try again");
       return;
     }
@@ -33,22 +36,28 @@ export default function LoginPage() {
 
       if (res && res.status === 200) {
         if (res.data.successfulLogin) {
-          localStorage.setItem("token", res.data.successfulLogin);
-
-          navigate(`/`);
-        } else if (res.data.inValidPassword) {
-          setError("Invalid password");
+          setIsLoading(false);
           setEmail("");
           setPassword("");
-        } else if (res.data.userNotFoundError) {
-          setError("User not found, invalid email");
+          setError("");
+          localStorage.setItem("token", res.data.successfulLogin);
+          navigate(`/`);
+        } else if (res.data.inValidPassword || res.data.userNotFoundError) {
+          setIsLoading(false);
+          setError("Invalid Credentials");
           setEmail("");
           setPassword("");
         }
       } else {
+        setIsLoading(false);
+        setEmail("");
+        setPassword("");
         setError("Internal Server Error");
       }
     } catch (error) {
+      setIsLoading(false);
+      setEmail("");
+      setPassword("");
       setError("Internal Server Error");
     }
 
@@ -62,6 +71,8 @@ export default function LoginPage() {
         linkText="Signup here"
         linkPath="/signup"
         formTitle="Welcome back to Traidr"
+        isLoading={isloading}
+        loaderComponent={<Loader />}
         children={{
           formElements: (
             <>
@@ -85,7 +96,7 @@ export default function LoginPage() {
                   placeholder="********"
                   onChange={handlePassword}
                 />
-                <Link className="forgot-password" to={"/forgot-password"}>
+                <Link className="forgot-password" to={"/reset-password"}>
                   Forgot Password
                 </Link>
               </fieldset>
