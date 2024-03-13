@@ -20,7 +20,7 @@ interface DescriptionProps {
     product: shopProductsInterface;
 }
 
-export default function Description({ shop, user, product }: DescriptionProps) {
+export default function Description({ shop, user, product }: DescriptionProps){
     // const { shopId } = useParams()
   return (
     <>
@@ -40,3 +40,4 @@ export default function Description({ shop, user, product }: DescriptionProps) {
     </>
   )
 }
+
