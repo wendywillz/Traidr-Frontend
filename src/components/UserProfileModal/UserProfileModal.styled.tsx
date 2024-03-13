@@ -7,7 +7,7 @@ export const UserProfileModalContainer = styled.div`
   position: fixed;
   overflow: hidden;
   top: 10%;
-  right: 3rem;
+  right: 2rem;
   z-index: 99;
   text-decoration: none;
   box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.1);

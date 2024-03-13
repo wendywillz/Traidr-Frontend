@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 export const SortByModalContainer = styled.div`    
-        border: 1px solid grey;
+        /* border: 1px solid grey; */
+        box-shadow: -5px 0px 15px 0px rgba(0, 0, 0, 0.1);
         border-radius: 1rem;
         background-color: white;
         padding: 0.5vh 0;
         /* padding-left: 2rem; */
-        width: 10rem;
+        width: 8rem;
         position: absolute;
-        top: 18vh;
-        right: 12rem;
+        top: 17.5vh;
+        right: 7.5rem;
 
         .sort-by-filter{
             font-size: 1vw;
@@ -19,8 +20,8 @@ export const SortByModalContainer = styled.div`
         }
         .sort-by-filter:hover{
             font-size: 1.2vw;
-            background-color: #E04F16;
-            color:white;
+            /* background-color: #E04F16;
+            color:white; */
 
         }
 `
