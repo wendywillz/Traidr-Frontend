@@ -37,10 +37,11 @@ export const ReviewTextField = styled.input`
     border: 0px solid #ccc;
 `;
 
-export const ReviewText = styled.p<{ color: string; fontSize: string; opacity?: string }>`
+export const ReviewText = styled.p<{ color: string; fontSize: string; fontWeight: string; opacity?: string }>`
     color: ${({ color }) => color};
     opacity: ${({ opacity }) => opacity || "1"};
     font-size: ${({ fontSize }) => fontSize};
+    font-weight: ${({ fontWeight }) => fontWeight};
 `;
 
 

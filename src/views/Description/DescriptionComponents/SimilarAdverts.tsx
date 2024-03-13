@@ -33,7 +33,7 @@ export default function SimilarAdverts() {
 return (
     <>
     <SimilarProductsMain>
-        <ReviewText color="black" fontSize="16px">Similar Adverts</ReviewText>
+        <ReviewText color="black" fontSize="2rem" fontWeight="600">Similar Adverts</ReviewText>
             <AllProductsContainer2>
                     <SimilarProductsContainer>
                     {displayedProducts &&

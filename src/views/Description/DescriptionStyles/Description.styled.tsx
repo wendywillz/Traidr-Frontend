@@ -16,7 +16,7 @@ export const DescriptionMain = styled.div`
 `
 
 export const DescriptionAdverts = styled.div`
-    background-color: green;
+    // background-color: green;
     display: block;
     margin-top: 5vh;
 `

@@ -4,18 +4,17 @@ export const SimilarProductsMain = styled.div`
   width: 100%;
 `;
 
-
 export const SimilarProductsContainer = styled.div`
-    display:flex;
-    flex-direction: row;
-    // flex-wrap: wrap;
-    margin-top: 5vh;
-    padding: 0 5rem;
-    background-color: red;
-    border: 10px solid purple;
-    width: 100%;
-    /* margin-left: 30%; */
-`
+  display: flex;
+  flex-direction: row;
+  // flex-wrap: wrap;
+  margin-top: 5vh;
+  padding: 0 5rem;
+  background-color: red;
+  border: 10px solid #000000;
+  width: 100%;
+  /* margin-left: 30%; */
+`;
 
 export const AllProductsContainer2 = styled.div`
   display: grid;
@@ -24,6 +23,6 @@ export const AllProductsContainer2 = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid purple;
+  border: 2px solid #e04f16;
   /* margin-left: 30%; */
 `;
