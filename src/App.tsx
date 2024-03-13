@@ -13,6 +13,8 @@ import StockYourShop from "./views/ShopRegistration/StockYourShopPage/StockYourS
 import Description from "./views/Description/DescriptionComponents/Description";
 import SuccessModal from "./components/SuccessModal/SuccessModalComponent";
 function App() {
+
+
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
@@ -41,6 +43,7 @@ function App() {
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/description" element={<Description />} />
+
       <Route path="/success-modal" element={<SuccessModal />} />
     </Routes>
   );

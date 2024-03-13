@@ -1,4 +1,4 @@
-import { images, number } from "./index";
+import { images } from "./index";
 import { IoIosTimer } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
 import { useState } from "react";

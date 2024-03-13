@@ -9,18 +9,28 @@ import {
 } from "../DescriptionStyles/Reviews.styled"
 import Star1 from "../../../assets/dashboard-assets/Star1.png"
 import Star4 from "../../../assets/dashboard-assets/Star4.png" // Import Star4 image
-import { NameYourShopFormDetails } from "../../../interfaces/shopInterfaces";
+import { shopProductsInterface, shopInterface } from "../../../interfaces/shopInterfaces";
 import userData from "../../../interfaces/userInterface";
 
 interface ShopProps {
-    shop: NameYourShopFormDetails;
+    shop: shopInterface;
 }
 
 interface UserProps {
     user: userData;
 }
 
-export default function Reviews(shop: ShopProps, user: UserProps) {
+interface ProductProps {
+    product: shopProductsInterface;
+  }
+
+  interface ReviewsProps {
+    shop: ShopProps;
+    user: UserProps;
+    product: ProductProps;
+  }
+  
+  export default function Reviews({ shop, user, product }: ReviewsProps) {
     const renderStars = () => {
         const stars = [];
         for (let i = 1; i <= 5; i++) {
@@ -44,12 +54,12 @@ export default function Reviews(shop: ShopProps, user: UserProps) {
         <>
             <ReviewContainer>
                 <ReviewHeader>Reviews</ReviewHeader>
-                <ReviewBody key={product.productId}>
+                <ReviewBody key={product.product.productId}>
                     {renderStars()}
                     <ReviewForm>
                         <ReviewTextField placeholder="Write your review here..." />
-                        <ReviewText color="#333333" fontSize="" fontWeight="normal">{user.name}</ReviewText>
-                        <ReviewText color="#333333" opacity="0.5" fontSize="13px" fontWeight="normal">{shop.shopName}</ReviewText>
+                        <ReviewText color="#333333" fontSize="" fontWeight="normal">{user.user.name}</ReviewText>
+                        <ReviewText color="#333333" opacity="0.5" fontSize="13px" fontWeight="normal">From{shop.shop.shopName}</ReviewText>
                         <ReviewText color="#333333" opacity="0.5" fontSize="13px" fontWeight="normal">{getCurrentDate()}</ReviewText>
                     </ReviewForm>
                 </ReviewBody>

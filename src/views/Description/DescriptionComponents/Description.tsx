@@ -8,12 +8,19 @@ import Header from "../../../components/Header/Header"
 import Reviews from "./Reviews"
 import TopDescription from "../../../components/TopDescription/TopDescription";
 import SimilarAdverts from "./SimilarAdverts"
-
+import { shopProductsInterface, shopInterface } from "../../../interfaces/shopInterfaces";
+import userData from "../../../interfaces/userInterface";
 // import AllProducts from "../../Dashboard/DashboardCompnents/AllProducts"
 // import { DashboardContainer } from "../../Dashboard/DashboardStyles/Dashboard.styled"
 // import { useParams } from "react-router-dom"
 
-export default function Description() {
+interface DescriptionProps {
+    shop: shopInterface;
+    user: userData;
+    product: shopProductsInterface;
+}
+
+export default function Description({ shop, user, product }: DescriptionProps) {
     // const { shopId } = useParams()
   return (
     <>
@@ -21,7 +28,7 @@ export default function Description() {
         <DescriptionContainer>
             <TopDescription />
             <DescriptionMain>
-                <Reviews />
+            <Reviews shop={{ shop }} user={{ user }} product={{ product }} />
             </DescriptionMain>
             <DescriptionAdverts>
                 <SimilarAdverts />
