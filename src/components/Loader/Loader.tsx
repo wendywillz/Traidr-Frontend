@@ -1,11 +1,10 @@
-import './Loader.css';
-
-const Loader = () => {
+import LoaderStyle from "./LoaderStyle";
+function Loader() {
   return (
-    <div className="loader-container">
-      <div className="loader"></div>
-    </div>
+    <LoaderStyle>
+      <div className="loader-inner"></div>
+    </LoaderStyle>
   );
-};
+}
 
 export default Loader;

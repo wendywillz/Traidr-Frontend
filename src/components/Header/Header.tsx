@@ -9,7 +9,7 @@ import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
-import UserProfileModal from "../../views/UserProfileModal/UserProfileModal.tsx";
+import UserProfileModal from "../UserProfileModal/UserProfileModal.tsx";
 
 interface userState {
   user: userDataInterface;

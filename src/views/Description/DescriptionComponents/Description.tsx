@@ -1,11 +1,12 @@
 import { 
     DescriptionContainer, 
-    DescriptionTop, 
+    // DescriptionTop, 
     DescriptionMain,
     DescriptionAdverts 
 } from "../DescriptionStyles/Description.styled"
 import Header from "../../../components/Header/Header"
 import Reviews from "./Reviews"
+import TopDescription from "../../../components/TopDescription/TopDescription";
 import SimilarAdverts from "./SimilarAdverts"
 
 // import AllProducts from "../../Dashboard/DashboardCompnents/AllProducts"
@@ -18,7 +19,7 @@ export default function Description() {
     <>
         <Header />
         <DescriptionContainer>
-            <DescriptionTop>Top</DescriptionTop>
+            <TopDescription />
             <DescriptionMain>
                 <Reviews />
             </DescriptionMain>

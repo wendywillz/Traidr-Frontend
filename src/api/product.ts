@@ -12,3 +12,11 @@ export const fetchProductsByShopId = async (shopId: string) => {
     return res.data.products;
   }
 };
+
+
+export const fetchProductsCategories = async () => {
+  const res = await axiosInstance.get(`/products/get-products-categories`);
+  if (res && res.data.productCategories) {
+    return res.data.productCategories;
+  }
+};

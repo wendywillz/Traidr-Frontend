@@ -13,6 +13,8 @@ interface formChildrenProps {
   extraText?: string;
   linkText?: string;
   linkPath?: string;
+  isLoading?: boolean;
+  loaderComponent?: ReactNode;
 }
 export default function FormComponent({
   children,
@@ -22,6 +24,8 @@ export default function FormComponent({
   extraText,
   linkText,
   linkPath,
+  isLoading,
+  loaderComponent,
 }: formChildrenProps) {
   const { formElements } = children;
   return (
@@ -34,11 +38,14 @@ export default function FormComponent({
           <p className="form-component-title">{formTitle}</p>
           <form className="form-component" onSubmit={handleSubmit}>
             {formElements}
-            <MainButton button_text={button_text} />
+            <MainButton button_text={button_text} isLoading={isLoading} loaderComponent={loaderComponent} />
           </form>
           {extraText && (
             <p className="extra-text">
-              {extraText} <Link  className="link-to-text" to={linkPath ?? ""}>{linkText}</Link>
+              {extraText}{" "}
+              <Link className="link-to-text" to={linkPath ?? ""}>
+                {linkText}
+              </Link>
             </p>
           )}
         </div>
