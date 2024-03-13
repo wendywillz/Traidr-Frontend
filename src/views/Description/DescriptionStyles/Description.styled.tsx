@@ -11,12 +11,12 @@ export const DescriptionTop = styled.div`
 `
 
 export const DescriptionMain = styled.div`
-    background-color: blue;
+    // background-color: blue;
     display: block;  
 `
 
 export const DescriptionAdverts = styled.div`
-    background-color: green;
+    // background-color: green;
     display: block;
     margin-top: 5vh;
 `
