@@ -9,28 +9,44 @@ import {
 } from "../DescriptionStyles/Reviews.styled"
 import Star1 from "../../../assets/dashboard-assets/Star1.png"
 import Star4 from "../../../assets/dashboard-assets/Star4.png" // Import Star4 image
-import { shopProductsInterface, shopInterface } from "../../../interfaces/shopInterfaces";
-import userData from "../../../interfaces/userInterface";
+// import { shopProductsInterface } from "../../../interfaces/shopInterfaces";
+// import userData from "../../../interfaces/userInterface";
+import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react";
+import { fetchReviewByProductId } from "../../../api/product";
 
-interface ShopProps {
-    shop: shopInterface;
-}
+// interface ShopProps {
+//     shop: shopInterface;
+// }
 
-interface UserProps {
-    user: userData;
-}
+// interface UserProps {
+//     user: userData;
+// }
 
-interface ProductProps {
-    product: shopProductsInterface;
-  }
+// interface ProductProps {
+//     product: shopProductsInterface;
+//   }
 
   interface ReviewsProps {
-    shop: ShopProps;
-    user: UserProps;
-    product: ProductProps;
+    // shop: ShopProps;
+    user: string;
+    reviewStar: number;
+    reviewText: string;
+    reviewDate: string;
   }
   
-  export default function Reviews({ shop, user, product }: ReviewsProps) {
+  export default function Reviews({  user, reviewStar, reviewText, reviewDate }: ReviewsProps) {
+    const { productId } = useParams();
+    const [reviews, setReviews] = useState<ReviewsProps[] | null>(null);
+    useEffect(() => {
+        fetchReviewByProductId(productId!).then((res) => {
+            if (res) {
+                setReviews(res);
+            }
+        });
+    }, []);
+
+    
     const renderStars = () => {
         const stars = [];
         for (let i = 1; i <= 5; i++) {
@@ -54,13 +70,10 @@ interface ProductProps {
         <>
             <ReviewContainer>
                 <ReviewHeader>Reviews</ReviewHeader>
-                <ReviewBody key={product.product.productId}>
+                <ReviewBody>
                     {renderStars()}
                     <ReviewForm>
                         <ReviewTextField placeholder="Write your review here..." />
-                        <ReviewText color="#333333" fontSize="" fontWeight="normal">{user.user.name}</ReviewText>
-                        <ReviewText color="#333333" opacity="0.5" fontSize="13px" fontWeight="normal">From{shop.shop.shopName}</ReviewText>
-                        <ReviewText color="#333333" opacity="0.5" fontSize="13px" fontWeight="normal">{getCurrentDate()}</ReviewText>
                     </ReviewForm>
                 </ReviewBody>
             </ReviewContainer>
