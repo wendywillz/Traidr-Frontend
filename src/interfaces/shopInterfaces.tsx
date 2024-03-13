@@ -47,6 +47,8 @@ export interface shopProductsInterface {
   productVideo: string;
   productPrice: number;
   shopId: string;
+  shopName?: string;
+  shopOwner?: string;
 }
 
 export interface shopInterface {

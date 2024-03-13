@@ -1,4 +1,4 @@
-import { images, number } from "./index";
+// import { images } from "./index";
 import { IoIosTimer } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
 import { useState } from "react";
@@ -6,8 +6,9 @@ import "./TopDescription.css";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineChat } from "react-icons/md";
+import { shopProductsInterface } from "../../interfaces/shopInterfaces";
 
-function TopDescription() {
+function TopDescription({...props}: shopProductsInterface) {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleSelectChange = (e: any) => {
@@ -26,9 +27,9 @@ function TopDescription() {
           </ul>
 
           <div className="img-container">
-            {images.map((item, index) => (
+            {props.productImages.map((product, index) => (
               <div key={index}>
-                <img src={item.imgURL} alt={item.name} />
+                <img src={product} alt={product} />
               </div>
             ))}
           </div>
@@ -38,9 +39,9 @@ function TopDescription() {
           <div className="views">
             <div>
               <p className="views-time"> 3 Views in the last 2 minutes </p>
-              <h2 className="price">N30,000</h2>
-              <p className="store">Wallphy Store</p>
-              <p className="hens-product">Hans Blender Set</p>
+              <h2 className="price">{props.productPrice}</h2>
+              <p className="store">{props.shopId}</p>
+              <p className="hens-product">{props.productTitle}</p>
             </div>
 
             <div>
@@ -88,15 +89,15 @@ function TopDescription() {
               <FaUserCircle style={{ width: "7rem", height: "7rem" }} />
 
               <div className="data-group">
-                <h2>Bankole Yusuf</h2>
-                <p>BankoleYusuf@gmail.com</p>
+                <h2>{props.shopOwner}</h2>
+                <p>{props.shopId}</p>
                 <div className="chat-group">
                   <MdOutlineChat
                     style={{ width: "1rem", height: "1rem", color: "#219653" }}
                   />
                   <p>start chat</p>
                 </div>
-                <p>contact: 09085757757,08065443355</p>
+                {/* <p>contact: 09085757757,08065443355</p> */}
               </div>
             </div>
           </div>
