@@ -1,8 +1,9 @@
+/* eslint-disable react-refresh/only-export-components */
 import axios from "axios";
-
 // backend url
+const BACKENDURL = import.meta.env.VITE_APP_BASE_URL;
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: BACKENDURL,
   withCredentials: true,
 });
 

@@ -6,6 +6,8 @@ import {
 } from "../DescriptionStyles/Description.styled"
 import Header from "../../../components/Header/Header"
 import Reviews from "./Reviews"
+import SimilarAdverts from "./SimilarAdverts"
+
 // import AllProducts from "../../Dashboard/DashboardCompnents/AllProducts"
 // import { DashboardContainer } from "../../Dashboard/DashboardStyles/Dashboard.styled"
 // import { useParams } from "react-router-dom"
@@ -20,7 +22,9 @@ export default function Description() {
             <DescriptionMain>
                 <Reviews />
             </DescriptionMain>
-            <DescriptionAdverts>Adverts</DescriptionAdverts>
+            <DescriptionAdverts>
+                <SimilarAdverts />
+            </DescriptionAdverts>
         </DescriptionContainer>
         {/* <DashboardContainer>
             <AllProducts shopId={shopId!} />

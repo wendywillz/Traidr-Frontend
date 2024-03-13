@@ -37,6 +37,7 @@ import { ListingDetails } from "../../../interfaces/shopInterfaces";
 import { useParams } from "react-router-dom";
 import SuccessModal from "../../SuccessModal/SuccessModalComponent";
 import axiosInstance from "../../../utils/axiosInstance";
+import { fetchShopCategories } from "../../../api/shop";
 
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,6 +55,7 @@ const StockYourShop = () => {
   const [photoFiles, setPhotoFiles] = useState<File[]>([]);
   const [photoDataURLs, setPhotoDataURLs] = useState<string[]>([]);
   const [displayPopup, setDisplayPopup] = useState(false);
+  const [categories, setCategories] = useState([]);
   // checking if the listing details is in the local storage
   useEffect(() => {
     const storedListingDetails = localStorage.getItem("listingDetails")!;
@@ -70,6 +72,13 @@ const StockYourShop = () => {
     if (storedUploadedPhotoURL) {
       setPhotoDataURLs(JSON.parse(storedUploadedPhotoURL));
     }
+  }, []);
+
+  // fetching shop categories
+  useEffect(() => {
+    fetchShopCategories().then((res) => {
+      setCategories(res);
+    });
   }, []);
 
   const handleListingDetails = (
@@ -254,41 +263,42 @@ const StockYourShop = () => {
                 </ul>
               </UploadInstructions>
               <MultipleUploads>
-                <UploadFile>
-                  {/*This whole div would have a visible border */}
-                  <img
-                    src={photoIcon}
-                    className="stock-shop-page-upload-icon"
-                  />
-                  <span className="stock-shop-page-upload-photo-label">
-                    Click to add a Photo
-                  </span>
-                  <span className="max-file-size">
-                    (Maximum file size: 3mb)
-                  </span>
-                  <input
-                    className="stock-shop-page-upload-photo-input"
-                    type="file"
-                    accept="image/*"
-                    id="photoInput"
-                    name="photo"
-                    onChange={handlePhotoUpload}
-                    required
-                  />
+                {photoDataURLs.length < 3 && (
+                  <UploadFile>
+                    {/*This whole div would have a visible border */}
+                    <img
+                      src={photoIcon}
+                      className="stock-shop-page-upload-icon"
+                    />
+                    <span className="stock-shop-page-upload-photo-label">
+                      Click to add a Photo
+                    </span>
+                    <span className="max-file-size">
+                      (Maximum file size: 3mb)
+                    </span>
+                    <input
+                      className="stock-shop-page-upload-photo-input"
+                      type="file"
+                      accept="image/*"
+                      id="photoInput"
+                      name="photo"
+                      onChange={handlePhotoUpload}
+                      required
+                    />
 
-                  {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-                </UploadFile>
+                    {errorMessage && (
+                      <ErrorMessage>{errorMessage}</ErrorMessage>
+                    )}
+                  </UploadFile>
+                )}
+
                 <UploadedImagesPreview>
-                  <UploadedImagesPreview>
-                    {photoDataURLs &&
-                      photoDataURLs.map((dataURL, index) => (
-                        <img
-                          key={index}
-                          src={dataURL}
-                          alt={`Uploaded photo ${index}`}
-                        />
-                      ))}
-                  </UploadedImagesPreview>
+                  {photoDataURLs &&
+                    photoDataURLs.map((dataURL, index) => (
+                      <div key={index}>
+                        <img src={dataURL} alt={`Uploaded photo ${index}`} />
+                      </div>
+                    ))}
                 </UploadedImagesPreview>
               </MultipleUploads>
             </Upload>
@@ -431,9 +441,11 @@ const StockYourShop = () => {
                     <option value={""} selected>
                       Select your category
                     </option>
-                    <option value={"furniture"}>Furniture</option>
-                    <option value={"Electronics"}>Electronics</option>
-                    <option value={"Home Appliances"}>Home Appliances</option>
+                    {categories.map((category: string) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
                   </CategorySelectStyle>
                 </div>
 

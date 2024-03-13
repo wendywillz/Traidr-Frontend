@@ -1,36 +1,47 @@
+import {
+  SearchBarContainer,
+  SearchField,
+  SortButton,
+} from "../DashboardStyles/SearchBar.styled";
+import { useState } from "react";
+import SortByModal from "../../SortByModal/SortByModal";
 
-import { SearchBarContainer, SearchField, SortButton } from '../DashboardStyles/SearchBar.styled'
-import { useState } from 'react'
-import SortByModal from '../../SortByModal/SortByModal'
-
-const SearchBar = () => {
-  const [sortByModalVisibility, setSortByModalVisibility] = useState(false)
-
-const toggleSetByModal = ()=>{
-    setSortByModalVisibility(!sortByModalVisibility)
+interface Props {
+  ascendSort: () => void;
+  descendSort: () => void;
+  originalOrder: () => void;
 }
+const SearchBar = ({ ascendSort, descendSort, originalOrder }: Props) => {
+  const [sortByModalVisibility, setSortByModalVisibility] = useState(false);
 
+  const toggleSetByModal = () => {
+    setSortByModalVisibility(!sortByModalVisibility);
+  };
 
   return (
     <>
-    <SearchBarContainer>
+      <SearchBarContainer>
         {/*This should contain both the search input filed and the sortby button */}
-        
-            <SearchField type="text" placeholder='search for item...'/>
-       
-        <SortButton onClick={toggleSetByModal}>
-            SORT BY:
-        </SortButton>
-        
-    </SearchBarContainer>
-    {sortByModalVisibility && <SortByModal/>}
+
+        <SearchField type="text" placeholder="search for item..." />
+
+        <SortButton onClick={toggleSetByModal}>SORT BY:</SortButton>
+      </SearchBarContainer>
+      {sortByModalVisibility && (
+        <SortByModal
+          ascendSort={ascendSort}
+          descendSort={descendSort}
+          originalOrder={originalOrder}
+        />
+      )}
     </>
-  )
-}
+  );
+};
 
-export default SearchBar
- 
+export default SearchBar;
 
-{/*
+{
+  /*
 <input type="text" placeholder='search for item...'/>
-*/}
+*/
+}

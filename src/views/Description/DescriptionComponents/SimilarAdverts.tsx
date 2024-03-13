@@ -1,37 +1,51 @@
-import {
-    ProductNameContainer,
-    IndividualProductContainer,
-  } from "../DescriptionStyles/SimilarAdverts.styled";
-  import heartIcon from "../../../assets/dashboard-assets/heart-icon.png";
-  import { shopProductsInterface } from "../../../interfaces/shopInterfaces";
-  
-  interface ProductProps {
-    product: shopProductsInterface;
-  }
+import { 
+    SimilarProductsContainer, 
+    AllProductsContainer2,
+    SimilarProductsMain
+} from "../DescriptionStyles/SimilarAdverts.styled"
+import AllProductsCard from "../../../components/ProductsCard/AllProductsCard"
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { shopProductsInterface } from "../../../interfaces/shopInterfaces";
+import { fetchProductsByShopId } from "../../../api/product";
+import { ReviewText } from "../DescriptionStyles/Reviews.styled"
+// import { productsDummy } from "./dummyData";
 
 export default function SimilarAdverts() {
-  return (
-    <div className="user-dashboard-all-products-whole-container">
-      <IndividualProductContainer>
-        <img
-          className="user-dashboard-individual-product-image"
-          src={product.productImages[0]}
-        />
 
-        <ProductNameContainer>
-          <p className="user-dashboard-individual-product-name">
-            {product.productTitle}{" "}
-          </p>
-          <img className="user-dashboard-heart-icon" src={heartIcon} />
-        </ProductNameContainer>
+  // const displayedProducts = productsDummy;
+    const { shopId } = useParams();
+  //Constants declarations
+  const [displayedProducts, setDisplayedProducts] =
+    useState<shopProductsInterface[]>();
 
-        <p className="user-dashboard-individual-product-description">
-          {product.productDescription.substring(0, 45)}...
-        </p>
-        <h6 className="user-dashboard-individual-product-price">
-          ₦{product.productPrice.toLocaleString()}
-        </h6>
-      </IndividualProductContainer>
-    </div>
-  );
+  useEffect(() => {
+    fetchProductsByShopId(shopId!).then((res) => {
+      if (res) {
+        console.log("res", res);
+        setDisplayedProducts(res);
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
+
+return (
+    <>
+    <SimilarProductsMain>
+        <ReviewText color="black" fontSize="16px">Similar Adverts</ReviewText>
+            <AllProductsContainer2>
+                    <SimilarProductsContainer>
+                    {displayedProducts &&
+                        displayedProducts.map((product) => {
+                            return (
+                                <AllProductsCard product={product} key={product.productId} />
+                                // <AllProductsCard displayedProducts={displayedProducts} />
+                            );
+                        })}
+                    </SimilarProductsContainer>
+            </AllProductsContainer2>
+    </SimilarProductsMain>
+    </>
+)
 }
