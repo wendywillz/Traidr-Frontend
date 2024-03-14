@@ -18,6 +18,7 @@ export const ReviewBody = styled.div`
 export const EachReviewWrapper = styled.div`
   display: flex;
   margin: 1rem 0;
+  flex-direction: column;
 
   .review-text,
   .review-date {
@@ -27,6 +28,7 @@ export const EachReviewWrapper = styled.div`
   .reviewer {
     font-size: 0.9rem;
     font-weight: bold;
+    margin-top: 1rem;
     color: var(--black-color);
   }
 `;

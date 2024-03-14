@@ -10,7 +10,6 @@ import {
   ErrorText,
   SuccessReview,
 } from "../DescriptionStyles/Reviews.styled";
-import userDataInterface from "../../../interfaces/userInterface";
 import Star1 from "../../../assets/dashboard-assets/Star1.png";
 import Star4 from "../../../assets/dashboard-assets/Star4.png"; // Import Star4 image
 // import { shopProductsInterface } from "../../../interfaces/shopInterfaces";
@@ -20,22 +19,22 @@ import { useEffect, useState } from "react";
 import { fetchReviewByProductId } from "../../../api/product";
 import SmallButton from "../../../components/button/smallButton/smallButton";
 import axiosInstance from "../../../utils/axiosInstance";
-import { useSelector } from "react-redux";
 
 interface ReviewsProps {
   // shop: ShopProps;
   reviewId: string;
-  user: string;
+  reviewerName: string;
   reviewStar: number;
   reviewText: string;
-  reviewDate: string;
+  date: string;
 }
 
 export default function Reviews() {
   const { productId } = useParams();
   console.log("reviews", productId);
   const [reviews, setReviews] = useState<ReviewsProps[]>();
-  const reviewer = useSelector((state: userDataInterface) => state.userId);
+  const token = localStorage.getItem("token");
+  console.log("reviewer", token);
   const [error, setError] = useState("");
   const [successReview, setSuccessReview] = useState("");
   useEffect(() => {
@@ -48,33 +47,35 @@ export default function Reviews() {
   const [reviewText, setReviewText] = useState<string>("");
   const handleSubmitReview = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await axiosInstance.post(`/reviews/add-review/${productId}`, {
-      reviewText,
-      reviewer,
-    });
-    if (res && res.data.reviewCreated) {
-      setError("");
-      setReviewText("");
-      setSuccessReview("Review submitted successfully");
-      window.location.reload();
-    } else {
-      setSuccessReview("");
-      setError("Error submitting review");
-      setReviewText("");
+    if (!token) return setError("You must be logged in to submit a review");
+    else {
+      const res = await axiosInstance.post(`/reviews/add-review/${productId}`, {
+        reviewText,
+      });
+      if (res && res.data.reviewCreated) {
+        setError("");
+        setReviewText("");
+        setSuccessReview("Review submitted successfully");
+        window.location.reload();
+      } else {
+        setSuccessReview("");
+        setError("Error submitting review");
+        setReviewText("");
+      }
     }
   };
-  const renderStars = () => {
-    const stars = [];
-    for (let i = 1; i <= 5; i++) {
-      const starImage = i < 5 ? Star1 : Star4; // Use Star1 for the first 4 stars, Star4 for the 5th star
-      stars.push(
-        <ReviewStar key={i}>
-          <img src={starImage} alt={`Star ${i}`} />
-        </ReviewStar>
-      );
-    }
-    return stars;
-  };
+//   const renderStars = () => {
+//     const stars = [];
+//     for (let i = 1; i <= 5; i++) {
+//       const starImage = i < 5 ? Star1 : Star4; // Use Star1 for the first 4 stars, Star4 for the 5th star
+//       stars.push(
+//         <ReviewStar key={i}>
+//           <img src={starImage} alt={`Star ${i}`} />
+//         </ReviewStar>
+//       );
+//     }
+//     return stars;
+//   };
 
   return (
     <>
@@ -89,15 +90,15 @@ export default function Reviews() {
                   key={review.reviewId}
                 >
                   <div className="review-star-wrapper">
-                    <img src={Star4} alt="Star 4" />
+                    {/* <img src={Star4} alt="Star 4" /> */}
                   </div>
                   <p className="review-text">{review.reviewText}</p>
-                  <p className="reviewer">{review.user}</p>
-                  <p className="review-date">{review.reviewDate}</p>
+                  <p className="reviewer">{review.reviewerName}</p>
+                  <p className="review-date">{review.date.slice(0,10)}</p>
                 </EachReviewWrapper>
               );
             })}
-          {renderStars()}
+          {/* {renderStars()} */}
           {successReview && <SuccessReview>{error}</SuccessReview>}
           {error && <ErrorText>{error}</ErrorText>}
           <ReviewForm onSubmit={handleSubmitReview}>

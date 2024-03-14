@@ -34,7 +34,7 @@ export const fetchProductsCategories = async () => {
 
 export const fetchReviewByProductId = async (productId : string) => {
   const res = await axiosInstance.get(`/reviews/get-product-review/${productId}`);
-  if (res && res.data.productCategories) {
-    return res.data.productCategories;
+  if (res && res.data.reviews) {
+    return res.data.reviews;
   }
 };

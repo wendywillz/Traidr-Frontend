@@ -19,6 +19,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteChilren) {
     const handleProtectedRoute = async () => {
       const res = await axiosInstance.get("/verify-token");
       if (res && res.data.userDetail) {
+        console.log("res.data.userDetail", res.data.userDetail);
         // dispatching the user data to the redux store, inital state is an object
         dispatch(login(res.data.userDetail));
       } else {
