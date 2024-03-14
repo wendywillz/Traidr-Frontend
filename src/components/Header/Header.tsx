@@ -16,6 +16,8 @@ interface userState {
 }
 export default function Header() {
   const { shopId } = useParams();
+  // const reviewer = useSelector((state: userDataInterface) => state.userId);
+
   const [notificationCount, setNotificationCount] = useState(0);
   const token = localStorage.getItem("token");
   const products = localStorage.getItem("shopProducts");
@@ -166,12 +168,29 @@ export default function Header() {
                     </div>
                   )}
                 </div>
-                <Link
-                  to="/dashboard/start-selling"
-                  className="header-right-signup-btn big-screen"
-                >
-                  Start Selling
-                </Link>
+                {token ? (
+                  <Link
+                    to="/dashboard/shop-registration"
+                    className="header-right-signup-btn big-screen"
+                  >
+                    Start Selling
+                  </Link>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="header-right-login-btn big-screen"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to="/signup"
+                      className="header-right-signup-btn big-screen"
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
               </>
             )}
           </div>

@@ -13,8 +13,6 @@ import StockYourShop from "./views/ShopRegistration/StockYourShopPage/StockYourS
 import Description from "./views/Description/DescriptionComponents/Description";
 import SuccessModal from "./components/SuccessModal/SuccessModalComponent";
 function App() {
-
-
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
