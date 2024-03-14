@@ -49,6 +49,8 @@ export interface shopProductsInterface {
   shopId: string;
   shopName?: string;
   shopOwner?: string;
+  shopOwnerEmail?: string;
+  similarProducts?: shopProductsInterface[];
 }
 
 export interface shopInterface {

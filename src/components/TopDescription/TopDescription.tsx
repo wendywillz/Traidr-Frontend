@@ -8,7 +8,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineChat } from "react-icons/md";
 import { shopProductsInterface } from "../../interfaces/shopInterfaces";
 
-function TopDescription({...props}: shopProductsInterface) {
+function TopDescription({ ...props }: shopProductsInterface) {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleSelectChange = (e: any) => {
@@ -39,8 +39,8 @@ function TopDescription({...props}: shopProductsInterface) {
           <div className="views">
             <div>
               <p className="views-time"> 3 Views in the last 2 minutes </p>
-              <h2 className="price">{props.productPrice}</h2>
-              <p className="store">{props.shopId}</p>
+              <h2 className="price">₦{props.productPrice}</h2>
+              <p className="store">{props.shopName}</p>
               <p className="hens-product">{props.productTitle}</p>
             </div>
 
@@ -90,7 +90,7 @@ function TopDescription({...props}: shopProductsInterface) {
 
               <div className="data-group">
                 <h2>{props.shopOwner}</h2>
-                <p>{props.shopId}</p>
+                <p>{props.shopOwnerEmail}</p>
                 <div className="chat-group">
                   <MdOutlineChat
                     style={{ width: "1rem", height: "1rem", color: "#219653" }}

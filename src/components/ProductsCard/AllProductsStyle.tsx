@@ -7,6 +7,7 @@ export const AllProductsWrapper = styled.div`
   min-height: 350px;
   max-height: 350px;
   margin: 1rem 0;
+  cursor: pointer;
 
   .each-product-image {
     min-height: 70%;
