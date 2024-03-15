@@ -1,9 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchReviewByProductId } from '../../../api/product';
-import Star1 from '../../../assets/dashboard-assets/Star1.png';
-import Star4 from '../../../assets/dashboard-assets/Star4.png'; // Import Star4 image
-import { ReviewContainer, ReviewHeader, ReviewBody, ReviewStar, ReviewForm, ReviewTextField, EachReviewWrapper, ErrorText, SuccessReview } from "../DescriptionStyles/Reviews.styled";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { fetchReviewByProductId } from "../../../api/product";
+import Star1 from "../../../assets/dashboard-assets/Star1.png";
+import Star4 from "../../../assets/dashboard-assets/Star4.png"; // Import Star4 image
+import {
+  ReviewContainer,
+  ReviewHeader,
+  ReviewBody,
+  ReviewStar,
+  ReviewForm,
+  ReviewTextField,
+  EachReviewWrapper,
+  ErrorText,
+  SuccessReview,
+} from "../DescriptionStyles/Reviews.styled";
 import SmallButton from "../../../components/button/smallButton/smallButton";
 import axiosInstance from "../../../utils/axiosInstance";
 import { useSelector } from "react-redux";
@@ -56,7 +66,7 @@ export default function Reviews() {
     else {
       const res = await axiosInstance.post(`/reviews/add-review/${productId}`, {
         reviewText,
-        reviewStar
+        reviewStar,
       });
       if (res && res.data.reviewCreated) {
         setError("");
@@ -72,15 +82,22 @@ export default function Reviews() {
     }
   };
 
-  const renderStars = (isExistingReview = false, existingReviewStar = 0) => { // Differentiate for existing and new review stars
+  const renderStars = (isExistingReview = false, existingReviewStar = 0) => {
+    // Differentiate for existing and new review stars
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      const starImage = (isExistingReview 
-        ? i <= existingReviewStar 
-        : i <= reviewStar) ? Star1 : Star4; // Use appropriate star image based on existing or new review
+      const starImage = (
+        isExistingReview ? i <= existingReviewStar : i <= reviewStar
+      )
+        ? Star1
+        : Star4; // Use appropriate star image based on existing or new review
       stars.push(
-        <ReviewStar key={i} 
-          onClick={isExistingReview ? undefined : () => setReviewStar(i)}> {/* Click handler only for new review stars */}
+        <ReviewStar
+          key={i}
+          onClick={isExistingReview ? undefined : () => setReviewStar(i)}
+        >
+          {" "}
+          {/* Click handler only for new review stars */}
           <img src={starImage} alt={`Star ${i}`} />
         </ReviewStar>
       );
@@ -95,25 +112,27 @@ export default function Reviews() {
         <ReviewBody>
           {reviews?.length &&
             reviews.map((review) => {
+              const isCurrentUserReview =
+                review.reviewerName === loggedInUser && hasGivenReview;
               return (
                 <EachReviewWrapper
                   className="each-review-wrapper"
                   key={review.reviewId}
                 >
                   <div className="review-star-wrapper">
-                    {renderStars(true, review.reviewStar)} {/* Render stars for existing reviews (without click handler) */}
+                    {renderStars(true, review.reviewStar)}{" "}
+                    {/* Render stars for existing reviews (without click handler) */}
                   </div>
                   <p className="review-text">{review.reviewText}</p>
                   <p className="reviewer">
-                    {/* {!hasGivenReview ? (
+                    {isCurrentUserReview ? (
                       <>
                         {review.reviewerName} (
                         <span className="you-reviewer">You</span>)
                       </>
                     ) : (
-                      <>{review.reviewerName}</>
-                    )} */}
-                    {review.reviewerName}
+                      review.reviewerName
+                    )}
                   </p>
                   <p className="review-date">{review.date.slice(0, 10)}</p>
                 </EachReviewWrapper>
@@ -134,7 +153,6 @@ export default function Reviews() {
           )}
         </ReviewBody>
       </ReviewContainer>
-    
     </>
   );
 }
