@@ -1,27 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import {
-  ReviewContainer,
-  ReviewHeader,
-  ReviewBody,
-  ReviewStar,
-  ReviewForm,
-  ReviewTextField,
-  EachReviewWrapper,
-  ErrorText,
-  SuccessReview,
-} from "../DescriptionStyles/Reviews.styled";
-import Star1 from "../../../assets/dashboard-assets/Star1.png";
-import Star4 from "../../../assets/dashboard-assets/Star4.png"; // Import Star4 image
-// import { shopProductsInterface } from "../../../interfaces/shopInterfaces";
-// import userData from "../../../interfaces/userInterface";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { fetchReviewByProductId } from "../../../api/product";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { fetchReviewByProductId } from '../../../api/product';
+import Star1 from '../../../assets/dashboard-assets/Star1.png';
+import Star4 from '../../../assets/dashboard-assets/Star4.png'; // Import Star4 image
+import { ReviewContainer, ReviewHeader, ReviewBody, ReviewStar, ReviewForm, ReviewTextField, EachReviewWrapper, ErrorText, SuccessReview } from "../DescriptionStyles/Reviews.styled";
 import SmallButton from "../../../components/button/smallButton/smallButton";
 import axiosInstance from "../../../utils/axiosInstance";
 
+// Interface for review data (replace with your actual interface)
 interface ReviewsProps {
-  // shop: ShopProps;
   reviewId: string;
   reviewerName: string;
   reviewStar: number;
@@ -37,6 +24,8 @@ export default function Reviews() {
   console.log("reviewer", token);
   const [error, setError] = useState("");
   const [successReview, setSuccessReview] = useState("");
+  const [reviewStar, setReviewStar] = useState(0); // State for new review star rating
+
   useEffect(() => {
     fetchReviewByProductId(productId!).then((res) => {
       if (res) {
@@ -44,17 +33,21 @@ export default function Reviews() {
       }
     });
   }, []);
+
   const [reviewText, setReviewText] = useState<string>("");
+
   const handleSubmitReview = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!token) return setError("You must be logged in to submit a review");
     else {
       const res = await axiosInstance.post(`/reviews/add-review/${productId}`, {
         reviewText,
+        reviewStar
       });
       if (res && res.data.reviewCreated) {
         setError("");
         setReviewText("");
+        setReviewStar(0);
         setSuccessReview("Review submitted successfully");
         window.location.reload();
       } else {
@@ -64,18 +57,22 @@ export default function Reviews() {
       }
     }
   };
-//   const renderStars = () => {
-//     const stars = [];
-//     for (let i = 1; i <= 5; i++) {
-//       const starImage = i < 5 ? Star1 : Star4; // Use Star1 for the first 4 stars, Star4 for the 5th star
-//       stars.push(
-//         <ReviewStar key={i}>
-//           <img src={starImage} alt={`Star ${i}`} />
-//         </ReviewStar>
-//       );
-//     }
-//     return stars;
-//   };
+
+  const renderStars = (isExistingReview = false, existingReviewStar = 0) => { // Differentiate for existing and new review stars
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      const starImage = (isExistingReview 
+        ? i <= existingReviewStar 
+        : i <= reviewStar) ? Star1 : Star4; // Use appropriate star image based on existing or new review
+      stars.push(
+        <ReviewStar key={i} 
+          onClick={isExistingReview ? undefined : () => setReviewStar(i)}> {/* Click handler only for new review stars */}
+          <img src={starImage} alt={`Star ${i}`} />
+        </ReviewStar>
+      );
+    }
+    return stars;
+  };
 
   return (
     <>
@@ -90,15 +87,15 @@ export default function Reviews() {
                   key={review.reviewId}
                 >
                   <div className="review-star-wrapper">
-                    {/* <img src={Star4} alt="Star 4" /> */}
+                    {renderStars(true, review.reviewStar)} {/* Render stars for existing reviews (without click handler) */}
                   </div>
                   <p className="review-text">{review.reviewText}</p>
                   <p className="reviewer">{review.reviewerName}</p>
-                  <p className="review-date">{review.date.slice(0,10)}</p>
+                  <p className="review-date">{review.date.slice(0, 10)}</p>
                 </EachReviewWrapper>
               );
             })}
-          {/* {renderStars()} */}
+          {renderStars()} {/* Render stars for new review form */}
           {successReview && <SuccessReview>{error}</SuccessReview>}
           {error && <ErrorText>{error}</ErrorText>}
           <ReviewForm onSubmit={handleSubmitReview}>
@@ -111,6 +108,7 @@ export default function Reviews() {
           </ReviewForm>
         </ReviewBody>
       </ReviewContainer>
+    
     </>
   );
 }
