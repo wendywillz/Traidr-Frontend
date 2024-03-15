@@ -5,7 +5,10 @@ import axiosInstance from "../../utils/axiosInstance";
 import orImage from "../../assets/or.png";
 import GoogleSignup from "./component/GoogleSignup";
 import Loader from "../../components/Loader/Loader";
+import { useDispatch } from "react-redux";
+import { login } from "../../app/features/userAuth/userAuthSlice";
 export default function LoginPage() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userEmail, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,7 +43,10 @@ export default function LoginPage() {
           setEmail("");
           setPassword("");
           setError("");
-          localStorage.setItem("token", res.data.successfulLogin);
+          console.log("res.data", res.data.successfulLogin.token);
+          localStorage.setItem("token", res.data.successfulLogin.token);
+
+          dispatch(login(res.data.successfulLogin));
           navigate(`/`);
         } else if (res.data.inValidPassword || res.data.userNotFoundError) {
           setIsLoading(false);

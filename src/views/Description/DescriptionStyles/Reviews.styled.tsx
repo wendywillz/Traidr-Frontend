@@ -6,9 +6,7 @@ export const ReviewContainer = styled.div`
   padding: 1rem 0;
 `;
 
-export const ReviewHeader = styled.h3`
-  //   background-color: tomato;
-`;
+export const ReviewHeader = styled.h2``;
 
 export const ReviewBody = styled.div`
   //   background-color: gold;
@@ -30,6 +28,9 @@ export const EachReviewWrapper = styled.div`
     font-weight: bold;
     margin-top: 1rem;
     color: var(--black-color);
+  }
+  .you-reviewer{
+    color: var(--orange-color)
   }
 `;
 export const ReviewStar = styled.div`

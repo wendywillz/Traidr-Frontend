@@ -15,15 +15,19 @@ import logouticon from "../../assets/user-profile-modal-assets/logout-icon.png";
 
 //package imports
 import { Link, useParams } from "react-router-dom";
-
-const UserProfileModal = () => {
+interface userProfileProps {
+  toggleVissiblity: () => void;
+}
+const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
   const handleLogout = () => {
+    toggleVissiblity();
     localStorage.removeItem("token");
     localStorage.clear();
     return;
   };
 
   const { shopId } = useParams();
+  // if(shopId) return null
   return (
     <UserProfileModalContainer>
       <ModalHeader>
