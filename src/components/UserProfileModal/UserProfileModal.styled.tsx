@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export const UserProfileModalContainer = styled.div`
   width: 20rem;
-  height: 41vh;
+  height: 30rem;
   border-radius: 4px;
   position: fixed;
   overflow: hidden;
   top: 10%;
   right: 2rem;
-  z-index: 99;
+  z-index: 1000;
   text-decoration: none;
   box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.1);
   &:focus,

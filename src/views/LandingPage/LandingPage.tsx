@@ -14,6 +14,7 @@ import { fetchAllProducts } from "../../api/product";
 import AllProductsCard from "../../components/ProductsCard/AllProductsCard";
 import { AllProductsWrapper } from "../../components/ProductsCard/AllProductsStyle";
 import dummyProducts from "../../assets/products/dummy.png";
+
 export default function LandingPage() {
   const [products, setProducts] = useState<shopProductsInterface[]>();
 
@@ -27,6 +28,15 @@ export default function LandingPage() {
   return (
     <>
       <Header />
+      {/* <PopUpMessageWrapper>
+        <div className="icon-wrapper">
+          <i className="fa-regular fa-circle-check success-icon"></i>
+        </div>
+        <div className="message-wrapper">
+          <h2 className="success-message">Login Successful</h2>
+          <p className="display-pop-up-message"></p>
+        </div>
+      </PopUpMessageWrapper> */}
       <LandingPageMainWrapper className="landing-page-main-body-wrapper">
         <div className="landing-page-inner-body-wrapper">
           <div className="landing-page-first-section-wrapper">
@@ -51,13 +61,13 @@ export default function LandingPage() {
           </div>
           <div className="landing-page-second-section-wrapper">
             <div className="landing-page-second-section-left-wrapper">
-              <h1>
+              <h2>
                 Why use{" "}
                 <span>
                   <img src={tradirImage} alt="traidr-image" />
                 </span>{" "}
                 ?
-              </h1>
+              </h2>
 
               <div className="why-use-traidr-wrapper">
                 <div className="each-why-use">
@@ -112,7 +122,7 @@ export default function LandingPage() {
           </div>
           <div className="trending-sales-section">
             <div className="trending-sales-section-heading">
-              <h1>Trending Sales</h1>
+              <h2>Trending Sales</h2>
             </div>
             <div className="trending-sales-product-wrapper">
               {products?.length ? (

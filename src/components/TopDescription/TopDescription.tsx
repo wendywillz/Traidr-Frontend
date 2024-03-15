@@ -39,7 +39,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
           <div className="views">
             <div>
               <p className="views-time"> 3 Views in the last 2 minutes </p>
-              <h2 className="price">₦{props.productPrice}</h2>
+              <p className="price">₦{props.productPrice}</p>
               <p className="store">{props.shopName}</p>
               <p className="hens-product">{props.productTitle}</p>
             </div>
@@ -86,10 +86,10 @@ function TopDescription({ ...props }: shopProductsInterface) {
             </div>
 
             <div className="user-info">
-              <FaUserCircle style={{ width: "7rem", height: "7rem" }} />
+              <FaUserCircle style={{ width: "5rem", height: "5rem" }} />
 
               <div className="data-group">
-                <h2>{props.shopOwner}</h2>
+                <p>{props.shopOwner}</p>
                 <p>{props.shopOwnerEmail}</p>
                 <div className="chat-group">
                   <MdOutlineChat

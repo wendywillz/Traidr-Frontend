@@ -36,9 +36,9 @@
 }
 .price {
   margin-bottom: 1rem;
-  font-size: 32px;
-  color: #333333;
-  height: 28px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--black-color);
 }
 
 .store {
@@ -146,6 +146,9 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+.data-group p {
+  font-weight: 700;
 }
 .chat-group {
   display: flex;

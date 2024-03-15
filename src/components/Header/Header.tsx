@@ -33,12 +33,15 @@ export default function Header() {
   const [profileModalVisibility, setProfileModalVisibility] = useState(false);
 
   const toggleProfileModal = () => {
+    console.log("profile", profileModalVisibility)
     setProfileModalVisibility(!profileModalVisibility);
   };
 
   return (
     <>
-      {profileModalVisibility && <UserProfileModal />}
+      {profileModalVisibility && (
+        <UserProfileModal toggleVissiblity={toggleProfileModal} />
+      )}
       <HeaderStyle>
         <div className="header-inner">
           <div className="logo-wrapper">
@@ -161,7 +164,11 @@ export default function Header() {
                 </div>
                 <div className="user-profile-img-wrapper">
                   {userData && userData.profileImage ? (
-                    <img src={userData?.profileImage} alt="" />
+                    <img
+                      src={userData?.profileImage}
+                      alt=""
+                      onClick={toggleProfileModal}
+                    />
                   ) : (
                     <div className="shop-profile-header-icon">
                       <FaUserCircle />

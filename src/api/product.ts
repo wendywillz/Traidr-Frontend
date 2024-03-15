@@ -16,7 +16,6 @@ export const fetchProductsByShopId = async (shopId: string) => {
 export const fetchProductsById = async (productId: string) => {
   const res = await axiosInstance.get(`/products/get-single-product/${productId}`);
   if (res && res.data.product) {
-    console.log("res.data.product", res.data.product);
     return res.data.product;
   }
   else {

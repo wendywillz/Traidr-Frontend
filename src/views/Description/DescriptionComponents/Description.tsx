@@ -19,10 +19,8 @@ export default function Description() {
   useEffect(() => {
     fetchProductsById(productId!).then((res) => {
       if (res) {
-        console.log("got it", res);
-        setProducts(res);
+        return setProducts(res);
       }
-      console.log("res", res);
     });
   }, []);
   return (

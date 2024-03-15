@@ -8,11 +8,11 @@ export const AllProductsWrapper = styled.div`
   max-height: 350px;
   margin: 1rem 0;
   cursor: pointer;
+  max-width: 450px;
 
   .each-product-image {
-    min-height: 70%;
-    height: 70%;
-    max-height: 70%;
+    min-height: 250px;
+    max-height: 250px;
     flex: 1;
     display: flex;
     align-items: center;
@@ -23,6 +23,7 @@ export const AllProductsWrapper = styled.div`
   }
   .each-product-image img {
     object-fit: contain;
+    height: 100%;
   }
   .each-product-title {
     font-weight: 600;
