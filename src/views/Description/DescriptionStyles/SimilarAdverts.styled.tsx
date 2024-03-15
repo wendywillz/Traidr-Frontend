@@ -10,8 +10,8 @@ export const SimilarProductsContainer = styled.div`
   // flex-wrap: wrap;
   margin-top: 5vh;
   padding: 0 5rem;
-  background-color: red;
-  border: 10px solid #000000;
+  // background-color: red;
+  // border: 10px solid #000000;
   width: 100%;
   /* margin-left: 30%; */
 `;
@@ -23,6 +23,6 @@ export const AllProductsContainer2 = styled.div`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid #e04f16;
+  // border: 2px solid #e04f16;
   /* margin-left: 30%; */
 `;
