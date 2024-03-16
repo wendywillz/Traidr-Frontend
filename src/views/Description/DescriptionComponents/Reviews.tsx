@@ -1,9 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchReviewByProductId } from '../../../api/product';
-import Star1 from '../../../assets/dashboard-assets/Star1.png';
-import Star4 from '../../../assets/dashboard-assets/Star4.png'; // Import Star4 image
-import { ReviewContainer, ReviewHeader, ReviewBody, ReviewStar, ReviewForm, ReviewTextField, EachReviewWrapper, ErrorText, SuccessReview } from "../DescriptionStyles/Reviews.styled";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { fetchReviewByProductId } from "../../../api/product";
+import Star1 from "../../../assets/dashboard-assets/Star1.png";
+import Star4 from "../../../assets/dashboard-assets/Star4.png"; // Import Star4 image
+import {
+  ReviewContainer,
+  ReviewHeader,
+  ReviewBody,
+  ReviewStar,
+  ReviewForm,
+  ReviewTextField,
+  EachReviewWrapper,
+  ErrorText,
+  SuccessReview,
+} from "../DescriptionStyles/Reviews.styled";
 import SmallButton from "../../../components/button/smallButton/smallButton";
 import axiosInstance from "../../../utils/axiosInstance";
 
@@ -11,7 +21,7 @@ import axiosInstance from "../../../utils/axiosInstance";
 interface ReviewsProps {
   reviewId: string;
   reviewerName: string;
-  reviewStar: number;
+  reviewRating: number;
   reviewText: string;
   date: string;
 }
@@ -24,7 +34,7 @@ export default function Reviews() {
   console.log("reviewer", token);
   const [error, setError] = useState("");
   const [successReview, setSuccessReview] = useState("");
-  const [reviewStar, setReviewStar] = useState(0); // State for new review star rating
+  const [reviewRating, setreviewRating] = useState(0); // State for new review star rating
 
   useEffect(() => {
     fetchReviewByProductId(productId!).then((res) => {
@@ -42,12 +52,12 @@ export default function Reviews() {
     else {
       const res = await axiosInstance.post(`/reviews/add-review/${productId}`, {
         reviewText,
-        reviewStar
+        reviewRating,
       });
       if (res && res.data.reviewCreated) {
         setError("");
         setReviewText("");
-        setReviewStar(0);
+        setreviewRating(0);
         setSuccessReview("Review submitted successfully");
         window.location.reload();
       } else {
@@ -58,15 +68,22 @@ export default function Reviews() {
     }
   };
 
-  const renderStars = (isExistingReview = false, existingReviewStar = 0) => { // Differentiate for existing and new review stars
+  const renderStars = (isExistingReview = false, existingreviewRating = 0) => {
+    // Differentiate for existing and new review stars
     const stars = [];
     for (let i = 1; i <= 5; i++) {
-      const starImage = (isExistingReview 
-        ? i <= existingReviewStar 
-        : i <= reviewStar) ? Star1 : Star4; // Use appropriate star image based on existing or new review
+      const starImage = (
+        isExistingReview ? i <= existingreviewRating : i <= reviewRating
+      )
+        ? Star1
+        : Star4; // Use appropriate star image based on existing or new review
       stars.push(
-        <ReviewStar key={i} 
-          onClick={isExistingReview ? undefined : () => setReviewStar(i)}> {/* Click handler only for new review stars */}
+        <ReviewStar
+          key={i}
+          onClick={isExistingReview ? undefined : () => setreviewRating(i)}
+        >
+          {" "}
+          {/* Click handler only for new review stars */}
           <img src={starImage} alt={`Star ${i}`} />
         </ReviewStar>
       );
@@ -87,7 +104,8 @@ export default function Reviews() {
                   key={review.reviewId}
                 >
                   <div className="review-star-wrapper">
-                    {renderStars(true, review.reviewStar)} {/* Render stars for existing reviews (without click handler) */}
+                    {renderStars(true, review.reviewRating)}{" "}
+                    {/* Render stars for existing reviews (without click handler) */}
                   </div>
                   <p className="review-text">{review.reviewText}</p>
                   <p className="reviewer">{review.reviewerName}</p>
@@ -108,7 +126,6 @@ export default function Reviews() {
           </ReviewForm>
         </ReviewBody>
       </ReviewContainer>
-    
     </>
   );
 }
