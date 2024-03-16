@@ -14,7 +14,7 @@ import messagingIcon from "../../assets/user-profile-modal-assets/messaging-icon
 import logouticon from "../../assets/user-profile-modal-assets/logout-icon.png";
 
 //package imports
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 interface userProfileProps {
   toggleVissiblity: () => void;
 }
@@ -28,6 +28,8 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
 
   const { shopId } = useParams();
   // if(shopId) return null
+  const location = useLocation();
+  
   return (
     <UserProfileModalContainer>
       <ModalHeader>
@@ -36,7 +38,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
         </div>
         <div className="user-profile-modal-user-info-container">
           <p className="user-profile-modal-user-name">User Name</p>
-          <Link to="/user/profile">
+          <Link to={location.pathname.includes("dashboard") ? "/user/profile" : "/login"}>
             <p className="user-profile-modal-user-visit-profile">
               Visit your Profile
             </p>
@@ -46,7 +48,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
 
       <ModalBody>
         <div className="user-profile-modal-link-container">
-          <Link to="/user/edit-profile">
+          <Link to={location.pathname.includes("dashboard") ? "/user/edit-profile" : "/login"}>
             <div className="user-profile-modal-link-text-and-icon-container">
               <img
                 src={editProfileIcon}
@@ -56,7 +58,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
             </div>
           </Link>
 
-          <Link to={`/dashboard/shop-profile/${shopId}`}>
+          <Link to={location.pathname.includes("dashboard") ? `/dashboard/shop-profile/${shopId}` : `/login`}>
             <div className="user-profile-modal-link-text-and-icon-container">
               <img src={myShopIcon} className="user-profile-modal-link-icon" />
               <p className="user-profile-modal-link-text">My Shop</p>
@@ -65,14 +67,14 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
         </div>
         <hr />
         <div className="user-profile-modal-link-container">
-          <Link to="/user/my-cart">
+          <Link to={location.pathname.includes("dashboard") ? "/user/my-cart": "/login"}>
             <div className="user-profile-modal-link-text-and-icon-container">
               <img src={cartIcon} className="user-profile-modal-link-icon" />
               <p className="user-profile-modal-link-text">Cart</p>
             </div>
           </Link>
 
-          <Link to="/user/my-messages">
+          <Link to={location.pathname.includes("dashboard") ? "/user/my-messages": "/login"}>
             <div className="user-profile-modal-link-text-and-icon-container">
               <img
                 src={messagingIcon}

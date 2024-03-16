@@ -76,6 +76,7 @@ export const ListingDetailsForm = styled.div`
     border: 1px solid grey;
     color: grey;
     border-radius: 0.5rem;
+    padding: 2vh 1rem;
     /* opacity: 30%; */
   }
 `;
