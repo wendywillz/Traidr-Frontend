@@ -19,7 +19,8 @@ export const SortByModalContainer = styled.div`
             text-align: center;
         }
         .sort-by-filter:hover{
-            font-size: 1.2vw;
+            font-size: 1.01vw;
+            color:  #E04F16;
             /* background-color: #E04F16;
             color:white; */
 

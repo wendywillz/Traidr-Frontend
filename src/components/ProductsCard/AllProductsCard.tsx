@@ -24,8 +24,8 @@ function AllProductsCard({ product }: ProductProps) {
         )}
       </div>
       <p className="each-product-title">{product.productTitle}</p>
-      <p className="each-product-description">{product.productDescription}</p>
-      <span className="each-product-price">₦{product.productPrice}</span>
+      <p className="each-product-description">{product.productDescription.substring(0, 45)}...</p>
+      <span className="each-product-price">₦{product.productPrice.toLocaleString()}</span>
     </AllProductsWrapper>
   );
 }

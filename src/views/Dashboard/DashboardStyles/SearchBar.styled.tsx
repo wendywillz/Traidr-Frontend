@@ -15,6 +15,7 @@ export const SearchField = styled.input`
     height: 4vh;
     width: 80%;
     border-radius: 5px;
+    padding: 0vh 1rem;
 `
  
 export const SortButton = styled.button`

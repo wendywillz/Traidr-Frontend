@@ -86,7 +86,7 @@ export default function Header() {
                     to={`/dashboard/shop-profile/${shopId}`}
                     className="header-right-signup-btn big-screen"
                   >
-                    Go to Shop
+                    Go to Shop 
                   </Link>
                 ) : (
                   <Link
