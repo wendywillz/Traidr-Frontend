@@ -6,8 +6,8 @@ import Star4 from '../../../assets/dashboard-assets/Star4.png'; // Import Star4 
 import { ReviewContainer, ReviewHeader, ReviewBody, ReviewStar, ReviewForm, ReviewTextField, EachReviewWrapper, ErrorText, SuccessReview } from "../DescriptionStyles/Reviews.styled";
 import SmallButton from "../../../components/button/smallButton/smallButton";
 import axiosInstance from "../../../utils/axiosInstance";
-import { useSelector } from "react-redux";
-import userData from "../../../interfaces/userInterface";
+
+// Interface for review data (replace with your actual interface)
 interface ReviewsProps {
   reviewId: string;
   reviewerName: string;
@@ -15,17 +15,13 @@ interface ReviewsProps {
   reviewText: string;
   date: string;
 }
-interface userAuthStateProps {
-  user: userData;
-}
+
 export default function Reviews() {
   const { productId } = useParams();
+  console.log("reviews", productId);
   const [reviews, setReviews] = useState<ReviewsProps[]>();
-  const [hasGivenReview, setHasGivenReview] = useState(false);
   const token = localStorage.getItem("token");
-  const loggedInUser = useSelector(
-    (state: userAuthStateProps) => state.user.name
-  );
+  console.log("reviewer", token);
   const [error, setError] = useState("");
   const [successReview, setSuccessReview] = useState("");
   const [reviewStar, setReviewStar] = useState(0); // State for new review star rating
@@ -37,16 +33,6 @@ export default function Reviews() {
       }
     });
   }, []);
-
-  useEffect(() => {
-    if (reviews?.length && loggedInUser) {
-      const userHasReviewed = reviews.some(
-        (review) => review.reviewerName === loggedInUser
-      );
-      console.log("userHasGivenReview", userHasReviewed);
-      setHasGivenReview(userHasReviewed);
-    }
-  }, [reviews, loggedInUser]);
 
   const [reviewText, setReviewText] = useState<string>("");
 
@@ -104,17 +90,7 @@ export default function Reviews() {
                     {renderStars(true, review.reviewStar)} {/* Render stars for existing reviews (without click handler) */}
                   </div>
                   <p className="review-text">{review.reviewText}</p>
-                  <p className="reviewer">
-                    {/* {!hasGivenReview ? (
-                      <>
-                        {review.reviewerName} (
-                        <span className="you-reviewer">You</span>)
-                      </>
-                    ) : (
-                      <>{review.reviewerName}</>
-                    )} */}
-                    {review.reviewerName}
-                  </p>
+                  <p className="reviewer">{review.reviewerName}</p>
                   <p className="review-date">{review.date.slice(0, 10)}</p>
                 </EachReviewWrapper>
               );
@@ -122,16 +98,14 @@ export default function Reviews() {
           {renderStars()} {/* Render stars for new review form */}
           {successReview && <SuccessReview>{error}</SuccessReview>}
           {error && <ErrorText>{error}</ErrorText>}
-          {!hasGivenReview && (
-            <ReviewForm onSubmit={handleSubmitReview}>
-              <ReviewTextField
-                placeholder="Write your review here..."
-                onChange={(e) => setReviewText(e.target.value)}
-                value={reviewText}
-              />
-              <SmallButton type="submit" button_text="Submit review" />
-            </ReviewForm>
-          )}
+          <ReviewForm onSubmit={handleSubmitReview}>
+            <ReviewTextField
+              placeholder="Write your review here..."
+              onChange={(e) => setReviewText(e.target.value)}
+              value={reviewText}
+            />
+            <SmallButton type="submit" button_text="Submit review" />
+          </ReviewForm>
         </ReviewBody>
       </ReviewContainer>
     
