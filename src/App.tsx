@@ -12,6 +12,7 @@ import ShopRegistrationPage from "./views/ShopRegistration/ShopRegistrationPage"
 import StockYourShop from "./views/ShopRegistration/StockYourShopPage/StockYourShop";
 import Description from "./views/Description/DescriptionComponents/Description";
 import SuccessModal from "./components/SuccessModal/SuccessModalComponent";
+import Wishlist from "./views/wishlistModal/Wishlist";
 function App() {
   return (
     <Routes>
@@ -41,6 +42,7 @@ function App() {
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/description/:productId" element={<Description />} />
+      <Route path="/wishlist" element={<Wishlist />} />
 
       <Route path="/success-modal" element={<SuccessModal />} />
     </Routes>
