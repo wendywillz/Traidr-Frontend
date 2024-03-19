@@ -13,6 +13,7 @@ import StockYourShop from "./views/ShopRegistration/StockYourShopPage/StockYourS
 import Description from "./views/Description/DescriptionComponents/Description";
 import SuccessModal from "./components/SuccessModal/SuccessModalComponent";
 import Wishlist from "./views/wishlistModal/Wishlist";
+import ProfileSettings from "./views/ProfileSettingsPage/ProfileSettingsMain/ProfileSettings";
 function App() {
   return (
     <Routes>
@@ -42,7 +43,8 @@ function App() {
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/description/:productId" element={<Description />} />
-      <Route path="/wishlist" element={<Wishlist />} />
+      <Route path="/user/my-wishlist" element={<Wishlist />} />
+      <Route path="/user/edit-profile" element={<ProfileSettings/>} />
 
       <Route path="/success-modal" element={<SuccessModal />} />
     </Routes>
