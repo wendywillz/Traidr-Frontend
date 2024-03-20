@@ -55,7 +55,7 @@ export default function Header() {
           </div>
           <div className="header-right-btn-wrapper">
             <i className="fa-solid fa-bars small-screen-icon"></i>
-            {location.pathname.includes("dashboard") ? (
+            {location.pathname.includes("dashboard") || location.pathname.includes("user") ? (
               <>
                 <div
                   className="shop-profile-notification-wrapper"

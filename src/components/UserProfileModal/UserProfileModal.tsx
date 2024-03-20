@@ -12,6 +12,7 @@ import myShopIcon from "../../assets/user-profile-modal-assets/my-shop-icon.png"
 import cartIcon from "../../assets/user-profile-modal-assets/cart-icon.png";
 import messagingIcon from "../../assets/user-profile-modal-assets/messaging-icon.png";
 import logouticon from "../../assets/user-profile-modal-assets/logout-icon.png";
+import { BsHeart } from "react-icons/bs";
 
 //package imports
 import { Link, useParams, useLocation } from "react-router-dom";
@@ -81,6 +82,13 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
                 className="user-profile-modal-link-icon"
               />
               <p className="user-profile-modal-link-text">Messaging</p>
+            </div>
+          </Link>
+
+          <Link to={location.pathname.includes("dashboard") ? "/user/my-wishlist": "/login"}>
+            <div className="user-profile-modal-link-text-and-icon-container">
+              <BsHeart color="#E04F16" className="user-profile-modal-link-icon"/>
+              <p className="user-profile-modal-link-text">Wishlist</p>
             </div>
           </Link>
         </div>
