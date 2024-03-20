@@ -125,7 +125,9 @@ export const ProfileSettings = () => {
 }
 
   
-
+const handleChange = (e)=>{
+  setUserDetails({...userDetails, [e.target.name]:e.target.value})
+}
 
 
 
@@ -175,7 +177,7 @@ export const ProfileSettings = () => {
                   placeholder="Jane"
                   className="profile-seetings-form-input"
                   value={userDetails.firstName}
-                  onChange={(event) => { return setUserDetails({ ...userDetails, firstName: event.target.value }); }} />
+                  onChange={handleChange} />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label
@@ -192,14 +194,17 @@ export const ProfileSettings = () => {
                   placeholder="JaneDoe@email.com"
                   className="profile-seetings-form-input"
                   value={userDetails.email}
-                  onChange={(event) => { return setUserDetails({ ...userDetails, email: event.target.value }); }} />
+                  onChange={handleChange} />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label htmlFor="genderInput" className="profile-settings-form-label">
                   Gender
                 </label>
                 <br />
-                <select id="genderInput" name="gender" className="profile-seetings-form-input" value={userDetails.gender} onChange={(event)=>{return setUserDetails({ ...userDetails, gender: event.target.value})}}>
+                <select id="genderInput" name="gender" className="profile-seetings-form-input" value={userDetails.gender} 
+                onChange={handleChange}
+                >
+                  <option value="">--select--</option>
                   <option value="female">Female</option>
                   <option value="male">Male</option>
                   <option value="other">Other</option>
@@ -221,7 +226,7 @@ export const ProfileSettings = () => {
                   placeholder="Awesomeness Shop"
                   className="profile-seetings-form-input"
                   value={userDetails.shopName}
-                  onChange={(event) => { return setUserDetails({ ...userDetails, shopName: event.target.value }); }} />
+                  onChange={handleChange} />
               </div>
             </FormSectionContainer>
             {/*RIGHT SIDE OF FORM */}
@@ -241,7 +246,7 @@ export const ProfileSettings = () => {
                   placeholder="Doe"
                   className="profile-seetings-form-input"
                   value={userDetails.lastName}
-                  onChange={(event) => { return setUserDetails({ ...userDetails, lastName: event.target.value }); }} />
+                  onChange={handleChange} />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label
@@ -258,7 +263,7 @@ export const ProfileSettings = () => {
                   placeholder="07034249775"
                   className="profile-seetings-form-input"
                   value={userDetails.phoneNumber}
-                  onChange={(event) => { return setUserDetails({ ...userDetails, phoneNumber: event.target.value }); }} />
+                  onChange={handleChange} />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label
@@ -274,7 +279,7 @@ export const ProfileSettings = () => {
                   placeholder="32, Rasaq Eletu Street, Osapa London, Lagos"
                   className="profile-seetings-form-textarea"
                   value={userDetails.address}
-                  onChange={(event) => { return setUserDetails({ ...userDetails, address: event.target.value }); }}
+                  onChange={handleChange}
                 ></textarea>
               </div>
             </FormSectionContainer>
