@@ -23,7 +23,7 @@ function App() {
         element={
           <ProtectedRoute>
             <Routes>
-              <Route path={"shop/:shopId"} element={<Dashboard />} />
+              <Route index element={<Dashboard />} />
               <Route
                 path="shop-registration"
                 element={<ShopRegistrationPage />}

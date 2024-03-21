@@ -31,7 +31,7 @@ export const ProductNameContainer = styled.div`
 
 export const AllProductsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
   width: 100%;
   justify-content: space-between;

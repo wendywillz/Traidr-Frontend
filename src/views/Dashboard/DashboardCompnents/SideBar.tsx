@@ -8,9 +8,17 @@ import {
 import arrow from "../../../assets/dashboard-assets/inverted_caret.png";
 import orangeArrow from "../../../assets/dashboard-assets/orange_inverted_caret.png";
 import { fetchProductsCategories } from "../../../api/product";
-import { useEffect, useState } from "react";
-const SideBar = () => {
+import { ChangeEvent, useEffect, useState } from "react";
+
+//Prop declaration:
+interface Props{
+  handleFilterChange :(event: ChangeEvent<HTMLInputElement>)=>void;
+}
+
+
+const SideBar = ({handleFilterChange}: Props) => {
   const [categories, setCategories] = useState([]);
+  
 
   // fetching shop categories
   useEffect(() => {
@@ -38,10 +46,11 @@ const SideBar = () => {
                 <fieldset>
                   <input
                     className="sidebar-filter-selection"
-                    type="checkbox"
-                    name={category}
+                    type="radio"
+                    name={`category`}
                     id={index.toString()}
                     value={category}
+                    onChange={handleFilterChange}
                   />
                   <label className="sidebar-filter-selection-label">
                     {category}
@@ -67,25 +76,19 @@ const SideBar = () => {
 
           <fieldset>
             <input
-              className="sidebar-filter-selection"
-              type="radio"
-              value={"less than 25000"}
-              name="price"
+              className="sidebar-price-range"
+              type="number"
+              name="minPrice"
+              onChange={handleFilterChange}
             />
-            <label className="sidebar-filter-selection-label">
-              Less than ₦25,000
-            </label>
-          </fieldset>
-          <fieldset>
+            <span className="sidebar-price-separator"> - </span>
+
             <input
-              className="sidebar-filter-selection"
-              type="radio"
-              value={"15000 - 25000"}
-              name="price"
+              className="sidebar-price-range"
+              type="number"
+              name="maxPrice"
+              onChange={handleFilterChange}
             />
-            <label className="sidebar-filter-selection-label">
-              Less than ₦25,000
-            </label>
           </fieldset>
           <div className="sidebar-filter-selection-show-more-continer">
             <p className="sidebar-filter-selection-show-more-text">Show more</p>
@@ -161,3 +164,32 @@ const SideBar = () => {
 };
 
 export default SideBar;
+
+/*
+DELETED ELEMENTS:
+ <fieldset>
+            <input
+              className="sidebar-filter-selection"
+              type="radio"
+              value={"less than 25000"}
+              name="price"
+            />
+            <label className="sidebar-filter-selection-label">
+              Less than ₦25,000
+            </label>
+          </fieldset>
+          <fieldset>
+            <input
+              className="sidebar-filter-selection"
+              type="radio"
+              value={"15000 - 25000"}
+              name="price"
+            />
+            <label className="sidebar-filter-selection-label">
+              Less than ₦25,000
+            </label>
+          </fieldset>
+
+
+
+*/
