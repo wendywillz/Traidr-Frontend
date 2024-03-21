@@ -2,25 +2,34 @@ import userDataInterface from "../../interfaces/userInterface.tsx";
 import traidrLogo from "../../assets/traidr-logo-orange.png";
 import "./HeaderStyle.tsx";
 import HeaderStyle from "./HeaderStyle.tsx";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { BsBell } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 import UserProfileModal from "../UserProfileModal/UserProfileModal.tsx";
+import { fetchUserShopDetails } from "../../api/users.ts";
 
 interface userState {
   user: userDataInterface;
 }
 export default function Header() {
-  const { shopId } = useParams();
   // const reviewer = useSelector((state: userDataInterface) => state.userId);
 
   const [notificationCount, setNotificationCount] = useState(0);
   const token = localStorage.getItem("token");
-  const products = localStorage.getItem("shopProducts");
+  const isSeller = useSelector((state: userState) => state.user.isSeller);
+  console.log("isSeller", isSeller);
+  const [shopIdFromBackend, setShopIdFromBackend] = useState("");
+  useEffect(() => {
+    if (isSeller) {
+      fetchUserShopDetails().then((res) => {
+        setShopIdFromBackend(res);
+      });
+    }
+  }, []);
   const handleNotificationClick = () => {
     setNotificationCount(0);
   };
@@ -33,7 +42,7 @@ export default function Header() {
   const [profileModalVisibility, setProfileModalVisibility] = useState(false);
 
   const toggleProfileModal = () => {
-    console.log("profile", profileModalVisibility)
+    console.log("profile", profileModalVisibility);
     setProfileModalVisibility(!profileModalVisibility);
   };
 
@@ -55,7 +64,8 @@ export default function Header() {
           </div>
           <div className="header-right-btn-wrapper">
             <i className="fa-solid fa-bars small-screen-icon"></i>
-            {location.pathname.includes("dashboard") || location.pathname.includes("user") ? (
+            {location.pathname.includes("dashboard") ||
+            location.pathname.includes("user") ? (
               <>
                 <div
                   className="shop-profile-notification-wrapper"
@@ -81,12 +91,12 @@ export default function Header() {
                     </div>
                   )}
                 </div>
-                {products ? (
+                {shopIdFromBackend.trim() ? (
                   <Link
-                    to={`/dashboard/shop-profile/${shopId}`}
+                    to={`/dashboard/shop-profile/${shopIdFromBackend}`}
                     className="header-right-signup-btn big-screen"
                   >
-                    Go to Shop 
+                    Go to Shop
                   </Link>
                 ) : (
                   <Link
@@ -124,12 +134,21 @@ export default function Header() {
                       </div>
                     )}
                   </div>
-                  <Link
-                    to="/dashboard/shop-registration"
-                    className="header-right-signup-btn big-screen"
-                  >
-                    Start Selling
-                  </Link>
+                  {isSeller ? (
+                    <Link
+                      to={`/dashboard/shop-profile/${shopIdFromBackend}`}
+                      className="header-right-signup-btn big-screen"
+                    >
+                      Go to Shop
+                    </Link>
+                  ) : (
+                    <Link
+                      to="/dashboard/shop-registration"
+                      className="header-right-signup-btn big-screen"
+                    >
+                      Start Selling
+                    </Link>
+                  )}
                 </>
               ) : (
                 <>
