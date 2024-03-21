@@ -147,7 +147,7 @@ const ShopProfile = () => {
         <SmallButton
           type="button"
           button_text="View all products"
-          onClick={() => navigate(`/dashboard/shop/${shopId}`)}
+          onClick={() => navigate(`/dashboard`)}
         />
       </ShopProfileMainWrapper>
     </>
