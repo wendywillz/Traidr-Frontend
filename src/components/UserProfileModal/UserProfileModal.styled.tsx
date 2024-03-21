@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const UserProfileModalContainer = styled.div`
+  background-color: white;
   width: 20rem;
-  height: 30rem;
+  height: 45vh;
   border-radius: 4px;
   position: fixed;
   overflow: hidden;
@@ -67,7 +68,7 @@ export const ModalHeader = styled.div`
 
 export const ModalBody = styled.div`
   background-color: white;
-  height: 30vh;
+  height: 35vh;
   padding: 1vh 1rem;
   /* border: 3px solid gold; */
   a {

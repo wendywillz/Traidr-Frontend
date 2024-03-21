@@ -125,7 +125,7 @@ export const ProfileSettings = () => {
 }
 
   
-const handleChange = (e)=>{
+const handleChange = (e:ChangeEvent<HTMLFormElement>)=>{
   setUserDetails({...userDetails, [e.target.name]:e.target.value})
 }
 
@@ -177,7 +177,7 @@ const handleChange = (e)=>{
                   placeholder="Jane"
                   className="profile-seetings-form-input"
                   value={userDetails.firstName}
-                  onChange={handleChange} />
+                  onChange={()=>handleChange} />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label
@@ -194,7 +194,7 @@ const handleChange = (e)=>{
                   placeholder="JaneDoe@email.com"
                   className="profile-seetings-form-input"
                   value={userDetails.email}
-                  onChange={handleChange} />
+                  onChange={()=>handleChange} />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label htmlFor="genderInput" className="profile-settings-form-label">
@@ -202,7 +202,7 @@ const handleChange = (e)=>{
                 </label>
                 <br />
                 <select id="genderInput" name="gender" className="profile-seetings-form-input" value={userDetails.gender} 
-                onChange={handleChange}
+                onChange={()=>handleChange}
                 >
                   <option value="">--select--</option>
                   <option value="female">Female</option>
@@ -226,7 +226,7 @@ const handleChange = (e)=>{
                   placeholder="Awesomeness Shop"
                   className="profile-seetings-form-input"
                   value={userDetails.shopName}
-                  onChange={handleChange} />
+                  onChange={()=>handleChange} />
               </div>
             </FormSectionContainer>
             {/*RIGHT SIDE OF FORM */}
@@ -246,7 +246,7 @@ const handleChange = (e)=>{
                   placeholder="Doe"
                   className="profile-seetings-form-input"
                   value={userDetails.lastName}
-                  onChange={handleChange} />
+                  onChange={()=>handleChange} />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label
@@ -263,7 +263,7 @@ const handleChange = (e)=>{
                   placeholder="07034249775"
                   className="profile-seetings-form-input"
                   value={userDetails.phoneNumber}
-                  onChange={handleChange} />
+                  onChange={()=>handleChange} />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label
@@ -279,7 +279,7 @@ const handleChange = (e)=>{
                   placeholder="32, Rasaq Eletu Street, Osapa London, Lagos"
                   className="profile-seetings-form-textarea"
                   value={userDetails.address}
-                  onChange={handleChange}
+                  onChange={()=>handleChange}
                 ></textarea>
               </div>
             </FormSectionContainer>

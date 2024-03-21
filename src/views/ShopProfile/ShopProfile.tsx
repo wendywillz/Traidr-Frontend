@@ -8,7 +8,7 @@ import {
 } from "../../interfaces/shopInterfaces";
 import SmallButton from "../../components/button/smallButton/smallButton";
 import { fetchShopDetail } from "../../api/shop";
-import { fetchAllProducts } from "../../api/product";
+import { fetchAllProducts, fetchProductsByShopId } from "../../api/product";
 
 const ShopProfile = () => {
   const { shopId } = useParams();
@@ -29,7 +29,7 @@ const ShopProfile = () => {
 
   // fetch product from the database
   useEffect(() => {
-    fetchAllProducts().then((res) => {
+    fetchProductsByShopId(shopId!).then((res) => {
       if (res) {
         setProducts(res);
         localStorage.setItem("shopProducts", JSON.stringify(res));
