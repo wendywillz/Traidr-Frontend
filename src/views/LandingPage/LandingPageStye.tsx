@@ -188,6 +188,19 @@ export const LandingPageMainWrapper = styled.div`
     color: var(--normal-text-color);
     text-align: left;
   }
+  .trending-sales-view-all-products{
+    color: white;
+    background-color: #E04F16;
+    width: 12vw;
+    height: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 7vw;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+
   .trending-sales-product-wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
