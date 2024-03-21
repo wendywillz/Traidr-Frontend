@@ -47,7 +47,7 @@ export default function LoginPage() {
           localStorage.setItem("token", res.data.successfulLogin.token);
 
           dispatch(login(res.data.successfulLogin));
-          navigate(`/`);
+          navigate(`/dashboard`);
         } else if (res.data.inValidPassword || res.data.userNotFoundError) {
           setIsLoading(false);
           setError("Invalid Credentials");

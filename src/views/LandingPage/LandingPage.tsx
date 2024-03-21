@@ -15,7 +15,7 @@ import AllProductsCard from "../../components/ProductsCard/AllProductsCard";
 import { AllProductsWrapper } from "../../components/ProductsCard/AllProductsStyle";
 import dummyProducts from "../../assets/products/dummy.png";
 
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function LandingPage() {
   const [products, setProducts] = useState<shopProductsInterface[]>();
@@ -124,11 +124,7 @@ export default function LandingPage() {
           </div>
           <div className="trending-sales-section">
             <div className="trending-sales-section-heading">
-
               <h2>Trending Sales</h2>
-              <Link to="/dashboard" className="trending-sales-view-all-products">View All Products
-              </Link>
-
             </div>
             <div className="trending-sales-product-wrapper">
               {products?.length ? (
@@ -153,6 +149,9 @@ export default function LandingPage() {
                 </AllProductsWrapper>
               )}
             </div>
+            <Link to="/dashboard" className="trending-sales-view-all-products">
+              View All Products
+            </Link>
           </div>
         </div>
       </LandingPageMainWrapper>

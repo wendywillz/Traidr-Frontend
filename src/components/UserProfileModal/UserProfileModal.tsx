@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //style imports
 import {
   UserProfileModalContainer,
@@ -15,9 +16,16 @@ import logouticon from "../../assets/user-profile-modal-assets/logout-icon.png";
 import { BsHeart } from "react-icons/bs";
 
 //package imports
-import { Link, useParams, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import userData from "../../interfaces/userInterface";
+import { useEffect, useState } from "react";
+import { fetchUserShopDetails } from "../../api/users";
 interface userProfileProps {
   toggleVissiblity: () => void;
+}
+interface userState {
+  user: userData;
 }
 const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
   const handleLogout = () => {
@@ -27,10 +35,20 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
     return;
   };
 
-  const { shopId } = useParams();
+  // const { shopId } = useParams();
   // if(shopId) return null
   const location = useLocation();
-  
+  const isSeller = useSelector((state: userState) => state.user.isSeller);
+  console.log("isSeller", isSeller);
+  const [shopIdFromBackend, setShopIdFromBackend] = useState("");
+  useEffect(() => {
+    if (isSeller) {
+      fetchUserShopDetails().then((res) => {
+        setShopIdFromBackend(res);
+      });
+    }
+  }, []);
+
   return (
     <UserProfileModalContainer>
       <ModalHeader>
@@ -39,7 +57,13 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
         </div>
         <div className="user-profile-modal-user-info-container">
           <p className="user-profile-modal-user-name">User Name</p>
-          <Link to={location.pathname.includes("dashboard") ? "/user/profile" : "/login"}>
+          <Link
+            to={
+              location.pathname.includes("dashboard")
+                ? "/user/profile"
+                : "/"
+            }
+          >
             <p className="user-profile-modal-user-visit-profile">
               Visit your Profile
             </p>
@@ -49,7 +73,13 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
 
       <ModalBody>
         <div className="user-profile-modal-link-container">
-          <Link to={location.pathname.includes("dashboard") ? "/user/edit-profile" : "/login"}>
+          <Link
+            to={
+              location.pathname.includes("dashboard")
+                ? "/user/edit-profile"
+                : "/"
+            }
+          >
             <div className="user-profile-modal-link-text-and-icon-container">
               <img
                 src={editProfileIcon}
@@ -59,7 +89,13 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
             </div>
           </Link>
 
-          <Link to={location.pathname.includes("dashboard") ? `/dashboard/shop-profile/${shopId}` : `/login`}>
+          <Link
+            to={
+              shopIdFromBackend.trim()
+                ? `/dashboard/shop-profile/${shopIdFromBackend}`
+                : `/dashboard/shop-registration`
+            }
+          >
             <div className="user-profile-modal-link-text-and-icon-container">
               <img src={myShopIcon} className="user-profile-modal-link-icon" />
               <p className="user-profile-modal-link-text">My Shop</p>
@@ -68,14 +104,26 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
         </div>
         <hr />
         <div className="user-profile-modal-link-container">
-          <Link to={location.pathname.includes("dashboard") ? "/user/my-cart": "/login"}>
+          <Link
+            to={
+              location.pathname.includes("dashboard")
+                ? "/user/my-cart"
+                : "/"
+            }
+          >
             <div className="user-profile-modal-link-text-and-icon-container">
               <img src={cartIcon} className="user-profile-modal-link-icon" />
               <p className="user-profile-modal-link-text">Cart</p>
             </div>
           </Link>
 
-          <Link to={location.pathname.includes("dashboard") ? "/user/my-messages": "/login"}>
+          <Link
+            to={
+              location.pathname.includes("dashboard")
+                ? "/user/my-messages"
+                : "/"
+            }
+          >
             <div className="user-profile-modal-link-text-and-icon-container">
               <img
                 src={messagingIcon}
@@ -85,9 +133,18 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
             </div>
           </Link>
 
-          <Link to={location.pathname.includes("dashboard") ? "/user/my-wishlist": "/login"}>
+          <Link
+            to={
+              location.pathname.includes("dashboard")
+                ? "/user/my-wishlist"
+                : "/login"
+            }
+          >
             <div className="user-profile-modal-link-text-and-icon-container">
-              <BsHeart color="#E04F16" className="user-profile-modal-link-icon"/>
+              <BsHeart
+                color="#E04F16"
+                className="user-profile-modal-link-icon"
+              />
               <p className="user-profile-modal-link-text">Wishlist</p>
             </div>
           </Link>
