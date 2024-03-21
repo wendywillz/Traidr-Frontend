@@ -96,6 +96,6 @@ export const ModalBody = styled.div`
   }
   .user-profile-modal-link-text:hover {
     font-size: 1.1vw;
-    color: #E04F16;
+    color: #e04f16;
   }
 `;

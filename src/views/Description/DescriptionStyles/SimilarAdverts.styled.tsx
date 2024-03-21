@@ -5,20 +5,17 @@ export const SimilarProductsMain = styled.div`
 `;
 
 export const SimilarProductsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  // flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Four items per row */
+  gap: 2rem; /* Adjust the gap as needed for spacing between items */
   margin-top: 5vh;
-  padding: 0 5rem;
-  // background-color: red;
-  // border: 10px solid #000000;
+  padding: 1rem 1rem;
   width: 100%;
-  /* margin-left: 30%; */
 `;
 
 export const AllProductsContainer2 = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   gap: 2rem;
   width: 100%;
   justify-content: space-between;

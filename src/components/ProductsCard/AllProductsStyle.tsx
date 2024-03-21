@@ -4,8 +4,8 @@ export const AllProductsWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-  min-height: 350px;
-  max-height: 350px;
+  min-height: 380px;
+  max-height: 380px;
   margin: 1rem 0;
   cursor: pointer;
   max-width: 450px;
@@ -20,9 +20,11 @@ export const AllProductsWrapper = styled.div`
     background-color: #f2f2f2;
     border-radius: 5px;
     overflow: hidden;
+    // padding: 5rem;
   }
   .each-product-image img {
     object-fit: contain;
+    max-width: 100%;
     height: 100%;
   }
   .each-product-title {
