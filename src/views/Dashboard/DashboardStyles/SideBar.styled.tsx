@@ -60,13 +60,6 @@ export const SideBarCategory = styled.div`
     accent-color: #e04f16;
   }
 
-  .sidebar-filter-selection-label {
-    font-size: 1vw;
-    font-weight: 400;
-    margin-left: 1rem;
-    color: black;
-  }
-
   .sidebar-filter-selection-show-more-continer {
     display: flex;
     color: #e04f16;
@@ -81,4 +74,24 @@ export const SideBarCategory = styled.div`
     margin-top: 0.8vh;
     margin-left: 0.5rem;
   }
+
+  .sidebar-filter-selection-label {
+    font-size: 1vw;
+    font-weight: 400;
+    margin-left: 1rem;
+    color: black;
+  }
+
+  .sidebar-price-range{
+    border: 1px solid grey;
+    /* background-color: aqua; */
+    height: 3.5vh;
+    width: 6vw;
+    accent-color: #e04f16;
+  }
+
+  .sidebar-price-separator{
+    margin: 0 0.2vw;
+  }
+
 `;

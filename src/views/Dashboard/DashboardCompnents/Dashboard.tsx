@@ -7,26 +7,42 @@ import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
 import Header from "../../../components/Header/Header";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { shopProductsInterface } from "../../../interfaces/shopInterfaces";
-import { fetchProductsByShopId } from "../../../api/product";
+import { QueryParams } from "../../../interfaces/queryInterfaces";
+import { fetchAllProducts} from "../../../api/product";
 import { AllProductsContainer } from "../DashboardStyles/Product.styled";
 import AllProductsCard from "../../../components/ProductsCard/AllProductsCard";
 
+
+
+
 const Dashboard = () => {
-  const { shopId } = useParams();
+  // const { shopId } = useParams();
   //Constants declarations
   const [displayedProducts, setDisplayedProducts] =
     useState<shopProductsInterface[]>();
+    const[queryParams, setQueryParams]= useState<QueryParams>({
+      category: "",
+      search: "",
+      sort: "",
+      price: "",
+      maxPrice: "",
+      minPrice: ""
+    })
 
+//{category, search, sort, price, maxPrice, minPrice}
   useEffect(() => {
-    fetchProductsByShopId(shopId!).then((res) => {
+    fetchAllProducts(queryParams.category, queryParams.search, queryParams.sort, queryParams.price, queryParams.maxPrice, queryParams.minPrice).then((res) => {
       if (res) {
+        console.log(`RESPONSE:`, res);
         setDisplayedProducts(res);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [queryParams]);
+
+
   //Functions
   const sortProductsByPriceAscending = () => {
     const sortedProductsAscending = displayedProducts!.sort(
@@ -44,19 +60,30 @@ const Dashboard = () => {
     setDisplayedProducts(displayedProducts);
   };
 
+
+  //CATEGORY FILTERING
+  const handleFilterChange = (event: ChangeEvent<HTMLInputElement>)=>{
+    const selectedCategory = event.target.value as string
+        console.log(selectedCategory)
+    setQueryParams({...queryParams, [event.target.name]:selectedCategory})
+  }
+
+
+
   return (
     <>
       <Header />
       <DashboardContainer>
-        <SideBar />
+        <SideBar handleFilterChange={handleFilterChange} />
         <DashboardMain>
           <SearchBar
-            ascendSort={sortProductsByPriceAscending}
-            descendSort={sortProductsByPriceDescending}
-            originalOrder={returnOriginalOrder}
+            // ascendSort={sortProductsByPriceAscending}
+            // descendSort={sortProductsByPriceDescending}
+            // originalOrder={returnOriginalOrder}
+            handleFilterChange={handleFilterChange}
           />
 
-          <DashBoardTitle>TRENDING SALES</DashBoardTitle>
+          <DashBoardTitle>TRENDING SALES </DashBoardTitle>
           <AllProductsContainer>
             {displayedProducts &&
               displayedProducts.map((product) => {
