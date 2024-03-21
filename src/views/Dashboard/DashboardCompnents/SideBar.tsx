@@ -79,7 +79,9 @@ const SideBar = ({handleFilterChange}: Props) => {
               className="sidebar-price-range"
               type="number"
               name="minPrice"
+              placeholder="min"
               onChange={handleFilterChange}
+              
             />
             <span className="sidebar-price-separator"> - </span>
 
@@ -87,6 +89,7 @@ const SideBar = ({handleFilterChange}: Props) => {
               className="sidebar-price-range"
               type="number"
               name="maxPrice"
+              placeholder="max"
               onChange={handleFilterChange}
             />
           </fieldset>
