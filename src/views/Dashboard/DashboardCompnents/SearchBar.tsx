@@ -30,9 +30,6 @@ const SearchBar = ({ handleFilterChange }: Props) => {
       </SearchBarContainer>
       {sortByModalVisibility && (
         <SortByModal
-          // ascendSort={ascendSort}
-          // descendSort={descendSort}
-          // originalOrder={originalOrder}
           handleFilterChange={handleFilterChange}
         />
       )}
