@@ -8,7 +8,7 @@ import {
 } from "../../interfaces/shopInterfaces";
 import SmallButton from "../../components/button/smallButton/smallButton";
 import { fetchShopDetail } from "../../api/shop";
-// import { fetchAllProducts, fetchProductsByShopId } from "../../api/product";
+// import {  fetchProductsByShopId } from "../../api/product";
 
 const ShopProfile = () => {
   const { shopId } = useParams();
@@ -147,7 +147,7 @@ const ShopProfile = () => {
         <SmallButton
           type="button"
           button_text="View all products"
-          onClick={() => navigate(`/dashboard/shop/${shopId}`)}
+          onClick={() => navigate(`/dashboard`)}
         />
       </ShopProfileMainWrapper>
     </>

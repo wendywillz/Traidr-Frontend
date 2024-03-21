@@ -6,7 +6,6 @@ import {
 import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
 import Header from "../../../components/Header/Header";
-// import { useParams } from "react-router-dom";
 import { useState, useEffect, ChangeEvent } from "react";
 import { shopProductsInterface } from "../../../interfaces/shopInterfaces";
 import { QueryParams } from "../../../interfaces/queryInterfaces";
@@ -43,22 +42,8 @@ const Dashboard = () => {
   }, [queryParams]);
 
 
-  //Functions
-  // const sortProductsByPriceAscending = () => {
-  //   const sortedProductsAscending = displayedProducts!.sort(
-  //     (a, b) => a.productPrice - b.productPrice
-  //   );
-  //   setDisplayedProducts(sortedProductsAscending);
-  // };
-  // const sortProductsByPriceDescending = () => {
-  //   const sortedProductsDescending = displayedProducts!.sort(
-  //     (a, b) => b.productPrice - a.productPrice
-  //   );
-  //   setDisplayedProducts(sortedProductsDescending);
-  // };
-  // const returnOriginalOrder = () => {
-  //   setDisplayedProducts(displayedProducts);
-  // };
+  
+  
 
 
   //CATEGORY FILTERING
@@ -77,9 +62,6 @@ const Dashboard = () => {
         <SideBar handleFilterChange={handleFilterChange} />
         <DashboardMain>
           <SearchBar
-            // ascendSort={sortProductsByPriceAscending}
-            // descendSort={sortProductsByPriceDescending}
-            // originalOrder={returnOriginalOrder}
             handleFilterChange={handleFilterChange}
           />
 
