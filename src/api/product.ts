@@ -38,4 +38,4 @@ export const fetchReviewByProductId = async (productId : string) => {
   }
 };
 
-const productsLink = "/products/get-all-products?category=&maxPrice=&minPrice=&sort=&search=&price="
+// const productsLink = "/products/get-all-products?category=&maxPrice=&minPrice=&sort=&search=&price="
