@@ -30,6 +30,7 @@ ALL YOU HAVE TO DO IS TO WRAP YOUR CREATED CHARTS / TABLES INTO THE ADMIN PAGE C
 </AdminPageContent>
 
 THEN PLACE YOUR CONTENT IN THE APPROPRIATE FOLDER FOR YOUR PAGE.
+http://localhost:5173/test will take you to the test page.
 
 The "TestPage.tsx" file found in the "TestContent" folder shows you what would be rendered using this model.
 Thank you for your understanding.
