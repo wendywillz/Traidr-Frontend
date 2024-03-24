@@ -1,19 +1,24 @@
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "./views/LandingPage/LandingPage";
-import LoginPage from "./views/LoginPage/LoginPage";
-import SignupPage from "./views/SignupPage/SignupPage";
-import ResetPasswordPage from "./views/Reset-your-passsword/ResetPasswordPage";
-import ChangePassword from "./views/ChangePassword/ChangePassword";
-import ShopProfile from "./views/ShopProfile/ShopProfile";
-import Dashboard from "./views/Dashboard/DashboardCompnents/Dashboard";
+import LandingPage from "./views/User/LandingPage/LandingPage";
+import LoginPage from "./views/User/LoginPage/LoginPage";
+import SignupPage from "./views/User/SignupPage/SignupPage";
+import ResetPasswordPage from "./views/User/Reset-your-passsword/ResetPasswordPage";
+import ChangePassword from "./views/User/ChangePassword/ChangePassword";
+import ShopProfile from "./views/User/ShopProfile/ShopProfile";
+import Dashboard from "./views/User/Dashboard/DashboardCompnents/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import EnterOtpPage from "./views/Enter-otp/EnterOtpPage";
-import ShopRegistrationPage from "./views/ShopRegistration/ShopRegistrationPage";
-import StockYourShop from "./views/ShopRegistration/StockYourShopPage/StockYourShop";
-import Description from "./views/Description/DescriptionComponents/Description";
+import EnterOtpPage from "./views/User/Enter-otp/EnterOtpPage";
+import ShopRegistrationPage from "./views/User/ShopRegistration/ShopRegistrationPage";
+import StockYourShop from "./views/User/ShopRegistration/StockYourShopPage/StockYourShop";
+import Description from "./views/User/Description/DescriptionComponents/Description";
 import SuccessModal from "./components/SuccessModal/SuccessModalComponent";
-import Wishlist from "./views/wishlistModal/Wishlist";
-import ProfileSettings from "./views/ProfileSettingsPage/ProfileSettingsMain/ProfileSettings";
+import Wishlist from "./views/User/wishlistModal/Wishlist";
+import ProfileSettings from "./views/User/ProfileSettingsPage/ProfileSettingsMain/ProfileSettings";
+
+//Below is a test page. remove later on.
+import TestPage from "./views/TestContent/TestPage";
+
+
 function App() {
   return (
     <Routes>
@@ -47,6 +52,7 @@ function App() {
       <Route path="/user/edit-profile" element={<ProfileSettings/>} />
 
       <Route path="/success-modal" element={<SuccessModal />} />
+      <Route path="/test" element={<TestPage />} />
     </Routes>
   );
 }
