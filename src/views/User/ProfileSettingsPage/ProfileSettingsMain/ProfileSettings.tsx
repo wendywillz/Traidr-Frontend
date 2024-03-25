@@ -16,6 +16,7 @@ import Header from "../../../../components/Header/Header";
 import { BsCameraFill, BsPersonCircle } from "react-icons/bs";
 import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios"
+import axiosInstance from "../../../../utils/axiosInstance";
 
 interface UserDetails{
   firstName: string;
@@ -25,7 +26,7 @@ interface UserDetails{
   gender: string;
   address: string;
   shopName: string;
-  profilePic: string| Blob| null| File;
+  // profilePic: string| Blob| null| File;
 }
 
 
@@ -89,14 +90,14 @@ export const ProfileSettings = () => {
     gender: "",
     address: "",
     shopName: "",
-    profilePic: userPic
+    // profilePic: userPic
   });
 
   
 
   //submitting the  user details
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    // event.preventDefault();
     console.log(`USER DETAILS ADDED`);
     console.log(userDetails);
 
@@ -109,14 +110,14 @@ export const ProfileSettings = () => {
     userDetailsData.append("gender", userDetails.gender)
     userDetailsData.append("address", userDetails.address)
     userDetailsData.append("shopName", userDetails.shopName)
-    userDetailsData.append("profilePic",userPic as Blob )
+    // userDetailsData.append("profilePic",userPic as Blob )
     console.log(`USER DETAILS DATA:`);
     console.log(userDetailsData);
 
 
     //Sending listing details to backend
     try {
-      await axios.post('/user/edit-profile/details', {data: userDetailsData})
+      await axiosInstance.post('/users/edit-profile', {data: userDetailsData})
       console.log(`User Details have been sucessfully submitted`);
        } catch (error) {
       console.error(`Error submitting user details: ${error}`)
@@ -207,8 +208,6 @@ const handleChange = (e:ChangeEvent<HTMLFormElement>)=>{
                   <option value="">--select--</option>
                   <option value="female">Female</option>
                   <option value="male">Male</option>
-                  <option value="other">Other</option>
-                  <option value="prefer not to say">Prefer not to say</option>
                 </select>
               </div>
               <div className="profile-settings-form-label-and-input-container">
