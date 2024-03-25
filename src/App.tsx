@@ -15,6 +15,7 @@ import SuccessModal from "./components/SuccessModal/SuccessModalComponent";
 import Wishlist from "./views/User/wishlistModal/Wishlist";
 import ProfileSettings from "./views/User/ProfileSettingsPage/ProfileSettingsMain/ProfileSettings";
 
+import AdminDashboardPage from "./views/Admin/AdminPages/AdminDashboard/AdminDashboardPage";
 //Below is a test page. remove later on.
 import TestPage from "./views/TestContent/TestPage";
 
@@ -52,6 +53,7 @@ function App() {
       <Route path="/user/edit-profile" element={<ProfileSettings/>} />
 
       <Route path="/success-modal" element={<SuccessModal />} />
+      <Route path="/admin/dashboard" element={< AdminDashboardPage/>} />
       <Route path="/test" element={<TestPage />} />
     </Routes>
   );
