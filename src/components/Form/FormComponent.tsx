@@ -33,12 +33,18 @@ export default function FormComponent({
       <div className="form-component-inner-body-wrapper">
         <div className="form-component-wrapper">
           <div className="form-component-logo-wrapper">
-            <img src={traidrLogo} alt="" />
+            <Link to="/">
+              <img src={traidrLogo} alt="" />
+            </Link>
           </div>
           <p className="form-component-title">{formTitle}</p>
           <form className="form-component" onSubmit={handleSubmit}>
             {formElements}
-            <MainButton button_text={button_text} isLoading={isLoading} loaderComponent={loaderComponent} />
+            <MainButton
+              button_text={button_text}
+              isLoading={isLoading}
+              loaderComponent={loaderComponent}
+            />
           </form>
           {extraText && (
             <p className="extra-text">

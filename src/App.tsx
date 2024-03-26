@@ -14,11 +14,10 @@ import Description from "./views/User/Description/DescriptionComponents/Descript
 import SuccessModal from "./components/SuccessModal/SuccessModalComponent";
 import Wishlist from "./views/User/wishlistModal/Wishlist";
 import ProfileSettings from "./views/User/ProfileSettingsPage/ProfileSettingsMain/ProfileSettings";
-
+import AdminSideBar from "./components/adminSideBar/AdminSideBar";
 import AdminDashboardPage from "./views/Admin/AdminPages/AdminDashboard/AdminDashboardPage";
 //Below is a test page. remove later on.
 import TestPage from "./views/TestContent/TestPage";
-
 
 function App() {
   return (
@@ -50,10 +49,10 @@ function App() {
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/description/:productId" element={<Description />} />
       <Route path="/user/my-wishlist" element={<Wishlist />} />
-      <Route path="/user/edit-profile" element={<ProfileSettings/>} />
+      <Route path="/user/edit-profile" element={<ProfileSettings />} />
 
       <Route path="/success-modal" element={<SuccessModal />} />
-      <Route path="/admin/dashboard" element={< AdminDashboardPage/>} />
+      <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
       <Route path="/test" element={<TestPage />} />
     </Routes>
   );

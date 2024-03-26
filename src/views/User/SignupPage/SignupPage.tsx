@@ -110,7 +110,7 @@ export default function SignupPage() {
                 />
               </fieldset>
               <fieldset className="input-wrapper">
-                <label htmlFor="email"> Email Address</label>
+                <label> Email Address</label>
                 <input
                   type="text"
                   id="email"
@@ -121,7 +121,7 @@ export default function SignupPage() {
                 />
               </fieldset>
               <fieldset className="input-wrapper">
-                <label htmlFor="password">Password</label>
+                <label>Password</label>
                 <input
                   type="password"
                   id="password"
@@ -131,7 +131,7 @@ export default function SignupPage() {
                 />
               </fieldset>
               <fieldset className="input-wrapper">
-                <label htmlFor="password">How did you hear about us</label>
+                <label >How did you hear about us</label>
                 <select
                   className="how-did-you-hear"
                   value={aboutUs}
@@ -145,9 +145,8 @@ export default function SignupPage() {
                 </select>
               </fieldset>
               <fieldset className="input-wrapper">
-                <label htmlFor="password">Age</label>
+                <label>Age</label>
                 <select
-                  className="how-did-you-hear"
                   value={age}
                   onChange={handleAge}
                 >
@@ -161,7 +160,6 @@ export default function SignupPage() {
               <fieldset className="input-wrapper">
                 <label htmlFor="password">Gender</label>
                 <select
-                  className="how-did-you-hear"
                   value={gender}
                   onChange={handleGender}
                 >

@@ -5,21 +5,22 @@ const FormComponentStyle = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  max-height: 100vh;
+  min-height: 100vh;
   overflow-y: hidden;
   background-image: url(${formBackground});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
   .form-component-inner-body-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 40%;
-    min-height: 100%;
-    padding: 4rem 3.5rem;
+    height: 80%;
+    min-height: 70vh;
+    padding: 2rem 3.5rem;
     border-radius: 5px;
     margin: 1rem auto;
     background-color: #fff;
@@ -37,6 +38,9 @@ const FormComponentStyle = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .form-component-logo-wrapper a {
+    text-decoration: none;
   }
   .form-component-title {
     font-size: 1.5rem;
@@ -81,10 +85,10 @@ const FormComponentStyle = styled.div`
   .password-input-wrapper {
     margin-bottom: 1rem !important;
   }
-  .form-component select {
+  .form-component fieldset select {
     width: 100%;
     padding: 0.5rem;
-    height: 2rem;
+    height: 2.5rem;
     border-radius: 5px;
     border: 1px solid var(--input-border-color);
     outline: none;
