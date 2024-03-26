@@ -168,6 +168,8 @@ export default function SignupPage() {
                   <option value="select">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
+                  <option value="other">others</option>
+                  <option value="not specify">not specify</option>
                 </select>
               </fieldset>
               <div className="or-wrapper">
