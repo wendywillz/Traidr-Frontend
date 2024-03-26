@@ -7,6 +7,7 @@ import { UserGreeting, AllDataCards } from "./AdminDashboardPage.Styled"
 import AdminHeader from "../../AdminPagesComponents/AdminHeader/AdminHeader"
 import AdminSideBar from "../../AdminPagesComponents/AdminSidebar/AdminSideBar"
 import DataCard from "./AdminDashboardComponents/DataCard/DataCard"
+import RecentActivity from "../../AdminPagesComponents/RecentActivity/RecentActivity"
 
 //PACKAGE IMPORTS
 import { useState } from "react"
@@ -45,6 +46,7 @@ const AdminDashboardPage = () => {
                 
 
             </AdminPageContent>
+            <RecentActivity/>
         </AdminPageMain>
     </AdminPageContainer>
   )
