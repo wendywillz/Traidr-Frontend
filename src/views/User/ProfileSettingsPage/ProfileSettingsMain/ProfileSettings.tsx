@@ -96,7 +96,7 @@ export const ProfileSettings = () => {
   
 
   //submitting the  user details
-  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (_event: FormEvent<HTMLFormElement>) => {
     // event.preventDefault();
     console.log(`USER DETAILS ADDED`);
     console.log(userDetails);
