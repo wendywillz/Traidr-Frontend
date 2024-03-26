@@ -6,7 +6,7 @@ export const RecentActivityContainer = styled.div`
 .recent-activity{
     border: 1px solid red;
     width: 18vw;
-    height: 80vh;
+    height: 70vh;
     margin-left: 47rem;
     margin-top: -5.5rem;
     box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);

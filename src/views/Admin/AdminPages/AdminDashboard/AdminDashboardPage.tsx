@@ -13,6 +13,7 @@ import DataCard from "./AdminDashboardComponents/DataCard/DataCard";
 import AdminSideBar from "../../../../components/adminSideBar/AdminSideBar";
 //PACKAGE IMPORTS
 import { useState } from "react";
+import RecentActivity from "../../AdminPagesComponents/RecentActivity/RecentActivity";
 
 //INTERFACE DECLARATIONS
 interface AdminDataSummary {
@@ -55,7 +56,9 @@ const AdminDashboardPage = () => {
               reportLink={"/admin/dashboard/tickets-report"}
             />
           </AllDataCards>
+         
         </AdminPageContent>
+         <RecentActivity/>
       </AdminPageMain>
     </AdminPageContainer>
   );
