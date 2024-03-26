@@ -11,6 +11,8 @@ export default function SignupPage() {
   const [userEmail, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [aboutUs, setAboutUs] = useState("");
+  const [age, setAge] = useState("");
+  const [gender, setGender] = useState("");
   const [error, setError] = useState("");
   const [isloading, setIsLoading] = useState(false);
   const handleUserName = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +26,12 @@ export default function SignupPage() {
   };
   const handleAboutUs = (event: ChangeEvent<HTMLSelectElement>) => {
     setAboutUs((event.currentTarget as HTMLSelectElement).value);
+  };
+  const handleAge = (event: ChangeEvent<HTMLSelectElement>) => {
+    setAge((event.currentTarget as HTMLSelectElement).value);
+  };
+  const handleGender = (event: ChangeEvent<HTMLSelectElement>) => {
+    setGender((event.currentTarget as HTMLSelectElement).value);
   };
 
   const handleSubmit = async (event: FormEvent) => {
@@ -41,6 +49,8 @@ export default function SignupPage() {
         email: userEmail,
         password: password,
         hearAboutUs: aboutUs,
+        age: age,
+        gender: gender,
       });
 
       if (res && res.status === 200) {
@@ -100,7 +110,7 @@ export default function SignupPage() {
                 />
               </fieldset>
               <fieldset className="input-wrapper">
-                <label htmlFor="email"> Email Address</label>
+                <label> Email Address</label>
                 <input
                   type="text"
                   id="email"
@@ -111,7 +121,7 @@ export default function SignupPage() {
                 />
               </fieldset>
               <fieldset className="input-wrapper">
-                <label htmlFor="password">Password</label>
+                <label>Password</label>
                 <input
                   type="password"
                   id="password"
@@ -121,7 +131,7 @@ export default function SignupPage() {
                 />
               </fieldset>
               <fieldset className="input-wrapper">
-                <label htmlFor="password">How did you hear about us</label>
+                <label >How did you hear about us</label>
                 <select
                   className="how-did-you-hear"
                   value={aboutUs}
@@ -132,6 +142,30 @@ export default function SignupPage() {
                   <option value="instagram">Instagram</option>
                   <option value="linkedin">LinkedIn</option>
                   <option value="twitter">Twitter</option>
+                </select>
+              </fieldset>
+              <fieldset className="input-wrapper">
+                <label>Age</label>
+                <select
+                  value={age}
+                  onChange={handleAge}
+                >
+                  <option value="select">Select</option>
+                  <option value="18 - 24">18 - 24</option>
+                  <option value="25 - 33">25 - 33</option>
+                  <option value="34 - 44">34 - 44</option>
+                  <option value="45 & above">45 & above</option>
+                </select>
+              </fieldset>
+              <fieldset className="input-wrapper">
+                <label htmlFor="password">Gender</label>
+                <select
+                  value={gender}
+                  onChange={handleGender}
+                >
+                  <option value="select">Select</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
                 </select>
               </fieldset>
               <div className="or-wrapper">

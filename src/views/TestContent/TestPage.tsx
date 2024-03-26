@@ -1,5 +1,5 @@
 import AdminHeader from "../Admin/AdminPagesComponents/AdminHeader/AdminHeader"
-import AdminSideBar from "../Admin/AdminPagesComponents/AdminSidebar/AdminSideBar"
+import AdminSideBar from "../../components/adminSideBar/AdminSideBar"
 import { AdminPageContainer, AdminPageMain, AdminPageTitle, AdminPageContent } from "../Admin/AdminPagesComponents/MainAdminStyles/MainAdminStyles.Styled"
 import TestBarChart from "./TestCharts/TestBarChart"
 import TestPieChart from "./TestCharts/TestPieChart"
