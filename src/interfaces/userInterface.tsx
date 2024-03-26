@@ -6,4 +6,8 @@ export default interface userData {
   phoneNumber: number;
   isAdmin: string;
   isSeller: string;
+  gender: string;
+  age: number;
+  address: string;
+  shopName: string;
 }

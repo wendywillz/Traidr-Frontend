@@ -17,21 +17,29 @@ import { BsCameraFill, BsPersonCircle } from "react-icons/bs";
 import { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios"
 import axiosInstance from "../../../../utils/axiosInstance";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../app/store";
 
+//Interface declaration
 interface UserDetails{
   firstName: string;
   lastName: string;
   email: string;
   phoneNumber: string;
   gender: string;
+  dateOfBirth: string;
   address: string;
   shopName: string;
   // profilePic: string| Blob| null| File;
 }
 
-
+import userData from "../../../../interfaces/userInterface";
 
 export const ProfileSettings = () => {
+  //fetching the user
+  const currentUser: userData = useSelector((state: RootState)=> state.user)
+  const currentUserId:string|null = useSelector((state: RootState)=> state.user.userId)
+  const currentUserName:string|null = useSelector((state: RootState)=> state.user.name)
 
   //Logic for handling the photo upload    
   const [userPic, setUserPic] = useState<File | null>(null);
@@ -69,7 +77,7 @@ export const ProfileSettings = () => {
 
     //Sending uploaded photo to backend
     try {
-      await axios.post('/user/edit-profile/profile-picture', {data: userPicFormData})
+      await axios.post(`/user/edit-profile/profile-picture${currentUserId}`, {data: userPicFormData})
       console.log(`Profile picture has been successfully changed`)
       } catch (error) {
       console.error(`Error uploading photo: ${error}`)
@@ -88,6 +96,7 @@ export const ProfileSettings = () => {
     email: "",
     phoneNumber: "",
     gender: "",
+    dateOfBirth:"",
     address: "",
     shopName: "",
     // profilePic: userPic
@@ -96,28 +105,14 @@ export const ProfileSettings = () => {
   
 
   //submitting the  user details
-  const handleFormSubmit = async (_event: FormEvent<HTMLFormElement>) => {
-    // event.preventDefault();
+  const handleFormSubmit = async ( event: FormEvent<HTMLFormElement> ) => {
+    event.preventDefault();
     console.log(`USER DETAILS ADDED`);
     console.log(userDetails);
 
-    //adding data to form
-    const userDetailsData = new FormData()
-    userDetailsData.append("firstName", userDetails.firstName)
-    userDetailsData.append("lastName", userDetails.lastName)
-    userDetailsData.append("email", userDetails.email)
-    userDetailsData.append("phoneNumber", userDetails.phoneNumber)
-    userDetailsData.append("gender", userDetails.gender)
-    userDetailsData.append("address", userDetails.address)
-    userDetailsData.append("shopName", userDetails.shopName)
-    // userDetailsData.append("profilePic",userPic as Blob )
-    console.log(`USER DETAILS DATA:`);
-    console.log(userDetailsData);
-
-
-    //Sending listing details to backend
     try {
-      await axiosInstance.post('/users/edit-profile', {data: userDetailsData})
+     const res = await axiosInstance.post(`/users/edit-profile/${currentUserId}`, userDetails)
+     if(res && res.data.success) location.reload()
       console.log(`User Details have been sucessfully submitted`);
        } catch (error) {
       console.error(`Error submitting user details: ${error}`)
@@ -126,7 +121,7 @@ export const ProfileSettings = () => {
 }
 
   
-const handleChange = (e:ChangeEvent<HTMLFormElement>)=>{
+const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextAreaElement|HTMLSelectElement>)=>{
   setUserDetails({...userDetails, [e.target.name]:e.target.value})
 }
 
@@ -158,6 +153,8 @@ const handleChange = (e:ChangeEvent<HTMLFormElement>)=>{
             </button>
           </div>
         </ChangePictureForm>
+        
+        {/* <p>{currentUserName} and {currentUserId}</p> */}
 
         <UserDetailsForm onSubmit={handleFormSubmit}>
           <UserDetailsSection>
@@ -175,10 +172,10 @@ const handleChange = (e:ChangeEvent<HTMLFormElement>)=>{
                   id="firstNameInput"
                   name="firstName"
                   type="text"
-                  placeholder="Jane"
+                  placeholder={currentUser.name.split(" ")[0]}
                   className="profile-seetings-form-input"
-                  value={userDetails.firstName}
-                  onChange={()=>handleChange} />
+                   value={userDetails.firstName}
+                  onChange={handleChange} />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label
@@ -192,18 +189,19 @@ const handleChange = (e:ChangeEvent<HTMLFormElement>)=>{
                   id="emailInput"
                   name="email"
                   type="email"
-                  placeholder="JaneDoe@email.com"
+                  placeholder={currentUser.email}
                   className="profile-seetings-form-input"
                   value={userDetails.email}
-                  onChange={()=>handleChange} />
+                  onChange={handleChange} />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label htmlFor="genderInput" className="profile-settings-form-label">
                   Gender
                 </label>
                 <br />
-                <select id="genderInput" name="gender" className="profile-seetings-form-input" value={userDetails.gender} 
-                onChange={()=>handleChange}
+                <select id="genderInput" name="gender" className="profile-seetings-form-input" 
+                value={userDetails.gender} 
+                onChange={handleChange}
                 >
                   <option value="">--select--</option>
                   <option value="female">Female</option>
@@ -224,8 +222,8 @@ const handleChange = (e:ChangeEvent<HTMLFormElement>)=>{
                   type="text"
                   placeholder="Awesomeness Shop"
                   className="profile-seetings-form-input"
-                  value={userDetails.shopName}
-                  onChange={()=>handleChange} />
+                   value={userDetails.shopName}
+                  onChange={handleChange} />
               </div>
             </FormSectionContainer>
             {/*RIGHT SIDE OF FORM */}
@@ -242,10 +240,10 @@ const handleChange = (e:ChangeEvent<HTMLFormElement>)=>{
                   id="lastNameInput"
                   name="lastName"
                   type="text"
-                  placeholder="Doe"
+                  placeholder={currentUser.name.split(" ")[1]}
                   className="profile-seetings-form-input"
-                  value={userDetails.lastName}
-                  onChange={()=>handleChange} />
+                   value={userDetails.lastName}
+                  onChange={handleChange} />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label
@@ -261,9 +259,27 @@ const handleChange = (e:ChangeEvent<HTMLFormElement>)=>{
                   type="tel"
                   placeholder="07034249775"
                   className="profile-seetings-form-input"
-                  value={userDetails.phoneNumber}
-                  onChange={()=>handleChange} />
+                   value={userDetails.phoneNumber}
+                  onChange={handleChange} />
               </div>
+              <div className="profile-settings-form-label-and-input-container">
+                <label
+                  htmlFor="dateOfBirthInput"
+                  className="profile-settings-form-label"
+                >
+                  Date of Birth
+                </label>
+                <br />
+                <input
+                  id="dateOfBirthInput"
+                  name="dateOfBirth"
+                  type="date"
+                  placeholder=""
+                  className="profile-seetings-form-input"
+                   value={userDetails.dateOfBirth}
+                  onChange={handleChange} />
+              </div>
+
               <div className="profile-settings-form-label-and-input-container">
                 <label
                   htmlFor="addressInput"
@@ -277,15 +293,15 @@ const handleChange = (e:ChangeEvent<HTMLFormElement>)=>{
                   name="address"
                   placeholder="32, Rasaq Eletu Street, Osapa London, Lagos"
                   className="profile-seetings-form-textarea"
-                  value={userDetails.address}
-                  onChange={()=>handleChange}
+                   value={userDetails.address}
+                  onChange={handleChange}
                 ></textarea>
               </div>
             </FormSectionContainer>
           </UserDetailsSection>
 
           <div className="profile-settings-user-details-form-buttons">
-            <button className="profile-settings-page-save-button">
+            <button className="profile-settings-page-save-button" onClick={()=>handleFormSubmit}>
               Save Changes
             </button>
             <button className="profile-settings-page-cancel-button">
