@@ -12,6 +12,8 @@ import { QueryParams } from "../../../../interfaces/queryInterfaces";
 import { fetchAllProducts} from "../../../../api/product";
 import { AllProductsContainer } from "../DashboardStyles/Product.styled";
 import AllProductsCard from "../../../../components/ProductsCard/AllProductsCard";
+//import { useSelector } from "react-redux";
+// import { RootState } from "../../../../app/store";
 
 
 
@@ -19,6 +21,7 @@ import AllProductsCard from "../../../../components/ProductsCard/AllProductsCard
 const Dashboard = () => {
   // const { shopId } = useParams();
   //Constants declarations
+  //const currentUserId:string|null = useSelector((state: RootState)=> state.user.userId)
   const [displayedProducts, setDisplayedProducts] =
     useState<shopProductsInterface[]>();
     const[queryParams, setQueryParams]= useState<QueryParams>({

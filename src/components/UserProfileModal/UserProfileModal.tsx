@@ -76,7 +76,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
           <Link
             to={
               location.pathname.includes("dashboard")
-                ? "/user/edit-profile"
+                ? "/dashboard/user/edit-profile"
                 : "/"
             }
           >

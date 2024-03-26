@@ -39,6 +39,7 @@ function App() {
                 path="stock-your-shop/:shopId"
                 element={<StockYourShop />}
               />
+              <Route path="user/edit-profile" element={<ProfileSettings/>} />
             </Routes>
           </ProtectedRoute>
         }
@@ -49,8 +50,6 @@ function App() {
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/description/:productId" element={<Description />} />
       <Route path="/user/my-wishlist" element={<Wishlist />} />
-      <Route path="/user/edit-profile" element={<ProfileSettings />} />
-
       <Route path="/success-modal" element={<SuccessModal />} />
       <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
       <Route path="/test" element={<TestPage />} />
