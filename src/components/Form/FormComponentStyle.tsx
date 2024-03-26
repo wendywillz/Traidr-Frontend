@@ -18,7 +18,7 @@ const FormComponentStyle = styled.div`
     justify-content: center;
     align-items: center;
     width: 40%;
-    min-height: 80%;
+    min-height: 100%;
     padding: 4rem 3.5rem;
     border-radius: 5px;
     margin: 1rem auto;
@@ -84,7 +84,7 @@ const FormComponentStyle = styled.div`
   .form-component select {
     width: 100%;
     padding: 0.5rem;
-    height: 2.5rem;
+    height: 2rem;
     border-radius: 5px;
     border: 1px solid var(--input-border-color);
     outline: none;
