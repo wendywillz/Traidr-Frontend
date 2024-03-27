@@ -11,7 +11,7 @@ export default function SignupPage() {
   const [userEmail, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [aboutUs, setAboutUs] = useState("");
-  const [age, setAge] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [gender, setGender] = useState("");
   const [error, setError] = useState("");
   const [isloading, setIsLoading] = useState(false);
@@ -27,8 +27,8 @@ export default function SignupPage() {
   const handleAboutUs = (event: ChangeEvent<HTMLSelectElement>) => {
     setAboutUs((event.currentTarget as HTMLSelectElement).value);
   };
-  const handleAge = (event: ChangeEvent<HTMLSelectElement>) => {
-    setAge((event.currentTarget as HTMLSelectElement).value);
+  const handleDateOfBirth = (event: ChangeEvent<HTMLInputElement>) => {
+    setDateOfBirth((event.currentTarget as HTMLInputElement).value);
   };
   const handleGender = (event: ChangeEvent<HTMLSelectElement>) => {
     setGender((event.currentTarget as HTMLSelectElement).value);
@@ -49,7 +49,7 @@ export default function SignupPage() {
         email: userEmail,
         password: password,
         hearAboutUs: aboutUs,
-        age: age,
+        dateOfBirth: dateOfBirth,
         gender: gender,
       });
 
@@ -145,17 +145,15 @@ export default function SignupPage() {
                 </select>
               </fieldset>
               <fieldset className="input-wrapper">
-                <label>Age</label>
-                <select
-                  value={age}
-                  onChange={handleAge}
-                >
-                  <option value="select">Select</option>
-                  <option value="18 - 24">18 - 24</option>
-                  <option value="25 - 33">25 - 33</option>
-                  <option value="34 - 44">34 - 44</option>
-                  <option value="45 & above">45 & above</option>
-                </select>
+                <label htmlFor="dateOfBirthInput">Date of Birth</label>
+                <input  
+                  id="dateOfBirthInput"
+                  name="dateOfBirth"
+                  type="date"
+                  placeholder=""
+                  className="profile-seetings-form-input"
+                   value={dateOfBirth}
+                  onChange={handleDateOfBirth} />
               </fieldset>
               <fieldset className="input-wrapper">
                 <label htmlFor="password">Gender</label>
@@ -166,8 +164,6 @@ export default function SignupPage() {
                   <option value="select">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
-                  <option value="other">others</option>
-                  <option value="not specify">not specify</option>
                 </select>
               </fieldset>
               <div className="or-wrapper">
