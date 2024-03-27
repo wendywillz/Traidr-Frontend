@@ -12,6 +12,7 @@ export const AdminPageMain = styled.div`
   width: 80%;
   margin-left: 20%;
   /* height: 100vh; */
+  /* display:flex; */
 `;
 export const AdminPageTitle = styled.h2`
   background: none;
