@@ -171,3 +171,15 @@
   line-height: 27px;
   color: #219653;
 }
+
+.add-to-cart{
+  border-radius: 7px;
+  color: white;
+  background-color: var(--orange-color);
+  padding: 1vh 0rem;
+  text-align: center;
+  width: 10vw;
+  height: 6vh;
+  margin-top: 2vh;
+  margin-left: 10rem;
+}

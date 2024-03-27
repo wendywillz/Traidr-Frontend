@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineChat } from "react-icons/md";
 import { shopProductsInterface } from "../../interfaces/shopInterfaces";
+import { useParams } from "react-router-dom";
 
 function TopDescription({ ...props }: shopProductsInterface) {
   const [selectedOption, setSelectedOption] = useState("");
@@ -14,6 +15,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
   const handleSelectChange = (e: any) => {
     setSelectedOption(e.target.value);
   };
+  const {productId} = useParams()
 
   return (
     <div>
@@ -84,6 +86,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
                 Add to Wishlist
               </Link>
             </div>
+           
 
             <div className="user-info">
               <FaUserCircle style={{ width: "5rem", height: "5rem" }} />
@@ -100,6 +103,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
                 {/* <p>contact: 09085757757,08065443355</p> */}
               </div>
             </div>
+            <div className="add-to-cart">Add to cart </div>
           </div>
         </div>
       </section>
