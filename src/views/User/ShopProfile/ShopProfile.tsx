@@ -8,12 +8,13 @@ import {
 } from "../../../interfaces/shopInterfaces";
 import SmallButton from "../../../components/button/smallButton/smallButton";
 import { fetchShopDetail } from "../../../api/shop";
+import { fetchProductsByShopId } from "../../../api/product";
 // import {  fetchProductsByShopId } from "../../api/product";
 
 const ShopProfile = () => {
   const { shopId } = useParams();
   const [profileImage, setProfileImage] = useState<string | null>(null); // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [products] = useState<shopProductsInterface[]>();
+  const [products, setProducts] = useState<shopProductsInterface[]>();
   const [shop, setShop] = useState<shopInterface>();
   const navigate = useNavigate();
 
@@ -27,17 +28,13 @@ const ShopProfile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // fetch product from the database
-  // useEffect(() => {
-  //   fetchProductsByShopId(shopId!).then((res) => {
-  //     if (res) {
-  //       setProducts(res);
-  //       localStorage.setItem("shopProducts", JSON.stringify(res));
-  //     }
-  //   });
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
+  useEffect(() => {
+    fetchProductsByShopId(shopId!).then((res) => {
+      if (res) {
+        setProducts(res);
+      }
+    });
+  }, []);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleProfileImage = (e: any) => {
     const file = e.target.files[0];

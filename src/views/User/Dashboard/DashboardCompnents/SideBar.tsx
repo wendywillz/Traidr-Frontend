@@ -43,7 +43,7 @@ const SideBar = ({handleFilterChange}: Props) => {
           {categories.map((category: string, index: number) => {
             return (
               <>
-                <fieldset>
+                <fieldset key={index}>
                   <input
                     className="sidebar-filter-selection"
                     type="radio"

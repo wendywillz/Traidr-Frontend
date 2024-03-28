@@ -9,14 +9,11 @@ import Header from "../../../../components/Header/Header";
 import { useState, useEffect, ChangeEvent } from "react";
 import { shopProductsInterface } from "../../../../interfaces/shopInterfaces";
 import { QueryParams } from "../../../../interfaces/queryInterfaces";
-import { fetchAllProducts} from "../../../../api/product";
+import { fetchAllProducts } from "../../../../api/product";
 import { AllProductsContainer } from "../DashboardStyles/Product.styled";
 import AllProductsCard from "../../../../components/ProductsCard/AllProductsCard";
 //import { useSelector } from "react-redux";
 // import { RootState } from "../../../../app/store";
-
-
-
 
 const Dashboard = () => {
   // const { shopId } = useParams();
@@ -24,39 +21,37 @@ const Dashboard = () => {
   //const currentUserId:string|null = useSelector((state: RootState)=> state.user.userId)
   const [displayedProducts, setDisplayedProducts] =
     useState<shopProductsInterface[]>();
-    const[queryParams, setQueryParams]= useState<QueryParams>({
-      category: "",
-      search: "",
-      sort: "",
-      price: "",
-      maxPrice: "",
-      minPrice: ""
-    })
+  const [queryParams, setQueryParams] = useState<QueryParams>({
+    category: "",
+    search: "",
+    sort: "",
+    price: "",
+    maxPrice: "",
+    minPrice: "",
+  });
 
-//{category, search, sort, price, maxPrice, minPrice}
+  //{category, search, sort, price, maxPrice, minPrice}
   useEffect(() => {
-    fetchAllProducts(queryParams.category, queryParams.search, queryParams.sort, queryParams.price, queryParams.maxPrice, queryParams.minPrice).then((res) => {
+    fetchAllProducts(
+      queryParams.category,
+      queryParams.search,
+      queryParams.sort,
+      queryParams.price,
+      queryParams.maxPrice,
+      queryParams.minPrice
+    ).then((res) => {
       if (res) {
-        console.log(`RESPONSE:`, res);
         setDisplayedProducts(res);
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryParams]);
 
-
-  
-  
-
-
   //CATEGORY FILTERING
-  const handleFilterChange = (event: ChangeEvent<HTMLInputElement>)=>{
-    const selectedCategory = event.target.value as string
-        console.log(selectedCategory)
-    setQueryParams({...queryParams, [event.target.name]:selectedCategory})
-  }
-
-
+  const handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const selectedCategory = event.target.value as string;
+    setQueryParams({ ...queryParams, [event.target.name]: selectedCategory });
+  };
 
   return (
     <>
@@ -64,9 +59,7 @@ const Dashboard = () => {
       <DashboardContainer>
         <SideBar handleFilterChange={handleFilterChange} />
         <DashboardMain>
-          <SearchBar
-            handleFilterChange={handleFilterChange}
-          />
+          <SearchBar handleFilterChange={handleFilterChange} />
 
           <DashBoardTitle>TRENDING SALES </DashBoardTitle>
           <AllProductsContainer>

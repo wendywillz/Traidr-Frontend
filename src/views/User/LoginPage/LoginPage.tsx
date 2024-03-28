@@ -43,14 +43,17 @@ export default function LoginPage() {
           setEmail("");
           setPassword("");
           setError("");
-          console.log("res.data", res.data.successfulLogin.token);
           localStorage.setItem("token", res.data.successfulLogin.token);
-
           dispatch(login(res.data.successfulLogin));
           navigate(`/dashboard`);
-        } else if (res.data.inValidPassword || res.data.userNotFoundError) {
+        } else if (res.data.userNotFoundError) {
           setIsLoading(false);
-          setError("Invalid Credentials");
+          setError("User does not exist, kindly signup");
+          setEmail("");
+          setPassword("");
+        } else if (res.data.inValidPassword) {
+          setIsLoading(false);
+          setError("Invalid credentials");
           setEmail("");
           setPassword("");
         }
@@ -84,10 +87,10 @@ export default function LoginPage() {
             <>
               {error && <div className="error-message">{error} </div>}
               <fieldset className="username-input-wrapper">
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">Email</label>
                 <input
-                  type="text"
-                  id="username"
+                  type="email"
+                  id="email"
                   value={userEmail}
                   placeholder="BabalolaYu@gmail.com"
                   onChange={handleUserEmail}

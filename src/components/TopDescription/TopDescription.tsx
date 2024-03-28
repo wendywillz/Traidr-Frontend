@@ -1,7 +1,7 @@
 // import { images } from "./index";
 import { IoIosTimer } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import "./TopDescription.css";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
@@ -13,7 +13,7 @@ import AddToCartButton from "../AddToCartButton/AddToCartButton";
 function TopDescription({ ...props }: shopProductsInterface) {
   const [selectedOption, setSelectedOption] = useState("");
 
-  const handleSelectChange = (e: any) => {
+  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(e.target.value);
   };
 
@@ -97,7 +97,6 @@ function TopDescription({ ...props }: shopProductsInterface) {
                 Add to Wishlist
               </Link></p>
             </div>
-           
 
             <div className="user-info">
               <FaUserCircle style={{ width: "5rem", height: "5rem" }} />

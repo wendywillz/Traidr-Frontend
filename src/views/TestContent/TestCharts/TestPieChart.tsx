@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { useState } from "react"
 
@@ -8,7 +9,7 @@ import testData from "../testData"
 const TestPieChart = () => {
     const maleNo = testData.filter((user)=> user.gender === "M")
     const femaleNo = testData.filter((user)=> user.gender === "F")
-    const [userDetails, setUserDetails] = useState({
+    const [userDetails, _setUserDetails] = useState({
         labels: ["Male characters", "Female Characters"],
         datasets: [{
             label: "Corth Main Characters",
