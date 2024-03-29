@@ -16,9 +16,14 @@ import Wishlist from "./views/User/wishlistModal/Wishlist";
 import ProfileSettings from "./views/User/ProfileSettingsPage/ProfileSettingsMain/ProfileSettings";
 import AdminSideBar from "./components/adminSideBar/AdminSideBar";
 import AdminDashboardPage from "./views/Admin/AdminPages/AdminDashboard/AdminDashboardPage";
+import UserAnalytics from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
+
+
 //Below is a test page. remove later on.
 import TestPage from "./views/TestContent/TestPage";
-import UserAnalytics from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
+
+import AddQuantityModal from "./views/User/AddQuantityModal/AddQuantityModal";
+
 
 function App() {
   return (
@@ -53,8 +58,10 @@ function App() {
       <Route path="/user/my-wishlist" element={<Wishlist />} />
       <Route path="/success-modal" element={<SuccessModal />} />
       <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-      <Route path="/test" element={<TestPage />} />
       <Route path="/admin/user-analytics" element={<UserAnalytics/>} />
+      <Route path="/test" element={<TestPage />} />
+      <Route path="/qty" element={<AddQuantityModal />} />
+     
     </Routes>
   );
 }
