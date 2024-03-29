@@ -1,11 +1,11 @@
 
 import { UserAnalyticsChartsContainer } from './UserAnalytics.Styled';
-import LineCharts from '../../../../components/charts/LineChart';
+import VistingCustomersChart  from './LineCharts/VistingCustomersChart ';
 import AdminSideBar from '../../../../components/adminSideBar/AdminSideBar';
 import AdminHeader from '../../AdminPagesComponents/AdminHeader/AdminHeader';
 import { AdminPageMain, AdminPageTitle, AdminPageContent } from '../../AdminPagesComponents/MainAdminStyles/MainAdminStyles.Styled';
 
-const UserAnalyticsCharts = () => {
+const UserAnalytics = () => {
   return (
     <UserAnalyticsChartsContainer>
       <AdminSideBar />
@@ -14,21 +14,7 @@ const UserAnalyticsCharts = () => {
         <AdminPageTitle>User Analytics</AdminPageTitle>
         <AdminPageContent>
          
-            <LineCharts
-              title='Visiting Customers'
-              data={{
-                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-                datasets: [
-                  {
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    fill: false,
-                    borderColor: 'rgb(54, 162, 235)',
-                    tension: 0.3,
-                  },
-                ],
-              }}
-              chartId='chartId'
-            />
+            <VistingCustomersChart  />
          
         </AdminPageContent>
       </AdminPageMain>
@@ -36,4 +22,4 @@ const UserAnalyticsCharts = () => {
   );
 };
 
-export default UserAnalyticsCharts;
+export default UserAnalytics;
