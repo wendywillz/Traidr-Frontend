@@ -18,7 +18,7 @@ import AdminSideBar from "./components/adminSideBar/AdminSideBar";
 import AdminDashboardPage from "./views/Admin/AdminPages/AdminDashboard/AdminDashboardPage";
 //Below is a test page. remove later on.
 import TestPage from "./views/TestContent/TestPage";
-import UserAnalyticsCharts from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
+import UserAnalytics from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
 
 function App() {
   return (
@@ -54,7 +54,7 @@ function App() {
       <Route path="/success-modal" element={<SuccessModal />} />
       <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
       <Route path="/test" element={<TestPage />} />
-      <Route path="/admin/user-analytics" element={<UserAnalyticsCharts/>} />
+      <Route path="/admin/user-analytics" element={<UserAnalytics/>} />
     </Routes>
   );
 }
