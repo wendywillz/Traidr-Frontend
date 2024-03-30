@@ -1,25 +1,33 @@
-
-import { UserAnalyticsChartsContainer } from './UserAnalytics.Styled';
+import AdminHeader from "../../AdminPagesComponents/AdminHeader/AdminHeader";
+import AdminSideBar from "../../../../components/adminSideBar/AdminSideBar";
+import {
+  AdminPageContainer,
+  AdminPageMain,
+  AdminPageTitle,
+  AdminPageContent,
+} from "../../AdminPagesComponents/MainAdminStyles/MainAdminStyles.Styled";
+// import TestLineChart from "../../../TestContent/TestCharts/TestLineChart";
+// import { GenderPieChart } from "./PieChart/GenderPieChart/GenderPieChart";
+import UserAnalyticsDemographyPieChart from "./PieChart/UserAnalyticsDemographyPieChart";
+import { UserAnalyticsChartsContainer } from "./UserAnalytics.Styled";
 import VistingCustomersChart  from './LineCharts/VistingCustomersChart ';
-import AdminSideBar from '../../../../components/adminSideBar/AdminSideBar';
-import AdminHeader from '../../AdminPagesComponents/AdminHeader/AdminHeader';
-import { AdminPageMain, AdminPageTitle, AdminPageContent } from '../../AdminPagesComponents/MainAdminStyles/MainAdminStyles.Styled';
 
-const UserAnalytics = () => {
+export const UserAnalytics = () => {
   return (
     <UserAnalyticsChartsContainer>
+    <AdminPageContainer>
       <AdminSideBar />
       <AdminPageMain>
         <AdminHeader />
         <AdminPageTitle>User Analytics</AdminPageTitle>
         <AdminPageContent>
-         
-            <VistingCustomersChart  />
-         
+          {/* <TestLineChart/> */}
+          <VistingCustomersChart/>
+          <UserAnalyticsDemographyPieChart />
         </AdminPageContent>
       </AdminPageMain>
-    </UserAnalyticsChartsContainer>
+    </AdminPageContainer>
+  </UserAnalyticsChartsContainer> 
   );
 };
 
-export default UserAnalytics;

@@ -14,13 +14,13 @@ import Description from "./views/User/Description/DescriptionComponents/Descript
 import SuccessModal from "./components/SuccessModal/SuccessModalComponent";
 import Wishlist from "./views/User/wishlistModal/Wishlist";
 import ProfileSettings from "./views/User/ProfileSettingsPage/ProfileSettingsMain/ProfileSettings";
-import AdminSideBar from "./components/adminSideBar/AdminSideBar";
+// import AdminSideBar from "./components/adminSideBar/AdminSideBar";
 import AdminDashboardPage from "./views/Admin/AdminPages/AdminDashboard/AdminDashboardPage";
-import UserAnalytics from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
 
 
 //Below is a test page. remove later on.
 import TestPage from "./views/TestContent/TestPage";
+import { UserAnalytics } from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
 
 import AddQuantityModal from "./views/User/AddQuantityModal/AddQuantityModal";
 
@@ -60,7 +60,8 @@ function App() {
       <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
       <Route path="/admin/user-analytics" element={<UserAnalytics/>} />
       <Route path="/test" element={<TestPage />} />
-      <Route path="/qty" element={<AddQuantityModal />} />
+      <Route path="/admin/user-analytics" element={<UserAnalytics />} />
+      <Route path="/qty" element={<AddQuantityModal toggleVisiblity={() => {}} />} />
      
     </Routes>
   );

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineChat } from "react-icons/md";
 import { shopProductsInterface } from "../../interfaces/shopInterfaces";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import AddQuantityModal from "../../views/User/AddQuantityModal/AddQuantityModal";
 
 function TopDescription({ ...props }: shopProductsInterface) {
@@ -16,7 +16,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
   const handleSelectChange = (e: any) => {
     setSelectedOption(e.target.value);
   };
-  const {productId} = useParams()
+  // const {productId} = useParams()
 
   const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
 
