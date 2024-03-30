@@ -7,12 +7,8 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineChat } from "react-icons/md";
 import { shopProductsInterface } from "../../interfaces/shopInterfaces";
-<<<<<<< HEAD
 // import { useParams } from "react-router-dom";
-=======
-import { useParams } from "react-router-dom";
 import AddQuantityModal from "../../views/User/AddQuantityModal/AddQuantityModal";
->>>>>>> 599ebc6db8e427e6a3f6cde14ddc07524f6c7245
 
 function TopDescription({ ...props }: shopProductsInterface) {
   const [selectedOption, setSelectedOption] = useState("");

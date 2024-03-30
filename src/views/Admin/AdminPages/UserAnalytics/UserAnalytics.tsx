@@ -6,7 +6,7 @@ import {
   AdminPageTitle,
   AdminPageContent,
 } from "../../AdminPagesComponents/MainAdminStyles/MainAdminStyles.Styled";
-import TestLineChart from "../../../TestContent/TestCharts/TestLineChart";
+// import TestLineChart from "../../../TestContent/TestCharts/TestLineChart";
 // import { GenderPieChart } from "./PieChart/GenderPieChart/GenderPieChart";
 import UserAnalyticsDemographyPieChart from "./PieChart/UserAnalyticsDemographyPieChart";
 import { UserAnalyticsChartsContainer } from "./UserAnalytics.Styled";
@@ -21,7 +21,7 @@ export const UserAnalytics = () => {
         <AdminHeader />
         <AdminPageTitle>User Analytics</AdminPageTitle>
         <AdminPageContent>
-          <TestLineChart/>
+          {/* <TestLineChart/> */}
           <VistingCustomersChart/>
           <UserAnalyticsDemographyPieChart />
         </AdminPageContent>
