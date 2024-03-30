@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineChat } from "react-icons/md";
 import { shopProductsInterface } from "../../interfaces/shopInterfaces";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 function TopDescription({ ...props }: shopProductsInterface) {
   const [selectedOption, setSelectedOption] = useState("");
@@ -15,7 +15,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
   const handleSelectChange = (e: any) => {
     setSelectedOption(e.target.value);
   };
-  const {productId} = useParams()
+  // const {productId} = useParams()
 
   return (
     <div>

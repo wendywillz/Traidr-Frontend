@@ -58,7 +58,7 @@ const testData = [
         userName: "Banei Ikri",
         email:"Banei Ikri@gmail.con",
         age:13,
-        gender:"F",
+        gender:"O",
         shopName:"Spices Books"
         
     },
@@ -67,7 +67,7 @@ const testData = [
         userName: "Sasia Bami",
         email:"sasiabami@gmail.com",
         age:50,
-        gender:"F",
+        gender:"O",
         shopName:"Jacket Shop"
         
     },

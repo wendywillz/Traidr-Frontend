@@ -24,7 +24,7 @@ export const AdminPageTitle = styled.h2`
 `;
 
 export const AdminPageContent = styled.div`
-  border: 2px solid blue;
+  // border: 2px solid blue;
   background-color: #f9fafb;
   margin-left: 2.5vw;
 `;
