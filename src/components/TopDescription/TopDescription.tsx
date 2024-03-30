@@ -7,7 +7,12 @@ import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineChat } from "react-icons/md";
 import { shopProductsInterface } from "../../interfaces/shopInterfaces";
+<<<<<<< HEAD
 // import { useParams } from "react-router-dom";
+=======
+import { useParams } from "react-router-dom";
+import AddQuantityModal from "../../views/User/AddQuantityModal/AddQuantityModal";
+>>>>>>> 599ebc6db8e427e6a3f6cde14ddc07524f6c7245
 
 function TopDescription({ ...props }: shopProductsInterface) {
   const [selectedOption, setSelectedOption] = useState("");
@@ -17,8 +22,16 @@ function TopDescription({ ...props }: shopProductsInterface) {
   };
   // const {productId} = useParams()
 
+  const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
+
+  const toggleQuantityModal = () => {
+    console.log("profile", quantityModalVisibility);
+    setQuantityModalVisibility(!quantityModalVisibility);
+  };
+
   return (
     <div>
+      <div className="quantity-modal-container">{quantityModalVisibility && <AddQuantityModal toggleVisiblity={toggleQuantityModal}/>}</div>
       <section className="display">
         <div>
           <ul className="home-search">
@@ -81,10 +94,11 @@ function TopDescription({ ...props }: shopProductsInterface) {
 
           <div className="sectwo">
             <div className="sub-sec">
-              <p></p>
-              <Link className="wishlist" to="">
+            <div className="add-to-cart" onClick={toggleQuantityModal}>Add to cart </div>
+            
+              <p><Link className="wishlist" to="">
                 Add to Wishlist
-              </Link>
+              </Link></p>
             </div>
            
 
@@ -103,7 +117,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
                 {/* <p>contact: 09085757757,08065443355</p> */}
               </div>
             </div>
-            <div className="add-to-cart">Add to cart </div>
+           
           </div>
         </div>
       </section>
