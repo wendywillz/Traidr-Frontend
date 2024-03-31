@@ -1,4 +1,17 @@
 import styled from "styled-components";
+
+export const AllProductsCardContainer = styled.div`
+  /* border: 2px solid green; */
+  display: flex;
+  flex-direction: column;
+
+  .dashboard-add-to-cart-button{
+    margin-top: -2vh;
+    margin-left: 4rem;
+    /* visibility: hidden; */
+  }
+`
+
 export const AllProductsWrapper = styled.div`
   display: flex;
   flex-direction: column;
