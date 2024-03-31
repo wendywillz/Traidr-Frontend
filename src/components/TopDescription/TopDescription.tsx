@@ -8,7 +8,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineChat } from "react-icons/md";
 import { shopProductsInterface } from "../../interfaces/shopInterfaces";
 // import { useParams } from "react-router-dom";
-import AddQuantityModal from "../../views/User/AddQuantityModal/AddQuantityModal";
+import AddToCartButton from "../AddToCartButton/AddToCartButton";
 
 function TopDescription({ ...props }: shopProductsInterface) {
   const [selectedOption, setSelectedOption] = useState("");
@@ -16,23 +16,25 @@ function TopDescription({ ...props }: shopProductsInterface) {
   const handleSelectChange = (e: any) => {
     setSelectedOption(e.target.value);
   };
-  // const {productId} = useParams()
 
-  const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
+  
+   const currentProductId = props.productId
+
+   const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
 
   const toggleQuantityModal = () => {
-    console.log("profile", quantityModalVisibility);
+    console.log("modalVisible?", quantityModalVisibility);
     setQuantityModalVisibility(!quantityModalVisibility);
   };
 
   return (
     <div>
-      <div className="quantity-modal-container">{quantityModalVisibility && <AddQuantityModal toggleVisiblity={toggleQuantityModal}/>}</div>
+      
       <section className="display">
         <div>
           <ul className="home-search">
-            <Link to="">Home /</Link>
-            <Link to="">Search /</Link>
+            <Link to="/">Home /</Link>
+            <Link to="/dashboard/">Search /</Link>
             <Link to="">Home appliances</Link>
             <Link to="">Home appliances</Link>
           </ul>
@@ -90,8 +92,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
 
           <div className="sectwo">
             <div className="sub-sec">
-            <div className="add-to-cart" onClick={toggleQuantityModal}>Add to cart </div>
-            
+            <AddToCartButton productId={currentProductId} toggleVisibility={toggleQuantityModal}/>
               <p><Link className="wishlist" to="">
                 Add to Wishlist
               </Link></p>
