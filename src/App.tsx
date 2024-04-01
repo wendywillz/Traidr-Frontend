@@ -21,6 +21,7 @@ import TestPage from "./views/TestContent/TestPage";
 import { UserAnalytics } from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
 
 import AddQuantityModal from "./views/User/AddQuantityModal/AddQuantityModal";
+import  DeliveryDetails from "./views/User/DeliveryDetail/DeliveryDetails"
 
 function App() {
   return (
@@ -63,7 +64,9 @@ function App() {
       <Route
         path="/qty"
         element={<AddQuantityModal toggleVisiblity={() => {}} />}
+      
       />
+      <Route path="/delivery-details" element={<DeliveryDetails/>} />
     </Routes>
   );
 }
