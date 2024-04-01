@@ -42,7 +42,6 @@ export const GenderPieChart = () => {
   return (
     <div
       style={{
-        width: 300,
         padding: "10px",
         marginRight: "10px",
         backgroundColor: "#f0f0f0",

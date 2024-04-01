@@ -6,28 +6,29 @@ import {
   AdminPageTitle,
   AdminPageContent,
 } from "../../AdminPagesComponents/MainAdminStyles/MainAdminStyles.Styled";
-// import TestLineChart from "../../../TestContent/TestCharts/TestLineChart";
-// import { GenderPieChart } from "./PieChart/GenderPieChart/GenderPieChart";
-import UserAnalyticsDemographyPieChart from "./PieChart/UserAnalyticsDemographyPieChart";
 import { UserAnalyticsChartsContainer } from "./UserAnalytics.Styled";
-import VistingCustomersChart  from './LineCharts/VistingCustomersChart ';
+import VistingCustomersChart from "./LineCharts/VistingCustomersChart ";
+import AverageUsageTimeChart from "./LineCharts/AverageUsageTime";
+import { AgePieChart } from "./PieChart/AgePieChart/AgePieChart";
+import { GenderPieChart } from "./PieChart/GenderPieChart/GenderPieChart";
 
 export const UserAnalytics = () => {
   return (
     <UserAnalyticsChartsContainer>
-    <AdminPageContainer>
-      <AdminSideBar />
-      <AdminPageMain>
-        <AdminHeader />
-        <AdminPageTitle>User Analytics</AdminPageTitle>
-        <AdminPageContent>
-          {/* <TestLineChart/> */}
-          <VistingCustomersChart/>
-          <UserAnalyticsDemographyPieChart />
-        </AdminPageContent>
-      </AdminPageMain>
-    </AdminPageContainer>
-  </UserAnalyticsChartsContainer> 
+      <AdminPageContainer>
+        <AdminSideBar />
+        <AdminPageMain>
+          <AdminHeader />
+          <AdminPageTitle>User Analytics</AdminPageTitle>
+          <AdminPageContent>
+            {/* <TestLineChart/> */}
+            <VistingCustomersChart />
+            <AverageUsageTimeChart />
+            <GenderPieChart />
+            <AgePieChart />
+          </AdminPageContent>
+        </AdminPageMain>
+      </AdminPageContainer>
+    </UserAnalyticsChartsContainer>
   );
 };
-

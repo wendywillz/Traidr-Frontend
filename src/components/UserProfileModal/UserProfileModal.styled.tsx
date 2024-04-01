@@ -3,10 +3,11 @@ import styled from "styled-components";
 export const UserProfileModalContainer = styled.div`
   background-color: white;
   width: 20rem;
-  height: 45vh;
+  min-height: 45vh;
   border-radius: 4px;
   position: fixed;
   overflow: hidden;
+  padding-bottom: 1rem;
   top: 10%;
   right: 2rem;
   z-index: 1000;
@@ -51,7 +52,7 @@ export const ModalHeader = styled.div`
 
   .user-profile-modal-user-name {
     margin: 1vh 0;
-    font-size: 1.5vw;
+    font-size: 1.2rem;
   }
 
   .user-profile-modal-user-visit-profile {

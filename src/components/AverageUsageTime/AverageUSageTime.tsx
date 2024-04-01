@@ -8,7 +8,7 @@ interface AverageUSageTimeProps {
 }
 function AverageUSageTime({ children }: AverageUSageTimeProps) {
   const userId = useSelector((state: RootState) => state.user.userId);
-
+  console.log("userId", userId);
   useEffect(() => {
     let startTime: Date;
     // function formatTime(date: Date) {
@@ -25,10 +25,13 @@ function AverageUSageTime({ children }: AverageUSageTimeProps) {
 
     async function sendActiveDuration(userId: string, activeDuration: number) {
       try {
-        const response = await axiosInstance.post("/users/active-duration", {
-          userId,
-          activeDuration,
-        });
+        const response = await axiosInstance.post(
+          "/admin/user-analytics/active-duration",
+          {
+            userId,
+            activeDuration,
+          }
+        );
         if (response && response.data.success) {
           console.log("Active duration sent successfully");
         }
@@ -54,8 +57,6 @@ function AverageUSageTime({ children }: AverageUSageTimeProps) {
         const activeDuration = (endTime.getTime() - startTime.getTime()) / 1000;
         console.log("Active duration:", activeDuration);
         sendActiveDuration(userId, activeDuration);
-      } else {
-        startTime = new Date();
       }
     });
 

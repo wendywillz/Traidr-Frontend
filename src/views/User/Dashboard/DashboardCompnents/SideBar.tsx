@@ -42,7 +42,7 @@ const SideBar = ({handleFilterChange}: Props) => {
         <form>
           {categories.map((category: string, index: number) => {
             return (
-              <>
+              
                 <fieldset key={index}>
                   <input
                     className="sidebar-filter-selection"
@@ -56,7 +56,7 @@ const SideBar = ({handleFilterChange}: Props) => {
                     {category}
                   </label>
                 </fieldset>
-              </>
+              
             );
           })}
           <div className="sidebar-filter-selection-show-more-continer">
