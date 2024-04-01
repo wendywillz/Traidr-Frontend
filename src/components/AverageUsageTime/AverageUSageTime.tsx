@@ -39,6 +39,21 @@ function AverageUSageTime({ children }: AverageUSageTimeProps) {
       }
     }
 
+    async function sendLastActiveTime(userId: string) {
+      try {
+        const response = await axiosInstance.post(
+          "/admin/send-last-active-time",
+          {
+            userId,
+          }
+        );
+        if (response && response.data.success) {
+          /* empty */
+        }
+      } catch (error) {
+        /* empty */
+      }
+    }
     // Function to initialize startTime on first interaction
     function initializeStartTime() {
       if (!startTime) {
@@ -54,8 +69,8 @@ function AverageUSageTime({ children }: AverageUSageTimeProps) {
       if (document.visibilityState === "hidden") {
         const endTime = new Date();
         const activeDuration = (endTime.getTime() - startTime.getTime()) / 1000;
-        console.log("Active duration:", activeDuration);
         sendActiveDuration(userId, activeDuration);
+        sendLastActiveTime(userId);
       }
     });
 

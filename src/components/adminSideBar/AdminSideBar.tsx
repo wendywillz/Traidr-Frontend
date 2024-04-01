@@ -53,7 +53,7 @@ function AdminSideBar() {
           <span>User Analytics</span>
         </NavLink>
         <NavLink
-          to="/admin/dashboard"
+          to="/admin/dashboard/product-metrics"
           className={`admin-side-bar-each-content ${
             location.pathname.includes("/product-metrics") ? "active-link" : ""
           }`}

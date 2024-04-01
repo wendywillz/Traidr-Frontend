@@ -38,6 +38,16 @@ export default function AverageUsageTimeChart() {
     scales: {
       y: {
         beginAtZero: true,
+        title: {
+          display: true,
+          text: "Hours",
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Days of the Week",
+        },
       },
     },
   };

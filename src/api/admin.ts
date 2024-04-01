@@ -12,3 +12,10 @@ export const fetchAverageUsageTime = async () => {
     return res.data.averageDailyUsage
   }
 }
+
+export const fetchDailyActiveUser = async () => { 
+  const res = await axiosInstance.get(`/admin/get-daily-active-user`);
+  if (res && res.data.dailyActiveUsers) {
+    return res.data.dailyActiveUsers
+  }
+}

@@ -20,8 +20,9 @@ import TestPage from "./views/TestContent/TestPage";
 import { UserAnalytics } from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
 import AdminProtectedRoute from "./components/ProtectedRoute/AdminProtectedRoute";
 import AddQuantityModal from "./views/User/AddQuantityModal/AddQuantityModal";
-import  DeliveryDetails from "./views/User/DeliveryDetail/DeliveryDetails"
+import DeliveryDetails from "./views/User/DeliveryDetail/DeliveryDetails";
 import AdminSignupPage from "./views/Admin/AdminSignupPage/AdminSignupPage";
+import ProductMetrics from "./views/Admin/AdminPages/ProductMetrics/ProductMetrics";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
             <Routes>
               <Route index element={<AdminDashboardPage />} />
               <Route path="user-analytics" element={<UserAnalytics />} />
+              <Route path="product-metrics" element={<ProductMetrics />} />
             </Routes>
           </AdminProtectedRoute>
         }
@@ -75,9 +77,8 @@ function App() {
       <Route
         path="/qty"
         element={<AddQuantityModal toggleVisiblity={() => {}} />}
-      
       />
-      <Route path="/delivery-details" element={<DeliveryDetails/>} />
+      <Route path="/delivery-details" element={<DeliveryDetails />} />
     </Routes>
   );
 }
