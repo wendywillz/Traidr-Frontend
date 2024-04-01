@@ -1,29 +1,40 @@
 // import { images } from "./index";
 import { IoIosTimer } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import "./TopDescription.css";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineChat } from "react-icons/md";
 import { shopProductsInterface } from "../../interfaces/shopInterfaces";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+import AddToCartButton from "../AddToCartButton/AddToCartButton";
 
 function TopDescription({ ...props }: shopProductsInterface) {
   const [selectedOption, setSelectedOption] = useState("");
 
-  const handleSelectChange = (e: any) => {
+  const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(e.target.value);
   };
-  const {productId} = useParams()
+
+  
+   const currentProductId = props.productId
+
+   const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
+
+  const toggleQuantityModal = () => {
+    console.log("modalVisible?", quantityModalVisibility);
+    setQuantityModalVisibility(!quantityModalVisibility);
+  };
 
   return (
     <div>
+      
       <section className="display">
         <div>
           <ul className="home-search">
-            <Link to="">Home /</Link>
-            <Link to="">Search /</Link>
+            <Link to="/">Home /</Link>
+            <Link to="/dashboard/">Search /</Link>
             <Link to="">Home appliances</Link>
             <Link to="">Home appliances</Link>
           </ul>
@@ -81,12 +92,11 @@ function TopDescription({ ...props }: shopProductsInterface) {
 
           <div className="sectwo">
             <div className="sub-sec">
-              <p></p>
-              <Link className="wishlist" to="">
+            <AddToCartButton productId={currentProductId} toggleVisibility={toggleQuantityModal}/>
+              <p><Link className="wishlist" to="">
                 Add to Wishlist
-              </Link>
+              </Link></p>
             </div>
-           
 
             <div className="user-info">
               <FaUserCircle style={{ width: "5rem", height: "5rem" }} />
@@ -103,7 +113,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
                 {/* <p>contact: 09085757757,08065443355</p> */}
               </div>
             </div>
-            <div className="add-to-cart">Add to cart </div>
+           
           </div>
         </div>
       </section>

@@ -8,7 +8,7 @@ const AdminDashboardStyle = styled.div`
   width: 20%;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+  padding: 0 2rem 2rem 2rem;
 
   .admin-side-bar-logo-wrapper {
     display: flex;
@@ -29,7 +29,19 @@ const AdminDashboardStyle = styled.div`
     margin: 1rem 0;
     text-decoration: none;
     color: var(--normal-text-color);
+    transition: all 0.3s;
   }
+  .admin-side-bar-content a:hover {
+    background-color: var(--orange-color);
+    color: #fff;
+    padding: 0.8rem 1rem;
+  }
+  .admin-side-bar-content a:active {
+    background-color: var(--orange-color);
+    color: #fff;
+    padding: 0.8rem 1rem;
+  }
+
   .admin-side-bar-each-content a img {
   }
   .admin-side-bar-each-content a span {

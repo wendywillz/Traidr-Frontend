@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 //STYLE IMPORTS
 import {
   AdminPageContainer,
@@ -23,7 +24,7 @@ interface AdminDataSummary {
 }
 
 const AdminDashboardPage = () => {
-  const [adminDataSummary, setAdminDataSummary] = useState<AdminDataSummary>({
+  const [adminDataSummary, _setAdminDataSummary] = useState<AdminDataSummary>({
     totalOrders: 0,
     totalTenants: 0,
     supportTickets: 0,

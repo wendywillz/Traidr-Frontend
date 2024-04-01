@@ -19,7 +19,6 @@ export default function EnterOtpPage() {
 
     try {
       const email = localStorage.getItem("signupOTp");
-      console.log("email", email);
       const res = await axiosInstance.post("/users-otp/verify", {
         otp,
         email,
@@ -68,7 +67,7 @@ export default function EnterOtpPage() {
               {error && <div className="error-message">{error} </div>}
 
               <fieldset className="input-wrapper">
-                <label htmlFor="otp">Otp</label>
+                <label htmlFor="otp">OTP</label>
                 <input
                   type="otp"
                   id="otp"

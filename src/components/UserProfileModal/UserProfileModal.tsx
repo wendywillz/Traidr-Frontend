@@ -39,7 +39,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
   // if(shopId) return null
   const location = useLocation();
   const isSeller = useSelector((state: userState) => state.user.isSeller);
-  console.log("isSeller", isSeller);
+  const userName = useSelector((state: userState) => state.user.name);
   const [shopIdFromBackend, setShopIdFromBackend] = useState("");
   useEffect(() => {
     if (isSeller) {
@@ -56,13 +56,11 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
           <img src={userIcon} className="user-profile-modal-user-image" />
         </div>
         <div className="user-profile-modal-user-info-container">
-          <p className="user-profile-modal-user-name">User Name</p>
+          <p className="user-profile-modal-user-name">
+            {userName.trim() ? userName : "userName"}
+          </p>
           <Link
-            to={
-              location.pathname.includes("dashboard")
-                ? "/user/profile"
-                : "/"
-            }
+            to={location.pathname.includes("dashboard") ? "/user/profile" : "/"}
           >
             <p className="user-profile-modal-user-visit-profile">
               Visit your Profile
@@ -105,11 +103,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
         <hr />
         <div className="user-profile-modal-link-container">
           <Link
-            to={
-              location.pathname.includes("dashboard")
-                ? "/user/my-cart"
-                : "/"
-            }
+            to={location.pathname.includes("dashboard") ? "/user/my-cart" : "/"}
           >
             <div className="user-profile-modal-link-text-and-icon-container">
               <img src={cartIcon} className="user-profile-modal-link-icon" />

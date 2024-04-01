@@ -39,7 +39,7 @@ export const ProfileSettings = () => {
   //fetching the user
   const currentUser: userData = useSelector((state: RootState)=> state.user)
   const currentUserId:string|null = useSelector((state: RootState)=> state.user.userId)
-  const currentUserName:string|null = useSelector((state: RootState)=> state.user.name)
+  //const currentUserName:string|null = useSelector((state: RootState)=> state.user.name)
 
   //Logic for handling the photo upload    
   const [userPic, setUserPic] = useState<File | null>(null);

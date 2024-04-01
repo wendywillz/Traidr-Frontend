@@ -14,10 +14,13 @@ import Description from "./views/User/Description/DescriptionComponents/Descript
 import SuccessModal from "./components/SuccessModal/SuccessModalComponent";
 import Wishlist from "./views/User/wishlistModal/Wishlist";
 import ProfileSettings from "./views/User/ProfileSettingsPage/ProfileSettingsMain/ProfileSettings";
-import AdminSideBar from "./components/adminSideBar/AdminSideBar";
 import AdminDashboardPage from "./views/Admin/AdminPages/AdminDashboard/AdminDashboardPage";
+import AverageUSageTime from "./components/AverageUsageTime/AverageUSageTime";
 //Below is a test page. remove later on.
 import TestPage from "./views/TestContent/TestPage";
+import { UserAnalytics } from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
+
+import AddQuantityModal from "./views/User/AddQuantityModal/AddQuantityModal";
 
 function App() {
   return (
@@ -27,20 +30,22 @@ function App() {
         path="/dashboard/*"
         element={
           <ProtectedRoute>
-            <Routes>
-              <Route index element={<Dashboard />} />
-              <Route
-                path="shop-registration"
-                element={<ShopRegistrationPage />}
-              />
-              <Route path="change-password" element={<ChangePassword />} />
-              <Route path="shop-profile/:shopId" element={<ShopProfile />} />
-              <Route
-                path="stock-your-shop/:shopId"
-                element={<StockYourShop />}
-              />
-              <Route path="user/edit-profile" element={<ProfileSettings/>} />
-            </Routes>
+            <AverageUSageTime>
+              <Routes>
+                <Route index element={<Dashboard />} />
+                <Route
+                  path="shop-registration"
+                  element={<ShopRegistrationPage />}
+                />
+                <Route path="change-password" element={<ChangePassword />} />
+                <Route path="shop-profile/:shopId" element={<ShopProfile />} />
+                <Route
+                  path="stock-your-shop/:shopId"
+                  element={<StockYourShop />}
+                />
+                <Route path="user/edit-profile" element={<ProfileSettings />} />
+              </Routes>
+            </AverageUSageTime>
           </ProtectedRoute>
         }
       />
@@ -52,9 +57,15 @@ function App() {
       <Route path="/user/my-wishlist" element={<Wishlist />} />
       <Route path="/success-modal" element={<SuccessModal />} />
       <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+      <Route path="/admin/user-analytics" element={<UserAnalytics />} />
       <Route path="/test" element={<TestPage />} />
+      <Route path="/admin/user-analytics" element={<UserAnalytics />} />
+      <Route
+        path="/qty"
+        element={<AddQuantityModal toggleVisiblity={() => {}} />}
+      />
     </Routes>
   );
 }
 
-export default App; 
+export default App;

@@ -24,7 +24,10 @@ export const AdminPageTitle = styled.h2`
 `;
 
 export const AdminPageContent = styled.div`
-  border: 2px solid blue;
+  display: grid;
+  grid-template-columns: 50% 50% !important;
+  gap: 10px;
   background-color: #f9fafb;
+  background-color: red;
   margin-left: 2.5vw;
 `;

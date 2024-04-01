@@ -9,7 +9,6 @@ export const nameYourShopSlice = createSlice({
   reducers: {
     updatedNameYourShop: (state, action) => {
       const nameYourShop = action.payload;
-      console.log("initial state", initialState);
       return Object.assign(state, nameYourShop);
     },
     clearNameYourShop: (state) => {

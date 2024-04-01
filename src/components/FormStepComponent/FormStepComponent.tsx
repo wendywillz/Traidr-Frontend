@@ -8,10 +8,6 @@ import {
   TellUsAboutYourShopFormDetails,
   ShopSecurityInterface,
 } from "../../interfaces/shopInterfaces";
-// import useMultiStepForm from "../HandleMultipleForm/HandleMultipleForm";
-// import NameYourShopComponent from "../../views/ShopRegistration/NameYourShop/NameYourShop";
-// import TellUsAboutYourShopComponent from "../../views/ShopRegistration/TellUsAboutYourShop/TellUsAboutYourShop";
-// import ShopSecurityPage from "../../views/ShopRegistration/ShopSecurityPage/ShopSecurityPage";
 interface shopSecurityState {
   shopSecurity: ShopSecurityInterface;
 }
@@ -26,18 +22,10 @@ interface formStepperState {
 }
 
 function FormStepComponent() {
-  // const steps = [
-  //   <NameYourShopComponent />,
-  //   <TellUsAboutYourShopComponent />,
-  //   <ShopSecurityPage />,
-  // ];
-
-  // const { currentStepIndex } = useMultiStepForm(steps);
-  // console.log("currentStep", currentStep);
   const currentStepIndex = useSelector(
     (state: formStepperState) => state.formStepper
   );
-  //console.log("currentStepIndex", currentStepIndex);
+
   const nameYourShop = useSelector(
     (state: nameYourShopState) => state.nameYourShop
   );
@@ -48,55 +36,6 @@ function FormStepComponent() {
   const shopSecurity = useSelector(
     (state: shopSecurityState) => state.shopSecurity
   );
-
-  // const [nameYourShop, setNameYourShop] = useState<NameYourShopFormDetails>({
-  //   shopName: "",
-  //   shopCategory: "",
-  //   shopCurrency: "NGN",
-  //   shopDescription: "",
-  // });
-  // useEffect(() => {
-  //   const storedNameYourShop = JSON.parse(
-  //     localStorage.getItem("nameYourShop")!
-  //   );
-  //   if (storedNameYourShop) {
-  //     setNameYourShop(storedNameYourShop);
-  //   }
-  // }, []);
-
-  // const [tellUsAboutYourShop, SetTellUsAboutYourShop] =
-  //   useState<TellUsAboutYourShopFormDetails>({
-  //     shopCountry: "",
-  //     shopStreetAddress: "",
-  //     shopCity: "",
-  //     shopState: "",
-  //     shopZipCode: "",
-  //   });
-  // useEffect(() => {
-  //   const storedTellUsAboutYourShop = JSON.parse(
-  //     localStorage.getItem("tellUsAboutYourShop")!
-  //   );
-  //   if (storedTellUsAboutYourShop) {
-  //     SetTellUsAboutYourShop(storedTellUsAboutYourShop);
-  //   }
-  // }, []);
-
-  // const [shopSecurity, setShopSecurity] = useState(false);
-  // useEffect(() => {
-  //   const storedShopSecurity = JSON.parse(
-  //     localStorage.getItem("shopSecurity")!
-  //   );
-  //   if (storedShopSecurity) {
-  //     setShopSecurity(storedShopSecurity);
-  //   }
-  // }, []);
-  //const nameYourShop = JSON.parse(localStorage.getItem("nameYourShop")!);
-  // const tellUsAboutYourShop = JSON.parse(
-  //   localStorage.getItem("tellUsAboutYourShop")!
-  // );
-  //const shopSecurity = JSON.parse(localStorage.getItem("shopSecurity")!);
-
-  //const howYouGetPaid = localStorage.getItem("howYouGetPaid");
 
   function returnNameYourShopLineColor() {
     if (nameYourShop.shopCategory) {
@@ -169,13 +108,7 @@ function FormStepComponent() {
             ) : (
               <FaCircle className="grey-color" />
             )}
-            {/* {currentStepIndex.currentStepIndex === 2 && shopSecurity ? (
-              <CiCircleCheck className="step-icon" />
-            ) : currentStepIndex.currentStepIndex === 2 && !shopSecurity ? (
-              <FaCircle className="step-icon" />
-            ) : (
-              <FaCircle className="grey-color" />
-            )} */}
+
             <p>Shop Security</p>
           </div>
         </div>

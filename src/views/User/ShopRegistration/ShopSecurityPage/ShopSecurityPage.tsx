@@ -51,14 +51,12 @@ const ShopSecurityPage = () => {
       if (!nameYourShop || !tellUsAboutYourShop || !shopSecurity) {
         alert("Please complete all sections of the form");
       } else {
-        console.log("done", userData);
         const res = await axiosInstance.post("/shop/create-shop", {
           ...nameYourShop,
           ...tellUsAboutYourShop,
           shopOwner: userData.userId,
         });
         if (res && res.data.shopCreated) {
-          console.log("hop created", res.data.shopCreadted);
           setIsLoading(false);
           localStorage.removeItem("nameYourShop");
           localStorage.removeItem("tellUsAboutYourShop");

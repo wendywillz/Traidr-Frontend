@@ -66,6 +66,7 @@ const FormStepComponentWrapper = styled.div`
   .step-icon {
     font-size: 2rem;
     color: var(--orange-color);
+    background-color: white;
   }
 
   .form-step p {

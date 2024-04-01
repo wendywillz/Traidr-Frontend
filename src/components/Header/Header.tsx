@@ -21,7 +21,6 @@ export default function Header() {
   const [notificationCount, setNotificationCount] = useState(0);
   const token = localStorage.getItem("token");
   const isSeller = useSelector((state: userState) => state.user.isSeller);
-  console.log("isSeller", isSeller);
   const [shopIdFromBackend, setShopIdFromBackend] = useState("");
   useEffect(() => {
     if (isSeller) {
@@ -42,7 +41,6 @@ export default function Header() {
   const [profileModalVisibility, setProfileModalVisibility] = useState(false);
 
   const toggleProfileModal = () => {
-    console.log("profile", profileModalVisibility);
     setProfileModalVisibility(!profileModalVisibility);
   };
 
