@@ -4,7 +4,7 @@ export const RecentActivityContainer = styled.div`
    
     
 .recent-activity{
-    border: 1px solid red;
+    // border: 1px solid red;
     width: 18vw;
     height: 70vh;
     margin-left: 47rem;
