@@ -1,57 +1,87 @@
 import styled from "styled-components";
 
-export const AdminHeaderContainer = styled.div`
-    border: 1px solid green;
+const HeaderStyle = styled.header`
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  background-color: #fff;
+  z-index: 100;
+  top: 0;
+  align-items: center;
+  padding: 0rem 2rem;
+  height: 4rem;
+  margin-bottom: 2rem;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+  .header-inner {
     display: flex;
-    height: 7vh;
-    background-color: white;
-    margin-bottom: 4vh;
-    /* width: 80%; */
-`
-
-export const AdminSearchbarContainer = styled.div`
-    border: 1px solid grey;
-    border-radius:8px;
+    justify-content: space-between;
+    align-items: center;
+    flex-basis: 100%;
+    width: 100%;
+    @media (min-width: 1500px) {
+      max-width: 1500px;
+    }
+  }
+  .search-wrapper {
+    flex-basis: 50%;
+    width: 50%;
     display: flex;
-    margin-top: 1vh;
-    margin-left: 2.5vw;
-    margin-right: 16vw;
-    padding: 0 0.5vw;
-    height: 5vh;
-    opacity: 50%;
-
-    .admin-header-search-icon{
-        border: none;
-        margin-right: 0.5rem;
-        margin-top: 1vh;
-        color: grey;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .search-wrapper input {
+    width: 100%;
+    border: none;
+    padding: 0.8rem;
+    outline: none;
+    color: var(--normal-text-color);
+  }
+    .search-wrapper input::placeholder {
+        color: var(--input-placeholder-color);
     }
-    .admin-header-searchbar{
-        border: none;
-        font-size: 1vw;
-        width: 40vw;
-    }
-`
+  .search-wrapper input:focus {
+    border: none;
+    outline: none:
+  }
+  .user-profile-img-wrapper {
+    height: 4rem;
+    width: 4rem;
+  }
 
-export const AdminUserImageContainer = styled.div`
-    border: 1px solid red;
+  .user-profile-img-wrapper img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .header-right-btn-wrapper {
+    flex-basis: 50%;
     display: flex;
-    flex-wrap:nowrap;
-    width: 18vw;
-
-    .admin-header-notification-icon{
-        color: grey;
-        margin-top: 1.5vh;
-        margin-right: 0.5vw;
+    gap: 1rem;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .small-screen-icon {
+    display: block;
+    color: var(--orange-color);
+    @media (min-width: 768px) {
+      display: none;
     }
-
-    .admin-header-user-icon{
-        margin-right: 0.5vw;
+  }
+  .big-screen {
+    @media (max-width: 768px) {
+      display: none;
     }
+  }
+  .admin-notification-icon, .admin-profile-img {
+   cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+  }
+`;
 
-    .admin-header-user-name{
-        color: grey;
-        margin-top: 1.3vh;
-    }
-`
-
+export default HeaderStyle;

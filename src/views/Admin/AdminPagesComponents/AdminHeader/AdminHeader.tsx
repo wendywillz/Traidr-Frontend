@@ -1,23 +1,30 @@
-import { AdminHeaderContainer, AdminSearchbarContainer, AdminUserImageContainer } from "./AdminHeader.Styled"
-import { BsSearch, BsPersonCircle, BsBell } from "react-icons/bs"
+import HeaderStyle from "./AdminHeader.Styled";
+import { BsBell } from "react-icons/bs";
+import { FaUserCircle } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../app/store";
+export default function AdminHeader() {
+  const userData = useSelector((state: RootState) => state.user);
+  // useEffect(() => {
 
-const AdminHeader = () => {
+  // }, []);
+
   return (
-    <AdminHeaderContainer>
-        <AdminSearchbarContainer>
-            <BsSearch size={"1.3vw"} className="admin-header-search-icon"/>
-            <input type="text" placeholder="Search for Data..." className="admin-header-searchbar"/>
+    <HeaderStyle>
+      <div className="header-inner">
+        <div className="search-wrapper">
+          <input type="text" placeholder="Search for Data..... " />
+        </div>
+        <div className="header-right-btn-wrapper">
+          <BsBell className="admin-notification-icon" />
 
-        </AdminSearchbarContainer>
+          <FaUserCircle className="admin-profile-img" />
 
-        <AdminUserImageContainer>
-            <BsBell size={"1.5vw"} className="admin-header-notification-icon"/>
-            <BsPersonCircle size={"3.6vw"} className="admin-header-user-icon"/>
-            <p className="admin-header-user-name">Janet Lannister</p>
-        </AdminUserImageContainer>
-
-    </AdminHeaderContainer>
-  )
+          <div className="admin-name-wrapper">
+            <p>{userData.name}</p>
+          </div>
+        </div>
+      </div>
+    </HeaderStyle>
+  );
 }
-
-export default AdminHeader

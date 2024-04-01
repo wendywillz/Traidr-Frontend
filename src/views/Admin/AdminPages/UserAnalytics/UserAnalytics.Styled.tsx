@@ -18,10 +18,17 @@ export const UserAnalyticsContent = styled.div`
 `;
 
 export const LineChartContainer = styled.div`
-  border: 1px solid orange;
-  background-color: white;
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  p {
+    margin: 1rem 0;
+  }
 `;
 
 export const AverageUsageTimeStyle = styled.div`
   background-color: #fff;
+  padding: 0.5rem 1rem;
+  p {
+    margin: 1rem 0;
+  }
 `;

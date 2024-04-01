@@ -15,6 +15,8 @@ import AdminSideBar from "../../../../components/adminSideBar/AdminSideBar";
 //PACKAGE IMPORTS
 import { useState } from "react";
 import RecentActivity from "../../AdminPagesComponents/RecentActivity/RecentActivity";
+import { RootState } from "../../../../app/store";
+import { useSelector } from "react-redux";
 
 //INTERFACE DECLARATIONS
 interface AdminDataSummary {
@@ -29,14 +31,14 @@ const AdminDashboardPage = () => {
     totalTenants: 0,
     supportTickets: 0,
   });
-
+  const userData = useSelector((state: RootState) => state.user);
   return (
     <AdminPageContainer>
       <AdminSideBar />
       <AdminPageMain>
         <AdminHeader />
         <AdminPageTitle>Dashboard</AdminPageTitle>
-        <UserGreeting>Welcome {"Janet Lannister"}</UserGreeting>
+        <UserGreeting>Welcome {userData.name}</UserGreeting>
         <AdminPageContent>
           <AllDataCards>
             <DataCard
@@ -57,9 +59,8 @@ const AdminDashboardPage = () => {
               reportLink={"/admin/dashboard/tickets-report"}
             />
           </AllDataCards>
-         
         </AdminPageContent>
-         <RecentActivity/>
+        <RecentActivity />
       </AdminPageMain>
     </AdminPageContainer>
   );

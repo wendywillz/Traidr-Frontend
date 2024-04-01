@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const DailyActiveUserStyle = styled.div`
+export const MonthlyActiveUserStyle = styled.div`
   background-color: #fff;
   padding: 0.5rem 1rem;
   p {

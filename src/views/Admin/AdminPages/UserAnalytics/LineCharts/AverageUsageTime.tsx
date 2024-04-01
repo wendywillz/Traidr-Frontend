@@ -5,25 +5,20 @@ import { fetchAverageUsageTime } from "../../../../../api/admin";
 
 export default function AverageUsageTimeChart() {
   const [averageUsageTime, setAverageUsageTime] = useState<number[]>();
+  const [days, setDays] = useState<string[]>();
+
   useEffect(() => {
     fetchAverageUsageTime().then((res) => {
       if (res) {
         setAverageUsageTime(
-          Object.values<number>(res).map((value: number) => value / 60)
+          Object.values<number>(res).map((value: number) => value / 3600)
         );
+        setDays(Object.keys(res));
       }
     });
   }, []);
   const data = {
-    labels: [
-      "Sunday",
-      "Monday",
-      "Tueday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ],
+    labels: days,
     datasets: [
       {
         label: "Average Usage Time",
@@ -46,17 +41,19 @@ export default function AverageUsageTimeChart() {
       x: {
         title: {
           display: true,
-          text: "Days of the Week",
         },
       },
     },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    }
   };
-
   return (
-    <>
-      <AverageUsageTimeStyle>
-        <Line data={data} options={options} />
-      </AverageUsageTimeStyle>
-    </>
+    <AverageUsageTimeStyle>
+      <p>Average Usage time</p>
+      <Line data={data} options={options} />
+    </AverageUsageTimeStyle>
   );
 }

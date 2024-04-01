@@ -8,14 +8,20 @@ export const fetchUserGender = async () => {
 
 export const fetchAverageUsageTime = async () => {
   const res = await axiosInstance.get(`/admin/user-analytics/get-average-usage-time`);
-  if (res && res.data.averageDailyUsage) {
-    return res.data.averageDailyUsage
+  if (res && res.data.sortedAverageDailyUsage) {
+    return res.data.sortedAverageDailyUsage
   }
 }
 
 export const fetchDailyActiveUser = async () => { 
   const res = await axiosInstance.get(`/admin/get-daily-active-user`);
-  if (res && res.data.dailyActiveUsers) {
-    return res.data.dailyActiveUsers
+  if (res && res.data.sortedDailyActiveUser) {
+    return res.data.sortedDailyActiveUser
+  }
+}
+export const fetchMonthlyActiveUser = async () => { 
+  const res = await axiosInstance.get(`/admin/get-monthly-active-user`);
+  if (res && res.data.sortedMonthlyActiveUsers) {
+    return res.data.sortedMonthlyActiveUsers
   }
 }
