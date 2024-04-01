@@ -7,7 +7,7 @@ export const fetchUserGender = async () => {
 };
 
 export const fetchAverageUsageTime = async () => {
-  const res = await axiosInstance.get(`/admin/user-analytics/get-average-user`);
+  const res = await axiosInstance.get(`/admin/user-analytics/get-average-usage-time`);
   if (res && res.data.averageDailyUsage) {
     return res.data.averageDailyUsage
   }

@@ -16,7 +16,7 @@ import logouticon from "../../assets/user-profile-modal-assets/logout-icon.png";
 import { BsHeart } from "react-icons/bs";
 
 //package imports
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import userData from "../../interfaces/userInterface";
 import { useEffect, useState } from "react";
@@ -28,6 +28,7 @@ interface userState {
   user: userData;
 }
 const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
+  const token = localStorage.getItem("token");
   const handleLogout = () => {
     toggleVissiblity();
     localStorage.removeItem("token");
@@ -37,7 +38,6 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
 
   // const { shopId } = useParams();
   // if(shopId) return null
-  const location = useLocation();
   const isSeller = useSelector((state: userState) => state.user.isSeller);
   const userName = useSelector((state: userState) => state.user.name);
   const [shopIdFromBackend, setShopIdFromBackend] = useState("");
@@ -60,7 +60,8 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
             {userName.trim() ? userName : "userName"}
           </p>
           <Link
-            to={location.pathname.includes("dashboard") ? "/user/profile" : "/"}
+            to={token ? "/dashboard/user/edit-profile" : "/"}
+            onClick={toggleVissiblity}
           >
             <p className="user-profile-modal-user-visit-profile">
               Visit your Profile
@@ -72,11 +73,8 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
       <ModalBody>
         <div className="user-profile-modal-link-container">
           <Link
-            to={
-              location.pathname.includes("dashboard")
-                ? "/dashboard/user/edit-profile"
-                : "/"
-            }
+            to={token ? "/dashboard/user/edit-profile" : "/"}
+            onClick={toggleVissiblity}
           >
             <div className="user-profile-modal-link-text-and-icon-container">
               <img
@@ -93,6 +91,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
                 ? `/dashboard/shop-profile/${shopIdFromBackend}`
                 : `/dashboard/shop-registration`
             }
+            onClick={toggleVissiblity}
           >
             <div className="user-profile-modal-link-text-and-icon-container">
               <img src={myShopIcon} className="user-profile-modal-link-icon" />
@@ -102,9 +101,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
         </div>
         <hr />
         <div className="user-profile-modal-link-container">
-          <Link
-            to={location.pathname.includes("dashboard") ? "/user/my-cart" : "/"}
-          >
+          <Link to={token ? "/user/my-cart" : "/"} onClick={toggleVissiblity}>
             <div className="user-profile-modal-link-text-and-icon-container">
               <img src={cartIcon} className="user-profile-modal-link-icon" />
               <p className="user-profile-modal-link-text">Cart</p>
@@ -112,11 +109,8 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
           </Link>
 
           <Link
-            to={
-              location.pathname.includes("dashboard")
-                ? "/user/my-messages"
-                : "/"
-            }
+            to={token ? "/user/my-messages" : "/"}
+            onClick={toggleVissiblity}
           >
             <div className="user-profile-modal-link-text-and-icon-container">
               <img
@@ -128,11 +122,8 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
           </Link>
 
           <Link
-            to={
-              location.pathname.includes("dashboard")
-                ? "/user/my-wishlist"
-                : "/login"
-            }
+            to={token ? "/user/my-wishlist" : "/login"}
+            onClick={toggleVissiblity}
           >
             <div className="user-profile-modal-link-text-and-icon-container">
               <BsHeart
