@@ -29,7 +29,7 @@ function AdminSideBar() {
           <img src={useranalyticsIcon} alt="" />
           <span>User Analytics</span>
         </Link>
-        <Link to="/" className="admin-side-bar-each-content">
+        <Link to="/productmetrics" className="admin-side-bar-each-content">
           <img src={productIcon} alt="" />
           <span>Product Metrics</span>
         </Link>
