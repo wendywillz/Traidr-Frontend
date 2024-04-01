@@ -13,7 +13,7 @@ export default function AverageUsageTimeChart() {
         setAverageUsageTime(
           Object.values<number>(res).map((value: number) => value / 3600)
         );
-        setDays(Object.keys(res));
+        setDays(Object.keys(res).map((day) => day.slice(0, 3)));
       }
     });
   }, []);
@@ -48,7 +48,7 @@ export default function AverageUsageTimeChart() {
       legend: {
         display: false,
       },
-    }
+    },
   };
   return (
     <AverageUsageTimeStyle>

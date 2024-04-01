@@ -6,19 +6,17 @@ import {
   SideBarCategoryTitle,
 } from "../DashboardStyles/SideBar.styled";
 import arrow from "../../../../assets/dashboard-assets/inverted_caret.png";
-import orangeArrow from "../../../../assets/dashboard-assets/orange_inverted_caret.png";
+// import orangeArrow from "../../../../assets/dashboard-assets/orange_inverted_caret.png";
 import { fetchProductsCategories } from "../../../../api/product";
 import { ChangeEvent, useEffect, useState } from "react";
 
 //Prop declaration:
-interface Props{
-  handleFilterChange :(event: ChangeEvent<HTMLInputElement>)=>void;
+interface Props {
+  handleFilterChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-
-const SideBar = ({handleFilterChange}: Props) => {
+const SideBar = ({ handleFilterChange }: Props) => {
   const [categories, setCategories] = useState([]);
-  
 
   // fetching shop categories
   useEffect(() => {
@@ -42,30 +40,28 @@ const SideBar = ({handleFilterChange}: Props) => {
         <form>
           {categories.map((category: string, index: number) => {
             return (
-              
-                <fieldset key={index}>
-                  <input
-                    className="sidebar-filter-selection"
-                    type="radio"
-                    name={`category`}
-                    id={index.toString()}
-                    value={category}
-                    onChange={handleFilterChange}
-                  />
-                  <label className="sidebar-filter-selection-label">
-                    {category}
-                  </label>
-                </fieldset>
-              
+              <fieldset key={index}>
+                <input
+                  className="sidebar-filter-selection"
+                  type="radio"
+                  name={`category`}
+                  id={index.toString()}
+                  value={category}
+                  onChange={handleFilterChange}
+                />
+                <label className="sidebar-filter-selection-label">
+                  {category}
+                </label>
+              </fieldset>
             );
           })}
-          <div className="sidebar-filter-selection-show-more-continer">
+          {/* <div className="sidebar-filter-selection-show-more-continer">
             <p className="sidebar-filter-selection-show-more-text">Show more</p>
             <img
               className="sidebar-filter-selection-show-more-arrow"
               src={orangeArrow}
             />
-          </div>
+          </div> */}
           {/* Price secetion */}
           <SideBarCategoryTitle>
             <h2 className="sidebar-category-filter-title">Price</h2>
@@ -81,7 +77,6 @@ const SideBar = ({handleFilterChange}: Props) => {
               name="minPrice"
               placeholder="min"
               onChange={handleFilterChange}
-              
             />
             <span className="sidebar-price-separator"> - </span>
 
@@ -93,13 +88,13 @@ const SideBar = ({handleFilterChange}: Props) => {
               onChange={handleFilterChange}
             />
           </fieldset>
-          <div className="sidebar-filter-selection-show-more-continer">
+          {/* <div className="sidebar-filter-selection-show-more-continer">
             <p className="sidebar-filter-selection-show-more-text">Show more</p>
             <img
               className="sidebar-filter-selection-show-more-arrow"
               src={orangeArrow}
             />
-          </div>
+          </div> */}
           {/* colour filter */}
           <SideBarCategoryTitle>
             <h2 className="sidebar-category-filter-title">Colour</h2>
@@ -153,13 +148,13 @@ const SideBar = ({handleFilterChange}: Props) => {
             />
             <label className="sidebar-filter-selection-label">Yellow</label>
           </fieldset>
-          <div className="sidebar-filter-selection-show-more-continer">
+          {/* <div className="sidebar-filter-selection-show-more-continer">
             <p className="sidebar-filter-selection-show-more-text">Show more</p>
             <img
               className="sidebar-filter-selection-show-more-arrow"
               src={orangeArrow}
             />
-          </div>
+          </div> */}
         </form>
       </SideBarCategory>
     </SideBarContainer>
