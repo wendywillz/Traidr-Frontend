@@ -92,7 +92,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
 
           <div className="sectwo">
             <div className="sub-sec">
-            <AddToCartButton productId={currentProductId} toggleVisibility={toggleQuantityModal}/>
+            <AddToCartButton buttonText={`ADD TO CART`} productId={currentProductId} toggleVisibility={toggleQuantityModal}/>
               <p><Link className="wishlist" to="">
                 Add to Wishlist
               </Link></p>

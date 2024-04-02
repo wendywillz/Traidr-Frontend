@@ -1,68 +1,71 @@
 import Header from "../../../components/Header/Header";
-import { CartContainer, CartContent, CartText, Cartleftcontainer, CartleftcontainerImg, CartleftcontainerText } from "./CartPage.Styled";
-import ViewMoreButton from "../../../components/button/ViewMoreButton/ViewMoreButton";
-import blender from "../../../assets/Description/blender.png";
+import { CartContainer,  CartText, OrderButton } from "./CartPage.Styled";
+import CartItemRow from "./CartItemRow";
+
+//Interface imports
+import { CartProductDetail } from "../../../interfaces/cartInterfaces";
+
+
+
+//packages and tools
+import { useState, useEffect } from "react";
+import { fetchCartItems } from "../../../api/cart";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../app/store";
+import axiosInstance from "../../../utils/axiosInstance";
+
 
 
 const CartPage = () => {
+const userId:string|null = useSelector((state: RootState)=> state.user.userId)
+
+const [cartProducts, setCartProducts] = useState<CartProductDetail[]>()
+
+useEffect(()=>{
+  fetchCartItems(userId).then((res) => {
+    if (res) {
+      setCartProducts(res);
+    }
+  });
+},[cartProducts])
+
+
+
+const handleDelete = async(productId: string)=>{
+  const selectedProductDetail = {
+      userId: userId,
+      productId: productId
+  }
+try {
+ const res = await axiosInstance.post(`/cart/delete-cart-item`, selectedProductDetail)
+ if(res && res.data.success) location.reload()
+  console.log(`Product deleted`);
+  
+  
+} catch (error) {
+  console.log(`Error deleting product. Reason:` , error);
+}
+
+}
+
   return (
     <>
       <Header />
       <CartContainer>
         <CartText>
-            Wishlist
+            Your Cart
         </CartText>
-        <CartContent>
-          <Cartleftcontainer>
-            <CartleftcontainerImg>
-              <img src={blender} alt="blender" />
-            </CartleftcontainerImg>
-            <CartleftcontainerText>
-              <p className="wishlistHeading">Hens Red Blender Set</p>
-              <p className="wishlistDescription">
-                Lorem ipsum dolor sit amet consectetur. Tellus potenti volutpat
-                etiam maecenas feugiat viverra faucibus.
-              </p>
-              <p className="wishlistPrice">N30,000 Negotiable</p>
-            </CartleftcontainerText>
-          </Cartleftcontainer>
-          <ViewMoreButton button_text={"View More"} type={"button"} />
-        </CartContent>
-
-        <CartContent>
-          <Cartleftcontainer>
-            <CartleftcontainerImg>
-              <img src={blender} alt="blender" />
-            </CartleftcontainerImg>
-            <CartleftcontainerText>
-              <p className="wishlistHeading">Hens Red Blender Set</p>
-              <p className="wishlistDescription">
-                Lorem ipsum dolor sit amet consectetur. Tellus potenti volutpat
-                etiam maecenas feugiat viverra faucibus.
-              </p>
-              <p className="wishlistPrice">N30,000 Negotiable</p>
-            </CartleftcontainerText>
-          </Cartleftcontainer>
-          <ViewMoreButton button_text={"View More"} type={"button"} />
-        </CartContent>
-
-        <CartContent>
-          <Cartleftcontainer>
-            <CartleftcontainerImg>
-              <img src={blender} alt="blender" />
-            </CartleftcontainerImg>
-            <CartleftcontainerText>
-              <p className="wishlistHeading">Hens Red Blender Set</p>
-              <p className="wishlistDescription">
-                Lorem ipsum dolor sit amet consectetur. Tellus potenti volutpat
-                etiam maecenas feugiat viverra faucibus.
-              </p>
-              <p className="wishlistPrice">N30,000 Negotiable</p>
-            </CartleftcontainerText>
-          </Cartleftcontainer>
-          <ViewMoreButton button_text={"View More"} type={"button"} />
-        </CartContent>
-
+        <div>
+          {cartProducts?.map((product)=>{
+            return(
+              <CartItemRow cartItem={product} key={product.productId} handleDelete={handleDelete}/>
+            )
+          })}
+        </div>
+        
+       
+        
+        <OrderButton>PLACE ORDER</OrderButton>
       </CartContainer>
     </>
   );
@@ -70,3 +73,5 @@ const CartPage = () => {
 
 
 export default CartPage
+
+{/* <ViewMoreButton button_text={"View More"} type={"button"} /> */}
