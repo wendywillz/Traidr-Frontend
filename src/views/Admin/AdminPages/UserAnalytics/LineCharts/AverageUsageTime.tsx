@@ -1,39 +1,59 @@
 import { Line } from "react-chartjs-2";
 import { AverageUsageTimeStyle } from "../UserAnalytics.Styled";
-const data = {
-  labels: [
-    "Sunday",
-    "Monday",
-    "Tueday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ],
-  datasets: [
-    {
-      label: "Average Usage Time",
-      data: [65, 59, 80, 81, 56, 55, 40],
-      fill: false,
-      backgroundColor: "rgb(75, 192, 192)",
-      borderColor: "rgba(75, 192, 192, 0.2)",
-    },
-  ],
-};
+import { useEffect, useState } from "react";
+import { fetchAverageUsageTime } from "../../../../../api/admin";
 
-const options = {
-  scales: {
-    y: {
-      beginAtZero: true,
-    },
-  },
-};
 export default function AverageUsageTimeChart() {
+  const [averageUsageTime, setAverageUsageTime] = useState<number[]>();
+  const [days, setDays] = useState<string[]>();
+
+  useEffect(() => {
+    fetchAverageUsageTime().then((res) => {
+      if (res) {
+        setAverageUsageTime(
+          Object.values<number>(res).map((value: number) => value / 3600)
+        );
+        setDays(Object.keys(res).map((day) => day.slice(0, 3)));
+      }
+    });
+  }, []);
+  const data = {
+    labels: days,
+    datasets: [
+      {
+        label: "Average Usage Time",
+        data: averageUsageTime,
+        fill: false,
+        backgroundColor: "rgb(75, 192, 192)",
+        borderColor: "rgba(75, 192, 192, 0.2)",
+      },
+    ],
+  };
+  const options = {
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: "Hours",
+        },
+      },
+      x: {
+        title: {
+          display: true,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
   return (
-    <>
-      <AverageUsageTimeStyle>
-        <Line data={data} options={options} />;
-      </AverageUsageTimeStyle>
-    </>
+    <AverageUsageTimeStyle>
+      <p>Average Usage time</p>
+      <Line data={data} options={options} />
+    </AverageUsageTimeStyle>
   );
 }

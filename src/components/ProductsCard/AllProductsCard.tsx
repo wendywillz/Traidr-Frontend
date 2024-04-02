@@ -38,7 +38,7 @@ function AllProductsCard({ product }: ProductProps) {
       <p className="each-product-description">{product.productDescription.substring(0, 30)}{product.productDescription.length >=30? "...":""}</p>
       <span className="each-product-price">₦{product.productPrice.toLocaleString()}</span>
     </AllProductsWrapper>
-    <div className="dashboard-add-to-cart-button"> <AddToCartButton productId={product.productId} toggleVisibility={toggleQuantityModal}/>
+    <div className="dashboard-add-to-cart-button"> <AddToCartButton buttonText={`ADD TO CART`}  productId={product.productId} toggleVisibility={toggleQuantityModal}/>
    </div> 
     </AllProductsCardContainer>
     

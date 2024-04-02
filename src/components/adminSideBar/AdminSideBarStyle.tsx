@@ -6,6 +6,7 @@ const AdminDashboardStyle = styled.div`
   height: 100vh;
   position: fixed;
   width: 20%;
+  z-index: 200;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 0 2rem 2rem 2rem;
@@ -21,7 +22,7 @@ const AdminDashboardStyle = styled.div`
     margin-top: 2rem;
   }
 
-  .admin-side-bar-content a {
+  .admin-side-bar-each-content {
     display: flex;
     gap: 1rem;
     align-items: center;
@@ -31,15 +32,15 @@ const AdminDashboardStyle = styled.div`
     color: var(--normal-text-color);
     transition: all 0.3s;
   }
-  .admin-side-bar-content a:hover {
+  .admin-side-bar-each-content:hover {
     background-color: var(--orange-color);
     color: #fff;
     padding: 0.8rem 1rem;
   }
-  .admin-side-bar-content a:active {
-    background-color: var(--orange-color);
-    color: #fff;
-    padding: 0.8rem 1rem;
+  .active-link {
+    background-color: var(--orange-color) !important;
+    color: #fff !important;
+    padding: 0.8rem 1rem !important;
   }
 
   .admin-side-bar-each-content a img {

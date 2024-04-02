@@ -45,7 +45,9 @@ export default function LoginPage() {
           setError("");
           localStorage.setItem("token", res.data.successfulLogin.token);
           dispatch(login(res.data.successfulLogin));
-          navigate(`/dashboard`);
+          res.data.successfulLogin.isAdmin
+            ? navigate(`/admin/dashboard`)
+            : navigate(`/dashboard`);
         } else if (res.data.userNotFoundError) {
           setIsLoading(false);
           setError("User does not exist, kindly signup");

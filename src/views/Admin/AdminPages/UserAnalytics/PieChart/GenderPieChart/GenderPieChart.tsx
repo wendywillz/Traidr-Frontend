@@ -3,10 +3,10 @@ import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import { fetchUserGender } from "../../../../../../api/admin";
 
-interface GenderDetails {
-  maleCount: number;
-  femaleCount: number;
-}
+// interface GenderDetails {
+//   maleCount: number;
+//   femaleCount: number;
+// }
 
 export const GenderPieChart = () => {
   const [genderDetails, setGenderDetails] = useState({
@@ -28,15 +28,13 @@ export const GenderPieChart = () => {
   useEffect(() => {
     fetchUserGender().then((res) => {
       if (res) {
-        console.log(`RESPONSE:`, res);
         setGenderDetails({
           maleCount: res.totalMaleCount,
           femaleCount: res.totalFemaleCount,
         });
-      } else {
-        console.log(`Error getting response`);
       }
     });
+    return () => {};
   }, []); // Removed genderDetails from the dependency array to avoid infinite loops
 
   return (

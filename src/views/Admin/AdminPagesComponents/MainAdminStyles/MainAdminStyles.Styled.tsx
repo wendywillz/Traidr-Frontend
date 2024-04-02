@@ -7,7 +7,6 @@ export const AdminPageContainer = styled.div`
 `;
 
 export const AdminPageMain = styled.div`
-  border: 2px solid pink;
   background-color: #f9fafb;
   width: 80%;
   margin-left: 20%;
@@ -26,8 +25,8 @@ export const AdminPageTitle = styled.h2`
 export const AdminPageContent = styled.div`
   display: grid;
   grid-template-columns: 50% 50% !important;
-  gap: 10px;
+  gap: 2rem;
   background-color: #f9fafb;
-  background-color: red;
-  margin-left: 2.5vw;
+  padding: 0 2rem;
+  overflow-x: hidden;
 `;

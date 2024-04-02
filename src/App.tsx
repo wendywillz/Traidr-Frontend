@@ -16,22 +16,24 @@ import Wishlist from "./views/User/wishlistModal/Wishlist";
 import ProfileSettings from "./views/User/ProfileSettingsPage/ProfileSettingsMain/ProfileSettings";
 import AdminDashboardPage from "./views/Admin/AdminPages/AdminDashboard/AdminDashboardPage";
 import AverageUSageTime from "./components/AverageUsageTime/AverageUSageTime";
-//Below is a test page. remove later on.
 import TestPage from "./views/TestContent/TestPage";
 import { UserAnalytics } from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
-
-import AddQuantityModal from "./views/User/AddQuantityModal/AddQuantityModal";
-import  DeliveryDetails from "./views/User/DeliveryDetail/DeliveryDetails"
+import AdminProtectedRoute from "./components/ProtectedRoute/AdminProtectedRoute";
+import DeliveryDetails from "./views/User/DeliveryDetail/DeliveryDetails";
+import AdminSignupPage from "./views/Admin/AdminSignupPage/AdminSignupPage";
+import ProductMetrics from "./views/Admin/AdminPages/ProductMetrics/ProductMetrics";
+import CartPage from "./views/User/CartModal/CartPage";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
+
       <Route
         path="/dashboard/*"
         element={
-          <ProtectedRoute>
-            <AverageUSageTime>
+          <AverageUSageTime>
+            <ProtectedRoute>
               <Routes>
                 <Route index element={<Dashboard />} />
                 <Route
@@ -45,28 +47,37 @@ function App() {
                   element={<StockYourShop />}
                 />
                 <Route path="user/edit-profile" element={<ProfileSettings />} />
+                
               </Routes>
-            </AverageUSageTime>
-          </ProtectedRoute>
+            </ProtectedRoute>
+          </AverageUSageTime>
         }
       />
+      <Route
+        path="/admin/dashboard/*"
+        element={
+          <AdminProtectedRoute>
+            <Routes>
+              <Route index element={<AdminDashboardPage />} />
+              <Route path="user-analytics" element={<UserAnalytics />} />
+              <Route path="product-metrics" element={<ProductMetrics />} />
+            </Routes>
+          </AdminProtectedRoute>
+        }
+      ></Route>
+
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
+      <Route path="/traidr/admin/signup" element={<AdminSignupPage />} />
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/description/:productId" element={<Description />} />
       <Route path="/user/my-wishlist" element={<Wishlist />} />
       <Route path="/success-modal" element={<SuccessModal />} />
-      <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-      <Route path="/admin/user-analytics" element={<UserAnalytics />} />
       <Route path="/test" element={<TestPage />} />
-      <Route path="/admin/user-analytics" element={<UserAnalytics />} />
-      <Route
-        path="/qty"
-        element={<AddQuantityModal toggleVisiblity={() => {}} />}
-      
-      />
-      <Route path="/delivery-details" element={<DeliveryDetails/>} />
+     
+      <Route path="/delivery-details" element={<DeliveryDetails />} />
+      <Route path="/user/my-cart" element={<CartPage/>} />
     </Routes>
   );
 }
