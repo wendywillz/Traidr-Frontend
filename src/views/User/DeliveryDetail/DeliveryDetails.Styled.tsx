@@ -4,7 +4,7 @@ import formBackground from "../../../assets/form-background-image.png";
 export const DeliveryDetailsContainer = styled.div`
 
 .body-div {
-  height: 100vh; /* Set the height to 100% of the viewport height */
+  height: 100vh;
   margin: 0;
   display: flex;
   justify-content: center;
@@ -42,12 +42,18 @@ export const DeliveryDetailsContainer = styled.div`
   margin-bottom: 1.4rem;
 }
 
-.form-container:not(:last-child) {
-  margin-right: 1.4rem;
+.FormContainer:not(:last-child) {
+  margin-right: 2rem;
 }
 
 .form-p {
   margin-bottom: .9rem;
+}
+
+
+.form-p-error{
+  color: red;
+  font-size: 0.5rem;
 }
 
 .form-input {
@@ -67,11 +73,10 @@ export const DeliveryDetailsContainer = styled.div`
   padding: .7rem 1.4rem;
   cursor: pointer;
   margin-top: 1.4rem;
-  width: 80%;
+  width: 100%;
 }
 
 .submit-button:hover {
   transform: translateY(-5px);
 }
-
 `;
