@@ -50,6 +50,7 @@ export const DeliveryDetailsContainer = styled.div`
   margin-bottom: .9rem;
 }
 
+
 .form-p-error{
   color: red;
   font-size: 0.5rem;
