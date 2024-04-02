@@ -1,5 +1,5 @@
 import Header from "../../../components/Header/Header";
-import { CartContainer,  CartText, OrderButton } from "./CartPage.Styled";
+import { CartContainer, CartPageTitle, OrderButton, CartHeaderContainer, CartTotal} from "./CartPage.Styled";
 import CartItemRow from "./CartItemRow";
 
 //Interface imports
@@ -20,14 +20,19 @@ const CartPage = () => {
 const userId:string|null = useSelector((state: RootState)=> state.user.userId)
 
 const [cartProducts, setCartProducts] = useState<CartProductDetail[]>()
+const [cartTotal, setCartTotal]= useState<number|undefined>(0)
 
 useEffect(()=>{
+  
   fetchCartItems(userId).then((res) => {
     if (res) {
       setCartProducts(res);
+      let total = cartProducts?.reduce((acc, curr)=> acc + (curr.productPrice* curr.productQuantity), 0)
+      setCartTotal(total)
     }
   });
 },[cartProducts])
+
 
 
 
@@ -52,9 +57,12 @@ try {
     <>
       <Header />
       <CartContainer>
-        <CartText>
-            Your Cart
-        </CartText>
+        <CartHeaderContainer>
+        <CartPageTitle>Cart Total</CartPageTitle>
+        <CartTotal>₦{cartTotal?.toLocaleString()}</CartTotal>
+
+        </CartHeaderContainer>
+       
         <div>
           {cartProducts?.map((product)=>{
             return(
