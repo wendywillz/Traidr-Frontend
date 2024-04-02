@@ -7,7 +7,7 @@ export const AgePieChart = () => {
   const femaleNo = testData.filter((user) => user.gender === "F");
   const othersNo = testData.filter((user) => user.gender === "O");
   const userDetails = {
-    labels: ["Male", "Female", "Others"],
+    labels: ["18-25", "26-35", "35+"],
     datasets: [
       {
         label: "Corth Main Characters",
@@ -18,7 +18,8 @@ export const AgePieChart = () => {
   };
 
   return (
-    <div style={{ padding: "10px", backgroundColor: "#f0f0f0" }}>
+    <div style={{ padding: "10px", backgroundColor: "#f0f0f0", width: `500px`,
+    height: `300px`,}}>
       <p style={{ fontSize: "14px", marginBottom: "-30px" }}>
         User Demographics (Age)
       </p>
