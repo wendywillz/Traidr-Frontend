@@ -26,18 +26,18 @@ interface AdminDataSummary {
 
 const AdminDashboardPage = () => {
   const [adminDataSummary, _setAdminDataSummary] = useState<AdminDataSummary>({
-    totalOrders: 0,
-    totalTenants: 0,
+    totalOrders: 5,
+    totalTenants: 3,
     supportTickets: 0,
   });
-
+  const userData = useSelector((state: RootState) => state.user);
   return (
     <AdminPageContainer>
       <AdminSideBar />
       <AdminPageMain>
         <AdminHeader />
         <AdminPageTitle>Dashboard</AdminPageTitle>
-        <UserGreeting>Welcome {"Janet Lannister"}</UserGreeting>
+        <UserGreeting>Welcome {userData.name}</UserGreeting>
         <AdminPageContent>
           <AllDataCards>
             <DataCard
@@ -59,6 +59,7 @@ const AdminDashboardPage = () => {
             />
           </AllDataCards>
         </AdminPageContent>
+        <RecentActivity />
         <MonthlyTrendLineChart />
         <RecentActivity />
       </AdminPageMain>

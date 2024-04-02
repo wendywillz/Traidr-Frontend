@@ -19,7 +19,6 @@ import AverageUSageTime from "./components/AverageUsageTime/AverageUSageTime";
 import TestPage from "./views/TestContent/TestPage";
 import { UserAnalytics } from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
 import AdminProtectedRoute from "./components/ProtectedRoute/AdminProtectedRoute";
-import AddQuantityModal from "./views/User/AddQuantityModal/AddQuantityModal";
 import DeliveryDetails from "./views/User/DeliveryDetail/DeliveryDetails";
 import AdminSignupPage from "./views/Admin/AdminSignupPage/AdminSignupPage";
 import ProductMetrics from "./views/Admin/AdminPages/ProductMetrics/ProductMetrics";

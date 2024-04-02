@@ -6,6 +6,7 @@ const AdminDashboardStyle = styled.div`
   height: 100vh;
   position: fixed;
   width: 20%;
+  z-index: 200;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 0 2rem 2rem 2rem;
