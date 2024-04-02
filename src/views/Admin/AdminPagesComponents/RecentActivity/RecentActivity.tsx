@@ -17,9 +17,6 @@ const RecentActivity = () => {
     // { name: 'Amara Okonjo', action: 'Paid for Order 774747' },
     // { name: 'Yetunde Okadigbo', action: 'Paid for Order 774747' },
     // { name: 'Obinna Amadi', action: 'Paid for Order 774747' },
-    // { name: 'Ifeanyi Ndubuisi', action: 'Paid for Order 774747' },
-    // { name: 'Musa Yusuf', action: 'Paid for Order 774747' },
-    // { name: 'Adebayo Adewale', action: 'Paid for Order 774747' },
   ];
 
   return (
