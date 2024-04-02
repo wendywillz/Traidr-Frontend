@@ -78,5 +78,4 @@ export const DeliveryDetailsContainer = styled.div`
 .submit-button:hover {
   transform: translateY(-5px);
 }
-
 `;
