@@ -19,7 +19,7 @@ const CheckoutPage: React.FC = () => {
     address: '',
     deliveryInstructions: ''
   });
-
+  
   const [errors, setErrors] = useState<Partial<FormData>>({});
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
