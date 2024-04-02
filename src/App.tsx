@@ -23,6 +23,7 @@ import AddQuantityModal from "./views/User/AddQuantityModal/AddQuantityModal";
 import DeliveryDetails from "./views/User/DeliveryDetail/DeliveryDetails";
 import AdminSignupPage from "./views/Admin/AdminSignupPage/AdminSignupPage";
 import ProductMetrics from "./views/Admin/AdminPages/ProductMetrics/ProductMetrics";
+import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineChart";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
               <Route index element={<AdminDashboardPage />} />
               <Route path="user-analytics" element={<UserAnalytics />} />
               <Route path="product-metrics" element={<ProductMetrics />} />
+              <Route path="monthly-trend" element={<MonthlyTrendLineChart />} />
             </Routes>
           </AdminProtectedRoute>
         }

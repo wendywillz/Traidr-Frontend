@@ -15,6 +15,7 @@ import AdminSideBar from "../../../../components/adminSideBar/AdminSideBar";
 //PACKAGE IMPORTS
 import { useState } from "react";
 import RecentActivity from "../../AdminPagesComponents/RecentActivity/RecentActivity";
+import MonthlyTrendLineChart from "../MonthlyTrend/LineChart";
 
 //INTERFACE DECLARATIONS
 interface AdminDataSummary {
@@ -57,9 +58,9 @@ const AdminDashboardPage = () => {
               reportLink={"/admin/dashboard/tickets-report"}
             />
           </AllDataCards>
-         
         </AdminPageContent>
-         <RecentActivity/>
+        <MonthlyTrendLineChart />
+        <RecentActivity />
       </AdminPageMain>
     </AdminPageContainer>
   );
