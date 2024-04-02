@@ -23,6 +23,7 @@ import DeliveryDetails from "./views/User/DeliveryDetail/DeliveryDetails";
 import AdminSignupPage from "./views/Admin/AdminSignupPage/AdminSignupPage";
 import ProductMetrics from "./views/Admin/AdminPages/ProductMetrics/ProductMetrics";
 import CartPage from "./views/User/CartModal/CartPage";
+import TenantsDataBase from "./views/Admin/TenantsDB/TenantsDB"
 
 function App() {
   return (
@@ -78,6 +79,7 @@ function App() {
      
       <Route path="/delivery-details" element={<DeliveryDetails />} />
       <Route path="/user/my-cart" element={<CartPage/>} />
+      <Route path="/admin/tenants-database" element={<TenantsDataBase />} />
     </Routes>
   );
 }
