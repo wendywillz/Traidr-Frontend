@@ -1,4 +1,4 @@
-import { AddToCartButtonContainer, AddToCartComponentContainer } from "./AddToCartButton.Styled"
+import { AddToCartButtonContainer } from "./AddToCartButton.Styled"
 import AddQuantityModal from "../AddQuantityModal/AddQuantityModal"
 import { useState } from "react";
 

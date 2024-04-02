@@ -18,7 +18,13 @@ export const AgePieChart = () => {
   };
 
   return (
-    <div style={{ padding: "10px", backgroundColor: "#f0f0f0" }}>
+    <div style={{ 
+      padding: "10px", 
+      backgroundColor: "#f0f0f0",
+      width: "500px",
+      height: "300px", 
+      marginLeft: "-150px"
+    }}>
       <p style={{ fontSize: "14px", marginBottom: "-30px" }}>
         User Demographics (Age)
       </p>
