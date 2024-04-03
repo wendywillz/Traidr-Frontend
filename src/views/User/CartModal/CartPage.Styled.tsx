@@ -71,6 +71,9 @@ export const CartleftcontainerText = styled.div`
     color: #219653;
   }
 
+  .sourceShop{
+    font-size: 1vw;
+  }
   .productStock{
     font-size: 1vw;
   }

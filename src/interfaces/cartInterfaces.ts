@@ -5,4 +5,5 @@ export interface CartProductDetail{
     productPrice: number;
     productQuantity: number;
     productTotal: number;
+    sourceShop: string;
   }
