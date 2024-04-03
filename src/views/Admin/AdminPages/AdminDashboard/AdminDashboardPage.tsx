@@ -15,8 +15,7 @@ import AdminSideBar from "../../../../components/adminSideBar/AdminSideBar";
 //PACKAGE IMPORTS
 import { useState } from "react";
 import RecentActivity from "../../AdminPagesComponents/RecentActivity/RecentActivity";
-import { RootState } from "../../../../app/store";
-import { useSelector } from "react-redux";
+import MonthlyTrendLineChart from "../MonthlyTrend/LineChart";
 
 //INTERFACE DECLARATIONS
 interface AdminDataSummary {
@@ -60,6 +59,8 @@ const AdminDashboardPage = () => {
             />
           </AllDataCards>
         </AdminPageContent>
+        <RecentActivity />
+        <MonthlyTrendLineChart />
         <RecentActivity />
       </AdminPageMain>
     </AdminPageContainer>

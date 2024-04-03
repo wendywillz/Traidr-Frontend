@@ -1,7 +1,4 @@
-import { ReactNode } from "react";
-
-export interface CartProductDetail{
-    [x: string]: ReactNode;
+export interface OrderProductDetail{
     productId: string;
     productTitle: string;
     productImage: string;
