@@ -28,3 +28,10 @@ export const fetchMonthlyTrend = async () => {
     return res.data;
   }
 };
+
+export const fetchMonthlyActiveUser = async () => { 
+  const res = await axiosInstance.get(`/admin/get-monthly-active-user`);
+  if (res && res.data.sortedMonthlyActiveUsers) {
+    return res.data.sortedMonthlyActiveUsers
+  }
+}

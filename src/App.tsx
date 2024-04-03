@@ -22,12 +22,10 @@ import AdminProtectedRoute from "./components/ProtectedRoute/AdminProtectedRoute
 import DeliveryDetails from "./views/User/DeliveryDetail/DeliveryDetails";
 import AdminSignupPage from "./views/Admin/AdminSignupPage/AdminSignupPage";
 import ProductMetrics from "./views/Admin/AdminPages/ProductMetrics/ProductMetrics";
-<<<<<<< HEAD
 import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineChart";
-=======
 import CartPage from "./views/User/CartModal/CartPage";
 import TenantsDataBase from "./views/Admin/TenantsDB/TenantsDB"
->>>>>>> 556dbec6dbde79cf55e4dc5b52f7f41174b7c17b
+import OrderPage from "./views/User/OrderPage/OrderPage";
 
 function App() {
   return (
@@ -80,16 +78,11 @@ function App() {
       <Route path="/user/my-wishlist" element={<Wishlist />} />
       <Route path="/success-modal" element={<SuccessModal />} />
       <Route path="/test" element={<TestPage />} />
-      <Route
-        path="/qty"
-        element={<AddQuantityModal toggleVisiblity={() => {}} />}
-      />
+     
       <Route path="/delivery-details" element={<DeliveryDetails />} />
-<<<<<<< HEAD
-=======
       <Route path="/user/my-cart" element={<CartPage/>} />
       <Route path="/admin/tenants-database" element={<TenantsDataBase />} />
->>>>>>> 556dbec6dbde79cf55e4dc5b52f7f41174b7c17b
+      <Route path="/order" element={<OrderPage />} />
     </Routes>
   );
 }

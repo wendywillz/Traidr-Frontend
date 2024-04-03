@@ -1,5 +1,5 @@
-import { CartContainer, CartContent, CartText, Cartleftcontainer, CartleftcontainerImg, CartleftcontainerText, CartRightContainer, CartItemQtyAndTotal, CartUpdateAndDeleteBtns } from "./CartPage.Styled";
-import blender from "../../../assets/Description/blender.png"; 
+import { CartContent, Cartleftcontainer, CartleftcontainerImg, CartleftcontainerText, CartRightContainer, CartItemQtyAndTotal, CartUpdateAndDeleteBtns } from "./CartPage.Styled";
+
 import AddToCartButton from "../../../components/AddToCartButton/AddToCartButton";
 
 //Interface imports
@@ -43,6 +43,7 @@ const toggleQuantityModal = () => {
             <CartleftcontainerText>
               <p className="productHeading">{cartItem.productTitle}</p>
               <p className="productPrice">₦{cartItem.productPrice.toLocaleString()}</p>
+              <p className="sourceShop">Seller: {cartItem.sourceShop}</p>
               <p className="productStock">In stock</p>
             </CartleftcontainerText>
 
