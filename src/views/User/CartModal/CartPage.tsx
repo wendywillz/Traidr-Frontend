@@ -13,10 +13,14 @@ import { fetchCartItems } from "../../../api/cart";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../app/store";
 import axiosInstance from "../../../utils/axiosInstance";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 
 
 const CartPage = () => {
+
+const navigate:NavigateFunction = useNavigate();
+
 const userId:string|null = useSelector((state: RootState)=> state.user.userId)
 
 const [cartProducts, setCartProducts] = useState<CartProductDetail[]>()
@@ -53,6 +57,23 @@ try {
 
 }
 
+
+const handleOrder = async()=>{
+  const info = {
+    currentUserId: userId
+  }
+  try {
+    const res = await axiosInstance.post(`/order/create-order`, info)
+    if(res && res.data.success) {
+    navigate('/user/order-summary');
+    console.log(`Order Created`);
+  }
+  } catch (error) {
+    console.log(`Error creating order. Reason:` , error);
+  }
+ 
+}
+
   return (
     <>
       <Header />
@@ -73,7 +94,7 @@ try {
         
        
         
-        <OrderButton>PLACE ORDER</OrderButton>
+        <OrderButton onClick={handleOrder}>PLACE ORDER</OrderButton>
       </CartContainer>
     </>
   );

@@ -7,12 +7,12 @@ import OrderItemRow from './OrderItemRow'
 import Header from '../../../components/Header/Header'
 
 //Interface imports
-import { CartProductDetail } from '../../../interfaces/cartInterfaces'
+import { OrderProductDetail } from '../../../interfaces/orderInterfaces'
 
 
 //Packages and tools
 import { useState } from 'react'
-import { fetchCartItems } from '../../../api/cart'
+import { fetchOrderItems } from '../../../api/order'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../app/store'
 
@@ -24,11 +24,11 @@ const OrderPage = () => {
 
     const userId:string|null = useSelector((state: RootState)=> state.user.userId) 
 
-const [orderItems, setOrderItems] = useState<CartProductDetail[]>()
+const [orderItems, setOrderItems] = useState<OrderProductDetail[]>()
 
 const [orderTotal, setOrderTotal]= useState<number|undefined>(0)
 
-fetchCartItems(userId).then((res) => {
+fetchOrderItems(userId).then((res) => {
     if (res) {
         setOrderItems(res);
       let total = orderItems?.reduce((acc, curr)=> acc + (curr.productPrice* curr.productQuantity), 0)

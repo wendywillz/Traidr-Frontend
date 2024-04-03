@@ -1,13 +1,13 @@
 import { OrderItemRowContiner, ProductDetail, ProductTotal} from './OrderPage.Styled'
-import blender from '../../../assets/dashboard-assets/blender-pic.png'
+
 
 
 //Interface imports
-import { CartProductDetail } from '../../../interfaces/cartInterfaces'
+import { OrderProductDetail } from '../../../interfaces/orderInterfaces';
 
 
 interface OrderItemProps{
-    orderItem: CartProductDetail;
+    orderItem: OrderProductDetail;
 }
 
 const OrderItemRow = ({orderItem}: OrderItemProps) => {
