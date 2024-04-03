@@ -4,13 +4,14 @@ import { useState } from "react";
 
 
 interface ButtonProps{
+  buttonText: string;
     productId: string| undefined|null;
     toggleVisibility: () => void;
 }
 
-const AddToCartButton = ({productId, toggleVisibility}: ButtonProps ) => {
+const AddToCartButton = ({buttonText, productId, toggleVisibility}: ButtonProps ) => {
 
-const currentProductId = "test-product-id-2"
+
 
 const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
 
@@ -22,7 +23,7 @@ const toggleQuantityModal = () => {
   return (
     // <AddToCartComponentContainer>
         <>
-       {!quantityModalVisibility && (<AddToCartButtonContainer onClick={toggleQuantityModal}>ADD TO CART
+       {!quantityModalVisibility && (<AddToCartButtonContainer onClick={toggleQuantityModal}>{buttonText}
         </AddToCartButtonContainer>) }
         <div className="quantity-modal">{quantityModalVisibility && <AddQuantityModal productId={productId} toggleVisibility={toggleQuantityModal}/>}</div>
         </>

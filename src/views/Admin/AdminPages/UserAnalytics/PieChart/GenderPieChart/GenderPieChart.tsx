@@ -43,8 +43,8 @@ export const GenderPieChart = () => {
         padding: "10px",
         marginRight: "10px",
         backgroundColor: "#f0f0f0",
-        width: "500px",
-        height: "300px",
+        width: `500px`,
+        height: `300px`,
       }}
     >
       <p style={{ marginBottom: "-30px", fontSize: "14px" }}>

@@ -27,8 +27,8 @@ interface AdminDataSummary {
 
 const AdminDashboardPage = () => {
   const [adminDataSummary, _setAdminDataSummary] = useState<AdminDataSummary>({
-    totalOrders: 0,
-    totalTenants: 0,
+    totalOrders: 5,
+    totalTenants: 3,
     supportTickets: 0,
   });
   const userData = useSelector((state: RootState) => state.user);

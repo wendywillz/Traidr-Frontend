@@ -19,10 +19,11 @@ import AverageUSageTime from "./components/AverageUsageTime/AverageUSageTime";
 import TestPage from "./views/TestContent/TestPage";
 import { UserAnalytics } from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
 import AdminProtectedRoute from "./components/ProtectedRoute/AdminProtectedRoute";
-import AddQuantityModal from "./views/User/AddQuantityModal/AddQuantityModal";
 import DeliveryDetails from "./views/User/DeliveryDetail/DeliveryDetails";
 import AdminSignupPage from "./views/Admin/AdminSignupPage/AdminSignupPage";
 import ProductMetrics from "./views/Admin/AdminPages/ProductMetrics/ProductMetrics";
+import CartPage from "./views/User/CartModal/CartPage";
+import TenantsDataBase from "./views/Admin/TenantsDB/TenantsDB"
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
                   element={<StockYourShop />}
                 />
                 <Route path="user/edit-profile" element={<ProfileSettings />} />
+                
               </Routes>
             </ProtectedRoute>
           </AverageUSageTime>
@@ -74,11 +76,10 @@ function App() {
       <Route path="/user/my-wishlist" element={<Wishlist />} />
       <Route path="/success-modal" element={<SuccessModal />} />
       <Route path="/test" element={<TestPage />} />
-      <Route
-        path="/qty"
-        element={<AddQuantityModal toggleVisiblity={() => {}} />}
-      />
+     
       <Route path="/delivery-details" element={<DeliveryDetails />} />
+      <Route path="/user/my-cart" element={<CartPage/>} />
+      <Route path="/admin/tenants-database" element={<TenantsDataBase />} />
     </Routes>
   );
 }
