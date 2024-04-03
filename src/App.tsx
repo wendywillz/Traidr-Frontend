@@ -27,6 +27,7 @@ import CartPage from "./views/User/CartModal/CartPage";
 import TenantsDataBase from "./views/Admin/TenantsDB/TenantsDB"
 import OrderPage from "./views/User/OrderPage/OrderPage";
 
+
 function App() {
   return (
     <Routes>
@@ -82,7 +83,8 @@ function App() {
       <Route path="/delivery-details" element={<DeliveryDetails />} />
       <Route path="/user/my-cart" element={<CartPage/>} />
       <Route path="/admin/tenants-database" element={<TenantsDataBase />} />
-      <Route path="/order" element={<OrderPage />} />
+      <Route path="/user/order-summary" element={<OrderPage />} />
+      
     </Routes>
   );
 }
