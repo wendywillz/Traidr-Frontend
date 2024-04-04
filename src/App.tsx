@@ -26,6 +26,7 @@ import CartPage from "./views/User/CartModal/CartPage";
 import TenantsDataBase from "./views/Admin/TenantsDB/TenantsDB"
 import OrderPage from "./views/User/OrderPage/OrderPage";
 import DeliveryPage from "./views/User/DeliveryPage/DeliveryPage";
+import PaymentPage from "./views/User/PaymentPage/PaymentPage";
 
 
 
@@ -84,6 +85,7 @@ function App() {
       <Route path="/admin/tenants-database" element={<TenantsDataBase />} />
       <Route path="/user/order-summary" element={<OrderPage />} />
       <Route path="/delivery-details" element ={<DeliveryPage />}/>
+      <Route path="/payment" element ={<PaymentPage />}/>
       
       
     </Routes>
