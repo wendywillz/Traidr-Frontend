@@ -1,5 +1,5 @@
 //style imports
-import { DeliveryPageWholeContainer, DeliveryPageMainContainer, DeliveryPageFormContainer, DeliveryPageForm, DeliveryFormField, DeliveryPageButtonsContainer, DeliveryPageButtons } from "./DeliveryPage.Styled"
+import { DeliveryPageWholeContainer, DeliveryPageMainContainer, DeliveryPageFormContainer, DeliveryPageForm, DeliveryFormField, DeliveryPageButtonsContainer, DeliveryPageButton } from "./DeliveryPage.Styled"
 
 //component imports
 import Header from "../../../components/Header/Header"
@@ -18,8 +18,30 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 
 
 const DeliveryPage = () => {
-
+    const navigate:NavigateFunction = useNavigate();
     const userId:string|null = useSelector((state: RootState)=> state.user.userId)
+
+    //HANDLING THE CONFIRM CANCEL MODAL
+    const [confirmCancelModalVisibility, setConfirmCancelModalVisibility]= useState(false)
+    const confirmCancelModalTitle = `CONFRIM ORDER CANCELLATION`
+    const confirmCancelModalmessage = `Please confirm you want to cancel your order`
+    const toggleConfirmCancelModal = ()=>{
+        setConfirmCancelModalVisibility(true)
+    }
+
+    //HANDLING THE ORDER CANCELLED MODAL
+    const [orderCancelledmodalVisibility, setOrderCancelledModalVisibility]= useState(false)
+    const orderCancelledModalTitle = `ORDER CANCELLED`
+    const orderCancelledModalMessage =`Your order has been cancelled`
+    const orderCancelledmodalButtonAction = ()=>{navigate('/user/my-cart')}
+    
+    //HANDLING THE PROCEED TO PAYMENT MODAL
+    const [proceedModalVisibility, setProceedModalVisibility] = useState(false)
+    const proceedModalTitle = `PROCEED TO PAYMENT`
+    const proceedModalMessage = `Click to proceed to payment`
+    const proceedModalButtonAction = ()=>{navigate('/payment')}
+
+
 
     const[deliveryDetails, setDeliveryDetails]= useState<DeliveryDetailsData>({
         recipientName: "",
@@ -33,10 +55,14 @@ const DeliveryPage = () => {
       }
       
 
-    const handleCheckout = ()=>{
+    const handleCheckout = async ()=>{
 
         try {
-            axiosInstance.post(`/delivery/add-delivery/${userId}`, deliveryDetails)
+            const res = await axiosInstance.post(`/delivery/add-delivery/${userId}`, deliveryDetails)
+            if(res){
+                console.log(`Delivery details have been added`);
+                setProceedModalVisibility(true)
+            }
             
         } catch (error) {
             console.log(`Problem sending delivery details. Reason:`, error);
@@ -44,13 +70,18 @@ const DeliveryPage = () => {
       }
 
 
-    const handleCancel =()=>{
+    const handleCancel = async ()=>{
         const info = {
             currentUserId: userId
         }
 
         try {
-            axiosInstance.post('/sale/cancel-sale', info)
+          const res = await  axiosInstance.post('/sale/cancel-sale', info)
+          if(res){
+            setConfirmCancelModalVisibility(false)
+            setOrderCancelledModalVisibility(true)
+            console.log(`ORDER CANCELLED`);
+          }
             
         } catch (error) {
             console.log(`Problem canceling sale`, error);
@@ -61,6 +92,12 @@ const DeliveryPage = () => {
 
   return (
     <DeliveryPageWholeContainer>
+        {confirmCancelModalVisibility && <MultipurposeModal title={confirmCancelModalTitle} message={confirmCancelModalmessage} onClickAction={handleCancel}/>}
+
+        {orderCancelledmodalVisibility && <MultipurposeModal title={orderCancelledModalTitle} message={orderCancelledModalMessage} onClickAction={orderCancelledmodalButtonAction}/>}
+
+        {proceedModalVisibility && <MultipurposeModal title={proceedModalTitle} message={proceedModalMessage} onClickAction={proceedModalButtonAction}/>}
+
         <Header/>
         <DeliveryPageMainContainer>
             <DeliveryPageFormContainer>
@@ -88,8 +125,8 @@ const DeliveryPage = () => {
                         </textarea>
                     </DeliveryFormField>
                     <DeliveryPageButtonsContainer>
-                        <DeliveryPageButtons className="delivery-form-cancel-button" onClick={handleCancel}>CANCEL</DeliveryPageButtons>
-                        <DeliveryPageButtons className="delivery-form-checkout-button" onClick={handleCheckout}>CHECKOUT</DeliveryPageButtons>
+                        <DeliveryPageButton className="delivery-form-cancel-button" onClick={toggleConfirmCancelModal}>CANCEL</DeliveryPageButton>
+                        <DeliveryPageButton className="delivery-form-checkout-button" onClick={handleCheckout}>CHECKOUT</DeliveryPageButton>
 
                     </DeliveryPageButtonsContainer>
                 </DeliveryPageForm>

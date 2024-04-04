@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import formBackground from "../../../assets/form-background-image.png";
 
-export const DeliveryPageWholeContainer = styled.div`
+
+export const PaymentPageWholeContainer = styled.div`
+    /* border: 1px solid red; */
     position: fixed;
     height: 100vh;
     width: 100vw;
@@ -11,14 +13,14 @@ export const DeliveryPageWholeContainer = styled.div`
     background-repeat: no-repeat; 
 `
 
-export const DeliveryPageMainContainer = styled.div`
+export const PaymentPageMainContainer = styled.div`
     /* border: 1px solid red; */
     padding: 1vh 24vw;
     
 
 `
 
-export const DeliveryPageFormContainer = styled.div`
+export const PaymentPageContentContainer = styled.div`
     /* border: 1px solid blue; */
     box-shadow: 2px 8px 20px 4px rgba(0, 0, 0, 0.1);
     height: 82vh;
@@ -28,70 +30,40 @@ export const DeliveryPageFormContainer = styled.div`
     /* padding: 0vh 1vw; */
     padding: 2vh 4.8vw 4vh 4.8vw;
 
-    .delivery-form-title{
+    .payment-content-title{
         font-size: 1.5vw;
         font-weight: 700;
         margin-bottom: 1vh;
     }
 
 `
-export const DeliveryPageForm = styled.form`
-    /* border: 1px solid green; */
-    /* padding: 3vh 9.5vw 0vh 9.5vw; */
-    /* height: 70vh; */
-    /* width: 50vw; */
+export const PaymentPageContent = styled.div`
+    /* border: 1px solid green;  */
+    padding: 3vh 9.5vw 0vh 9.5vw; 
+    height: 70vh; 
+    width: 43vw;
 `
-export const DeliveryFormField = styled.div`
-    /* border: 1px solid pink; */
-    margin-bottom: 2vh;
 
-    .delivery-form-label{
-        font-size: 1.05vw;
-        font-weight: 550;
-    }
-    .delivery-form-input{
-        height: 4.3vh;
-        width: 40vw;
-        margin-top: 1vh;
-        border-radius: 7px;
-        border: 0.1px solid gray;
-        padding-left: 1vw;
-        color: grey;
-        font-size: 0.9vw;
-        opacity: 50%;
-    }
-    .delivery-form-textarea{
-        height: 17vh;
-        width: 40vw;
-        margin-top: 1vh;
-        border-radius: 7px;
-        border: 0.1px solid gray;
-        padding-top: 1vh;
-        padding-left: 1vw;
-        color: grey;
-        font-size: 0.9vw;
-        opacity: 50%;
-    }
-`
-export const DeliveryPageButtonsContainer = styled.div`
+
+export const PaymentPageButtonsContainer = styled.div` 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
-    .delivery-form-cancel-button{
+    .payment-page-cancel-button{
     color: var(--orange-color);
     background-color: white;
     border: 1px solid var(--orange-color);
     }
 
-    .delivery-form-checkout-button{
+    .payment-page-checkout-button{
     color: white;
     background-color: var(--orange-color);
     border: none;
     }
 `
 
-export const DeliveryPageButton = styled.div`
+export const PaymentPageButton = styled.div`
     border: 1px solid black;
     width: 10vw;
     height: 6.5vh;

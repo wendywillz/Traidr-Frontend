@@ -30,8 +30,8 @@ const userId:string|null = useSelector((state: RootState)=> state.user.userId)
 
 //HANDLING THE CONFIRM CANCEL MODAL
 const [confirmationModalVisibility, setConfirmationModalVisibility]= useState(false)
-const confrimationModalTitle = `CONFRIM ORDER CANCELLATION`
-const confrimationModalmessage = `Please confirm you want to cancel your order`
+const confirmationModalTitle = `CONFRIM ORDER CANCELLATION`
+const confirmationModalmessage = `Please confirm you want to cancel your order`
 const toggleConfirmationModal = ()=>{
     setConfirmationModalVisibility(true)
 
@@ -48,7 +48,7 @@ const orderCancelledmodalButtonAction = ()=>{
 //HANDLING THE PROCEED TO PAYMENT MODAL
 const [proceedModalVisibility, setProceedModalVisibility] = useState(false)
 const proceedModalTitle = `PROCEED TO PAYMENT`
-const proceedModalMessage = `Click to continue with your payment`
+const proceedModalMessage = `Click to continue begin checkout`
 const proceedModalButtonAction = ()=>{
     navigate('/delivery-details')
 }
@@ -111,7 +111,7 @@ const createSale = async()=>{
 
   return (
     <OrderPageContainer>
-        {confirmationModalVisibility && <MultipurposeModal title={confrimationModalTitle} message={confrimationModalmessage} onClickAction={cancelOrder}/>}
+        {confirmationModalVisibility && <MultipurposeModal title={confirmationModalTitle} message={confirmationModalmessage} onClickAction={cancelOrder}/>}
 
         {orderCancelledmodalVisibility && <MultipurposeModal title={orderCancelledModalTitle} message={orderCancelledModalMessage} onClickAction={orderCancelledmodalButtonAction}/>}
 
