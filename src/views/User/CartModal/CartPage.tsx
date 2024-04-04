@@ -1,6 +1,7 @@
 import Header from "../../../components/Header/Header";
 import { CartContainer, CartPageTitle, OrderButton, CartHeaderContainer, CartTotal} from "./CartPage.Styled";
 import CartItemRow from "./CartItemRow";
+import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
 
 //Interface imports
 import { CartProductDetail } from "../../../interfaces/cartInterfaces";
@@ -22,6 +23,21 @@ const CartPage = () => {
 const navigate:NavigateFunction = useNavigate();
 
 const userId:string|null = useSelector((state: RootState)=> state.user.userId)
+
+
+//Functions dealing with the modal
+const [modalVisibility, setModalVisibility]= useState(false)
+const orderSuccessModalTitle = `ORDER CREATED`
+const orderSucessModalMessage =`Your order has successfully been created`
+const modalButtonAction = ()=>{
+  navigate('/user/order-summary')
+}
+// const toggleModalVisibility = ()=>{
+//   setModalVisibility(!modalVisibility)
+// }
+
+
+
 
 const [cartProducts, setCartProducts] = useState<CartProductDetail[]>()
 const [cartTotal, setCartTotal]= useState<number|undefined>(0)
@@ -64,8 +80,8 @@ const handleOrder = async()=>{
   }
   try {
     const res = await axiosInstance.post(`/order/create-order`, info)
-    if(res && res.data.success) {
-    navigate('/user/order-summary');
+    if(res) {
+    setModalVisibility(true)
     console.log(`Order Created`);
   }
   } catch (error) {
@@ -76,6 +92,7 @@ const handleOrder = async()=>{
 
   return (
     <>
+    {modalVisibility && <MultipurposeModal title={orderSuccessModalTitle} message={orderSucessModalMessage} onClickAction={modalButtonAction}/>}
       <Header />
       <CartContainer>
         <CartHeaderContainer>
