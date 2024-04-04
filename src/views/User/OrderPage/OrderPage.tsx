@@ -28,17 +28,16 @@ const navigate:NavigateFunction = useNavigate();
 
 const userId:string|null = useSelector((state: RootState)=> state.user.userId) 
 
-//HANDLING THE MODAL
+//HANDLING THE CONFIRM CANCEL MODAL
 const [confirmationModalVisibility, setConfirmationModalVisibility]= useState(false)
 const confrimationModalTitle = `CONFRIM ORDER CANCELLATION`
 const confrimationModalmessage = `Please confirm you want to cancel your order`
 const toggleConfirmationModal = ()=>{
-
     setConfirmationModalVisibility(true)
 
 }
 
-
+//HANDLING THE ORDER CANCELLED MODAL
 const [orderCancelledmodalVisibility, setOrderCancelledModalVisibility]= useState(false)
 const orderCancelledModalTitle = `ORDER CANCELLED`
 const orderCancelledModalMessage =`Your order has been cancelled`
@@ -46,7 +45,13 @@ const orderCancelledmodalButtonAction = ()=>{
   navigate('/user/my-cart')
 }
 
-
+//HANDLING THE PROCEED TO PAYMENT MODAL
+const [proceedModalVisibility, setProceedModalVisibility] = useState(false)
+const proceedModalTitle = `PROCEED TO PAYMENT`
+const proceedModalMessage = `Click to continue with your payment`
+const proceedModalButtonAction = ()=>{
+    navigate('/delivery-details')
+}
 
 
 const [orderItems, setOrderItems] = useState<OrderProductDetail[]>()
@@ -54,12 +59,12 @@ const [orderItems, setOrderItems] = useState<OrderProductDetail[]>()
 const [orderTotal, setOrderTotal]= useState<number|undefined>(0)
 
 useEffect(()=>{
-    fetchOrderItems(userId).then((res) => {
+    fetchOrderItems(userId).then((res:OrderProductDetail[]) => {
         if (res) {
             setOrderItems(res)
-          let total = orderItems?.reduce((acc, curr)=> acc + (curr.productPrice* curr.productQuantity), 0)
+          let total = res?.reduce((acc, curr)=> acc + (curr.productPrice* curr.productQuantity), 0)
           setOrderTotal(total)
-          console.log(`The total is`, total);
+        //   console.log(`The total is`, total);
         }else{
             navigate('/user/my-cart') 
         }
@@ -84,17 +89,34 @@ try {
 }
 }
 
-
-
-
-
+const createSale = async()=>{
+    const info = {
+        currentUserId: userId,
+        saleTotal: orderTotal
+      } 
+    try {
+        const res = await axiosInstance.post('sale/create-sale', info)
+        if(res){
+            // navigate('/delivery-details')
+            console.log(`SALE CREATED`)
+            setProceedModalVisibility(true)
+            
+        }
+    } catch (error) {
+        console.log(`Error creating order. Reason:`, error) 
+    }
+}
 
 
 
   return (
     <OrderPageContainer>
         {confirmationModalVisibility && <MultipurposeModal title={confrimationModalTitle} message={confrimationModalmessage} onClickAction={cancelOrder}/>}
+
         {orderCancelledmodalVisibility && <MultipurposeModal title={orderCancelledModalTitle} message={orderCancelledModalMessage} onClickAction={orderCancelledmodalButtonAction}/>}
+
+        {proceedModalVisibility && <MultipurposeModal title={proceedModalTitle} message={proceedModalMessage} onClickAction={proceedModalButtonAction}/>}
+
         <Header/>
         <OrderPageMain>
             <h2 className='order-page-Title'>Order Summary</h2>
@@ -116,7 +138,7 @@ try {
                 <div className='order-total-text'>ORDER TOTAL</div>
                 <div className='order-total-amount'>₦{orderTotal?.toLocaleString()}</div>
             </OrderTotal>
-            <PayNowButton>PAY NOW</PayNowButton>
+            <PayNowButton onClick={createSale}>CHECKOUT</PayNowButton>
             <CancelOrderButton onClick={toggleConfirmationModal}>CANCEL ORDER</CancelOrderButton>
         </OrderPageMain>
     </OrderPageContainer>
