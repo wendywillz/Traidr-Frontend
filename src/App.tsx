@@ -19,13 +19,13 @@ import AverageUSageTime from "./components/AverageUsageTime/AverageUSageTime";
 import TestPage from "./views/TestContent/TestPage";
 import { UserAnalytics } from "./views/Admin/AdminPages/UserAnalytics/UserAnalytics";
 import AdminProtectedRoute from "./components/ProtectedRoute/AdminProtectedRoute";
-import DeliveryDetails from "./views/User/DeliveryDetail/DeliveryDetails";
 import AdminSignupPage from "./views/Admin/AdminSignupPage/AdminSignupPage";
 import ProductMetrics from "./views/Admin/AdminPages/ProductMetrics/ProductMetrics";
 import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineChart";
 import CartPage from "./views/User/CartModal/CartPage";
 import TenantsDataBase from "./views/Admin/TenantsDB/TenantsDB"
 import OrderPage from "./views/User/OrderPage/OrderPage";
+import DeliveryPage from "./views/User/DeliveryPage/DeliveryPage";
 
 
 
@@ -80,11 +80,10 @@ function App() {
       <Route path="/user/my-wishlist" element={<Wishlist />} />
       <Route path="/success-modal" element={<SuccessModal />} />
       <Route path="/test" element={<TestPage />} />
-     
-      <Route path="/delivery-details" element={<DeliveryDetails />} />
       <Route path="/user/my-cart" element={<CartPage/>} />
       <Route path="/admin/tenants-database" element={<TenantsDataBase />} />
       <Route path="/user/order-summary" element={<OrderPage />} />
+      <Route path="/delivery-details" element ={<DeliveryPage />}/>
       
       
     </Routes>
