@@ -29,10 +29,20 @@ const navigate:NavigateFunction = useNavigate();
 const userId:string|null = useSelector((state: RootState)=> state.user.userId) 
 
 //HANDLING THE MODAL
-const [modalVisibility, setModalVisibility]= useState(false)
-const orderSuccessModalTitle = `ORDER CANCELLED`
-const orderSucessModalMessage =`Your order has been cancelled`
-const modalButtonAction = ()=>{
+const [confirmationModalVisibility, setConfirmationModalVisibility]= useState(false)
+const confrimationModalTitle = `CONFRIM ORDER CANCELLATION`
+const confrimationModalmessage = `Please confirm you want to cancel your order`
+const toggleConfirmationModal = ()=>{
+
+    setConfirmationModalVisibility(true)
+
+}
+
+
+const [orderCancelledmodalVisibility, setOrderCancelledModalVisibility]= useState(false)
+const orderCancelledModalTitle = `ORDER CANCELLED`
+const orderCancelledModalMessage =`Your order has been cancelled`
+const orderCancelledmodalButtonAction = ()=>{
   navigate('/user/my-cart')
 }
 
@@ -46,9 +56,10 @@ const [orderTotal, setOrderTotal]= useState<number|undefined>(0)
 useEffect(()=>{
     fetchOrderItems(userId).then((res) => {
         if (res) {
-            setOrderItems(res);
+            setOrderItems(res)
           let total = orderItems?.reduce((acc, curr)=> acc + (curr.productPrice* curr.productQuantity), 0)
           setOrderTotal(total)
+          console.log(`The total is`, total);
         }else{
             navigate('/user/my-cart') 
         }
@@ -63,7 +74,8 @@ const cancelOrder = async ()=>{
 try {
      const res = await axiosInstance.post('/order/cancel-order', info)
      if(res){
-        setModalVisibility(true)
+        setConfirmationModalVisibility(false)
+        setOrderCancelledModalVisibility(true)
         console.log(`ORDER CANCELLED`);
      }
     
@@ -81,7 +93,8 @@ try {
 
   return (
     <OrderPageContainer>
-        {modalVisibility && <MultipurposeModal title={orderSuccessModalTitle} message={orderSucessModalMessage} onClickAction={modalButtonAction}/>}
+        {confirmationModalVisibility && <MultipurposeModal title={confrimationModalTitle} message={confrimationModalmessage} onClickAction={cancelOrder}/>}
+        {orderCancelledmodalVisibility && <MultipurposeModal title={orderCancelledModalTitle} message={orderCancelledModalMessage} onClickAction={orderCancelledmodalButtonAction}/>}
         <Header/>
         <OrderPageMain>
             <h2 className='order-page-Title'>Order Summary</h2>
@@ -104,7 +117,7 @@ try {
                 <div className='order-total-amount'>₦{orderTotal?.toLocaleString()}</div>
             </OrderTotal>
             <PayNowButton>PAY NOW</PayNowButton>
-            <CancelOrderButton onClick={cancelOrder}>CANCEL ORDER</CancelOrderButton>
+            <CancelOrderButton onClick={toggleConfirmationModal}>CANCEL ORDER</CancelOrderButton>
         </OrderPageMain>
     </OrderPageContainer>
   )
