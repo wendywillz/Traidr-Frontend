@@ -26,6 +26,7 @@ import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineCha
 import CartPage from "./views/User/CartModal/CartPage";
 import TenantsDataBase from "./views/Admin/TenantsDB/TenantsDB"
 import OrderPage from "./views/User/OrderPage/OrderPage";
+import MultipurposeModal from "./components/MultipurposeModal/MultipurposeModal";
 
 
 function App() {
@@ -84,6 +85,7 @@ function App() {
       <Route path="/user/my-cart" element={<CartPage/>} />
       <Route path="/admin/tenants-database" element={<TenantsDataBase />} />
       <Route path="/user/order-summary" element={<OrderPage />} />
+      {/* <Route path="/mdl" element={<MultipurposeModal/>} /> */}
       
     </Routes>
   );

@@ -50,11 +50,11 @@ export const OrderTotal = styled.div`
     flex-direction: row;
     justify-content: space-between;
     background-color: grey;
-    margin-top: 2vh;
+    /* margin-top: 2vh; */
     margin-bottom: 2vh;
-    height: 5vh;
-    border-radius: 10px;
-    padding: 1vh 1vw 0vh 1vw;
+    height: 6vh;
+    /* border-radius: 10px; */
+    padding: 1vh 0vw 0vh 1vw;
 
 
     .order-total-text{
@@ -78,6 +78,7 @@ export const PayNowButton = styled.div`
     height: 5vh;
     padding-top: 1vh;
     border-radius: 10px;
+    cursor: pointer;
     &:hover{
         font-size: 1.3vw; 
         height: 5.1vh;
@@ -92,6 +93,7 @@ export const CancelOrderButton = styled.div`
     height: 5vh;
     padding-top: 1vh;
     border-radius: 10px;
+    cursor: pointer;
     &:hover{
         font-size: 1.3vw; 
         height: 5.1vh;
