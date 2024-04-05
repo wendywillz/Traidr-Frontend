@@ -125,7 +125,7 @@ const createSale = async()=>{
                 return(
                     <div>
                     <OrderItemRow orderItem={orderItem} key={orderItem.productId}/>
-                    <hr/>
+                    {/* <hr/> */}
                     </div>
 
                 )
