@@ -58,7 +58,7 @@ const DeliveryPage = () => {
     const handleCheckout = async ()=>{
 
         try {
-            const res = await axiosInstance.post(`/delivery/add-delivery/${userId}`, deliveryDetails)
+            const res = await axiosInstance.post(`/delivery/create-delivery/${userId}`, deliveryDetails)
             if(res){
                 console.log(`Delivery details have been added`);
                 setProceedModalVisibility(true)
