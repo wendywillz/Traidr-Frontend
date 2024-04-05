@@ -14,7 +14,7 @@ import Header from "../../../../components/Header/Header";
 
 //package imports
 import { BsCameraFill, BsPersonCircle } from "react-icons/bs";
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import axios from "axios"
 import axiosInstance from "../../../../utils/axiosInstance";
 import { useSelector } from "react-redux";
@@ -30,7 +30,7 @@ interface UserDetails{
   dateOfBirth: string;
   address: string;
   shopName: string;
-  // profilePic: string| Blob| null| File;
+  profilePic: string| Blob| null| File;
 }
 
 import userData from "../../../../interfaces/userInterface";
@@ -40,53 +40,6 @@ export const ProfileSettings = () => {
   const currentUser: userData = useSelector((state: RootState)=> state.user)
   const currentUserId:string|null = useSelector((state: RootState)=> state.user.userId)
   //const currentUserName:string|null = useSelector((state: RootState)=> state.user.name)
-
-  //Logic for handling the photo upload    
-  const [userPic, setUserPic] = useState<File | null>(null);
-  const [displayedProfilePic, setDisplayedProfilePic] = useState<string>("") //This is ONLY FOR THE DISPLAYED PIC. 
-
-
-  //Logic for handling photo upload and changing the displayed picture
-  const handleChangeProfilePic = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) return;
-    const uploadedPhoto = event.target.files[0];
-    const displayedPhoto = event.target.files[0];
-    if (uploadedPhoto) setUserPic(uploadedPhoto)
-    // console.log(photoFile);
-
-
-
-
-    //allowing the selected picture to show
-    const reader = new FileReader();
-    reader.onload = () => {
-      setDisplayedProfilePic(reader.result as string);
-    };
-    reader.readAsDataURL(displayedPhoto);
-  };
-
-
-  const handlePhotoUpload = async (event: FormEvent<HTMLFormElement>)=>{
-    event.preventDefault();
-
-    //adding data to form
-    const userPicFormData = new FormData()
-    userPicFormData.append("profilePic", userPic as Blob)
-    console.log(`PHOTO ADDED`);
-    console.log( userPic);
-
-    //Sending uploaded photo to backend
-    try {
-      await axios.post(`/user/edit-profile/profile-picture${currentUserId}`, {data: userPicFormData})
-      console.log(`Profile picture has been successfully changed`)
-      } catch (error) {
-      console.error(`Error uploading photo: ${error}`)
-      }
-
-  }
-
-
-
 
 
   //Logic for Handling User Details
@@ -99,7 +52,7 @@ export const ProfileSettings = () => {
     dateOfBirth:"",
     address: "",
     shopName: "",
-    // profilePic: userPic
+    profilePic: ""
   });
 
   
@@ -120,10 +73,62 @@ export const ProfileSettings = () => {
 
 }
 
-  
+//Handling the input changes on the rest of the form  
 const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextAreaElement|HTMLSelectElement>)=>{
   setUserDetails({...userDetails, [e.target.name]:e.target.value})
 }
+
+
+ //Logic for handling photo upload and changing the displayed picture
+const [displayedProfilePic, setDisplayedProfilePic] = useState<string>("")
+
+const [photoFile, setPhotoFile] = useState<File | null>(null);
+const [photoDataURL, setPhotoDataURL] = useState<string>();
+const [displayUploadedPhotoName, setDisplayUploadedPhotoName] =
+  useState<string>();
+const [photoDisplayError, setPhotoDisplayError] = useState<string>();
+
+
+const handleChangeProfilePic = (event: ChangeEvent<HTMLInputElement>) => {
+  if (!event.target.files) return;
+  const maxSize = 3 * 1024 * 1024;
+  const displayedPhoto = event.target.files[0];
+  const uploadedPhoto = event.target.files[0]
+  if (uploadedPhoto.size > maxSize || displayedPhoto.size > maxSize) {
+    setPhotoDisplayError("File size exceeds 10mb");
+    return;
+  }
+
+  if(uploadedPhoto){
+  setPhotoFile(uploadedPhoto);
+  setUserDetails({...userDetails, profilePic:uploadedPhoto as Blob})
+  setDisplayUploadedPhotoName(uploadedPhoto.name);}
+  
+  if(displayedPhoto){
+  //allowing the selected picture to show
+  const reader = new FileReader();
+  reader.onload = () => {
+    setDisplayedProfilePic(reader.result as string);
+  };
+  reader.readAsDataURL(displayedPhoto);
+}
+};
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////
+//Logic for hanling userphoto upload
+
+
+// checking if the displayUploadedVideoName is in the local storage
+useEffect(() => {
+  const storedUploadedPhotoName = localStorage.getItem(
+    "displayUploadedPhotoName"
+  );
+  if (storedUploadedPhotoName) {
+    setDisplayUploadedPhotoName(JSON.parse(storedUploadedPhotoName));
+  }
+}, []);
 
 
 
@@ -145,7 +150,7 @@ const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextA
           </div>
 
           <div className="profile-settings-change-photo-buttons-container">
-            <button className="profile-settings-page-upload-photo-button" onClick={()=> handlePhotoUpload}>
+            <button className="profile-settings-page-upload-photo-button">
               Upload New
             </button>
             <button className="profile-settings-page-delete-photo-button">
@@ -314,3 +319,54 @@ const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextA
   );
 };
 export default ProfileSettings;
+
+
+
+/*
+//Logic for handling the photo upload    
+  const [userPic, setUserPic] = useState<File | null>(null);
+  const [displayedProfilePic, setDisplayedProfilePic] = useState<string>("") //This is ONLY FOR THE DISPLAYED PIC. 
+
+
+  //Logic for handling photo upload and changing the displayed picture
+  const handleChangeProfilePic = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+    const uploadedPhoto = event.target.files[0];
+    const displayedPhoto = event.target.files[0];
+    if (uploadedPhoto) setUserPic(uploadedPhoto)
+    // console.log(photoFile);
+
+
+
+
+    //allowing the selected picture to show
+    const reader = new FileReader();
+    reader.onload = () => {
+      setDisplayedProfilePic(reader.result as string);
+    };
+    reader.readAsDataURL(displayedPhoto);
+  };
+
+
+  const handlePhotoUpload1 = async (event: FormEvent<HTMLFormElement>)=>{
+    event.preventDefault();
+
+    //adding data to form
+    const userPicFormData = new FormData()
+    userPicFormData.append("profilePic", userPic as Blob)
+    console.log(`PHOTO ADDED`);
+    console.log( userPic);
+
+    //Sending uploaded photo to backend
+    try {
+      await axios.post(`/user/edit-profile/profile-picture${currentUserId}`, {data: userPicFormData})
+      console.log(`Profile picture has been successfully changed`)
+      } catch (error) {
+      console.error(`Error uploading photo: ${error}`)
+      }
+
+  }
+
+
+
+*/

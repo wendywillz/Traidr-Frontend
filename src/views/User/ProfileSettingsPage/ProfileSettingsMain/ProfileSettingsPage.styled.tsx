@@ -52,6 +52,7 @@ export const ChangePictureForm = styled.form`
 
     .profile-settings-change-photo-buttons-container{
         margin: 5vh 0vw 0vh 5vw;
+        /* display:flex; */
     }
 
     .profile-settings-page-delete-photo-button{
