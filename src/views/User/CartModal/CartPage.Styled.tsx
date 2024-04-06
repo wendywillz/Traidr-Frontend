@@ -68,7 +68,7 @@ export const CartleftcontainerText = styled.div`
 
   .productPrice {
     font-size: 1vw;
-    color: #219653;
+    color: var(--price-green-color);
   }
 
   .sourceShop{
