@@ -30,7 +30,7 @@ const [modalVisibility, setModalVisibility]= useState(false)
 const orderSuccessModalTitle = `ORDER CREATED`
 const orderSucessModalMessage =`Your order has successfully been created`
 const modalButtonAction = ()=>{
-  navigate('/user/order-summary')
+  navigate('/user/my-order')
 }
 // const toggleModalVisibility = ()=>{
 //   setModalVisibility(!modalVisibility)

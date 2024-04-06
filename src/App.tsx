@@ -27,6 +27,7 @@ import TenantsDataBase from "./views/Admin/TenantsDB/TenantsDB"
 import OrderPage from "./views/User/OrderPage/OrderPage";
 import DeliveryPage from "./views/User/DeliveryPage/DeliveryPage";
 import PaymentPage from "./views/User/PaymentPage/PaymentPage";
+import OrderSummary from "./views/User/OrderSummary/OrderSummary";
 
 
 
@@ -83,9 +84,10 @@ function App() {
       <Route path="/test" element={<TestPage />} />
       <Route path="/user/my-cart" element={<CartPage/>} />
       <Route path="/admin/tenants-database" element={<TenantsDataBase />} />
-      <Route path="/user/order-summary" element={<OrderPage />} />
+      <Route path="/user/my-order" element={<OrderPage />} />
       <Route path="/delivery-details" element ={<DeliveryPage />}/>
       <Route path="/payment" element ={<PaymentPage />}/>
+      <Route path="/user/order-summary" element ={<OrderSummary />}/>
       
       
     </Routes>
