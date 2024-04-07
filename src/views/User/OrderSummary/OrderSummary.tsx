@@ -1,13 +1,46 @@
 //styled imports
-import { OrderSummaryWholeContainer, OrderSummaryMainContainer, OrderSummaryMain, OrderSummaryOverView, OrderSummaryPaymentAndDeliverySection, OrderSummaryInformationCard } from "./OrderSummary.Styled"
+import { OrderSummaryWholeContainer, OrderSummaryMainContainer, OrderSummaryMain, OrderSummaryOverView, OrderSummaryPaymentAndDeliverySection, OrderSummaryInformationCard, OrderSummaryNavigateButton  } from "./OrderSummary.Styled"
 
 //component imports
 import OrderSummaryRow from "./OrderSummaryRow"
 import Header from "../../../components/Header/Header"
 
+import { OrderProductDetail } from "../../../interfaces/orderInterfaces"
+import { SaleSummary } from "../../../interfaces/saleInterfaces"
+
+//package and tool imports
 import { useState, useEffect } from "react"
+import { fetchSaleSummary } from "../../../api/sale"
+import { useSelector } from "react-redux"
+import { RootState } from "../../../app/store"
+import { Link } from "react-router-dom"
 
 const OrderSummary = () => {
+  const userId:string|null = useSelector((state: RootState)=> state.user.userId) 
+
+
+  const [saleSummary, setSaleSummary] =useState<SaleSummary>()
+  const [orderItems, setOrderItems] = useState<OrderProductDetail[]>()
+
+  const [totalQuantity, setTotalQuantity]= useState<number|undefined>(0)
+
+useEffect(()=>{
+  fetchSaleSummary (userId).then((res:SaleSummary) => {
+        if (res) {
+          setSaleSummary(res)
+            setOrderItems(res.orderedProducts)
+          let totalQty = res?.orderedProducts.reduce((acc, curr)=> acc + (curr.productQuantity), 0)
+          setTotalQuantity(totalQty)
+        //   console.log(`The total is`, total);
+        }else{
+            
+        }
+      })
+},[])
+
+
+
+
   return (
     <OrderSummaryWholeContainer>
         <Header/>
@@ -16,15 +49,15 @@ const OrderSummary = () => {
               <h2 className="order-summary-page-title">ORDER SUMMARY</h2>
           <OrderSummaryOverView>
               <p className="order-overview-title">Order Overview</p>
-              <p className="order-overview-qty">3 Items</p>
-              <p className="order-overview-date">Placed on 5th November 2023</p>
-              <p className="order-overview-total">Total: ₦8,000</p>
+              <p className="order-overview-qty">{totalQuantity} Items</p>
+              <p className="order-overview-date">Placed on {saleSummary?.saleDate}</p>
+              <p className="order-overview-total">Total: ₦{saleSummary?.saleTotal.toLocaleString()}</p>
           </OrderSummaryOverView>
           <div className="order-items-list-title">PURCHASED ITEMS</div>
           <div className="order-items">
-          <OrderSummaryRow/>
-          <OrderSummaryRow/>
-          <OrderSummaryRow/>
+            {saleSummary?.orderedProducts.map((orderedProduct)=>{
+              return(<OrderSummaryRow orderedProduct={orderedProduct} key={orderedProduct.productId}/>)
+            })}
           </div>
           <OrderSummaryPaymentAndDeliverySection>
             <OrderSummaryInformationCard>
@@ -35,9 +68,9 @@ const OrderSummary = () => {
               </div>
               <div className="order-summary-info-subsection">
                 <p className="order-summary-subsection-title">Payment Details</p>
-                <p className="order-summary-subsection-text">Items Total: ₦8,000 </p>
+                <p className="order-summary-subsection-text">Items Total: ₦{saleSummary?.saleTotal.toLocaleString()} </p>
                 <p className="order-summary-subsection-text">Delivery fees: ₦0 </p>
-                <p className="order-summary-subsection-text">Total: ₦8,000 </p>
+                <p className="order-summary-subsection-text">Total:₦ {saleSummary?.saleTotal.toLocaleString()} </p>
               </div>
             </OrderSummaryInformationCard>
             <OrderSummaryInformationCard id="delivery-info">
@@ -48,17 +81,18 @@ const OrderSummary = () => {
               </div>
               <div className="order-summary-info-subsection">
                 <p className="order-summary-subsection-title">Shipping Address</p>
-                <p className="order-summary-subsection-text">Elephant Girl</p>
-                <p className="order-summary-subsection-text">08033041194</p>
-                <p className="order-summary-subsection-text">10, Orchid Road Lekki Lagos</p>
+                <p className="order-summary-subsection-text">{saleSummary?.recipientName}</p>
+                <p className="order-summary-subsection-text">0{saleSummary?.recipientPhoneNumber}</p>
+                <p className="order-summary-subsection-text">{saleSummary?.deliveryAddress}</p>
               </div>
               <div className="order-summary-info-subsection">
                 <p className="order-summary-subsection-title">Delivery Instructions</p>
-                <p className="order-summary-subsection-text">Leave the package by the blue door</p>
+                <p className="order-summary-subsection-text">{saleSummary?.deliveryInstructions}</p>
               </div>
             </OrderSummaryInformationCard>
           
           </OrderSummaryPaymentAndDeliverySection>
+          <OrderSummaryNavigateButton><Link to="/dashboard" className="order-summary-link">Back to my dashboard</Link></OrderSummaryNavigateButton>
           
           </OrderSummaryMain>
         </OrderSummaryMainContainer>

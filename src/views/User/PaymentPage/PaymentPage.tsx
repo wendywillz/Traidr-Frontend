@@ -18,7 +18,7 @@ const PaymentPage = () => {
   const [purchaseModalVisibility, setPurchaseModalVisibility] = useState(false)
   const purchaseModalTitle = `PURCHASE COMPLETED`
   const purchaseModalMessage = `Thank you for shopping with Traidr`
-  const purchaseModalButtonAction = ()=>{navigate('/dashboard')}
+  const purchaseModalButtonAction = ()=>{navigate('/user/order-summary')}
   const togglePurchaseModal = ()=>{
     setPurchaseModalVisibility(!purchaseModalVisibility)
   }
