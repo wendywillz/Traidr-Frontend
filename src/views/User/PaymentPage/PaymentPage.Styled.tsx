@@ -65,6 +65,8 @@ export const PaymentPageContent = styled.div`
         margin-left: 10vw;
         font-size: 1vw;
         font-weight: 400;
+        color: grey;
+        opacity: 50%;
     }
 `
 
