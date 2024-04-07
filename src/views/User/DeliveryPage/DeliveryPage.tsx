@@ -77,12 +77,38 @@ const DeliveryPage = () => {
     }
   };
 
+<<<<<<< HEAD
   const handleCancel = async () => {
     try {
       const res = await axiosInstance.post("/sale/cancel-sale");
       if (res) {
         setConfirmCancelModalVisibility(false);
         setOrderCancelledModalVisibility(true);
+=======
+    //HANDLING THE ORDER CANCELLED MODAL
+    const [orderCancelledmodalVisibility, setOrderCancelledModalVisibility]= useState(false)
+    const orderCancelledModalTitle = `ORDER CANCELLED`
+    const orderCancelledModalMessage =`Your order has been cancelled`
+    const orderCancelledmodalButtonAction = ()=>{navigate('/user/my-cart')}
+    
+    //HANDLING THE PROCEED TO PAYMENT MODAL
+    const [proceedModalVisibility, setProceedModalVisibility] = useState(false)
+    const proceedModalTitle = `PROCEED TO PAYMENT`
+    const proceedModalMessage = `Click to proceed to payment`
+    const proceedModalButtonAction = ()=>{navigate('/order/payment')}
+
+
+
+    const[deliveryDetails, setDeliveryDetails]= useState<DeliveryDetailsData>({
+        recipientName: "",
+        recipientPhoneNumber: 0,
+        deliveryAddress: "",
+        deliveryInstructions: ""
+    })
+
+    const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextAreaElement>)=>{
+        setDeliveryDetails({...deliveryDetails, [e.target.name]:e.target.value})
+>>>>>>> 47df2cd310eccacc41b2ed54d5719c62579126a5
       }
     } catch (error) {
       return error;

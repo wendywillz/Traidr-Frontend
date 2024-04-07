@@ -56,6 +56,7 @@ const OrderPage = () => {
 
   const [orderTotal, setOrderTotal] = useState<number | undefined>(0);
 
+<<<<<<< HEAD
   useEffect(() => {
     fetchOrderItems().then((res: OrderProductDetail[]) => {
       if (res) {
@@ -65,6 +66,27 @@ const OrderPage = () => {
           0
         );
         setOrderTotal(total);
+=======
+//HANDLING THE PROCEED TO PAYMENT MODAL
+const [proceedModalVisibility, setProceedModalVisibility] = useState(false)
+const proceedModalTitle = `PROCEED TO PAYMENT`
+const proceedModalMessage = `Click to continue begin checkout`
+const proceedModalButtonAction = ()=>{
+    navigate('/order/delivery-details')
+}
+
+
+const [orderItems, setOrderItems] = useState<OrderProductDetail[]>()
+
+const [orderTotal, setOrderTotal]= useState<number|undefined>(0)
+
+useEffect(()=>{
+    fetchOrderItems().then((res:OrderProductDetail[]) => {
+        if (res) {
+            setOrderItems(res)
+          let total = res?.reduce((acc, curr)=> acc + (curr.productPrice* curr.productQuantity), 0)
+          setOrderTotal(total)
+>>>>>>> 47df2cd310eccacc41b2ed54d5719c62579126a5
         //   console.log(`The total is`, total);
       } else {
         navigate("/user/my-cart");
