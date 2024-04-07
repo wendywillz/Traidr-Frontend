@@ -3,11 +3,11 @@ import styled from "styled-components";
 import formBackground from "../../../assets/form-background-image.png";
 
 export const OrderSummaryWholeContainer = styled.div`
-    /* border: 1px solid red;   */
-    background-image: url(${formBackground});
-  background-size: cover;
+    border: 1px solid red;  
+    /* background-image: url(${formBackground}); */
+  /* background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
 `
    
 export const OrderSummaryMainContainer = styled.div`
@@ -42,6 +42,7 @@ export const OrderSummaryMain = styled.div`
         border-right: 1px solid grey;
 
     }
+    
 `
 
 export const OrderSummaryOverView = styled.div`
@@ -111,7 +112,33 @@ export const OrderSummaryInformationCard = styled.div`
     }
 `
 
+export const OrderSummaryNavigateButton = styled.div`
+    border: none;
+    color: white;
+    background-color: var(--orange-color);
+    width: 30vw;
+    height: 6.5vh;
+    border-radius: 8px;
+    font-size: 1.15vw;
+    text-align: center;
+    padding-top: 2vh;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 2.5vh 0vw 1vh 15vw;
+    /* visibility: hidden; */
 
+    &:hover{
+        font-size: 1.2vw;
+        width: 10%.1vw;
+        height: 6.6vh;
+    } 
+   
+    .order-summary-link{
+        text-decoration: none;
+        color: white;
+    }
+     
+`
 
 ///////////////////////////////////////////////////////
 //STYLING FOR ODER SUMMARY ROW
@@ -128,6 +155,7 @@ export const OrderSummaryRowContainer = styled.div `
 `
 
 export const OrderSummaryProductDescription = styled.div `
+    margin-left: 0.5vw;
     /* border: 1px solid yellow; */
 
     .order-summary-product-name{
@@ -143,5 +171,9 @@ export const OrderSummaryProductDescription = styled.div `
     .order-summary-product-price{
         font-size: 1vw;
         font-weight:400;
+    }
+    .order-summary-product-seller{
+        font-size: 1vw;
+        font-weight:400; 
     }
 `
