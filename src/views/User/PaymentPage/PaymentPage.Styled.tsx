@@ -39,9 +39,33 @@ export const PaymentPageContentContainer = styled.div`
 `
 export const PaymentPageContent = styled.div`
     /* border: 1px solid green;  */
-    padding: 3vh 9.5vw 0vh 9.5vw; 
+    padding: 3vh 0vw 0vh 2vw; 
     height: 70vh; 
     width: 43vw;
+
+    .payment-page-title{
+        font-size: 2vw;
+        font-weight: 700;
+    }
+    .paystack-link-image{
+        cursor: pointer;
+        margin-top: 15vh;
+        margin-left: 7vw;
+        /* margin-bottom: 2vh; */
+        width: 20vw;
+        box-shadow: 2px 8px 20px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+    .paystack-link-image:hover{
+        width: 22vw;
+    }
+    .payment-page-instructions{
+        /* margin-top: 10vh; */
+        margin-bottom: 2vh;
+        margin-left: 10vw;
+        font-size: 1vw;
+        font-weight: 400;
+    }
 `
 
 

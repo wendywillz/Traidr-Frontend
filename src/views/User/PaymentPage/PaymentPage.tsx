@@ -4,13 +4,15 @@ import { PaymentPageWholeContainer, PaymentPageMainContainer, PaymentPageContent
 
 import Header from "../../../components/Header/Header"
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal"
+import paystackLogo from "../../../assets/paystack_icon.png"
 import { useState } from "react"
 import axiosInstance from "../../../utils/axiosInstance"
 
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { Link, NavigateFunction, useNavigate} from "react-router-dom";
 
 const PaymentPage = () => {
     const navigate:NavigateFunction = useNavigate();
+    
     
 
   //HANDLING THE CONFIRM CANCEL MODAL
@@ -31,7 +33,7 @@ const PaymentPage = () => {
   const [purchaseModalVisibility, setPurchaseModalVisibility] = useState(false)
   const purchaseModalTitle = `PURCHASE COMPLETED`
   const purchaseModalMessage = `Thank you for shopping with Traidr`
-  const purchaseModalButtonAction = ()=>{navigate('/user/order-summary')}
+  const purchaseModalButtonAction = ()=>{navigate('/order/receipt')}
   // const togglePurchaseModal = ()=>{
   //   setPurchaseModalVisibility(!purchaseModalVisibility)
   // }
@@ -81,12 +83,20 @@ const PaymentPage = () => {
         <PaymentPageMainContainer>
             <PaymentPageContentContainer>
             <PaymentPageContent>
-                        <p>Complete Payment through Paystack</p>
+                        <p className="payment-page-title">Complete Payment Through Paystack</p>
+                        <div>
+                          <Link to="https://paystack.com/pay/traidr">
+                            <img src={paystackLogo} className="paystack-link-image"/>
+                          </Link>
+                        </div>
+                        <p className="payment-page-instructions">Click button to pay with paystack.</p>
+                        
                     </PaymentPageContent>
 
                 <PaymentPageButtonsContainer>
                     <PaymentPageButton className="payment-page-cancel-button" onClick={toggleConfirmCancelModal}>CANCEL</PaymentPageButton>
 
+                  
                     <PaymentPageButton className="payment-page-checkout-button" onClick={handleCheckout}>PAY</PaymentPageButton>
                 </PaymentPageButtonsContainer>
             </PaymentPageContentContainer>

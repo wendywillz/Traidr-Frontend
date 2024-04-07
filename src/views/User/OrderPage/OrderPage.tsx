@@ -48,7 +48,7 @@ const [proceedModalVisibility, setProceedModalVisibility] = useState(false)
 const proceedModalTitle = `PROCEED TO PAYMENT`
 const proceedModalMessage = `Click to continue begin checkout`
 const proceedModalButtonAction = ()=>{
-    navigate('/delivery-details')
+    navigate('/order/delivery-details')
 }
 
 

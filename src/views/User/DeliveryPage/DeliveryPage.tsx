@@ -37,7 +37,7 @@ const DeliveryPage = () => {
     const [proceedModalVisibility, setProceedModalVisibility] = useState(false)
     const proceedModalTitle = `PROCEED TO PAYMENT`
     const proceedModalMessage = `Click to proceed to payment`
-    const proceedModalButtonAction = ()=>{navigate('/payment')}
+    const proceedModalButtonAction = ()=>{navigate('/order/payment')}
 
 
 
