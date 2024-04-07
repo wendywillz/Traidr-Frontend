@@ -18,15 +18,12 @@ const OrderSummary = () => {
 
 
   const [saleSummary, setSaleSummary] =useState<SaleSummary>()
-  const [orderItems, setOrderItems] = useState<OrderProductDetail[]>()
-
   const [totalQuantity, setTotalQuantity]= useState<number|undefined>(0)
 
 useEffect(()=>{
   fetchSaleSummary ().then((res:SaleSummary) => {
         if (res) {
-          setSaleSummary(res)
-            setOrderItems(res.orderedProducts)
+          setSaleSummary(res) 
           let totalQty = res?.orderedProducts.reduce((acc, curr)=> acc + (curr.productQuantity), 0)
           setTotalQuantity(totalQty)
         //   console.log(`The total is`, total);

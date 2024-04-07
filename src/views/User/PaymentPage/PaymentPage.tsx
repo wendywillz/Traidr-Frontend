@@ -6,26 +6,74 @@ import Header from "../../../components/Header/Header"
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal"
 import { useState } from "react"
 import axiosInstance from "../../../utils/axiosInstance"
-import { useSelector } from "react-redux"
-import { RootState } from "../../../app/store"
+
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const PaymentPage = () => {
     const navigate:NavigateFunction = useNavigate();
-    const userId:string|null = useSelector((state: RootState)=> state.user.userId)
+    
+
+  //HANDLING THE CONFIRM CANCEL MODAL
+  const [confirmCancelModalVisibility, setConfirmCancelModalVisibility]= useState(false)
+  const confirmCancelModalTitle = `CONFRIM ORDER CANCELLATION`
+  const confirmCancelModalmessage = `Please confirm you want to cancel your order`
+  const toggleConfirmCancelModal = ()=>{
+      setConfirmCancelModalVisibility(true)
+  }
+
+  //HANDLING THE ORDER CANCELLED MODAL
+  const [orderCancelledmodalVisibility, setOrderCancelledModalVisibility]= useState(false)
+  const orderCancelledModalTitle = `ORDER CANCELLED`
+  const orderCancelledModalMessage =`Your order has been cancelled`
+  const orderCancelledmodalButtonAction = ()=>{navigate('/user/my-cart')}
 
   //HANDLING THE PROCEED TO Purchase MODAL
   const [purchaseModalVisibility, setPurchaseModalVisibility] = useState(false)
   const purchaseModalTitle = `PURCHASE COMPLETED`
   const purchaseModalMessage = `Thank you for shopping with Traidr`
   const purchaseModalButtonAction = ()=>{navigate('/user/order-summary')}
-  const togglePurchaseModal = ()=>{
-    setPurchaseModalVisibility(!purchaseModalVisibility)
+  // const togglePurchaseModal = ()=>{
+  //   setPurchaseModalVisibility(!purchaseModalVisibility)
+  // }
+
+
+  const handleCheckout = async ()=>{
+    try {
+        const res = await axiosInstance.post(`/sale/complete-sale`)
+        if(res){
+            setPurchaseModalVisibility(true);
+            console.log(`Payment complete. Sale processed`)
+        }
+        
+    } catch (error) {
+        console.log(`Problem processing payment. Reason:`, error);
+    }
   }
+
+
+  const handleCancel = async ()=>{
+    try {
+      const res = await  axiosInstance.post('/sale/cancel-delivey-and-sale')
+      if(res){
+        setConfirmCancelModalVisibility(false)
+        setOrderCancelledModalVisibility(true)
+        console.log(`ORDER CANCELLED`);
+      }
+        
+    } catch (error) {
+        console.log(`Problem canceling sale`, error);
+    }
+  }
+
+
 
 
   return (
     <PaymentPageWholeContainer>
+        {confirmCancelModalVisibility && <MultipurposeModal title={confirmCancelModalTitle} message={confirmCancelModalmessage} onClickAction={handleCancel}/>}
+
+        {orderCancelledmodalVisibility && <MultipurposeModal title={orderCancelledModalTitle} message={orderCancelledModalMessage} onClickAction={orderCancelledmodalButtonAction}/>}
+
         {purchaseModalVisibility && <MultipurposeModal title={purchaseModalTitle} message={purchaseModalMessage} onClickAction={purchaseModalButtonAction}/>}
 
 
@@ -37,9 +85,9 @@ const PaymentPage = () => {
                     </PaymentPageContent>
 
                 <PaymentPageButtonsContainer>
-                    <PaymentPageButton className="payment-page-cancel-button">CANCEL</PaymentPageButton>
+                    <PaymentPageButton className="payment-page-cancel-button" onClick={toggleConfirmCancelModal}>CANCEL</PaymentPageButton>
 
-                    <PaymentPageButton className="payment-page-checkout-button" onClick={togglePurchaseModal}>PAY</PaymentPageButton>
+                    <PaymentPageButton className="payment-page-checkout-button" onClick={handleCheckout}>PAY</PaymentPageButton>
                 </PaymentPageButtonsContainer>
             </PaymentPageContentContainer>
         </PaymentPageMainContainer>
