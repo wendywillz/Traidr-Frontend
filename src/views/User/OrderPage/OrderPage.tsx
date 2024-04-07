@@ -15,8 +15,6 @@ import { OrderProductDetail } from '../../../interfaces/orderInterfaces'
 import { useState, useEffect } from 'react'
 import { fetchOrderItems } from '../../../api/order'
 import axiosInstance from '../../../utils/axiosInstance'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../../app/store'
 import { NavigateFunction, useNavigate } from 'react-router-dom'
 
 //import axiosInstance from '../../../utils/axiosInstance'
@@ -26,7 +24,7 @@ import { NavigateFunction, useNavigate } from 'react-router-dom'
 const OrderPage = () => {
 const navigate:NavigateFunction = useNavigate();
 
-const userId:string|null = useSelector((state: RootState)=> state.user.userId) 
+
 
 //HANDLING THE CONFIRM CANCEL MODAL
 const [confirmationModalVisibility, setConfirmationModalVisibility]= useState(false)
@@ -59,7 +57,7 @@ const [orderItems, setOrderItems] = useState<OrderProductDetail[]>()
 const [orderTotal, setOrderTotal]= useState<number|undefined>(0)
 
 useEffect(()=>{
-    fetchOrderItems(userId).then((res:OrderProductDetail[]) => {
+    fetchOrderItems().then((res:OrderProductDetail[]) => {
         if (res) {
             setOrderItems(res)
           let total = res?.reduce((acc, curr)=> acc + (curr.productPrice* curr.productQuantity), 0)
@@ -73,11 +71,9 @@ useEffect(()=>{
 
 
 const cancelOrder = async ()=>{
-    const info = {
-        currentUserId: userId
-      } 
+    
 try {
-     const res = await axiosInstance.post('/order/cancel-order', info)
+     const res = await axiosInstance.post('/order/cancel-order')
      if(res){
         setConfirmationModalVisibility(false)
         setOrderCancelledModalVisibility(true)
@@ -91,7 +87,6 @@ try {
 
 const createSale = async()=>{
     const info = {
-        currentUserId: userId,
         saleTotal: orderTotal
       } 
     try {

@@ -4,13 +4,10 @@ import { AddQuantityModalContainer,QuantityModalSection, QuantityCounterButton, 
 //package imports
 import { ChangeEvent, useState, useEffect } from "react"
 import axiosInstance from "../../utils/axiosInstance";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
 
 
 
 interface CartDetails{
-  currentUserId: string|null;
   currentProductId: string| undefined|null;
   productQuantity: number;
 }
@@ -26,10 +23,9 @@ interface CartDetails{
   }
 
 const AddQuantityModal = ({productId, toggleVisibility}: ModalProps) => {
-    const currentUserId:string|null = useSelector((state: RootState)=> state.user.userId)
+   
     const[quantity, setQuantity] = useState<number>(0)
     const [cartData, setCartData]= useState<CartDetails>({
-      currentUserId:currentUserId, 
       currentProductId: productId,
       productQuantity:0,
      })

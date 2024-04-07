@@ -6,3 +6,11 @@ export const fetchUserShopDetails = async () => {
     }
     
 }
+
+
+export const fetchUserId = async ()=>{
+    const res = await axiosInstance.get(`/users/get-id`)
+    if (res && res.data.response){
+        return res.data.response
+    }
+}

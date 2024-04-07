@@ -11,8 +11,6 @@ import { CartProductDetail } from "../../../interfaces/cartInterfaces";
 //packages and tools
 import { useState, useEffect } from "react";
 import { fetchCartItems } from "../../../api/cart";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../app/store";
 import axiosInstance from "../../../utils/axiosInstance";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
@@ -22,7 +20,7 @@ const CartPage = () => {
 
 const navigate:NavigateFunction = useNavigate();
 
-const userId:string|null = useSelector((state: RootState)=> state.user.userId)
+
 
 
 //Functions dealing with the modal
@@ -44,7 +42,7 @@ const [cartTotal, setCartTotal]= useState<number|undefined>(0)
 
 useEffect(()=>{
   
-  fetchCartItems(userId).then((res) => {
+  fetchCartItems().then((res) => {
     if (res) {
       setCartProducts(res);
       let total = cartProducts?.reduce((acc, curr)=> acc + (curr.productPrice* curr.productQuantity), 0)
@@ -58,7 +56,6 @@ useEffect(()=>{
 
 const handleDelete = async(productId: string)=>{
   const selectedProductDetail = {
-      userId: userId,
       productId: productId
   }
 try {
@@ -75,11 +72,9 @@ try {
 
 
 const handleOrder = async()=>{
-  const info = {
-    currentUserId: userId
-  }
+  
   try {
-    const res = await axiosInstance.post(`/order/create-order`, info)
+    const res = await axiosInstance.post(`/order/create-order`)
     if(res) {
     setModalVisibility(true)
     console.log(`Order Created`);
