@@ -9,7 +9,7 @@ import MultipurposeModal from "../../../components/MultipurposeModal/Multipurpos
 import DeliveryDetailsData from "../../../interfaces/deliveryInterfaces"
 
 //package and tools imports
-import { useState, ChangeEvent, FormEvent} from "react"
+import { useState, ChangeEvent} from "react"
 import axiosInstance from "../../../utils/axiosInstance"
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
