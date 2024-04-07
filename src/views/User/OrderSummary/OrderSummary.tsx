@@ -5,7 +5,7 @@ import { OrderSummaryWholeContainer, OrderSummaryMainContainer, OrderSummaryMain
 import OrderSummaryRow from "./OrderSummaryRow"
 import Header from "../../../components/Header/Header"
 
-import { OrderProductDetail } from "../../../interfaces/orderInterfaces"
+
 import { SaleSummary } from "../../../interfaces/saleInterfaces"
 
 //package and tool imports

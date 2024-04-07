@@ -15,7 +15,6 @@ import Header from "../../../../components/Header/Header";
 //package imports
 import { BsCameraFill, BsPersonCircle } from "react-icons/bs";
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
-import axios from "axios"
 import axiosInstance from "../../../../utils/axiosInstance";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../app/store";

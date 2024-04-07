@@ -1,6 +1,6 @@
 import { OrderSummaryRowContainer, OrderSummaryProductDescription } from "./OrderSummary.Styled"
 
-import blender from "../../../assets/dashboard-assets/blender-pic.png"
+
 
 //Interface imports
 import { OrderProductDetail } from '../../../interfaces/orderInterfaces';
