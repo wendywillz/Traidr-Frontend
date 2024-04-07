@@ -4,31 +4,28 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const MobilePopUp = () => {
- 
   const navigate = useNavigate();
-  
-  function handleClick() {
 
-        axios.get("http://localhost:3001/user/logout", {
+  function handleClick() {
+    axios
+      .get("http://localhost:3001/user/logout", {
         withCredentials: true,
       })
       .then((response) => {
-        if(response.status === 200 && response.data.successMessage){
-          navigate("/")
+        if (response.status === 200 && response.data.successMessage) {
+          navigate("/");
         }
-        
       })
       .catch((error) => {
-        console.error('Logout error:', error);
+        return error;
       });
- 
-}
+  }
   return (
     <aside>
-        <div className="logo">
-            <h1 className="logo-text">Traidr</h1>
-        </div>
-        <hr/>
+      <div className="logo">
+        <h1 className="logo-text">Traidr</h1>
+      </div>
+      <hr />
       <div className="cont">
         <Link to="/customerdashboard" className="sidebar-item">
           <img src="src/assets/home.png" alt="Home Icon" />
@@ -52,7 +49,9 @@ const MobilePopUp = () => {
         </a>
         <Link to="" className="sidebar-item">
           <img src="src/assets/logout.png" alt="Home Icon" />
-          <span className="home" onClick={handleClick}>Logout</span>
+          <span className="home" onClick={handleClick}>
+            Logout
+          </span>
         </Link>
       </div>
     </aside>

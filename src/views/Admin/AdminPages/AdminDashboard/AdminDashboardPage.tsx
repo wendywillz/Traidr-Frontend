@@ -16,7 +16,8 @@ import AdminSideBar from "../../../../components/adminSideBar/AdminSideBar";
 import { useState } from "react";
 import RecentActivity from "../../AdminPagesComponents/RecentActivity/RecentActivity";
 import MonthlyTrendLineChart from "../MonthlyTrend/LineChart";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../app/store";
 //INTERFACE DECLARATIONS
 interface AdminDataSummary {
   totalOrders: number;

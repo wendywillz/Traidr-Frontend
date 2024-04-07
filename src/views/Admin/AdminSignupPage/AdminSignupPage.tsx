@@ -73,7 +73,6 @@ export default function AdminSignupPage() {
     } catch (error) {
       setEmail("");
       setPassword("");
-      console.log("error", error);
       setError("Internal Server Error");
     }
 

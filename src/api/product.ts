@@ -18,9 +18,7 @@ export const fetchProductsById = async (productId: string) => {
   if (res && res.data.product) {
     return res.data.product;
   }
-  else {
-    console.log("res.error", res.data);
-  }
+  else { /* empty */ }
 };
 
 

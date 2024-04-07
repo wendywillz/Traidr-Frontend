@@ -10,7 +10,6 @@ export const stockYourShopFormSlice = createSlice({
   reducers: {
     updateStockYourShop: (state, action) => {
       const stockYourShop = action.payload;
-      console.log("initial state", initialState);
       return Object.assign(state, stockYourShop);
     },
   },

@@ -23,7 +23,6 @@ const CartItemRow = ({cartItem, handleDelete}: CartItemProps) => {
 const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
 
 const toggleQuantityModal = () => {
-  console.log("modalVisible?", quantityModalVisibility);
   setQuantityModalVisibility(!quantityModalVisibility);
 };
 

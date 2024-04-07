@@ -17,21 +17,18 @@ function TopDescription({ ...props }: shopProductsInterface) {
     setSelectedOption(e.target.value);
   };
 
-  
-   const currentProductId = props.productId
+  const currentProductId = props.productId;
 
-   const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
+  const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
 
   const toggleQuantityModal = () => {
-    console.log("modalVisible?", quantityModalVisibility);
     setQuantityModalVisibility(!quantityModalVisibility);
   };
 
   return (
     <div>
-      
       <section className="display">
-        <div>
+        <div className="top-description-page-wrapper">
           <ul className="home-search">
             <Link to="/">Home /</Link>
             <Link to="/dashboard/">Search /</Link>
@@ -39,9 +36,9 @@ function TopDescription({ ...props }: shopProductsInterface) {
             <Link to="">Home appliances</Link>
           </ul>
 
-          <div className="img-container">
+          <div className="product-description-image-wrapper">
             {props.productImages.map((product, index) => (
-              <div key={index}>
+              <div key={index} className="product-description-image">
                 <img src={product} alt={product} />
               </div>
             ))}
@@ -92,10 +89,16 @@ function TopDescription({ ...props }: shopProductsInterface) {
 
           <div className="sectwo">
             <div className="sub-sec">
-            <AddToCartButton buttonText={`ADD TO CART`} productId={currentProductId} toggleVisibility={toggleQuantityModal}/>
-              <p><Link className="wishlist" to="">
-                Add to Wishlist
-              </Link></p>
+              <AddToCartButton
+                buttonText={`ADD TO CART`}
+                productId={currentProductId}
+                toggleVisibility={toggleQuantityModal}
+              />
+              <p>
+                <Link className="wishlist" to="">
+                  Add to Wishlist
+                </Link>
+              </p>
             </div>
 
             <div className="user-info">
@@ -113,7 +116,6 @@ function TopDescription({ ...props }: shopProductsInterface) {
                 {/* <p>contact: 09085757757,08065443355</p> */}
               </div>
             </div>
-           
           </div>
         </div>
       </section>

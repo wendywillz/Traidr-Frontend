@@ -16,7 +16,6 @@ const AddToCartButton = ({buttonText, productId, toggleVisibility}: ButtonProps 
 const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
 
 const toggleQuantityModal = () => {
-      console.log("modalVisible?", quantityModalVisibility);
       setQuantityModalVisibility(!quantityModalVisibility);
 }
 

@@ -17,7 +17,7 @@ import {
 import SmallButton from "../../../../components/button/smallButton/smallButton";
 import axiosInstance from "../../../../utils/axiosInstance";
 import { useSelector } from "react-redux";
-import userData from "../../../../interfaces/userInterface";
+import { RootState } from "../../../../app/store";
 
 // Interface for review data (replace with your actual interface)
 interface ReviewsProps {
@@ -27,19 +27,14 @@ interface ReviewsProps {
   reviewText: string;
   date: string;
 }
-interface userAuthStateProps {
-  user: userData;
-}
+
 export default function Reviews() {
   const { productId } = useParams();
-  console.log("reviews", productId);
   const [reviews, setReviews] = useState<ReviewsProps[]>();
   const [hasGivenReview, setHasGivenReview] = useState(false);
   const token = localStorage.getItem("token");
-  console.log("reviewer", token);
-  const loggedInUser = useSelector(
-    (state: userAuthStateProps) => state.user.name
-  );
+
+  const loggedInUser = useSelector((state: RootState) => state.user.name);
   const [error, setError] = useState("");
   const [successReview, setSuccessReview] = useState("");
   const [reviewRating, setreviewRating] = useState(0); // State for new review star rating
@@ -56,11 +51,10 @@ export default function Reviews() {
       const userHasReviewed = reviews.some(
         (review) => review.reviewerName === loggedInUser
       );
-      console.log("userHasGivenReview", userHasReviewed);
       setHasGivenReview(userHasReviewed);
     }
   }, [reviews, loggedInUser]);
-  const [reviewText, setReviewText] = useState<string>("");
+  const [reviewText, setReviewText] = useState("");
 
   const handleSubmitReview = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
