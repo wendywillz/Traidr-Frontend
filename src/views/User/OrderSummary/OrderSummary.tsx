@@ -11,12 +11,10 @@ import { SaleSummary } from "../../../interfaces/saleInterfaces"
 //package and tool imports
 import { useState, useEffect } from "react"
 import { fetchSaleSummary } from "../../../api/sale"
-import { useSelector } from "react-redux"
-import { RootState } from "../../../app/store"
 import { Link } from "react-router-dom"
 
 const OrderSummary = () => {
-  const userId:string|null = useSelector((state: RootState)=> state.user.userId) 
+  
 
 
   const [saleSummary, setSaleSummary] =useState<SaleSummary>()
@@ -25,7 +23,7 @@ const OrderSummary = () => {
   const [totalQuantity, setTotalQuantity]= useState<number|undefined>(0)
 
 useEffect(()=>{
-  fetchSaleSummary (userId).then((res:SaleSummary) => {
+  fetchSaleSummary ().then((res:SaleSummary) => {
         if (res) {
           setSaleSummary(res)
             setOrderItems(res.orderedProducts)

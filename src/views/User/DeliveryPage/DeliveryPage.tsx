@@ -11,15 +11,13 @@ import DeliveryDetailsData from "../../../interfaces/deliveryInterfaces"
 //package and tools imports
 import { useState, ChangeEvent, FormEvent} from "react"
 import axiosInstance from "../../../utils/axiosInstance"
-import { useSelector } from "react-redux"
-import { RootState } from "../../../app/store"
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
 
 
 const DeliveryPage = () => {
     const navigate:NavigateFunction = useNavigate();
-    const userId:string|null = useSelector((state: RootState)=> state.user.userId)
+    
 
     //HANDLING THE CONFIRM CANCEL MODAL
     const [confirmCancelModalVisibility, setConfirmCancelModalVisibility]= useState(false)
@@ -58,7 +56,7 @@ const DeliveryPage = () => {
     const handleCheckout = async ()=>{
 
         try {
-            const res = await axiosInstance.post(`/delivery/create-delivery/${userId}`, deliveryDetails)
+            const res = await axiosInstance.post(`/delivery/create-delivery`, deliveryDetails)
             if(res){
                 console.log(`Delivery details have been added`);
                 setProceedModalVisibility(true)
@@ -71,12 +69,10 @@ const DeliveryPage = () => {
 
 
     const handleCancel = async ()=>{
-        const info = {
-            currentUserId: userId
-        }
+
 
         try {
-          const res = await  axiosInstance.post('/sale/cancel-sale', info)
+          const res = await  axiosInstance.post('/sale/cancel-sale')
           if(res){
             setConfirmCancelModalVisibility(false)
             setOrderCancelledModalVisibility(true)

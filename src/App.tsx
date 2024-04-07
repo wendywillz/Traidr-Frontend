@@ -28,6 +28,7 @@ import OrderPage from "./views/User/OrderPage/OrderPage";
 import DeliveryPage from "./views/User/DeliveryPage/DeliveryPage";
 import PaymentPage from "./views/User/PaymentPage/PaymentPage";
 import OrderSummary from "./views/User/OrderSummary/OrderSummary";
+import Test from "./views/User/Test";
 
 
 
@@ -88,6 +89,8 @@ function App() {
       <Route path="/delivery-details" element ={<DeliveryPage />}/>
       <Route path="/payment" element ={<PaymentPage />}/>
       <Route path="/user/order-summary" element ={<OrderSummary />}/>
+
+      <Route path="/tt" element ={<Test />}/>
       
       
     </Routes>

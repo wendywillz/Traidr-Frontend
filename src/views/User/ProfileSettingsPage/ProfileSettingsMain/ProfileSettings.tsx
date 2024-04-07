@@ -64,7 +64,7 @@ export const ProfileSettings = () => {
     console.log(userDetails);
 
     try {
-     const res = await axiosInstance.post(`/users/edit-profile/${currentUserId}`, userDetails)
+     const res = await axiosInstance.post(`/users/edit-profile`, userDetails)
      if(res && res.data.success) location.reload()
       console.log(`User Details have been sucessfully submitted`);
        } catch (error) {
