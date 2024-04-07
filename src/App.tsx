@@ -79,15 +79,24 @@ function App() {
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
       <Route path="/description/:productId" element={<Description />} />
-      <Route path="/user/my-wishlist" element={<Wishlist />} />
+     
       <Route path="/success-modal" element={<SuccessModal />} />
       <Route path="/test" element={<TestPage />} />
-      <Route path="/user/my-cart" element={<CartPage/>} />
+
+      {/*ADMIN PATHS: MOVE TO ADIM SECTION */}
       <Route path="/admin/tenants-database" element={<TenantsDataBase />} />
+     
+
+       {/*USER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME*/}
+     
+      <Route path="/user/my-wishlist" element={<Wishlist />} />
+      <Route path="/user/my-cart" element={<CartPage/>} />
       <Route path="/user/my-order" element={<OrderPage />} />
-      <Route path="/delivery-details" element ={<DeliveryPage />}/>
-      <Route path="/payment" element ={<PaymentPage />}/>
-      <Route path="/user/order-summary" element ={<OrderSummary />}/>
+
+      {/*ORDER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME */}
+      <Route path="order/delivery-details" element ={<DeliveryPage />}/>
+      <Route path="order/payment" element ={<PaymentPage />}/>
+      <Route path="/order/receipt" element ={<OrderSummary />}/>
 
      
       
