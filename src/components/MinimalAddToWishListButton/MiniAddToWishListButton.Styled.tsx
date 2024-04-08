@@ -9,4 +9,7 @@ export const MiniAddToWishListContainer = styled.div `
         width: 3vw;
         color: var(--orange-color);
     }
+    .add-to-wishlist-icon:hover{
+        size: 50;
+    }
 `

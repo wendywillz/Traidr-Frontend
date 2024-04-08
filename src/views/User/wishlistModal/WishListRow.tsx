@@ -34,7 +34,7 @@ const WishListRow = ({wishListItem, handleDelete}:WishListRowProps) => {
             </WishlistleftcontainerImg>
             <WishlistleftcontainerText>
               <p className="wishlistHeading">{wishListItem.productTitle}</p>
-              <p className="wishlistDescription">{wishListItem.productDescription}</p>
+              <p className="wishlistDescription">{wishListItem.productDescription.substring(0, 30)}{wishListItem.productDescription.length >= 30 ? "..." : ""}</p>
               <p className="wishlistPrice">₦{wishListItem.productPrice.toLocaleString()} Negotiable</p>
             </WishlistleftcontainerText>
           </Wishlistleftcontainer>

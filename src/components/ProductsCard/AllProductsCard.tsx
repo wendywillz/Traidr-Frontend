@@ -42,8 +42,8 @@ function AllProductsCard({ product }: ProductProps) {
         </div>
         <p className="each-product-title">{product.productTitle}</p>
         <p className="each-product-description">
-          {product.productDescription.substring(0, 30)}
-          {product.productDescription.length >= 30 ? "..." : ""}
+          {product.productDescription.substring(0, 25)}
+          {product.productDescription.length >= 25 ? "..." : ""}
         </p>
        
         <span className="each-product-price">
