@@ -9,6 +9,7 @@ import { MdOutlineChat } from "react-icons/md";
 import { shopProductsInterface } from "../../interfaces/shopInterfaces";
 // import { useParams } from "react-router-dom";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
+import AddToWishListButton from "../AddToWishListButton/AddToWishListButton";
 
 function TopDescription({ ...props }: shopProductsInterface) {
   const [selectedOption, setSelectedOption] = useState("");
@@ -95,9 +96,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
                 toggleVisibility={toggleQuantityModal}
               />
               <p>
-                <Link className="wishlist" to="">
-                  Add to Wishlist
-                </Link>
+                <AddToWishListButton productId={currentProductId}/>
               </p>
             </div>
 
