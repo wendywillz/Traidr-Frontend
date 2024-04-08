@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
-    "@rollup/rollup-darwin-x64": "^4.13.0",
     "axios": "^1.6.7",
     "chart.js": "^4.4.2",
     "dotenv": "^16.4.5",
@@ -49,5 +48,4 @@
     "typescript": "*",
     "vite": "^5.2.7"
   }
-
 }
