@@ -56,33 +56,35 @@ export const OrderTotal = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: gainsboro;
+    background-color: white;
+    color: var(--price-green-color);
     /* margin-top: 2vh; */
     margin-bottom: 2vh;
     height: 6vh;
     /* border-radius: 10px; */
     padding: 1vh 0vw 0vh 1vw;
-    border-left: 2px solid black;
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
-    border-top: 1px solid black;
+    border-left: 2px solid var(--price-green-color);
+    border-right: 2px solid var(--price-green-color);
+    border-bottom: 2px solid var(--price-green-color);
+    border-top: 1.5px solid var(--price-green-color);
 
 
     .order-total-text{
         font-size: 1.5vw;
         font-weight: 600;
+        color: var(--price-green-color);
     }
 
     .order-total-amount{
         font-size: 1.5vw;
         font-weight: 800;
-        /* color: var(--price-green-color); */
+        color: var(--price-green-color);
     }
 
 `
 
 export const PayNowButton = styled.div`
-    background-color:var(--price-green-color);
+    background-color:var(--orange-color);
     color: white;
     text-align: center;
     font-size: 1.2vw;
@@ -99,8 +101,9 @@ export const PayNowButton = styled.div`
 `
 
 export const CancelOrderButton = styled.div`
-    background-color: var(--orange-color);
-    color: white;
+    background-color: #F2F2F2;;
+    border: 2px solid black;
+    color: black;
     text-align: center;
     font-size: 1.2vw;
     font-weight: 600;
