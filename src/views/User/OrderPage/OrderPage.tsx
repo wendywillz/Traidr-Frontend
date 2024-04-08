@@ -60,7 +60,7 @@ const OrderPage = () => {
     fetchOrderItems().then((res: OrderProductDetail[]) => {
       if (res) {
         setOrderItems(res);
-        let total = res?.reduce(
+        const total = res?.reduce(
           (acc, curr) => acc + curr.productPrice * curr.productQuantity,
           0
         );

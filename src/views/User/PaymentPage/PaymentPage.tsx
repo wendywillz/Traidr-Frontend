@@ -13,11 +13,7 @@ import paystackLogo from "../../../assets/paystack_icon.png";
 import { useState } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 
-<<<<<<< HEAD
-import { NavigateFunction, useNavigate} from "react-router-dom";
-=======
 import { Link, NavigateFunction, useNavigate } from "react-router-dom";
->>>>>>> c3efb654787806678974a455a54065b7a7b493d3
 
 const PaymentPage = () => {
   const navigate: NavigateFunction = useNavigate();
