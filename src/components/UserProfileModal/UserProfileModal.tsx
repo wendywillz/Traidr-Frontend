@@ -11,7 +11,8 @@ import userIcon from "../../assets/user-profile-modal-assets/user-pic-icon.png";
 import editProfileIcon from "../../assets/user-profile-modal-assets/edit-profile-icon.png";
 import myShopIcon from "../../assets/user-profile-modal-assets/my-shop-icon.png";
 import cartIcon from "../../assets/user-profile-modal-assets/cart-icon.png";
-import messagingIcon from "../../assets/user-profile-modal-assets/messaging-icon.png";
+//import messagingIcon from "../../assets/user-profile-modal-assets/messaging-icon.png";
+import orderListIcon from "../../assets/user-profile-modal-assets/purchase_order_icon.png"
 import logouticon from "../../assets/user-profile-modal-assets/logout-icon.png";
 import { BsHeart } from "react-icons/bs";
 
@@ -109,15 +110,15 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
           </Link>
 
           <Link
-            to={token ? "/user/my-messages" : "/"}
+            to={token ? "/user/my-orders" : "/"}
             onClick={toggleVissiblity}
           >
             <div className="user-profile-modal-link-text-and-icon-container">
               <img
-                src={messagingIcon}
+                src={orderListIcon}
                 className="user-profile-modal-link-icon"
               />
-              <p className="user-profile-modal-link-text">Messaging</p>
+              <p className="user-profile-modal-link-text">Orders</p>
             </div>
           </Link>
 

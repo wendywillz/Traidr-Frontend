@@ -26,7 +26,7 @@ const CartPage = () => {
   const orderSuccessModalTitle = `ORDER CREATED`;
   const orderSucessModalMessage = `Your order has successfully been created`;
   const modalButtonAction = () => {
-    navigate("/user/my-order");
+    navigate('/order/new-order');
   };
   // const toggleModalVisibility = ()=>{
   //   setModalVisibility(!modalVisibility)

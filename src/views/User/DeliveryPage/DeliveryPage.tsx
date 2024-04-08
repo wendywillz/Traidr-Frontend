@@ -47,7 +47,7 @@ const DeliveryPage = () => {
   const proceedModalTitle = `PROCEED TO PAYMENT`;
   const proceedModalMessage = `Click to proceed to payment`;
   const proceedModalButtonAction = () => {
-    navigate("/payment");
+    navigate("/order/payment");
   };
 
   const [deliveryDetails, setDeliveryDetails] = useState<DeliveryDetailsData>({
@@ -70,10 +70,11 @@ const DeliveryPage = () => {
         deliveryDetails
       );
       if (res) {
+        console.log(`Delivery details have been added`);
         setProceedModalVisibility(true);
       }
     } catch (error) {
-      return error;
+      console.log(`Problem sending delivery details. Reason:`, error);
     }
   };
 
@@ -85,7 +86,7 @@ const DeliveryPage = () => {
         setOrderCancelledModalVisibility(true);
       }
     } catch (error) {
-      return error;
+      console.log(`Problem canceling sale`, error);
     }
   };
 

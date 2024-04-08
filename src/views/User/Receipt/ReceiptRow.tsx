@@ -1,4 +1,5 @@
-import { OrderSummaryRowContainer, OrderSummaryProductDescription } from "./OrderSummary.Styled"
+import { OrderSummaryRowContainer, OrderSummaryProductDescription } from "./Receipt.Styled"
+
 
 
 //Interface imports
@@ -10,7 +11,7 @@ interface OrderedProductProps{
 }
 
 
-const OrderSummaryRow = ({orderedProduct}:OrderedProductProps) => {
+const ReceiptRow = ({orderedProduct}:OrderedProductProps) => {
   return (
     <OrderSummaryRowContainer>
         <img src={orderedProduct.productImage} className="order-summary-product-image"/>
@@ -24,4 +25,4 @@ const OrderSummaryRow = ({orderedProduct}:OrderedProductProps) => {
   )
 }
 
-export default OrderSummaryRow
+export default ReceiptRow

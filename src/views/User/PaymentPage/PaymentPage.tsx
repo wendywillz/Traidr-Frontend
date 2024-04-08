@@ -9,10 +9,15 @@ import {
 
 import Header from "../../../components/Header/Header";
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
+import paystackLogo from "../../../assets/paystack_icon.png";
 import { useState } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 
+<<<<<<< HEAD
 import { NavigateFunction, useNavigate} from "react-router-dom";
+=======
+import { Link, NavigateFunction, useNavigate } from "react-router-dom";
+>>>>>>> c3efb654787806678974a455a54065b7a7b493d3
 
 const PaymentPage = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -40,7 +45,7 @@ const PaymentPage = () => {
   const purchaseModalTitle = `PURCHASE COMPLETED`;
   const purchaseModalMessage = `Thank you for shopping with Traidr`;
   const purchaseModalButtonAction = () => {
-    navigate("/user/order-summary");
+    navigate("/order/receipt");
   };
   // const togglePurchaseModal = ()=>{
   //   setPurchaseModalVisibility(!purchaseModalVisibility)
@@ -51,9 +56,10 @@ const PaymentPage = () => {
       const res = await axiosInstance.post(`/sale/complete-sale`);
       if (res) {
         setPurchaseModalVisibility(true);
+        console.log(`Payment complete. Sale processed`);
       }
     } catch (error) {
-      return error;
+      console.log(`Problem processing payment. Reason:`, error);
     }
   };
 
@@ -63,9 +69,10 @@ const PaymentPage = () => {
       if (res) {
         setConfirmCancelModalVisibility(false);
         setOrderCancelledModalVisibility(true);
+        console.log(`ORDER CANCELLED`);
       }
     } catch (error) {
-      return error;
+      console.log(`Problem canceling sale`, error);
     }
   };
 
@@ -99,7 +106,17 @@ const PaymentPage = () => {
       <PaymentPageMainContainer>
         <PaymentPageContentContainer>
           <PaymentPageContent>
-            <p>Complete Payment through Paystack</p>
+            <p className="payment-page-title">
+              Complete Payment Through Paystack
+            </p>
+            <div>
+              <Link to="https://paystack.com/pay/traidr">
+                <img src={paystackLogo} className="paystack-link-image" />
+              </Link>
+            </div>
+            <p className="payment-page-instructions">
+              Click button to pay with paystack.
+            </p>
           </PaymentPageContent>
 
           <PaymentPageButtonsContainer>

@@ -11,6 +11,8 @@ export const AddQuantityModalContainer = styled.div`
     height: 23vh; 
     align-items: center;
     padding-top: 1vh;
+    position: absolute;
+    z-index:100;
 `
 
 export const ModalCancelButton = styled.div`

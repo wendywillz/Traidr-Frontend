@@ -1,27 +1,27 @@
-import { OrderSummaryWholeContainer, OrderSummaryMainContainer, OrderSummaryMain, OrderSummaryOverView, OrderSummaryPaymentAndDeliverySection, OrderSummaryInformationCard, OrderSummaryNavigateButton  } from "./OrderSummary.Styled"
+//styled imports
+import { OrderSummaryWholeContainer, OrderSummaryMainContainer, OrderSummaryMain, OrderSummaryOverView, OrderSummaryPaymentAndDeliverySection, OrderSummaryInformationCard, OrderSummaryNavigateButton  } from "./Receipt.Styled"
 
-
-
+//component imports
+import ReceiptRow from "./ReceiptRow"
 import Header from "../../../components/Header/Header"
-import OrderSummaryRow from "./OrderSummaryRow"
 
 
 import { SaleSummary } from "../../../interfaces/saleInterfaces"
 
 //package and tool imports
 import { useState, useEffect } from "react"
-import { fetchSpecifiedOrderHistory } from "../../../api/order"
-import { Link, useParams } from "react-router-dom"
+import { fetchReceipt } from "../../../api/sale"
+import { Link } from "react-router-dom"
 
-const OrderSummary  = () => {
+const Receipt = () => {
   
-    const {saleId} = useParams()
+
 
   const [saleSummary, setSaleSummary] =useState<SaleSummary>()
   const [totalQuantity, setTotalQuantity]= useState<number|undefined>(0)
 
 useEffect(()=>{
-    fetchSpecifiedOrderHistory(saleId).then((res:SaleSummary) => {
+  fetchReceipt().then((res:SaleSummary) => {
         if (res) {
           setSaleSummary(res) 
           let totalQty = res?.orderedProducts.reduce((acc, curr)=> acc + (curr.productQuantity), 0)
@@ -41,7 +41,7 @@ useEffect(()=>{
         <Header/>
         <OrderSummaryMainContainer>
           <OrderSummaryMain>
-              <h2 className="order-summary-page-title">ORDER SUMMARY</h2>
+              <h2 className="order-summary-page-title">RECEIPT</h2>
           <OrderSummaryOverView>
               <p className="order-overview-title">Order Overview</p>
               <p className="order-overview-qty">{totalQuantity} Items</p>
@@ -51,7 +51,7 @@ useEffect(()=>{
           <div className="order-items-list-title">PURCHASED ITEMS</div>
           <div className="order-items">
             {saleSummary?.orderedProducts.map((orderedProduct)=>{
-              return(<OrderSummaryRow orderedProduct={orderedProduct} key={orderedProduct.productId}/>)
+              return(<ReceiptRow orderedProduct={orderedProduct} key={orderedProduct.productId}/>)
             })}
           </div>
           <OrderSummaryPaymentAndDeliverySection>
@@ -95,4 +95,4 @@ useEffect(()=>{
   )
 }
 
-export default OrderSummary 
+export default Receipt 

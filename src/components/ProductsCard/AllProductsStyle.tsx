@@ -4,6 +4,7 @@ export const AllProductsCardContainer = styled.div`
   /* border: 2px solid green; */
   display: flex;
   flex-direction: column;
+  
 
   .dashboard-add-to-cart-button{
     margin-top: -2vh;
@@ -22,6 +23,10 @@ export const AllProductsWrapper = styled.div`
   margin: 1rem 0;
   cursor: pointer;
   max-width: 450px;
+  position: relative;
+  z-index: 0;
+  
+  
 
   .each-product-image {
     min-height: 250px;
@@ -52,3 +57,18 @@ export const AllProductsWrapper = styled.div`
     font-weight: 600;
   }
 `;
+
+export const CartWishlistBtns = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+margin-left: -4.5vw;
+margin-top: 1vh;
+
+/* margin-left: 10vw; */
+/* margin-top: -2.5vh; */
+/* margin-left: 2vw; */
+
+`
+
+

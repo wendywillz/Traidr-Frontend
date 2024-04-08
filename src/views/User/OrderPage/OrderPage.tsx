@@ -49,7 +49,7 @@ const OrderPage = () => {
   const proceedModalTitle = `PROCEED TO PAYMENT`;
   const proceedModalMessage = `Click to continue begin checkout`;
   const proceedModalButtonAction = () => {
-    navigate("/delivery-details");
+    navigate("/order/delivery-details");
   };
 
   const [orderItems, setOrderItems] = useState<OrderProductDetail[]>();
@@ -60,7 +60,7 @@ const OrderPage = () => {
     fetchOrderItems().then((res: OrderProductDetail[]) => {
       if (res) {
         setOrderItems(res);
-        const total = res?.reduce(
+        let total = res?.reduce(
           (acc, curr) => acc + curr.productPrice * curr.productQuantity,
           0
         );
@@ -78,9 +78,10 @@ const OrderPage = () => {
       if (res) {
         setConfirmationModalVisibility(false);
         setOrderCancelledModalVisibility(true);
+        console.log(`ORDER CANCELLED`);
       }
     } catch (error) {
-      return error;
+      console.log(`Error canceling order. Reason:`, error);
     }
   };
 
@@ -92,11 +93,11 @@ const OrderPage = () => {
       const res = await axiosInstance.post("sale/create-sale", info);
       if (res) {
         // navigate('/delivery-details')
-
+        console.log(`SALE CREATED`);
         setProceedModalVisibility(true);
       }
     } catch (error) {
-      return error;
+      console.log(`Error creating order. Reason:`, error);
     }
   };
 
