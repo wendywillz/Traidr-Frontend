@@ -1,4 +1,4 @@
-import { AddToCartButtonContainer, AddToCartComponentContainer } from "./AddToCartButton.Styled"
+import { AddToCartButtonContainer } from "./AddToCartButton.Styled"
 import AddQuantityModal from "../AddQuantityModal/AddQuantityModal"
 import { useState } from "react";
 
@@ -9,7 +9,7 @@ interface ButtonProps{
     toggleVisibility: () => void;
 }
 
-const AddToCartButton = ({buttonText, productId, toggleVisibility}: ButtonProps ) => {
+const AddToCartButton = ({buttonText, productId}: ButtonProps ) => {
 
 
 

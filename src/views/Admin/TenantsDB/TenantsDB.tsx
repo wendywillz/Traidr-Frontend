@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 //STYLE IMPORTS
 import { AdminPageContainer, AdminPageTitle, AdminPageMain, AdminPageContent, } from "../AdminPagesComponents/MainAdminStyles/MainAdminStyles.Styled"
 import { TenantsDBContainer } from "./TenantsDB.styled"
@@ -11,7 +12,15 @@ import AdminSideBar from "../../../components/adminSideBar/AdminSideBar"
 //PACKAGE IMPORTS
 import { ChangeEvent, useState } from "react"
 
-
+ interface TenantsDataBase {
+   userID: string;
+   username: string;
+   age: string;
+   gender: string;
+   dateCreated: string;
+   shopName: string;
+   [key: string]: string; // Add index signature
+ }
 //INTERFACE DECLARATIONS
 interface TenantsDataBase{
     userID: string;
@@ -38,16 +47,9 @@ const [TenantsDataBase, setTenantsDataBase] = useState([
 
 
     const handleInputChange = (_e: ChangeEvent<HTMLInputElement>, _rowIndex: number, _key: string) => {
+        
         const updatedData = [...TenantsDataBase];
-        interface TenantsDataBase {
-            userID: string;
-            username: string;
-            age: string;
-            gender: string;
-            dateCreated: string;
-            shopName: string;
-            [key: string]: string; // Add index signature
-        }
+       
 
         // Rest of the code...
 

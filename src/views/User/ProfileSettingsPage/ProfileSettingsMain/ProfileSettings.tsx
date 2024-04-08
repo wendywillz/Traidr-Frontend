@@ -37,9 +37,6 @@ import userData from "../../../../interfaces/userInterface";
 export const ProfileSettings = () => {
   //fetching the user
   const currentUser: userData = useSelector((state: RootState) => state.user);
-  const currentUserId: string | null = useSelector(
-    (state: RootState) => state.user.userId
-  );
   //const currentUserName:string|null = useSelector((state: RootState)=> state.user.name)
 
   //Logic for Handling User Details
@@ -82,11 +79,9 @@ export const ProfileSettings = () => {
   //Logic for handling photo upload and changing the displayed picture
   const [displayedProfilePic, setDisplayedProfilePic] = useState<string>("");
 
-  const [photoFile, setPhotoFile] = useState<File | null>(null);
-  const [photoDataURL, setPhotoDataURL] = useState<string>();
-  const [displayUploadedPhotoName, setDisplayUploadedPhotoName] =
-    useState<string>();
-  const [photoDisplayError, setPhotoDisplayError] = useState<string>();
+  const [, setPhotoFile] = useState<File | null>(null);
+  const [, setDisplayUploadedPhotoName] = useState<string>();
+  const [, setPhotoDisplayError] = useState<string>();
 
   const handleChangeProfilePic = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;

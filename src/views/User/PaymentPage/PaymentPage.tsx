@@ -7,32 +7,15 @@ import {
   PaymentPageButton,
 } from "./PaymentPage.Styled";
 
-<<<<<<< HEAD
 import Header from "../../../components/Header/Header";
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
 import { useState } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
-=======
-import { PaymentPageWholeContainer, PaymentPageMainContainer, PaymentPageContentContainer, PaymentPageContent, PaymentPageButtonsContainer, PaymentPageButton } from "./PaymentPage.Styled"
 
-
-import Header from "../../../components/Header/Header"
-import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal"
-import paystackLogo from "../../../assets/paystack_icon.png"
-import { useState } from "react"
-import axiosInstance from "../../../utils/axiosInstance"
->>>>>>> 47df2cd310eccacc41b2ed54d5719c62579126a5
-
-import { Link, NavigateFunction, useNavigate} from "react-router-dom";
+import { NavigateFunction, useNavigate} from "react-router-dom";
 
 const PaymentPage = () => {
-<<<<<<< HEAD
   const navigate: NavigateFunction = useNavigate();
-=======
-    const navigate:NavigateFunction = useNavigate();
-    
-    
->>>>>>> 47df2cd310eccacc41b2ed54d5719c62579126a5
 
   //HANDLING THE CONFIRM CANCEL MODAL
   const [confirmCancelModalVisibility, setConfirmCancelModalVisibility] =
@@ -53,19 +36,12 @@ const PaymentPage = () => {
   };
 
   //HANDLING THE PROCEED TO Purchase MODAL
-<<<<<<< HEAD
   const [purchaseModalVisibility, setPurchaseModalVisibility] = useState(false);
   const purchaseModalTitle = `PURCHASE COMPLETED`;
   const purchaseModalMessage = `Thank you for shopping with Traidr`;
   const purchaseModalButtonAction = () => {
     navigate("/user/order-summary");
   };
-=======
-  const [purchaseModalVisibility, setPurchaseModalVisibility] = useState(false)
-  const purchaseModalTitle = `PURCHASE COMPLETED`
-  const purchaseModalMessage = `Thank you for shopping with Traidr`
-  const purchaseModalButtonAction = ()=>{navigate('/order/receipt')}
->>>>>>> 47df2cd310eccacc41b2ed54d5719c62579126a5
   // const togglePurchaseModal = ()=>{
   //   setPurchaseModalVisibility(!purchaseModalVisibility)
   // }
@@ -126,7 +102,6 @@ const PaymentPage = () => {
             <p>Complete Payment through Paystack</p>
           </PaymentPageContent>
 
-<<<<<<< HEAD
           <PaymentPageButtonsContainer>
             <PaymentPageButton
               className="payment-page-cancel-button"
@@ -144,30 +119,6 @@ const PaymentPage = () => {
           </PaymentPageButtonsContainer>
         </PaymentPageContentContainer>
       </PaymentPageMainContainer>
-=======
-        <Header/>
-        <PaymentPageMainContainer>
-            <PaymentPageContentContainer>
-            <PaymentPageContent>
-                        <p className="payment-page-title">Complete Payment Through Paystack</p>
-                        <div>
-                          <Link to="https://paystack.com/pay/traidr">
-                            <img src={paystackLogo} className="paystack-link-image"/>
-                          </Link>
-                        </div>
-                        <p className="payment-page-instructions">Click button to pay with paystack.</p>
-                        
-                    </PaymentPageContent>
-
-                <PaymentPageButtonsContainer>
-                    <PaymentPageButton className="payment-page-cancel-button" onClick={toggleConfirmCancelModal}>CANCEL</PaymentPageButton>
-
-                  
-                    <PaymentPageButton className="payment-page-checkout-button" onClick={handleCheckout}>PAY</PaymentPageButton>
-                </PaymentPageButtonsContainer>
-            </PaymentPageContentContainer>
-        </PaymentPageMainContainer>
->>>>>>> 47df2cd310eccacc41b2ed54d5719c62579126a5
     </PaymentPageWholeContainer>
   );
 };
