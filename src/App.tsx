@@ -26,6 +26,8 @@ import TenantsDataBase from "./views/Admin/TenantsDB/TenantsDB";
 import OrderPage from "./views/User/OrderPage/OrderPage";
 import DeliveryPage from "./views/User/DeliveryPage/DeliveryPage";
 import PaymentPage from "./views/User/PaymentPage/PaymentPage";
+import Receipt from "./views/User/Receipt/Receipt";
+import OrderHistoryList from "./views/User/OrderHistoryList/OrderHistoryList";
 import OrderSummary from "./views/User/OrderSummary/OrderSummary";
 
 function App() {
@@ -81,14 +83,20 @@ function App() {
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/otp-verification" element={<EnterOtpPage />} />
 
-      <Route path="/user/my-wishlist" element={<Wishlist />} />
       <Route path="/success-modal" element={<SuccessModal />} />
-      <Route path="/user/my-cart" element={<CartPage />} />
 
-      <Route path="/user/my-order" element={<OrderPage />} />
-      <Route path="/delivery-details" element={<DeliveryPage />} />
-      <Route path="/payment" element={<PaymentPage />} />
-      <Route path="/user/order-summary" element={<OrderSummary />} />
+       {/*USER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME*/}
+       <Route path="/user/my-wishlist" element={<Wishlist />} />
+      <Route path="/user/my-cart" element={<CartPage/>} />
+      <Route path="/user/my-orders" element ={<OrderHistoryList />}/>
+      <Route path = "/user/my-orders/:saleId" element={<OrderSummary/>} />
+
+
+      {/*ORDER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME */}
+      <Route path="/order/new-order" element={<OrderPage />} />
+      <Route path="/order/delivery-details" element ={<DeliveryPage />}/>
+      <Route path="/order/payment" element ={<PaymentPage />}/>
+      <Route path="/order/receipt" element ={<Receipt />}/>
     </Routes>
   );
 }
