@@ -1,16 +1,46 @@
 import Header from "../../../components/Header/Header";
 import {
   WishlistContainer,
-  WishlistContent,
   WishlistText,
-  Wishlistleftcontainer,
-  WishlistleftcontainerImg,
-  WishlistleftcontainerText,
 } from "./Wishlist.styled";
-import ViewMoreButton from "../../../components/button/ViewMoreButton/ViewMoreButton";
-import blender from "../../../assets/Description/blender.png";
+
+import WishListRow from "./WishListRow";
+import { fetchWishListItems } from "../../../api/wishlist";
+import { useEffect, useState } from "react";
+import { WishListProductDetail } from "../../../interfaces/wishListInterface";
+import axiosInstance from "../../../utils/axiosInstance"; 
+
 
 export default function Wishlist() {
+
+  const [wishListProducts, setWishListProducts] = useState<WishListProductDetail[]>();
+
+useEffect(()=>{
+  fetchWishListItems().then((res)=>{
+    if (res) {
+      setWishListProducts(res);
+    }
+  })
+},[wishListProducts])
+
+
+
+  const handleDelete = async (productId: string) => {
+    const selectedProductDetail = {
+      productId: productId,
+    };
+    try {
+      const res = await axiosInstance.post(
+        `/wishlist/delete-item`,
+        selectedProductDetail
+      );
+      if (res && res.data.success) location.reload();
+    } catch (error) {
+      console.log(`Error deleting prodct. Reason:`, error);
+    }
+  };
+
+
   return (
     <>
       <Header />
@@ -18,56 +48,15 @@ export default function Wishlist() {
         <WishlistText>
             Wishlist
         </WishlistText>
-        <WishlistContent>
-          <Wishlistleftcontainer>
-            <WishlistleftcontainerImg>
-              <img src={blender} alt="blender" />
-            </WishlistleftcontainerImg>
-            <WishlistleftcontainerText>
-              <p className="wishlistHeading">Hens Red Blender Set</p>
-              <p className="wishlistDescription">
-                Lorem ipsum dolor sit amet consectetur. Tellus potenti volutpat
-                etiam maecenas feugiat viverra faucibus.
-              </p>
-              <p className="wishlistPrice">N30,000 Negotiable</p>
-            </WishlistleftcontainerText>
-          </Wishlistleftcontainer>
-          <ViewMoreButton button_text={"View More"} type={"button"} />
-        </WishlistContent>
+        {wishListProducts?.map((product)=>{
+          return(
+            <WishListRow wishListItem={product} handleDelete={handleDelete} key={product.productId}/>
+          )
+        })}
+        
+        
 
-        <WishlistContent>
-          <Wishlistleftcontainer>
-            <WishlistleftcontainerImg>
-              <img src={blender} alt="blender" />
-            </WishlistleftcontainerImg>
-            <WishlistleftcontainerText>
-              <p className="wishlistHeading">Hens Red Blender Set</p>
-              <p className="wishlistDescription">
-                Lorem ipsum dolor sit amet consectetur. Tellus potenti volutpat
-                etiam maecenas feugiat viverra faucibus.
-              </p>
-              <p className="wishlistPrice">N30,000 Negotiable</p>
-            </WishlistleftcontainerText>
-          </Wishlistleftcontainer>
-          <ViewMoreButton button_text={"View More"} type={"button"} />
-        </WishlistContent>
-
-        <WishlistContent>
-          <Wishlistleftcontainer>
-            <WishlistleftcontainerImg>
-              <img src={blender} alt="blender" />
-            </WishlistleftcontainerImg>
-            <WishlistleftcontainerText>
-              <p className="wishlistHeading">Hens Red Blender Set</p>
-              <p className="wishlistDescription">
-                Lorem ipsum dolor sit amet consectetur. Tellus potenti volutpat
-                etiam maecenas feugiat viverra faucibus.
-              </p>
-              <p className="wishlistPrice">N30,000 Negotiable</p>
-            </WishlistleftcontainerText>
-          </Wishlistleftcontainer>
-          <ViewMoreButton button_text={"View More"} type={"button"} />
-        </WishlistContent>
+        
 
       </WishlistContainer>
     </>
