@@ -9,8 +9,6 @@ import MiniAddToCartButton from "../MinimalAddtoCartButton/MiniAddToCartButton";
 import MiniAddToWishListButton from "../MinimalAddToWishListButton/MiniAddToWishListButton";
 import dummyProducts from "../../assets/products/dummy.png";
 import { useNavigate } from "react-router-dom";
-import AddToCartButton from "../AddToCartButton/AddToCartButton";
-import { useState } from "react";
 interface ProductProps {
   product: shopProductsInterface;
 }
