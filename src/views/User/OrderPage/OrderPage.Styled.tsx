@@ -25,7 +25,7 @@ export const OrderItemRowContiner = styled.div`
     background-color: white;
     /* border-left: 1px solid black;
     border-right: 1px solid black; */
-    border-bottom: 1px solid black;
+    border-top: 1px solid black;
 `
 
 export const ProductDetail = styled.div`
@@ -38,6 +38,7 @@ export const ProductDetail = styled.div`
 }
 .order-item-details{
     padding-top: 1vh;
+    margin-left: 1vw;
 }
 .order-item-title{
     font-weight: 800;
@@ -58,21 +59,19 @@ export const OrderTotal = styled.div`
     justify-content: space-between;
     background-color: white;
     color: var(--price-green-color);
-    /* margin-top: 2vh; */
+    margin-top: 1vh;
     margin-bottom: 2vh;
     height: 6vh;
     /* border-radius: 10px; */
     padding: 1vh 0vw 0vh 1vw;
-    border-left: 2px solid var(--price-green-color);
-    border-right: 2px solid var(--price-green-color);
     border-bottom: 2px solid var(--price-green-color);
-    border-top: 1.5px solid var(--price-green-color);
+    border-top: 2px solid var(--price-green-color);
 
 
     .order-total-text{
         font-size: 1.5vw;
         font-weight: 600;
-        color: var(--price-green-color);
+        color: black;
     }
 
     .order-total-amount{
@@ -89,30 +88,31 @@ export const PayNowButton = styled.div`
     text-align: center;
     font-size: 1.2vw;
     font-weight: 600;
-    margin-bottom: 2vh;
-    height: 5vh;
-    padding-top: 1vh;
+    margin-top: 4vh;
+    margin-bottom: 3vh;
+    height: 7vh;
+    padding-top: 2vh;
     border-radius: 10px;
     cursor: pointer;
     &:hover{
         font-size: 1.3vw; 
-        height: 5.1vh;
+        height: 7.1vh;
     }
 `
 
 export const CancelOrderButton = styled.div`
     background-color: #F2F2F2;;
-    border: 2px solid black;
+    border: 2px solid gainsboro;
     color: black;
     text-align: center;
     font-size: 1.2vw;
     font-weight: 600;
-    height: 5vh;
-    padding-top: 1vh;
+    height: 7vh;
+    padding-top: 2vh;
     border-radius: 10px;
     cursor: pointer;
     &:hover{
         font-size: 1.3vw; 
-        height: 5.1vh;
+        height: 7.1vh;
     }
 `
