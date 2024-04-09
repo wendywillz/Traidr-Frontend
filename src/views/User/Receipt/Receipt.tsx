@@ -1,22 +1,36 @@
 //styled imports
-import { OrderSummaryWholeContainer, OrderSummaryMainContainer, OrderSummaryMain, OrderSummaryOverView, OrderSummaryPaymentAndDeliverySection, OrderSummaryInformationCard, OrderSummaryNavigateButton  } from "./Receipt.Styled"
+import {
+  OrderSummaryWholeContainer,
+  OrderSummaryMainContainer,
+  OrderSummaryMain,
+  OrderSummaryOverView,
+  OrderSummaryPaymentAndDeliverySection,
+  OrderSummaryInformationCard,
+  OrderSummaryNavigateButton,
+  DownloadButtonsContainer,
+  PrintStyledComponent, // Import the PrintStyledComponent
+  Text, // Import the Text styled component
+  // BorderedDiv, // Import the BorderedDiv styled component
+} from "./Receipt.Styled";
 
 //component imports
-import ReceiptRow from "./ReceiptRow"
-import Header from "../../../components/Header/Header"
-
-
-import { SaleSummary } from "../../../interfaces/saleInterfaces"
+import ReceiptRow from "./ReceiptRow";
+import Header from "../../../components/Header/Header";
+import PageLoader from "../../../components/PageLoader/PageLoader";
+import { SaleSummary } from "../../../interfaces/saleInterfaces";
 
 //package and tool imports
-import { useState, useEffect } from "react"
-import { fetchReceipt } from "../../../api/sale"
-import { Link } from "react-router-dom"
-import PageLoader from "../../../components/PageLoader/PageLoader"
+import { useState, useEffect, useRef } from "react";
+import { fetchReceipt } from "../../../api/sale";
+import { Link } from "react-router-dom";
+import ReactToPrint from "react-to-print";
+import html2canvas from "html2canvas";
+import imagesLoaded from 'imagesloaded';
+
 
 const Receipt = () => {
   
-    //Toggling the loader
+//Toggling the loader
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const [saleSummary, setSaleSummary] =useState<SaleSummary>()
@@ -26,77 +40,158 @@ useEffect(()=>{
   fetchReceipt().then((res:SaleSummary) => {
         if (res) {
           setSaleSummary(res) 
-          let totalQty = res?.orderedProducts.reduce((acc, curr)=> acc + (curr.productQuantity), 0)
+          const totalQty = res?.orderedProducts.reduce((acc, curr)=> acc + (curr.productQuantity), 0)
           setTotalQuantity(totalQty)
         //   console.log(`The total is`, total);
         setIsLoading(false)
-        }else{
-            
-        }
+        }else{ /* empty */ }
       })
 },[])
 
+  useEffect(() => {
+    fetchReceipt().then((res: SaleSummary) => {
+      if (res) {
+        setSaleSummary(res);
+        const totalQty = res?.orderedProducts.reduce(
+          (acc, curr) => acc + curr.productQuantity,
+          0
+        );
+        setTotalQuantity(totalQty);
+      }
+    });
+  }, []);
 
+  const componentRef = useRef<HTMLDivElement>(null);
 
+  const downloadAsJPG = () => {
+    if (componentRef.current) {
+       imagesLoaded(componentRef.current, () => html2canvas(componentRef.current!, {
+         backgroundColor: null,
+         scale: window.devicePixelRatio,
+       }).then((canvas) => {
+         const link = document.createElement('a');
+         link.download = 'Traidr receipt.jpg';
+         link.href = canvas.toDataURL('image/jpeg');
+         link.click();
+       }));
+    }
+   };
 
   return (
     <OrderSummaryWholeContainer>
       {isLoading && <PageLoader/>}
-        <Header/>
-        <OrderSummaryMainContainer>
-          <OrderSummaryMain>
-              <h2 className="order-summary-page-title">RECEIPT</h2>
+      <Header />
+      <OrderSummaryMainContainer>
+        <DownloadButtonsContainer>
+          <ReactToPrint
+            trigger={() => <button>Download as PDF</button>}
+            content={() => componentRef.current!}
+          />
+          <button onClick={downloadAsJPG}>Download as JPG</button>
+        </DownloadButtonsContainer>
+        <OrderSummaryMain ref={componentRef}>
+          <Text>
+            <h2 className="order-summary-page-title">RECEIPT</h2>
+          </Text>
           <OrderSummaryOverView>
-              <p className="order-overview-title">Order Overview</p>
-              <p className="order-overview-qty">{totalQuantity} Items</p>
-              <p className="order-overview-date">Placed on {saleSummary?.saleDate}</p>
-              <p className="order-overview-total">Total: ₦{saleSummary?.saleTotal.toLocaleString()}</p>
+            <PrintStyledComponent>
+              <Text>
+                <p className="order-overview-title">Order Overview</p>
+              </Text>
+              <Text>
+                <p className="order-overview-qty">{totalQuantity} Items</p>
+              </Text>
+              <Text>
+                <p className="order-overview-date">
+                  Placed on {saleSummary?.saleDate}
+                </p>
+              </Text>
+              <Text>
+                <p className="order-overview-total">
+                  Total: ₦{saleSummary?.saleTotal.toLocaleString()}
+                </p>
+              </Text>
+            </PrintStyledComponent>
           </OrderSummaryOverView>
-          <div className="order-items-list-title">PURCHASED ITEMS</div>
+          <div className="order-items-list-title"><Text>PURCHASED ITEMS</Text></div>
           <div className="order-items">
-            {saleSummary?.orderedProducts.map((orderedProduct)=>{
-              return(<ReceiptRow orderedProduct={orderedProduct} key={orderedProduct.productId}/>)
+            {saleSummary?.orderedProducts.map((orderedProduct) => {
+              return (
+                <Text><ReceiptRow
+                  orderedProduct={orderedProduct}
+                  key={orderedProduct.productId}
+                /></Text>
+              );
             })}
           </div>
           <OrderSummaryPaymentAndDeliverySection>
             <OrderSummaryInformationCard>
-              <div className="order-summary-info-title">PAYMENT INFORMATION</div>
-              <div className="order-summary-info-subsection">
-                <p className="order-summary-subsection-title">Payment Method</p>
-                <p className="order-summary-subsection-text">Paid with bank transfer via Paystck</p>
+              <div className="order-summary-info-title">
+              <Text>PAYMENT INFORMATION</Text>
               </div>
               <div className="order-summary-info-subsection">
-                <p className="order-summary-subsection-title">Payment Details</p>
-                <p className="order-summary-subsection-text">Items Total: ₦{saleSummary?.saleTotal.toLocaleString()} </p>
-                <p className="order-summary-subsection-text">Delivery fees: ₦0 </p>
-                <p className="order-summary-subsection-text">Total:₦ {saleSummary?.saleTotal.toLocaleString()} </p>
+              <Text><p className="order-summary-subsection-title">Payment Method</p></Text>
+              <Text><p className="order-summary-subsection-text">
+                  Paid with bank transfer via Paystck
+                </p></Text>
+              </div>
+              <div className="order-summary-info-subsection">
+              <Text><p className="order-summary-subsection-title">
+                  Payment Details
+                </p></Text>
+                <Text><p className="order-summary-subsection-text">
+                  Items Total: ₦{saleSummary?.saleTotal.toLocaleString()}{" "}
+                </p></Text>
+                <Text><p className="order-summary-subsection-text">
+                  Delivery fees: ₦0{" "}
+                </p></Text>
+                <Text><p className="order-summary-subsection-text">
+                  Total:₦ {saleSummary?.saleTotal.toLocaleString()}{" "}
+                </p></Text>
               </div>
             </OrderSummaryInformationCard>
             <OrderSummaryInformationCard id="delivery-info">
-            <div className="order-summary-info-title">DELIVERY INFORMATION</div>
-              <div className="order-summary-info-subsection">
-                <p className="order-summary-subsection-title">Delivery Method</p>
-                <p className="order-summary-subsection-text">Door Delivery</p>
+              <div className="order-summary-info-title">
+              <Text>DELIVERY INFORMATION</Text>
               </div>
               <div className="order-summary-info-subsection">
-                <p className="order-summary-subsection-title">Shipping Address</p>
-                <p className="order-summary-subsection-text">{saleSummary?.recipientName}</p>
-                <p className="order-summary-subsection-text">0{saleSummary?.recipientPhoneNumber}</p>
-                <p className="order-summary-subsection-text">{saleSummary?.deliveryAddress}</p>
+              <Text><p className="order-summary-subsection-title">
+                  Delivery Method
+                </p></Text>
+                <Text><p className="order-summary-subsection-text">Door Delivery</p></Text>
               </div>
               <div className="order-summary-info-subsection">
-                <p className="order-summary-subsection-title">Delivery Instructions</p>
-                <p className="order-summary-subsection-text">{saleSummary?.deliveryInstructions}</p>
+              <Text><p className="order-summary-subsection-title">
+                  Shipping Address
+                </p></Text>
+                <Text><p className="order-summary-subsection-text">
+                  {saleSummary?.recipientName}
+                </p></Text>
+                <Text><p className="order-summary-subsection-text">
+                  0{saleSummary?.recipientPhoneNumber}
+                </p></Text>
+                <Text><p className="order-summary-subsection-text">
+                  {saleSummary?.deliveryAddress}
+                </p></Text>
+              </div>
+              <div className="order-summary-info-subsection">
+              <Text><p className="order-summary-subsection-title">
+                  Delivery Instructions
+                </p></Text>
+                <Text><p className="order-summary-subsection-text">
+                  {saleSummary?.deliveryInstructions}
+                </p></Text>
               </div>
             </OrderSummaryInformationCard>
-          
           </OrderSummaryPaymentAndDeliverySection>
-          <OrderSummaryNavigateButton><Link to="/dashboard" className="order-summary-link">Back to my dashboard</Link></OrderSummaryNavigateButton>
-          
-          </OrderSummaryMain>
-        </OrderSummaryMainContainer>
+        </OrderSummaryMain>
+        <OrderSummaryNavigateButton>
+          <Link to="/dashboard" className="order-summary-link">
+            Back to my dashboard
+          </Link>
+        </OrderSummaryNavigateButton>
+      </OrderSummaryMainContainer>
     </OrderSummaryWholeContainer>
-  )
-}
-
-export default Receipt 
+  );
+};
+export default Receipt

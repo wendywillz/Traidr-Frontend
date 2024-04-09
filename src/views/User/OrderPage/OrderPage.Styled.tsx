@@ -88,15 +88,27 @@ export const PayNowButton = styled.div`
     text-align: center;
     font-size: 1.2vw;
     font-weight: 600;
+<<<<<<< HEAD
+    margin-bottom: 2vh;
+    height: 5vh;
+    cursor: pointer;
+    padding-top: 1vh;
+=======
     margin-top: 4vh;
     margin-bottom: 3vh;
     height: 7vh;
     padding-top: 2vh;
+>>>>>>> 1a201e8740d6b483f22e9d5cc7f4e5b34a41b71c
     border-radius: 10px;
     cursor: pointer;
     &:hover{
         font-size: 1.3vw; 
+<<<<<<< HEAD
+        height: 5.1vh;
+        cursor: pointer;
+=======
         height: 7.1vh;
+>>>>>>> 1a201e8740d6b483f22e9d5cc7f4e5b34a41b71c
     }
 `
 
@@ -107,12 +119,23 @@ export const CancelOrderButton = styled.div`
     text-align: center;
     font-size: 1.2vw;
     font-weight: 600;
+<<<<<<< HEAD
+    height: 5vh;
+    padding-top: 1vh;
+    cursor: pointer;
+=======
     height: 7vh;
     padding-top: 2vh;
+>>>>>>> 1a201e8740d6b483f22e9d5cc7f4e5b34a41b71c
     border-radius: 10px;
     cursor: pointer;
     &:hover{
         font-size: 1.3vw; 
+<<<<<<< HEAD
+        height: 5.1vh;
+        cursor: pointer;
+=======
         height: 7.1vh;
+>>>>>>> 1a201e8740d6b483f22e9d5cc7f4e5b34a41b71c
     }
 `

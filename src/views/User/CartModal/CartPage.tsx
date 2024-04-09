@@ -108,7 +108,6 @@ const CartPage = () => {
             );
           })}
         </div>
-
         <OrderButton onClick={handleOrder}>PLACE ORDER</OrderButton>
       </CartContainer>
     </>

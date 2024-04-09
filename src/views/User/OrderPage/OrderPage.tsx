@@ -108,7 +108,7 @@ const OrderPage = () => {
     }
   };
 
-  return (
+ return (
     <OrderPageContainer>
       {isLoading && <PageLoader/>}
       {confirmationModalVisibility && (

@@ -177,3 +177,25 @@ export const OrderSummaryProductDescription = styled.div `
         font-weight:400; 
     }
 `
+
+export const DownloadButtonsContainer = styled.div`
+ display: flex;
+ justify-content: flex-end;
+ gap: 10px; // Space between the buttons
+ margin-bottom: 20px; // Space below the buttons
+
+ button {
+    background-color: var(--orange-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+ }
+ button:hover {
+    background-color: var(--orange-color);
+    transition: 0.3s;
+    transform: scale(1.05);
+ }
+`;
