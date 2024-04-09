@@ -10,8 +10,8 @@ const LoaderStyle = styled.div`
     border-top: 4px solid var(--orange-color);
     border-radius: 50%;
     margin: 0 auto;
-    width: 3vw;
-    height: 3vw;
+    width: 30px;
+    height: 30px;
     animation: spin 2s linear infinite;
   @keyframes spin {
     0% { transform: rotate(0deg); }

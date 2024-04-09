@@ -36,7 +36,7 @@ function AdminSideBar() {
         <NavLink
           to="/admin/dashboard/tenants-database"
           className={`admin-side-bar-each-content ${
-            location.pathname.includes("/tenants/") ? "active-link" : ""
+            location.pathname.includes("/tenants-database") ? "active-link" : ""
           }`}
         >
           <img src={tenantIcn} alt="" />

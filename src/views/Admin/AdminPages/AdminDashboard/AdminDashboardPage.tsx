@@ -61,7 +61,7 @@ useEffect(()=>{
             <DataCard
               cardTitle={"Total Tenants"}
               displayedValue={adminDataSummary.totalTenants.toString()}
-              reportLink={"/admin/dashboard/tenants-report"}
+              reportLink={"/admin/dashboard/tenants-database"}
             />
 
             <DataCard

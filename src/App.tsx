@@ -22,14 +22,13 @@ import AdminSignupPage from "./views/Admin/AdminSignupPage/AdminSignupPage";
 import ProductMetrics from "./views/Admin/AdminPages/ProductMetrics/ProductMetrics";
 import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineChart";
 import CartPage from "./views/User/CartModal/CartPage";
-import TenantsDataBase from "./views/Admin/TenantsDB/TenantsDB";
+import TenantsDataBase from "./views/Admin/AdminPages/TenantsDB/TenantsDB";
 import OrderPage from "./views/User/OrderPage/OrderPage";
 import DeliveryPage from "./views/User/DeliveryPage/DeliveryPage";
 import PaymentPage from "./views/User/PaymentPage/PaymentPage";
 import Receipt from "./views/User/Receipt/Receipt";
 import OrderHistoryList from "./views/User/OrderHistoryList/OrderHistoryList";
 import OrderSummary from "./views/User/OrderSummary/OrderSummary";
-
 
 function App() {
   return (
@@ -86,21 +85,17 @@ function App() {
 
       <Route path="/success-modal" element={<SuccessModal />} />
 
-       {/*USER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME*/}
-       <Route path="/user/my-wishlist" element={<Wishlist />} />
-      <Route path="/user/my-cart" element={<CartPage/>} />
-      <Route path="/user/my-orders" element ={<OrderHistoryList />}/>
-      <Route path = "/user/my-orders/:saleId" element={<OrderSummary/>} />
-
+      {/*USER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME*/}
+      <Route path="/user/my-wishlist" element={<Wishlist />} />
+      <Route path="/user/my-cart" element={<CartPage />} />
+      <Route path="/user/my-orders" element={<OrderHistoryList />} />
+      <Route path="/user/my-orders/:saleId" element={<OrderSummary />} />
 
       {/*ORDER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME */}
       <Route path="/order/new-order" element={<OrderPage />} />
-      <Route path="/order/delivery-details" element ={<DeliveryPage />}/>
-      <Route path="/order/payment" element ={<PaymentPage />}/>
-      <Route path="/order/receipt" element ={<Receipt />}/>
-
-
-     
+      <Route path="/order/delivery-details" element={<DeliveryPage />} />
+      <Route path="/order/payment" element={<PaymentPage />} />
+      <Route path="/order/receipt" element={<Receipt />} />
     </Routes>
   );
 }
