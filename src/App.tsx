@@ -29,7 +29,7 @@ import PaymentPage from "./views/User/PaymentPage/PaymentPage";
 import Receipt from "./views/User/Receipt/Receipt";
 import OrderHistoryList from "./views/User/OrderHistoryList/OrderHistoryList";
 import OrderSummary from "./views/User/OrderSummary/OrderSummary";
-import Test from "./views/User/Test";
+
 
 function App() {
   return (
@@ -100,7 +100,7 @@ function App() {
       <Route path="/order/receipt" element ={<Receipt />}/>
 
 
-      <Route path="/test" element={<Test/>}/>
+     
     </Routes>
   );
 }

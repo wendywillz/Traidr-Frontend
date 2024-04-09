@@ -88,6 +88,7 @@ export const SideBarCategory = styled.div`
     height: 3.5vh;
     width: 6vw;
     accent-color: #e04f16;
+    padding: 1vw;
   }
 
   .sidebar-price-separator{
