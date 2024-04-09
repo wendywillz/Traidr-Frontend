@@ -16,7 +16,7 @@ export const WishlistContent = styled.div`
   border-bottom: 2px solid #f0f0f0;
   gap: 380px;
   margin-bottom: 3vh;
-  height: 15vh;
+  height: 20vh;
 `;
 export const WishlistText = styled.p`
   font-size: 2vw;
@@ -33,9 +33,13 @@ export const WishlistleftcontainerImg = styled.div`
   display: block;
   img {
     /* object-fit: contain; */
-    width: 7vw;
-    /* height: 15vh; */
+    /* width: 7vw;
+    height: 15vh; */
     margin-right: 1vw;
+  }
+  .wishlist-item-image{
+    width:8vw;
+    height: 17vh;
   }
 `;
 
@@ -64,7 +68,7 @@ export const WishListRowBtnsContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
     justify-self: right;
-    margin-top: 1vh;
+    margin-top: 8.5vh;
 `
 
 export const DeleteWishItemBtn = styled.div`

@@ -9,6 +9,7 @@ import MiniAddToCartButton from "../MinimalAddtoCartButton/MiniAddToCartButton";
 import MiniAddToWishListButton from "../MinimalAddToWishListButton/MiniAddToWishListButton";
 import dummyProducts from "../../assets/products/dummy.png";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 interface ProductProps {
   product: shopProductsInterface;
 }
@@ -24,6 +25,11 @@ function AllProductsCard({ product }: ProductProps) {
   // const toggleQuantityModal = () => {
   //   setQuantityModalVisibility(!quantityModalVisibility);
   // };
+
+  const [isInWishList, setIsInWishList] = useState<boolean>(false)
+  const toggleIsInWishList = ()=>{
+    setIsInWishList(!isInWishList)
+  }
 
   return (
     <AllProductsCardContainer>
@@ -60,7 +66,7 @@ function AllProductsCard({ product }: ProductProps) {
         /> */}
         <CartWishlistBtns>
           <MiniAddToCartButton productId={product.productId}/>
-          <MiniAddToWishListButton productId={product.productId}/>
+          <MiniAddToWishListButton productId={product.productId} onClickAction={toggleIsInWishList} isInWishList={isInWishList}/>
 
         </CartWishlistBtns>
         

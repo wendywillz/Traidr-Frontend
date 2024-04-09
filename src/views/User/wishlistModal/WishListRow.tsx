@@ -26,22 +26,22 @@ const WishListRow = ({wishListItem, handleDelete}:WishListRowProps) => {
     };
 
 
-  return (
+  return ( 
     <WishlistContent>
           <Wishlistleftcontainer>
             <WishlistleftcontainerImg>
-              <img src={wishListItem.productImage} alt="blender" />
+              <img src={wishListItem.productImage} className="wishlist-item-image" alt="blender" />
             </WishlistleftcontainerImg>
             <WishlistleftcontainerText>
               <p className="wishlistHeading">{wishListItem.productTitle}</p>
               <p className="wishlistDescription">{wishListItem.productDescription.substring(0, 30)}{wishListItem.productDescription.length >= 30 ? "..." : ""}</p>
-              <p className="wishlistPrice">₦{wishListItem.productPrice.toLocaleString()} Negotiable</p>
+              <p className="wishlistPrice">₦{wishListItem.productPrice.toLocaleString()}</p>
             </WishlistleftcontainerText>
           </Wishlistleftcontainer>
           <WishListRowBtnsContainer>
             <AddToCartButton buttonText={`ADD TO CART`} productId={wishListItem.productId} toggleVisibility={toggleQuantityModal}/>
 
-          <DeleteWishItemBtn onClick={()=>handleDelete(wishListItem.productId)}>DELETE</DeleteWishItemBtn>
+          <DeleteWishItemBtn onClick={()=>handleDelete(wishListItem.productId)}>REMOVE</DeleteWishItemBtn>
           </WishListRowBtnsContainer>
           
         </WishlistContent>
