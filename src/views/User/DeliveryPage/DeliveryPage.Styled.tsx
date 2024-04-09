@@ -64,7 +64,7 @@ export const DeliveryFormField = styled.div`
             outline: none; 
             border-color: var(--orange-color); 
             box-shadow: 0 0 0 2px var(--orange-color); 
-            color: blue;
+            color: #000;
          }
     }
     
@@ -84,7 +84,7 @@ export const DeliveryFormField = styled.div`
             outline: none; 
             border-color: var(--orange-color); 
             box-shadow: 0 0 0 2px var(--orange-color); 
-            color: blue;
+            color: #000;
          }
     }
 `
