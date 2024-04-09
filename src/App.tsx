@@ -29,6 +29,7 @@ import PaymentPage from "./views/User/PaymentPage/PaymentPage";
 import Receipt from "./views/User/Receipt/Receipt";
 import OrderHistoryList from "./views/User/OrderHistoryList/OrderHistoryList";
 import OrderSummary from "./views/User/OrderSummary/OrderSummary";
+import PageLoader from "./components/PageLoader/PageLoader";
 
 function App() {
   return (
@@ -97,6 +98,9 @@ function App() {
       <Route path="/order/delivery-details" element ={<DeliveryPage />}/>
       <Route path="/order/payment" element ={<PaymentPage />}/>
       <Route path="/order/receipt" element ={<Receipt />}/>
+
+
+      <Route path="/loader" element={<PageLoader/>}/>
     </Routes>
   );
 }

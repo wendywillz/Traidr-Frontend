@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const LoaderStyle = styled.div`
-  display: flex
+  display: flex;
   align-items: center;
   justify-content: center;
   
@@ -10,13 +10,14 @@ const LoaderStyle = styled.div`
     border-top: 4px solid var(--orange-color);
     border-radius: 50%;
     margin: 0 auto;
-    width: 30px;
-    height: 30px;
+    width: 3vw;
+    height: 3vw;
     animation: spin 2s linear infinite;
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg);
   }
+}
 }
   ;`;
 

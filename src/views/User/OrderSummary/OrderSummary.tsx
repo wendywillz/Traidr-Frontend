@@ -12,6 +12,7 @@ import { SaleSummary } from "../../../interfaces/saleInterfaces"
 import { useState, useEffect } from "react"
 import { fetchSpecifiedOrderHistory } from "../../../api/order"
 import { Link, useParams } from "react-router-dom"
+import PageLoader from "../../../components/PageLoader/PageLoader"
 
 const OrderSummary  = () => {
   
@@ -20,6 +21,10 @@ const OrderSummary  = () => {
   const [saleSummary, setSaleSummary] =useState<SaleSummary>()
   const [totalQuantity, setTotalQuantity]= useState<number|undefined>(0)
 
+  //Toggling the loader
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
+
 useEffect(()=>{
     fetchSpecifiedOrderHistory(saleId).then((res:SaleSummary) => {
         if (res) {
@@ -27,6 +32,7 @@ useEffect(()=>{
           let totalQty = res?.orderedProducts.reduce((acc, curr)=> acc + (curr.productQuantity), 0)
           setTotalQuantity(totalQty)
         //   console.log(`The total is`, total);
+        setIsLoading(false)
         }else{
             
         }
@@ -38,6 +44,7 @@ useEffect(()=>{
 
   return (
     <OrderSummaryWholeContainer>
+      {isLoading && <PageLoader/>}
         <Header/>
         <OrderSummaryMainContainer>
           <OrderSummaryMain>
