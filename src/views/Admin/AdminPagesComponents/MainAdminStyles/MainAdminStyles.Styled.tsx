@@ -10,23 +10,35 @@ export const AdminPageMain = styled.div`
   background-color: #f9fafb;
   width: 80%;
   margin-left: 20%;
-  /* height: 100vh; */
-  /* display:flex; */
 `;
 export const AdminPageTitle = styled.h2`
   background: none;
   color: black;
   font-size: 2.5vw;
   font-weight: 600;
-  margin-bottom: 3vh;
-  margin-left: 2.5vw;
 `;
 
 export const AdminPageContent = styled.div`
-  display: grid;
-  grid-template-columns: 50% 50% !important;
-  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   background-color: #f9fafb;
-  padding: 0 2rem;
+  padding: 0 3rem;
   overflow-x: hidden;
+  min-height: 100vh;
+`;
+
+export const AdminPageContentChartWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  gap: 2rem;
+`;
+export const AdminDashboardPageStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #f9fafb;
+  padding: 0 3rem;
+  overflow-x: hidden;
+  min-height: 100%;
 `;

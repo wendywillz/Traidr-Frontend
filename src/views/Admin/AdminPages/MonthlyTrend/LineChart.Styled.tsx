@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
 export const LineChartBackground = styled.div`
-  border: 1px solid orange;
-  width: 40vw;
-  height: 20vw;
-  background-color: white;
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  margin-top: 2rem;
+  p {
+    margin: 1rem 0;
+  }
+  @media (min-width: 768px) {
+    width: 60%;
+  }
 `;

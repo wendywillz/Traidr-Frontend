@@ -12,9 +12,9 @@ export default function AdminHeader() {
   return (
     <HeaderStyle>
       <div className="header-inner">
-        <div className="search-wrapper">
+        {/* <div className="search-wrapper">
           <input type="text" placeholder="Search for Data..... " />
-        </div>
+        </div> */}
         <div className="header-right-btn-wrapper">
           <BsBell className="admin-notification-icon" />
 
