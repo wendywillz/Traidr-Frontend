@@ -21,14 +21,14 @@ import { RootState } from "../../../../app/store";
 interface AdminDataSummary {
   totalOrders: number;
   totalTenants: number;
-  supportTickets: number;
+  totalRevenue: number;
 }
 
 const AdminDashboardPage = () => {
   const [adminDataSummary, _setAdminDataSummary] = useState<AdminDataSummary>({
     totalOrders: 5,
     totalTenants: 3,
-    supportTickets: 0,
+    totalRevenue: 0,
   });
   const userData = useSelector((state: RootState) => state.user);
   return (
