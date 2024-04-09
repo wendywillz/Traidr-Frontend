@@ -17,9 +17,14 @@ import { useState, useEffect } from "react";
 import { fetchCartItems } from "../../../api/cart";
 import axiosInstance from "../../../utils/axiosInstance";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import PageLoader from "../../../components/PageLoader/PageLoader";
 
 const CartPage = () => {
   const navigate: NavigateFunction = useNavigate();
+
+
+  //Toggling the loader
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   //Functions dealing with the modal
   const [modalVisibility, setModalVisibility] = useState(false);
@@ -44,6 +49,7 @@ const CartPage = () => {
           0
         );
         setCartTotal(total);
+        setIsLoading(false)
       }
     });
   }, [cartProducts]);
@@ -76,6 +82,7 @@ const CartPage = () => {
 
   return (
     <>
+    {isLoading && <PageLoader/>}
       {modalVisibility && (
         <MultipurposeModal
           title={orderSuccessModalTitle}

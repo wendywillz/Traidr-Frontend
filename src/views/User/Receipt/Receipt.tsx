@@ -12,10 +12,12 @@ import { SaleSummary } from "../../../interfaces/saleInterfaces"
 import { useState, useEffect } from "react"
 import { fetchReceipt } from "../../../api/sale"
 import { Link } from "react-router-dom"
+import PageLoader from "../../../components/PageLoader/PageLoader"
 
 const Receipt = () => {
   
-
+    //Toggling the loader
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const [saleSummary, setSaleSummary] =useState<SaleSummary>()
   const [totalQuantity, setTotalQuantity]= useState<number|undefined>(0)
@@ -27,6 +29,7 @@ useEffect(()=>{
           let totalQty = res?.orderedProducts.reduce((acc, curr)=> acc + (curr.productQuantity), 0)
           setTotalQuantity(totalQty)
         //   console.log(`The total is`, total);
+        setIsLoading(false)
         }else{
             
         }
@@ -38,6 +41,7 @@ useEffect(()=>{
 
   return (
     <OrderSummaryWholeContainer>
+      {isLoading && <PageLoader/>}
         <Header/>
         <OrderSummaryMainContainer>
           <OrderSummaryMain>

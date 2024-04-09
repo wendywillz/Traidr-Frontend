@@ -3,7 +3,7 @@ import styled from "styled-components";
 import formBackground from "../../../assets/form-background-image.png";
 
 export const OrderSummaryWholeContainer = styled.div`
-    border: 1px solid red;  
+    /* border: 1px solid red;   */
     /* background-image: url(${formBackground}); */
   /* background-size: cover;
   background-position: center;
