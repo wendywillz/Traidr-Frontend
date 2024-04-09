@@ -30,9 +30,7 @@ useEffect(()=>{
           setTotalQuantity(totalQty)
         //   console.log(`The total is`, total);
         setIsLoading(false)
-        }else{
-            
-        }
+        }else{ /* empty */ }
       })
 },[])
 

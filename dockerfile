@@ -5,9 +5,9 @@ WORKDIR /src/app
 
 COPY ./ ./
 
-RUN npm install --force
+RUN npm install
 
-RUN npm run build
+RUN npm run compile
 
 CMD [ "npm", "dev" ]
 

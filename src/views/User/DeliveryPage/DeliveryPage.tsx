@@ -19,7 +19,7 @@ import DeliveryDetailsData from "../../../interfaces/deliveryInterfaces";
 //package and tools imports
 import { useState, ChangeEvent } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
-import { NavigateFunction, useNavigate, Link } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const DeliveryPage = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -47,7 +47,7 @@ const DeliveryPage = () => {
   const proceedModalTitle = `PROCEED TO PAYMENT`;
   const proceedModalMessage = `Proceed to Paystack Payment`;
   const proceedModalButtonAction = () => {
-    window.location.href ="https://paystack.com/pay/traidr"
+    window.location.href = "https://paystack.com/pay/traidr";
     //navigate("/order/payment");
   };
 
@@ -218,5 +218,6 @@ const DeliveryPage = () => {
 
 export default DeliveryPage;
 
-
-{/* <Link to="https://paystack.com/pay/traidr" className="checkout-link"></Link> */}
+{
+  /* <Link to="https://paystack.com/pay/traidr" className="checkout-link"></Link> */
+}
