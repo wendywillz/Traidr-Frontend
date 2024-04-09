@@ -28,8 +28,8 @@ interface AdminDataSummary {
 const AdminDashboardPage = () => {
   
   const [adminDataSummary, setAdminDataSummary] = useState<AdminDataSummary>({
-    totalOrders: 5,
-    totalTenants: 3,
+    totalOrders: 0,
+    totalTenants: 0,
     totalRevenue: 0,
   });
 

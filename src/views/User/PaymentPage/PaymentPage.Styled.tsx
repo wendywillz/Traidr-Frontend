@@ -16,6 +16,7 @@ export const PaymentPageWholeContainer = styled.div`
 export const PaymentPageMainContainer = styled.div`
     /* border: 1px solid red; */
     padding: 1vh 24vw;
+    visibility: hidden;
     
 
 `
