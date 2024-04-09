@@ -76,11 +76,13 @@ export const PayNowButton = styled.div`
     font-weight: 600;
     margin-bottom: 2vh;
     height: 5vh;
+    cursor: pointer;
     padding-top: 1vh;
     border-radius: 10px;
     &:hover{
         font-size: 1.3vw; 
         height: 5.1vh;
+        cursor: pointer;
     }
 `
 
@@ -91,9 +93,11 @@ export const CancelOrderButton = styled.div`
     font-weight: 600;
     height: 5vh;
     padding-top: 1vh;
+    cursor: pointer;
     border-radius: 10px;
     &:hover{
         font-size: 1.3vw; 
         height: 5.1vh;
+        cursor: pointer;
     }
 `

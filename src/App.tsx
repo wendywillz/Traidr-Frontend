@@ -26,6 +26,7 @@ import CartPage from "./views/User/CartModal/CartPage";
 import TenantsDataBase from "./views/Admin/TenantsDB/TenantsDB"
 import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineChart";
 import OrderPage from "./views/User/OrderPage/OrderPage";
+// import PaystackCheckout from "./views/User/DeliveryDetail/paystackCheckout";
 
 
 function App() {
@@ -82,6 +83,7 @@ function App() {
       <Route path="/test" element={<TestPage />} />
      
       <Route path="/delivery-details" element={<DeliveryDetails />} />
+      {/* <Route path="/paystack-checkout" element={<PaystackCheckout />} /> */}
       <Route path="/user/my-cart" element={<CartPage/>} />
       <Route path="/admin/tenants-database" element={<TenantsDataBase />} />
       <Route path="/user/order-summary" element={<OrderPage />} />
