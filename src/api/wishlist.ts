@@ -6,3 +6,10 @@ export const fetchWishListItems = async()=>{
     return res.data.wishListProductDetails;
   }
 }
+
+export const fetchWishListCount = async()=>{
+  const res = await axiosInstance.get(`/wishlist/get-count`) 
+  if (res && res.data.wishListItemNumber) {
+   return res.data.wishListItemNumber;
+ }
+}
