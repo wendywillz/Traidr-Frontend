@@ -6,6 +6,7 @@ export const CartContainer = styled.div`
   padding: 0 5rem;
   justify-content: center;
   align-items: center;
+  
 `;
 
 export const CartHeaderContainer = styled.div`
@@ -17,10 +18,11 @@ export const CartHeaderContainer = styled.div`
 `
 
 export const CartContent = styled.div`
+  /* border: 1px solid blue; */
   box-shadow:  -5px 0px 10px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-evenly;
-  padding: 0vh 1vw 0vh 0vw;
+  padding: 1vh 1vw 1vh 1vw;
   border-bottom: 2px solid #f0f0f0;
   gap: 380px;
   margin-bottom: 2.5vh;
@@ -41,7 +43,7 @@ export const CartTotal = styled.p`
 export const Cartleftcontainer = styled.div`
   /* border: 1px solid blue; */
   display: flex;
-  gap: 30px;
+  gap: 1.2vw;
   width: 50vw;
   
 `;
@@ -53,12 +55,17 @@ export const CartleftcontainerImg = styled.div`
     object-fit: contain;
     width: 200px;
   }
+  .card-item-image{
+    width:10vw;
+    height: 22vh;
+  }
 `;
 
 export const CartleftcontainerText = styled.div`
   display: block;
 
   .productHeading {
+    /* border: 1px solid green; */
     font-size: 1.7vw;
     font-weight: 600;
     line-height: 33.6px;
@@ -78,6 +85,13 @@ export const CartleftcontainerText = styled.div`
     font-size: 1vw;
   }
 
+  .cart-item-total{
+  font-size: 1.5vw;
+  font-weight: 600;
+  color:var(--orange-color);
+  padding-right: 2vw;
+  margin-bottom: 3vh;
+ }
 
 `;
 
@@ -86,7 +100,7 @@ export const CartleftcontainerText = styled.div`
  width: 40vw;
  display: flex;
  flex-direction: column;
- padding-bottom: 2vh;
+ /* padding-bottom: 2vh; */
 
  
  `
@@ -98,13 +112,7 @@ justify-content: space-between;
 margin-bottom: 4vh;
 padding: 0vh 0vw 0vh 0vw;
 
-.cart-item-total{
-  font-size: 1.5vw;
-  font-weight: 600;
-  color:var(--orange-color);
-  padding-top: 3vh;
-  padding-right: 2vw;
- }
+
 
  .add-to-wishlist-btn-container{
   padding-top: 1vh;
@@ -115,20 +123,22 @@ export const CartUpdateAndDeleteBtns = styled.div`
   /* border: 1px solid red; */
 display: flex;
 justify-content: space-between;
+margin-top: 12.5vh;
+/* margin-bottom: -3vh; */
 
 .delete-item-button{
   display: flex;
     width: 10.5rem;
     height: 3.6rem;
     border-radius: 5px;
-    border: 1px solid var(--orange-color);
+    border: 1px solid gainsboro;
     margin-top: 1rem;
     font-size: 1rem;
     justify-content: center;
     text-decoration: none;
     align-items: center;
-    color: var(--orange-color);
-    background-color: white;
+    color: black;
+    background-color: #F2F2F2;
     cursor: pointer;
     &:hover {
 font-size: 1.1rem;
@@ -140,22 +150,22 @@ font-size: 1.1rem;
 
 export const OrderButton = styled.div`
   /* border: 2px solid green; */
-  width: 50vw;
-  height: 5vh;
+  width: 60vw;
+  height: 7.5vh;
  text-align: center;
  color: white;
- background-color: var(--price-green-color);
+ background-color: var(--orange-color);
  border-radius: 10px;
- margin-left: 20vw;
- margin-top: 2vh;
+ margin-left: 15vw;
+ margin-top: 3vh;
  margin-bottom: 2vh;
- padding-top: 1vh;
- font-size: 1.5vw;
+ padding-top: 1.6vh;
+ font-size: 1.9vw;
  font-weight: 600;
  cursor: pointer;
  &:hover {
-font-size: 1.6vw;
-width: 50.1vw;
-  height: 5.1vh;
+font-size: 2vw;
+width: 60.1vw;
+height: 7.6vh;
 } 
 `

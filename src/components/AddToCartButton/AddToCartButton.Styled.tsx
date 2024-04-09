@@ -7,7 +7,14 @@ export const AddToCartComponentContainer = styled.div`
     border: 1px solid blue;
 
 }
+`
 
+export const ButtonWholeContainer = styled.div`
+.altered{
+  color:var(--orange-color);
+  background-color: white;
+  border: 1px solid var(--orange-color);
+}
 `
 
 export const AddToCartButtonContainer = styled.div`
@@ -29,5 +36,6 @@ font-size: 1.1rem;
   width: 10.6rem;
   height: 3.7rem;
 } 
+
 
 `
