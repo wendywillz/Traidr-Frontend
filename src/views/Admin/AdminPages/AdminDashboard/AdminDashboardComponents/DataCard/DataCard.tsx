@@ -3,7 +3,7 @@ import { DataCardContainer } from "./DataCard.Styled";
 
 interface Props {
   cardTitle: string;
-  displayedValue: number;
+  displayedValue: string;
   reportLink: string;
 }
 

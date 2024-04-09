@@ -31,3 +31,11 @@ export const fetchMonthlyTrend = async () => {
     return res.data;
   }
 };
+
+
+export const fetchAdminDataSummary = async()=>{
+  const res = await axiosInstance.get(`/admin/get-dashboard-summary`);
+  if (res && res.data){
+    return res.data.adminDataSummary
+  }
+}
