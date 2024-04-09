@@ -7,6 +7,7 @@ import {
   DeliveryFormField,
   DeliveryPageButtonsContainer,
   DeliveryPageButton,
+  RequiredLabel,
 } from "./DeliveryPage.Styled";
 
 //component imports
@@ -123,12 +124,9 @@ const DeliveryPage = () => {
           <p className="delivery-form-title">ORDER DELIVERY DETAILS</p>
           <DeliveryPageForm>
             <DeliveryFormField>
-              <label
-                htmlFor="recipientNameInput"
-                className="delivery-form-label"
-              >
+              <RequiredLabel htmlFor="recipientNameInput">
                 RECIPIENT FULL NAME
-              </label>
+              </RequiredLabel>
               <br />
               <input
                 className="delivery-form-input"
@@ -142,31 +140,25 @@ const DeliveryPage = () => {
             </DeliveryFormField>
 
             <DeliveryFormField>
-              <label
-                htmlFor="recipientPhoneNumberInput"
-                className="delivery-form-label"
-              >
+              <RequiredLabel htmlFor="recipientPhoneNumberInput">
                 RECIPIENT PHONE NUMBER
-              </label>
+              </RequiredLabel>
               <br />
               <input
                 className="delivery-form-input"
                 type="tel"
                 id="recipientPhoneNumberInput"
                 name="recipientPhoneNumber"
-                placeholder="07034249775"
+                placeholder="Enter phone number"
                 value={deliveryDetails.recipientPhoneNumber}
                 onChange={handleChange}
               />
             </DeliveryFormField>
 
             <DeliveryFormField>
-              <label
-                htmlFor="deliveryAddressInput"
-                className="delivery-form-label"
-              >
+              <RequiredLabel htmlFor="deliveryAddressInput">
                 DELIVERY ADDRESS
-              </label>
+              </RequiredLabel>
               <br />
               <textarea
                 className="delivery-form-textarea"
@@ -177,7 +169,6 @@ const DeliveryPage = () => {
                 onChange={handleChange}
               ></textarea>
             </DeliveryFormField>
-
             <DeliveryFormField>
               <label
                 htmlFor="deliveryInstructionsInput"

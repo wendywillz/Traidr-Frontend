@@ -20,7 +20,6 @@ import { UserAnalytics } from "./views/Admin/AdminPages/UserAnalytics/UserAnalyt
 import AdminProtectedRoute from "./components/ProtectedRoute/AdminProtectedRoute";
 import AdminSignupPage from "./views/Admin/AdminSignupPage/AdminSignupPage";
 import ProductMetrics from "./views/Admin/AdminPages/ProductMetrics/ProductMetrics";
-import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineChart";
 import CartPage from "./views/User/CartModal/CartPage";
 import TenantsDataBase from "./views/Admin/AdminPages/TenantsDB/TenantsDB";
 import OrderPage from "./views/User/OrderPage/OrderPage";
@@ -29,6 +28,7 @@ import PaymentPage from "./views/User/PaymentPage/PaymentPage";
 import Receipt from "./views/User/Receipt/Receipt";
 import OrderHistoryList from "./views/User/OrderHistoryList/OrderHistoryList";
 import OrderSummary from "./views/User/OrderSummary/OrderSummary";
+import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineChart";
 
 function App() {
   return (
@@ -57,6 +57,7 @@ function App() {
                   element={<Description />}
                 />
                 <Route path="user/edit-profile" element={<ProfileSettings />} />
+                
               </Routes>
             </ProtectedRoute>
           </AverageUSageTime>

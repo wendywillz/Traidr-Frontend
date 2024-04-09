@@ -59,7 +59,15 @@ export const DeliveryFormField = styled.div`
         color: grey;
         font-size: 0.9vw;
         opacity: 50%;
+
+        &:focus {
+            outline: none; 
+            border-color: var(--orange-color); 
+            box-shadow: 0 0 0 2px var(--orange-color); 
+            color: #000;
+         }
     }
+    
     .delivery-form-textarea{
         height: 17vh;
         width: 40vw;
@@ -71,6 +79,13 @@ export const DeliveryFormField = styled.div`
         color: grey;
         font-size: 0.9vw;
         opacity: 50%;
+
+        &:focus {
+            outline: none; 
+            border-color: var(--orange-color); 
+            box-shadow: 0 0 0 2px var(--orange-color); 
+            color: #000;
+         }
     }
 `
 export const DeliveryPageButtonsContainer = styled.div`
@@ -106,7 +121,16 @@ export const DeliveryPageButton = styled.div`
         width: 10%.1vw;
         height: 6.6vh;
     }
-
-    
-    
 `
+
+export const RequiredLabel = styled.label`
+ display: inline-block;
+ margin-bottom: 0.5rem;
+ color: #333; // Default text color
+
+ &::after {
+    content: "*";
+    color: red;
+    margin-left: 0.25rem;
+ }
+`;
