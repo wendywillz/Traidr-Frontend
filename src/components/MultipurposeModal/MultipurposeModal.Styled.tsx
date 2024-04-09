@@ -106,4 +106,20 @@ animation: modal-animation 0.3s ease-in-out;
   align-items: center;
   gap: 1rem;
 }
+
+.modal-cancel-button{
+  color: var(--orange-color);
+  border: 1px solid var(--orange-color);
+  margin-left: 30vw;
+  font-size: 0.9vw;
+  font-weight: 500;
+  padding: 1vh 1vw;
+  border-radius: 60px;
+  &:hover{
+    background-color:var(--orange-color);
+    color: white;
+  }
+}
+
 `
+

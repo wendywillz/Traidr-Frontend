@@ -28,7 +28,7 @@ export const AllProductsWrapper = styled.div`
   
   
 
-  .each-product-image {
+  .each-product-image{
     min-height: 250px;
     max-height: 250px;
     flex: 1;
@@ -40,11 +40,17 @@ export const AllProductsWrapper = styled.div`
     overflow: hidden;
     // padding: 5rem;
   }
-  .each-product-image img {
+  .each-product-image img{
     object-fit: contain;
-    max-width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
   }
+
+  .dashboard-product-image{
+    width: 100vw;
+    height: 30vh
+  }
+
   .each-product-title {
     font-weight: 600;
   }

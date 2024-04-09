@@ -21,7 +21,7 @@ export const DeliveryPageMainContainer = styled.div`
 export const DeliveryPageFormContainer = styled.div`
     /* border: 1px solid blue; */
     box-shadow: 2px 8px 20px 4px rgba(0, 0, 0, 0.1);
-    height: 82vh;
+    height: 85vh;
     width: 50vw;
     border-radius:10px;
     background-color: white;
