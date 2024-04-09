@@ -37,12 +37,13 @@ const PaymentPage = () => {
   };
 
   //HANDLING THE PROCEED TO Purchase MODAL
-  const [purchaseModalVisibility, setPurchaseModalVisibility] = useState(false);
+  const [purchaseModalVisibility, setPurchaseModalVisibility] = useState(true);
   const purchaseModalTitle = `PURCHASE COMPLETED`;
   const purchaseModalMessage = `Thank you for shopping with Traidr`;
-  const purchaseModalButtonAction = () => {
-    navigate("/order/receipt");
-  };
+  // const purchaseModalButtonAction = () => {
+  //   navigate("/order/receipt");
+  // };
+  
   // const togglePurchaseModal = ()=>{
   //   setPurchaseModalVisibility(!purchaseModalVisibility)
   // }
@@ -51,7 +52,8 @@ const PaymentPage = () => {
     try {
       const res = await axiosInstance.post(`/sale/complete-sale`);
       if (res) {
-        setPurchaseModalVisibility(true);
+        setPurchaseModalVisibility(false);
+        navigate("/order/receipt")
         console.log(`Payment complete. Sale processed`);
       }
     } catch (error) {
@@ -94,7 +96,7 @@ const PaymentPage = () => {
         <MultipurposeModal
           title={purchaseModalTitle}
           message={purchaseModalMessage}
-          onClickAction={purchaseModalButtonAction}
+          onClickAction={handleCheckout}
         />
       )}
 
