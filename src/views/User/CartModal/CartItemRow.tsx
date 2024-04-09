@@ -1,7 +1,7 @@
-import { CartContent, Cartleftcontainer, CartleftcontainerImg, CartleftcontainerText, CartRightContainer, CartItemQtyAndTotal, CartUpdateAndDeleteBtns } from "./CartPage.Styled";
+import { CartContent, Cartleftcontainer, CartleftcontainerImg, CartleftcontainerText, CartRightContainer,  CartUpdateAndDeleteBtns } from "./CartPage.Styled";
 
 import AddToCartButton from "../../../components/AddToCartButton/AddToCartButton";
-import AddToWishListButton from "../../../components/AddToWishListButton/AddToWishListButton";
+// import AddToWishListButton from "../../../components/AddToWishListButton/AddToWishListButton";
 
 //Interface imports
 import { CartProductDetail } from "../../../interfaces/cartInterfaces";

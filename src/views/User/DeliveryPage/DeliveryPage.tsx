@@ -20,7 +20,7 @@ import DeliveryDetailsData from "../../../interfaces/deliveryInterfaces";
 //package and tools imports
 import { useState, ChangeEvent } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
-import { NavigateFunction, useNavigate, Link } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const DeliveryPage = () => {
   const navigate: NavigateFunction = useNavigate();
