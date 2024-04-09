@@ -152,10 +152,7 @@ export const OrderButton = styled.div`
  padding-top: 1vh;
  font-size: 1.5vw;
  font-weight: 600;
-<<<<<<< HEAD
-=======
  cursor: pointer;
->>>>>>> 19d1f9f794f56fb5beeea71536eecda7981f6fc5
  &:hover {
 font-size: 1.6vw;
 width: 50.1vw;

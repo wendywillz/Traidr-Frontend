@@ -1,12 +1,12 @@
-import { OrderHistoriesWholeContainer, OrderHistoriesMainContainer, OrderHistoriesMain, OrderHistoriesTableContainer, OrderHistoriesTable, OrderHistoriesTableHeadingRow } from "./OrderHistoryList.Styled"
+import { OrderHistoriesWholeContainer, OrderHistoriesMainContainer, OrderHistoriesMain, OrderHistoriesTableContainer, OrderHistoriesTable, OrderHistoriesTableHeadingRow, DownloadButtonsContainer, } from "./OrderHistoryList.Styled"
 import Header from "../../../components/Header/Header"
 import OrderHistoriesTableRow from "./OrderHistoryListRow"
 
 import { OrderHistoryListData } from "../../../interfaces/orderInterfaces"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { fetchOrderHistoryList } from "../../../api/order"
-
+import ReactToPrint from "react-to-print";
 
  
 
@@ -23,13 +23,20 @@ const OrderHistoryList = () => {
         })
     },[historyListData])
 
+    const componentRef = useRef<HTMLDivElement>(null);
 
 
   return (
     <OrderHistoriesWholeContainer>
         <Header/>
         <OrderHistoriesMainContainer>
-        <OrderHistoriesMain>
+        <DownloadButtonsContainer>
+          <ReactToPrint
+            trigger={() => <button>Download PDF</button>}
+            content={() => componentRef.current!}
+          />
+        </DownloadButtonsContainer>
+        <OrderHistoriesMain ref={componentRef}>
             <p className="order-history-list-page-title">Your Order History</p>
             <OrderHistoriesTableContainer>
                 <OrderHistoriesTable>
