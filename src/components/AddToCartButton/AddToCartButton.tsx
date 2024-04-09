@@ -9,14 +9,13 @@ interface ButtonProps{
     toggleVisibility: () => void;
 }
 
-const AddToCartButton = ({buttonText, productId, toggleVisibility}: ButtonProps ) => {
+const AddToCartButton = ({buttonText, productId}: ButtonProps ) => {
 
 
 
 const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
 
 const toggleQuantityModal = () => {
-      console.log("modalVisible?", quantityModalVisibility);
       setQuantityModalVisibility(!quantityModalVisibility);
 }
 

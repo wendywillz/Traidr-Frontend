@@ -40,16 +40,17 @@ export const GenderPieChart = () => {
   return (
     <div
       style={{
-        padding: "10px",
-        marginRight: "10px",
+        padding: "2rem",
         backgroundColor: "#f0f0f0",
-        width: `500px`,
-        height: `300px`,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        minWidth: `500px`,
+        height: `350px`,
       }}
     >
-      <p style={{ marginBottom: "-30px", fontSize: "14px" }}>
-        User Demographics (sex)
-      </p>
+      <p>User Demographics (sex)</p>
       <Pie
         data={userDetails}
         options={{

@@ -10,4 +10,5 @@ export default interface userData {
   age: number;
   address: string;
   shopName: string;
+  profilePic: string| Blob| null| File
 }

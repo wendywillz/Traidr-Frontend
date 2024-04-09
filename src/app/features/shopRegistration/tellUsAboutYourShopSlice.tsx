@@ -10,7 +10,6 @@ export const tellUsAboutYourShopSlice = createSlice({
   reducers: {
     updateTellUsAboutYourShop: (state, action) => {
       const tellUsAboutYourShop = action.payload;
-      //console.log("initial state", initialState);
       return Object.assign(state, tellUsAboutYourShop);
     },
     clearTellUsAboutYourShop: (state) => {

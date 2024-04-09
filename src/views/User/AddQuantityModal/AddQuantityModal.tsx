@@ -21,8 +21,6 @@ const AddQuantityModal = ({toggleVisiblity}:ModalProps) => {
         setInputValue(parseInt(event.target.value))
     }
     const handleSubmit = ()=>{
-        // event.preventDefault()
-        console.log(` ${inputValue} PRODUCTS ADD`);
         toggleVisiblity()
     }
 

@@ -40,7 +40,6 @@ import axiosInstance from "../../../../utils/axiosInstance";
 import { fetchProductsCategories } from "../../../../api/product";
 import Loader from "../../../../components/Loader/Loader";
 
-
 const StockYourShop = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////
   const { shopId } = useParams();
@@ -225,7 +224,6 @@ const StockYourShop = () => {
       }
     } catch (error) {
       setIsLoading(false);
-      console.log("product error", error);
     }
 
     //localStorage.setItem("stockYourShop", JSON.stringify(listingDetailsData));

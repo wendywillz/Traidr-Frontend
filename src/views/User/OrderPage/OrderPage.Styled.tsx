@@ -22,7 +22,10 @@ export const OrderItemRowContiner = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: gainsboro;
+    background-color: white;
+    /* border-left: 1px solid black;
+    border-right: 1px solid black; */
+    border-bottom: 1px solid black;
 `
 
 export const ProductDetail = styled.div`
@@ -34,7 +37,10 @@ export const ProductDetail = styled.div`
     height: 10.2vh;
 }
 .order-item-details{
-    padding-top: 3vh;
+    padding-top: 1vh;
+}
+.order-item-title{
+    font-weight: 800;
 }
 `
 
@@ -43,34 +49,43 @@ export const ProductTotal = styled.div`
     font-size: 1.5vw;
     font-weight: 600;
     padding-top: 7vh;
+    
 `
 
 export const OrderTotal = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: grey;
-    margin-top: 2vh;
+    background-color: white;
+    color: var(--price-green-color);
+    /* margin-top: 2vh; */
     margin-bottom: 2vh;
-    height: 5vh;
-    border-radius: 10px;
-    padding: 1vh 1vw 0vh 1vw;
+    height: 6vh;
+    /* border-radius: 10px; */
+    padding: 1vh 0vw 0vh 1vw;
+    border-left: 2px solid var(--price-green-color);
+    border-right: 2px solid var(--price-green-color);
+    border-bottom: 2px solid var(--price-green-color);
+    border-top: 1.5px solid var(--price-green-color);
 
 
     .order-total-text{
         font-size: 1.5vw;
         font-weight: 600;
+        color: var(--price-green-color);
     }
 
     .order-total-amount{
         font-size: 1.5vw;
-        font-weight: 600;
+        font-weight: 800;
+        color: var(--price-green-color);
     }
 
 `
 
 export const PayNowButton = styled.div`
-    background-color: orange;
+    background-color:var(--orange-color);
+    color: white;
     text-align: center;
     font-size: 1.2vw;
     font-weight: 600;
@@ -79,6 +94,7 @@ export const PayNowButton = styled.div`
     cursor: pointer;
     padding-top: 1vh;
     border-radius: 10px;
+    cursor: pointer;
     &:hover{
         font-size: 1.3vw; 
         height: 5.1vh;
@@ -87,7 +103,9 @@ export const PayNowButton = styled.div`
 `
 
 export const CancelOrderButton = styled.div`
-    background-color: red;
+    background-color: #F2F2F2;;
+    border: 2px solid black;
+    color: black;
     text-align: center;
     font-size: 1.2vw;
     font-weight: 600;
@@ -95,6 +113,7 @@ export const CancelOrderButton = styled.div`
     padding-top: 1vh;
     cursor: pointer;
     border-radius: 10px;
+    cursor: pointer;
     &:hover{
         font-size: 1.3vw; 
         height: 5.1vh;

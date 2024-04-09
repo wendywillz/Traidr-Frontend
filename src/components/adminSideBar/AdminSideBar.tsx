@@ -5,7 +5,6 @@ import AdminDashboardStyle from "./AdminSideBarStyle";
 import tenantIcn from "../../assets/Admin-side-bar/Tenant.png";
 import useranalyticsIcon from "../../assets/Admin-side-bar/user.png";
 import productIcon from "../../assets/Admin-side-bar/product.png";
-import supportTicketIcon from "../../assets/Admin-side-bar/support_agent.png";
 import settingsIcon from "../../assets/Admin-side-bar/settings.png";
 import logoutIcon from "../../assets/Admin-side-bar/logout.png";
 // import { useState } from "react";
@@ -35,7 +34,7 @@ function AdminSideBar() {
           <span>Home</span>
         </NavLink>
         <NavLink
-          to="/admin/dashboard"
+          to="/admin/dashboard/tenants-database"
           className={`admin-side-bar-each-content ${
             location.pathname.includes("/tenants/") ? "active-link" : ""
           }`}
@@ -61,15 +60,7 @@ function AdminSideBar() {
           <img src={productIcon} alt="" />
           <span>Product Metrics</span>
         </NavLink>
-        <NavLink
-          to="/admin/dashboard"
-          className={`admin-side-bar-each-content ${
-            location.pathname.includes("/support-tickets") ? "active-link" : ""
-          }`}
-        >
-          <img src={supportTicketIcon} alt="" />
-          <span>Support Tickets</span>
-        </NavLink>
+
         <NavLink
           to="/admin/dashboard"
           className={`admin-side-bar-each-content ${

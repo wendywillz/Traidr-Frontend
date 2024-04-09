@@ -5,7 +5,7 @@ import {
   ChangePictureForm,
   UserDetailsForm,
   FormSectionContainer,
-  UserDetailsSection
+  UserDetailsSection,
 } from "./ProfileSettingsPage.styled";
 
 //component imports
@@ -14,14 +14,13 @@ import Header from "../../../../components/Header/Header";
 
 //package imports
 import { BsCameraFill, BsPersonCircle } from "react-icons/bs";
-import { useState, ChangeEvent, FormEvent } from "react";
-import axios from "axios"
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import axiosInstance from "../../../../utils/axiosInstance";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../app/store";
 
 //Interface declaration
-interface UserDetails{
+interface UserDetails {
   firstName: string;
   lastName: string;
   email: string;
@@ -30,64 +29,15 @@ interface UserDetails{
   dateOfBirth: string;
   address: string;
   shopName: string;
-  // profilePic: string| Blob| null| File;
+  profilePic: string | Blob | null | File;
 }
 
 import userData from "../../../../interfaces/userInterface";
 
 export const ProfileSettings = () => {
   //fetching the user
-  const currentUser: userData = useSelector((state: RootState)=> state.user)
-  const currentUserId:string|null = useSelector((state: RootState)=> state.user.userId)
+  const currentUser: userData = useSelector((state: RootState) => state.user);
   //const currentUserName:string|null = useSelector((state: RootState)=> state.user.name)
-
-  //Logic for handling the photo upload    
-  const [userPic, setUserPic] = useState<File | null>(null);
-  const [displayedProfilePic, setDisplayedProfilePic] = useState<string>("") //This is ONLY FOR THE DISPLAYED PIC. 
-
-
-  //Logic for handling photo upload and changing the displayed picture
-  const handleChangeProfilePic = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) return;
-    const uploadedPhoto = event.target.files[0];
-    const displayedPhoto = event.target.files[0];
-    if (uploadedPhoto) setUserPic(uploadedPhoto)
-    // console.log(photoFile);
-
-
-
-
-    //allowing the selected picture to show
-    const reader = new FileReader();
-    reader.onload = () => {
-      setDisplayedProfilePic(reader.result as string);
-    };
-    reader.readAsDataURL(displayedPhoto);
-  };
-
-
-  const handlePhotoUpload = async (event: FormEvent<HTMLFormElement>)=>{
-    event.preventDefault();
-
-    //adding data to form
-    const userPicFormData = new FormData()
-    userPicFormData.append("profilePic", userPic as Blob)
-    console.log(`PHOTO ADDED`);
-    console.log( userPic);
-
-    //Sending uploaded photo to backend
-    try {
-      await axios.post(`/user/edit-profile/profile-picture${currentUserId}`, {data: userPicFormData})
-      console.log(`Profile picture has been successfully changed`)
-      } catch (error) {
-      console.error(`Error uploading photo: ${error}`)
-      }
-
-  }
-
-
-
-
 
   //Logic for Handling User Details
   const [userDetails, setUserDetails] = useState<UserDetails>({
@@ -96,56 +46,117 @@ export const ProfileSettings = () => {
     email: "",
     phoneNumber: "",
     gender: "",
-    dateOfBirth:"",
+    dateOfBirth: "",
     address: "",
     shopName: "",
-    // profilePic: userPic
+    profilePic: "",
   });
 
-  
-
   //submitting the  user details
-  const handleFormSubmit = async ( event: FormEvent<HTMLFormElement> ) => {
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(`USER DETAILS ADDED`);
-    console.log(userDetails);
 
     try {
-     const res = await axiosInstance.post(`/users/edit-profile/${currentUserId}`, userDetails)
-     if(res && res.data.success) location.reload()
-      console.log(`User Details have been sucessfully submitted`);
-       } catch (error) {
-      console.error(`Error submitting user details: ${error}`)
-        }
+      const res = await axiosInstance.post(`/users/edit-profile`, userDetails);
+      if (res && res.data.success) location.reload();
+    } catch (error) {
+      return error;
+    }
+  };
 
-}
+  //Handling the input changes on the rest of the form
+  const handleChange = (
+    e: ChangeEvent<
+      | HTMLFormElement
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | HTMLSelectElement
+    >
+  ) => {
+    setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
+  };
 
-  
-const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextAreaElement|HTMLSelectElement>)=>{
-  setUserDetails({...userDetails, [e.target.name]:e.target.value})
-}
+  //Logic for handling photo upload and changing the displayed picture
+  const [displayedProfilePic, setDisplayedProfilePic] = useState<string>("");
 
+  const [, setPhotoFile] = useState<File | null>(null);
+  const [, setDisplayUploadedPhotoName] = useState<string>();
+  const [, setPhotoDisplayError] = useState<string>();
 
+  const handleChangeProfilePic = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+    const maxSize = 3 * 1024 * 1024;
+    const displayedPhoto = event.target.files[0];
+    const uploadedPhoto = event.target.files[0];
+    if (uploadedPhoto.size > maxSize || displayedPhoto.size > maxSize) {
+      setPhotoDisplayError("File size exceeds 10mb");
+      return;
+    }
 
+    if (uploadedPhoto) {
+      setPhotoFile(uploadedPhoto);
+      setUserDetails({ ...userDetails, profilePic: uploadedPhoto as Blob });
+      setDisplayUploadedPhotoName(uploadedPhoto.name);
+    }
+
+    if (displayedPhoto) {
+      //allowing the selected picture to show
+      const reader = new FileReader();
+      reader.onload = () => {
+        setDisplayedProfilePic(reader.result as string);
+      };
+      reader.readAsDataURL(displayedPhoto);
+    }
+  };
+
+  ////////////////////////////////////////////////////////////////////////////////////////////
+  //Logic for hanling userphoto upload
+
+  // checking if the displayUploadedVideoName is in the local storage
+  useEffect(() => {
+    const storedUploadedPhotoName = localStorage.getItem(
+      "displayUploadedPhotoName"
+    );
+    if (storedUploadedPhotoName) {
+      setDisplayUploadedPhotoName(JSON.parse(storedUploadedPhotoName));
+    }
+  }, []);
 
   return (
     <ProfileSettingsPageContainer>
-      <Header/>
+      <Header />
 
       <ProfileFormsContainer>
         <ProfileNavigation />
         <ChangePictureForm>
           <div className="profile-settings-user-image-and-camera-icon-container">
-            {displayedProfilePic? <img src={displayedProfilePic} className="profile-settings-user-image"/>: <BsPersonCircle size={"9vw"}/>}
+            {displayedProfilePic ? (
+              <img
+                src={displayedProfilePic}
+                className="profile-settings-user-image"
+              />
+            ) : (
+              <BsPersonCircle size={"9vw"} />
+            )}
             {/* <BsPersonCircle size={"9vw"} /> */}
-            <label htmlFor="profilePictureInput" className="profile-settings-change-photo-label">
+            <label
+              htmlFor="profilePictureInput"
+              className="profile-settings-change-photo-label"
+            >
               <BsCameraFill size={"1.7vw"} color="white" />
             </label>
-            <input id="profilePictureInput" name="profilePicture" type="file" accept="image/*" className="profile-settings-change-photo-input" onChange={handleChangeProfilePic} />
+            <input
+              id="profilePictureInput"
+              name="profilePicture"
+              type="file"
+              accept="image/*"
+              className="profile-settings-change-photo-input"
+              onChange={handleChangeProfilePic}
+            />
           </div>
 
           <div className="profile-settings-change-photo-buttons-container">
-            <button className="profile-settings-page-upload-photo-button" onClick={()=> handlePhotoUpload}>
+            <button className="profile-settings-page-upload-photo-button">
               Upload New
             </button>
             <button className="profile-settings-page-delete-photo-button">
@@ -153,7 +164,7 @@ const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextA
             </button>
           </div>
         </ChangePictureForm>
-        
+
         {/* <p>{currentUserName} and {currentUserId}</p> */}
 
         <UserDetailsForm onSubmit={handleFormSubmit}>
@@ -174,8 +185,9 @@ const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextA
                   type="text"
                   placeholder={currentUser.name.split(" ")[0]}
                   className="profile-seetings-form-input"
-                   value={userDetails.firstName}
-                  onChange={handleChange} />
+                  value={userDetails.firstName}
+                  onChange={handleChange}
+                />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label
@@ -192,16 +204,23 @@ const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextA
                   placeholder={currentUser.email}
                   className="profile-seetings-form-input"
                   value={userDetails.email}
-                  onChange={handleChange} />
+                  onChange={handleChange}
+                />
               </div>
               <div className="profile-settings-form-label-and-input-container">
-                <label htmlFor="genderInput" className="profile-settings-form-label">
+                <label
+                  htmlFor="genderInput"
+                  className="profile-settings-form-label"
+                >
                   Gender
                 </label>
                 <br />
-                <select id="genderInput" name="gender" className="profile-seetings-form-input" 
-                value={userDetails.gender} 
-                onChange={handleChange}
+                <select
+                  id="genderInput"
+                  name="gender"
+                  className="profile-seetings-form-input"
+                  value={userDetails.gender}
+                  onChange={handleChange}
                 >
                   <option value="">--select--</option>
                   <option value="female">Female</option>
@@ -222,8 +241,9 @@ const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextA
                   type="text"
                   placeholder="Awesomeness Shop"
                   className="profile-seetings-form-input"
-                   value={userDetails.shopName}
-                  onChange={handleChange} />
+                  value={userDetails.shopName}
+                  onChange={handleChange}
+                />
               </div>
             </FormSectionContainer>
             {/*RIGHT SIDE OF FORM */}
@@ -242,8 +262,9 @@ const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextA
                   type="text"
                   placeholder={currentUser.name.split(" ")[1]}
                   className="profile-seetings-form-input"
-                   value={userDetails.lastName}
-                  onChange={handleChange} />
+                  value={userDetails.lastName}
+                  onChange={handleChange}
+                />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label
@@ -259,8 +280,9 @@ const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextA
                   type="tel"
                   placeholder="07034249775"
                   className="profile-seetings-form-input"
-                   value={userDetails.phoneNumber}
-                  onChange={handleChange} />
+                  value={userDetails.phoneNumber}
+                  onChange={handleChange}
+                />
               </div>
               <div className="profile-settings-form-label-and-input-container">
                 <label
@@ -276,8 +298,9 @@ const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextA
                   type="date"
                   placeholder=""
                   className="profile-seetings-form-input"
-                   value={userDetails.dateOfBirth}
-                  onChange={handleChange} />
+                  value={userDetails.dateOfBirth}
+                  onChange={handleChange}
+                />
               </div>
 
               <div className="profile-settings-form-label-and-input-container">
@@ -293,7 +316,7 @@ const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextA
                   name="address"
                   placeholder="32, Rasaq Eletu Street, Osapa London, Lagos"
                   className="profile-seetings-form-textarea"
-                   value={userDetails.address}
+                  value={userDetails.address}
                   onChange={handleChange}
                 ></textarea>
               </div>
@@ -301,7 +324,10 @@ const handleChange = (e:ChangeEvent<HTMLFormElement| HTMLInputElement| HTMLTextA
           </UserDetailsSection>
 
           <div className="profile-settings-user-details-form-buttons">
-            <button className="profile-settings-page-save-button" onClick={()=>handleFormSubmit}>
+            <button
+              className="profile-settings-page-save-button"
+              onClick={() => handleFormSubmit}
+            >
               Save Changes
             </button>
             <button className="profile-settings-page-cancel-button">

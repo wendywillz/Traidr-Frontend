@@ -68,7 +68,7 @@ export const CartleftcontainerText = styled.div`
 
   .productPrice {
     font-size: 1vw;
-    color: #219653;
+    color: var(--price-green-color);
   }
 
   .sourceShop{
@@ -96,12 +96,18 @@ export const CartItemQtyAndTotal = styled.div`
 display: flex;
 justify-content: space-between;
 margin-bottom: 4vh;
-padding: 0 2vw;
+padding: 0vh 0vw 0vh 0vw;
 
 .cart-item-total{
   font-size: 1.5vw;
   font-weight: 600;
   color:var(--orange-color);
+  padding-top: 3vh;
+  padding-right: 2vw;
+ }
+
+ .add-to-wishlist-btn-container{
+  padding-top: 1vh;
  }
 `
 

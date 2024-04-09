@@ -7,3 +7,13 @@ export interface OrderProductDetail{
     productTotal: number;
     sourceShop: string;
   }
+
+  export interface OrderHistoryListData{
+    saleId: string;
+    userId: string;
+    orderId: string;
+    saleTotal: number;
+    saleStatus: string
+    createdAt: string;
+    updatedAt: string;
+  }

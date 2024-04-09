@@ -1,6 +1,7 @@
 import { CartContent, Cartleftcontainer, CartleftcontainerImg, CartleftcontainerText, CartRightContainer, CartItemQtyAndTotal, CartUpdateAndDeleteBtns } from "./CartPage.Styled";
 
 import AddToCartButton from "../../../components/AddToCartButton/AddToCartButton";
+import AddToWishListButton from "../../../components/AddToWishListButton/AddToWishListButton";
 
 //Interface imports
 import { CartProductDetail } from "../../../interfaces/cartInterfaces";
@@ -23,7 +24,6 @@ const CartItemRow = ({cartItem, handleDelete}: CartItemProps) => {
 const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
 
 const toggleQuantityModal = () => {
-  console.log("modalVisible?", quantityModalVisibility);
   setQuantityModalVisibility(!quantityModalVisibility);
 };
 
@@ -44,6 +44,7 @@ const toggleQuantityModal = () => {
               <p className="productHeading">{cartItem.productTitle}</p>
               <p className="productPrice">₦{cartItem.productPrice.toLocaleString()}</p>
               <p className="sourceShop">Seller: {cartItem.sourceShop}</p>
+              <p className="cart-item-quantity">Qty: {cartItem.productQuantity}</p>
               <p className="productStock">In stock</p>
             </CartleftcontainerText>
 
@@ -52,7 +53,7 @@ const toggleQuantityModal = () => {
 
          <CartRightContainer>
           <CartItemQtyAndTotal>
-            <p className="cart-item-quantity">Qty: {cartItem.productQuantity}</p>
+           <div className="add-to-wishlist-btn-container"><AddToWishListButton productId={cartItem.productId}/></div>
             <p className="cart-item-total">₦{cartItem.productTotal.toLocaleString()}</p>
           </CartItemQtyAndTotal>
          

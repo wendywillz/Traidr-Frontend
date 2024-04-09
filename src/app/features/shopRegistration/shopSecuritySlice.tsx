@@ -10,7 +10,6 @@ export const shopSecuritySlice = createSlice({
   reducers: {
     updateTermsAndCondition: (state, action) => {
       const shopSecurity = action.payload;
-      console.log("initial state", initialState);
       return Object.assign(state, shopSecurity);
     },
     clearTermsAndCoditions: (state) => {

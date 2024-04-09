@@ -10,13 +10,18 @@ export const WishlistContainer = styled.div`
 
 export const WishlistContent = styled.div`
   display: flex;
-  padding: 20px 0px 0px 0px;
+  justify-content: space-between;
+  box-shadow:  1px 0px 5px 4px rgba(0, 0, 0, 0.1);
+  padding: 1vh 1vw 0vh 1vw;
   border-bottom: 2px solid #f0f0f0;
   gap: 380px;
+  margin-bottom: 3vh;
+  height: 15vh;
 `;
 export const WishlistText = styled.p`
-  font-size: 24px;
+  font-size: 2vw;
   font-weight: 600;
+  margin-bottom: 2vh;
 `;
 
 export const Wishlistleftcontainer = styled.div`
@@ -27,8 +32,10 @@ export const Wishlistleftcontainer = styled.div`
 export const WishlistleftcontainerImg = styled.div`
   display: block;
   img {
-    object-fit: contain;
-    width: 200px;
+    /* object-fit: contain; */
+    width: 7vw;
+    /* height: 15vh; */
+    margin-right: 1vw;
   }
 `;
 
@@ -51,3 +58,35 @@ export const WishlistleftcontainerText = styled.div`
     color: #219653;
   }
 `;
+
+export const WishListRowBtnsContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-self: right;
+    margin-top: 1vh;
+`
+
+export const DeleteWishItemBtn = styled.div`
+  
+    display: flex;
+    width: 10.5rem;
+    height: 3.6rem;
+    border-radius: 5px;
+    border: 1px solid var(--orange-color);
+    margin-top: 1rem;
+    margin-left: 4vw;
+    font-size: 1rem;
+    justify-content: center;
+    text-decoration: none;
+    align-items: center;
+    color: var(--orange-color);
+    background-color: white;
+    cursor: pointer;
+
+    &:hover {
+      font-size: 1.1rem;
+      width: 10.6rem;
+      height: 3.7rem;
+    } 
+`

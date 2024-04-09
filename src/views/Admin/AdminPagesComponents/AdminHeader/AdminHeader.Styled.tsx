@@ -2,20 +2,20 @@ import styled from "styled-components";
 
 const HeaderStyle = styled.header`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   position: sticky;
   background-color: #fff;
   z-index: 100;
   top: 0;
   align-items: center;
-  padding: 0rem 2rem;
+  padding: 0rem 3rem;
   height: 4rem;
   margin-bottom: 2rem;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
   .header-inner {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     flex-basis: 100%;
     width: 100%;
@@ -61,9 +61,13 @@ const HeaderStyle = styled.header`
   .header-right-btn-wrapper {
     flex-basis: 50%;
     display: flex;
-    gap: 1rem;
+    gap: .5rem;
     align-items: center;
     justify-content: flex-end;
+  }
+  .admin-name-wrapper p {
+color: #00000080;
+font-size: .9rem;
   }
   .small-screen-icon {
     display: block;
@@ -81,6 +85,9 @@ const HeaderStyle = styled.header`
    cursor: pointer;
     text-decoration: none;
     font-size: 2rem;
+  }
+  .admin-notification-icon {
+   font-size: 1.5rem;
   }
 `;
 

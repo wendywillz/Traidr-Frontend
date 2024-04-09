@@ -1,6 +1,7 @@
 import {
   AdminPageContainer,
   AdminPageContent,
+  AdminPageContentChartWrapper,
   AdminPageMain,
   AdminPageTitle,
 } from "../../AdminPagesComponents/MainAdminStyles/MainAdminStyles.Styled";
@@ -15,10 +16,12 @@ function ProductMetrics() {
       <AdminSideBar />
       <AdminPageMain>
         <AdminHeader />
-        <AdminPageTitle>Product Metrics</AdminPageTitle>
         <AdminPageContent>
-          <DailyActiveUser />
-          <MonthlyActiveUser />
+          <AdminPageTitle>Product Metrics</AdminPageTitle>
+          <AdminPageContentChartWrapper>
+            <DailyActiveUser />
+            <MonthlyActiveUser />
+          </AdminPageContentChartWrapper>
         </AdminPageContent>
       </AdminPageMain>
     </AdminPageContainer>

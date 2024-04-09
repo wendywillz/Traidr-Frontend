@@ -78,7 +78,6 @@ export default function SignupPage() {
     } catch (error) {
       setEmail("");
       setPassword("");
-      console.log("error", error);
       setError("Internal Server Error");
     }
 
@@ -131,7 +130,7 @@ export default function SignupPage() {
                 />
               </fieldset>
               <fieldset className="input-wrapper">
-                <label >How did you hear about us</label>
+                <label>How did you hear about us</label>
                 <select
                   className="how-did-you-hear"
                   value={aboutUs}
@@ -146,21 +145,19 @@ export default function SignupPage() {
               </fieldset>
               <fieldset className="input-wrapper">
                 <label htmlFor="dateOfBirthInput">Date of Birth</label>
-                <input  
+                <input
                   id="dateOfBirthInput"
                   name="dateOfBirth"
                   type="date"
                   placeholder=""
                   className="profile-seetings-form-input"
-                   value={dateOfBirth}
-                  onChange={handleDateOfBirth} />
+                  value={dateOfBirth}
+                  onChange={handleDateOfBirth}
+                />
               </fieldset>
               <fieldset className="input-wrapper">
                 <label htmlFor="password">Gender</label>
-                <select
-                  value={gender}
-                  onChange={handleGender}
-                >
+                <select value={gender} onChange={handleGender}>
                   <option value="select">Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>

@@ -55,12 +55,7 @@ const MonthlyTrendLineChart = () => {
 
   return (
     <LineChartBackground>
-      <Line
-        data={data}
-        options={options}
-        datasetIdKey={`chartId`}
-        style={{ width: `40vw`, height: `30vh` }}
-      />
+      <Line data={data} options={options} datasetIdKey={`chartId`} />
     </LineChartBackground>
   );
 };

@@ -58,6 +58,11 @@ export default function LoginPage() {
           setError("Invalid credentials");
           setEmail("");
           setPassword("");
+        } else {
+          setIsLoading(false);
+          setEmail("");
+          setPassword("");
+          setError("Internal Server Error");
         }
       } else {
         setIsLoading(false);
