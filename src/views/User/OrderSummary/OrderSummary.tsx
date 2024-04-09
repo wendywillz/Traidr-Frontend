@@ -21,6 +21,7 @@ import { Link, useParams } from "react-router-dom";
 import html2canvas from "html2canvas";
 import imagesLoaded from 'imagesloaded';
 import ReactToPrint from "react-to-print";
+import PageLoader from "../../../components/PageLoader/PageLoader"
 
 const OrderSummary = () => {
   const { saleId } = useParams();
@@ -41,6 +42,22 @@ const OrderSummary = () => {
       } else { /* empty */ }
     });
   }, []);
+  //Toggling the loader
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
+
+useEffect(()=>{
+    fetchSpecifiedOrderHistory(saleId).then((res:SaleSummary) => {
+        if (res) {
+          setSaleSummary(res) 
+          const totalQty = res?.orderedProducts.reduce((acc, curr)=> acc + (curr.productQuantity), 0)
+          setTotalQuantity(totalQty)
+        //   console.log(`The total is`, total);
+        setIsLoading(false)
+        }else{ /* empty */ }
+      })
+},[])
+
 
   const componentRef = useRef<HTMLDivElement>(null);
 
@@ -60,6 +77,7 @@ const OrderSummary = () => {
 
   return (
     <OrderSummaryWholeContainer>
+      {isLoading && <PageLoader/>}
       <Header />
       <OrderSummaryMainContainer>
       <DownloadButtonsContainer>

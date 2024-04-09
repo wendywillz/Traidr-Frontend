@@ -16,7 +16,7 @@ import {
 //component imports
 import ReceiptRow from "./ReceiptRow";
 import Header from "../../../components/Header/Header";
-
+import PageLoader from "../../../components/PageLoader/PageLoader";
 import { SaleSummary } from "../../../interfaces/saleInterfaces";
 
 //package and tool imports
@@ -27,9 +27,26 @@ import ReactToPrint from "react-to-print";
 import html2canvas from "html2canvas";
 import imagesLoaded from 'imagesloaded';
 
+
 const Receipt = () => {
-  const [saleSummary, setSaleSummary] = useState<SaleSummary>();
-  const [totalQuantity, setTotalQuantity] = useState<number | undefined>(0);
+  
+//Toggling the loader
+    const [isLoading, setIsLoading] = useState<boolean>(true)
+
+  const [saleSummary, setSaleSummary] =useState<SaleSummary>()
+  const [totalQuantity, setTotalQuantity]= useState<number|undefined>(0)
+
+useEffect(()=>{
+  fetchReceipt().then((res:SaleSummary) => {
+        if (res) {
+          setSaleSummary(res) 
+          const totalQty = res?.orderedProducts.reduce((acc, curr)=> acc + (curr.productQuantity), 0)
+          setTotalQuantity(totalQty)
+        //   console.log(`The total is`, total);
+        setIsLoading(false)
+        }else{ /* empty */ }
+      })
+},[])
 
   useEffect(() => {
     fetchReceipt().then((res: SaleSummary) => {
@@ -62,6 +79,7 @@ const Receipt = () => {
 
   return (
     <OrderSummaryWholeContainer>
+      {isLoading && <PageLoader/>}
       <Header />
       <OrderSummaryMainContainer>
         <DownloadButtonsContainer>
@@ -75,7 +93,6 @@ const Receipt = () => {
           <Text>
             <h2 className="order-summary-page-title">RECEIPT</h2>
           </Text>
-
           <OrderSummaryOverView>
             <PrintStyledComponent>
               <Text>
@@ -177,5 +194,4 @@ const Receipt = () => {
     </OrderSummaryWholeContainer>
   );
 };
-
-export default Receipt;
+export default Receipt

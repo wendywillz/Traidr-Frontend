@@ -38,13 +38,14 @@ const toggleQuantityModal = () => {
           <Cartleftcontainer>
 
             <CartleftcontainerImg>
-              <img src={cartItem.productImage} alt="image" />
+              <img src={cartItem.productImage} alt="image" className="card-item-image" />
             </CartleftcontainerImg>
             <CartleftcontainerText>
               <p className="productHeading">{cartItem.productTitle}</p>
-              <p className="productPrice">₦{cartItem.productPrice.toLocaleString()}</p>
-              <p className="sourceShop">Seller: {cartItem.sourceShop}</p>
               <p className="cart-item-quantity">Qty: {cartItem.productQuantity}</p>
+              <p className="cart-item-total">Total: ₦{cartItem.productTotal.toLocaleString()}</p>
+              <p className="productPrice">unit: ₦{cartItem.productPrice.toLocaleString()}</p>
+              <p className="sourceShop">Seller: {cartItem.sourceShop}</p>
               <p className="productStock">In stock</p>
             </CartleftcontainerText>
 
@@ -52,14 +53,9 @@ const toggleQuantityModal = () => {
 
 
          <CartRightContainer>
-          <CartItemQtyAndTotal>
-           <div className="add-to-wishlist-btn-container"><AddToWishListButton productId={cartItem.productId}/></div>
-            <p className="cart-item-total">₦{cartItem.productTotal.toLocaleString()}</p>
-          </CartItemQtyAndTotal>
-         
         <CartUpdateAndDeleteBtns>
         <AddToCartButton buttonText={`UPDATE`} productId={cartItem.productId} toggleVisibility={toggleQuantityModal}/>
-         <div className='delete-item-button' onClick={()=>handleDelete(cartItem.productId)}>Delete Item</div>
+         <div className='delete-item-button' onClick={()=>handleDelete(cartItem.productId)}>Remove</div>
         </CartUpdateAndDeleteBtns>
          
           
@@ -70,3 +66,9 @@ const toggleQuantityModal = () => {
 }
 
 export default CartItemRow
+
+
+//Removed items
+/*
+<div className="add-to-wishlist-btn-container"><AddToWishListButton productId={cartItem.productId}/></div>
+ */

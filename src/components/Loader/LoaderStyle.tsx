@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const LoaderStyle = styled.div`
-  display: flex
+  display: flex;
   align-items: center;
   justify-content: center;
   
@@ -17,6 +17,7 @@ const LoaderStyle = styled.div`
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg);
   }
+}
 }
   ;`;
 

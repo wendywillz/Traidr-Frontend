@@ -12,6 +12,7 @@ import {
 import OrderItemRow from "./OrderItemRow";
 import Header from "../../../components/Header/Header";
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
+import PageLoader from "../../../components/PageLoader/PageLoader";
 
 //Interface imports
 import { OrderProductDetail } from "../../../interfaces/orderInterfaces";
@@ -26,6 +27,10 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const OrderPage = () => {
   const navigate: NavigateFunction = useNavigate();
+
+  //Toggling the loader
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+
 
   //HANDLING THE CONFIRM CANCEL MODAL
   const [confirmationModalVisibility, setConfirmationModalVisibility] =
@@ -67,6 +72,7 @@ const OrderPage = () => {
         );
         setOrderTotal(total);
         //   console.log(`The total is`, total);
+        setIsLoading(false)
       } else {
         navigate("/user/my-cart");
       }
@@ -104,6 +110,7 @@ const OrderPage = () => {
 
  return (
     <OrderPageContainer>
+      {isLoading && <PageLoader/>}
       {confirmationModalVisibility && (
         <MultipurposeModal
           title={confirmationModalTitle}

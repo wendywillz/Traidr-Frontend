@@ -1,4 +1,4 @@
-import { AddToCartButtonContainer } from "./AddToCartButton.Styled"
+import { AddToCartButtonContainer, ButtonWholeContainer } from "./AddToCartButton.Styled"
 import AddQuantityModal from "../AddQuantityModal/AddQuantityModal"
 import { useState } from "react";
 
@@ -15,17 +15,21 @@ const AddToCartButton = ({buttonText, productId}: ButtonProps ) => {
 
 const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
 
+
+
+
+
 const toggleQuantityModal = () => {
       setQuantityModalVisibility(!quantityModalVisibility);
 }
 
   return (
     // <AddToCartComponentContainer>
-        <>
+        <ButtonWholeContainer>
        {!quantityModalVisibility && (<AddToCartButtonContainer onClick={toggleQuantityModal}>{buttonText}
         </AddToCartButtonContainer>) }
         <div className="quantity-modal">{quantityModalVisibility && <AddQuantityModal productId={productId} toggleVisibility={toggleQuantityModal}/>}</div>
-        </>
+        </ButtonWholeContainer>
    // </AddToCartComponentContainer>
      
 

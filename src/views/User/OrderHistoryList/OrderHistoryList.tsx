@@ -7,10 +7,15 @@ import { OrderHistoryListData } from "../../../interfaces/orderInterfaces"
 import { useState, useEffect, useRef } from "react"
 import { fetchOrderHistoryList } from "../../../api/order"
 import ReactToPrint from "react-to-print";
+import PageLoader from "../../../components/PageLoader/PageLoader"
+
 
  
 
 const OrderHistoryList = () => {
+    
+    //Toggling the loader
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     const [historyListData, setHistoryListData] = useState<OrderHistoryListData[]>([])
 
@@ -18,6 +23,7 @@ const OrderHistoryList = () => {
         fetchOrderHistoryList().then((res)=>{
             if(res){
                 setHistoryListData(res)
+                setIsLoading(false)
             }
 
         })
@@ -28,6 +34,7 @@ const OrderHistoryList = () => {
 
   return (
     <OrderHistoriesWholeContainer>
+        {isLoading && <PageLoader/>}
         <Header/>
         <OrderHistoriesMainContainer>
         <DownloadButtonsContainer>
