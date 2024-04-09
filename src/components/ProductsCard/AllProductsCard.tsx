@@ -39,9 +39,9 @@ function AllProductsCard({ product }: ProductProps) {
       >
         <div className="each-product-image">
           {product.productImages[0].includes("undefined") ? (
-            <img src={dummyProducts} alt="" />
+            <img src={dummyProducts} alt="" className="dashboard-product-image"/>
           ) : (
-            <img src={product.productImages[0]} alt="" />
+            <img src={product.productImages[0]} alt={product.productTitle} className="dashboard-product-image"/>
           )}
         </div>
         <p className="each-product-title">{product.productTitle}</p>

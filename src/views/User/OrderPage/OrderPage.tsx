@@ -38,7 +38,7 @@ const OrderPage = () => {
   const confirmationModalTitle = `CONFRIM ORDER CANCELLATION`;
   const confirmationModalmessage = `Please confirm you want to cancel your order`;
   const toggleConfirmationModal = () => {
-    setConfirmationModalVisibility(true);
+    setConfirmationModalVisibility(!confirmationModalVisibility);
   };
 
   //HANDLING THE ORDER CANCELLED MODAL
@@ -116,6 +116,7 @@ const OrderPage = () => {
           title={confirmationModalTitle}
           message={confirmationModalmessage}
           onClickAction={cancelOrder}
+          cancelButton={true}
         />
       )}
 
@@ -124,6 +125,7 @@ const OrderPage = () => {
           title={orderCancelledModalTitle}
           message={orderCancelledModalMessage}
           onClickAction={orderCancelledmodalButtonAction}
+          cancelButton={true}
         />
       )}
 
@@ -132,12 +134,13 @@ const OrderPage = () => {
           title={proceedModalTitle}
           message={proceedModalMessage}
           onClickAction={proceedModalButtonAction}
+          cancelButton={true}
         />
       )}
 
       <Header />
       <OrderPageMain>
-        <h2 className="order-page-Title">Order Summary</h2>
+        <h2 className="order-page-Title">Your Order</h2>
         <div>
           {orderItems?.map((orderItem) => {
             return (

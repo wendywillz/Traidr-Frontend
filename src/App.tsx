@@ -29,6 +29,7 @@ import Receipt from "./views/User/Receipt/Receipt";
 import OrderHistoryList from "./views/User/OrderHistoryList/OrderHistoryList";
 import OrderSummary from "./views/User/OrderSummary/OrderSummary";
 import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineChart";
+import MultipurposeModal from "./components/MultipurposeModal/MultipurposeModal";
 
 function App() {
   return (
@@ -63,6 +64,39 @@ function App() {
           </AverageUSageTime>
         }
       />
+
+<Route
+        path="/user/*"
+        element={
+          <AverageUSageTime>
+            <ProtectedRoute>
+              <Routes>
+              <Route path="my-wishlist" element={<Wishlist />} />
+              <Route path="my-cart" element={<CartPage />} />
+              <Route path="my-orders" element={<OrderHistoryList />} />
+              <Route path="my-orders/:saleId" element={<OrderSummary />} />
+              </Routes>
+            </ProtectedRoute>
+          </AverageUSageTime>
+        } />
+
+
+      <Route
+        path="/order/*"
+        element={
+          <AverageUSageTime>
+            <ProtectedRoute>
+              <Routes>
+              <Route path="new-order" element={<OrderPage />} />
+              <Route path="delivery-details" element={<DeliveryPage />} />
+              <Route path="payment" element={<PaymentPage />} />
+              <Route path="receipt" element={<Receipt />} />
+              </Routes>
+            </ProtectedRoute>
+          </AverageUSageTime>
+        } />
+
+
       <Route
         path="/admin/dashboard/*"
         element={
@@ -78,6 +112,7 @@ function App() {
         }
       ></Route>
 
+
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/traidr/admin/signup" element={<AdminSignupPage />} />
@@ -85,18 +120,15 @@ function App() {
       <Route path="/otp-verification" element={<EnterOtpPage />} />
 
       <Route path="/success-modal" element={<SuccessModal />} />
+      <Route path="/modal" element={<MultipurposeModal title="ORDER CREATED" message="Your order has been changed" onClickAction={()=>{}}/>}/>
 
       {/*USER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME*/}
-      <Route path="/user/my-wishlist" element={<Wishlist />} />
-      <Route path="/user/my-cart" element={<CartPage />} />
-      <Route path="/user/my-orders" element={<OrderHistoryList />} />
-      <Route path="/user/my-orders/:saleId" element={<OrderSummary />} />
 
-      {/*ORDER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME */}
-      <Route path="/order/new-order" element={<OrderPage />} />
-      <Route path="/order/delivery-details" element={<DeliveryPage />} />
-      <Route path="/order/payment" element={<PaymentPage />} />
-      <Route path="/order/receipt" element={<Receipt />} />
+      
+
+
+      
+      
     </Routes>
   );
 }

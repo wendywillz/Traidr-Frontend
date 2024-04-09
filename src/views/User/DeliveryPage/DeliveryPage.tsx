@@ -31,7 +31,7 @@ const DeliveryPage = () => {
   const confirmCancelModalTitle = `CONFRIM ORDER CANCELLATION`;
   const confirmCancelModalmessage = `Please confirm you want to cancel your order`;
   const toggleConfirmCancelModal = () => {
-    setConfirmCancelModalVisibility(true);
+    setConfirmCancelModalVisibility(!confirmCancelModalVisibility);
   };
 
   //HANDLING THE ORDER CANCELLED MODAL
@@ -99,6 +99,7 @@ const DeliveryPage = () => {
           title={confirmCancelModalTitle}
           message={confirmCancelModalmessage}
           onClickAction={handleCancel}
+          cancelButton={true}
         />
       )}
 
@@ -107,6 +108,7 @@ const DeliveryPage = () => {
           title={orderCancelledModalTitle}
           message={orderCancelledModalMessage}
           onClickAction={orderCancelledmodalButtonAction}
+          cancelButton={true}
         />
       )}
 
@@ -115,6 +117,7 @@ const DeliveryPage = () => {
           title={proceedModalTitle}
           message={proceedModalMessage}
           onClickAction={proceedModalButtonAction}
+          cancelButton={true}
         />
       )}
 

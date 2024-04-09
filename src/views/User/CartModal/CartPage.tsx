@@ -72,7 +72,7 @@ const CartPage = () => {
   const handleOrder = async () => {
     try {
       const res = await axiosInstance.post(`/order/create-order`);
-      if (res) {
+      if (res.data.success || res.data.message) {
         setModalVisibility(true);
       }
     } catch (error) {
@@ -88,6 +88,7 @@ const CartPage = () => {
           title={orderSuccessModalTitle}
           message={orderSucessModalMessage}
           onClickAction={modalButtonAction}
+          cancelButton={true}
         />
       )}
       <Header />
