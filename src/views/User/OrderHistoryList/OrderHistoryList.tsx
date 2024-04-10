@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from "react"
 import { fetchOrderHistoryList } from "../../../api/order"
 import ReactToPrint from "react-to-print";
 import PageLoader from "../../../components/PageLoader/PageLoader"
+import BackButton from "../../../components/BackButton/BackButton"
 
 
  
@@ -36,6 +37,7 @@ const OrderHistoryList = () => {
     <OrderHistoriesWholeContainer>
         {isLoading && <PageLoader/>}
         <Header/>
+        <BackButton linkTo={"/dashboard"}/>
         <OrderHistoriesMainContainer>
         <DownloadButtonsContainer>
           <ReactToPrint

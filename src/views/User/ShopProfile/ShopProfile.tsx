@@ -9,6 +9,7 @@ import {
 import SmallButton from "../../../components/button/smallButton/smallButton";
 import { fetchShopDetail } from "../../../api/shop";
 import { fetchProductsByShopId } from "../../../api/product";
+import BackButton from "../../../components/BackButton/BackButton";
 // import {  fetchProductsByShopId } from "../../api/product";
 
 const ShopProfile = () => {
@@ -53,6 +54,7 @@ const ShopProfile = () => {
   return (
     <>
       <Header />
+      <BackButton linkTo={"/dashboard"}/>
 
       <ShopProfileMainWrapper>
         <div className="shop-profile-product-logo">

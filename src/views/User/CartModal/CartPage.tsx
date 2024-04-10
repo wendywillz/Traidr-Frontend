@@ -18,6 +18,7 @@ import { fetchCartItems } from "../../../api/cart";
 import axiosInstance from "../../../utils/axiosInstance";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import PageLoader from "../../../components/PageLoader/PageLoader";
+import BackButton from "../../../components/BackButton/BackButton";
 
 const CartPage = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -92,6 +93,7 @@ const CartPage = () => {
         />
       )}
       <Header />
+      <BackButton linkTo={"/dashboard"}/>
       <CartContainer>
         <CartHeaderContainer>
           <CartPageTitle>Cart Total</CartPageTitle>
