@@ -34,9 +34,9 @@ const CartPage = () => {
   const modalButtonAction = () => {
     navigate('/order/new-order');
   };
-  // const toggleModalVisibility = ()=>{
-  //   setModalVisibility(!modalVisibility)
-  // }
+  const toggleModalVisibility = ()=>{
+    setModalVisibility(!modalVisibility)
+  }
 
   const [cartProducts, setCartProducts] = useState<CartProductDetail[]>();
   const [cartTotal, setCartTotal] = useState<number | undefined>(0);
@@ -74,7 +74,8 @@ const CartPage = () => {
     try {
       const res = await axiosInstance.post(`/order/create-order`);
       if (res.data.success || res.data.message) {
-        setModalVisibility(true);
+        navigate('/order/new-order');
+        
       }
     } catch (error) {
       return error;
@@ -88,7 +89,7 @@ const CartPage = () => {
         <MultipurposeModal
           title={orderSuccessModalTitle}
           message={orderSucessModalMessage}
-          onClickAction={modalButtonAction}
+          onClickAction={handleOrder}
           cancelButton={true}
         />
       )}
@@ -111,7 +112,7 @@ const CartPage = () => {
             );
           })}
         </div>
-        <OrderButton onClick={handleOrder}>PLACE ORDER</OrderButton>
+        <OrderButton onClick={toggleModalVisibility}>PLACE ORDER</OrderButton>
       </CartContainer>
     </>
   );

@@ -1,6 +1,6 @@
 import axiosInstance from "../utils/axiosInstance";
-export const fetchAllProducts = async (category:string = "", search:string = "", sort:string="", price:string="", maxPrice:string = "", minPrice:string="") => {
-  const res = await axiosInstance.get(`/products/get-all-products?category=${category}&maxPrice=${maxPrice}&minPrice=${minPrice}&sort=${sort}&search=${search}&price=${price}`);
+export const fetchAllProducts = async (category:string = "", search:string = "", sort:string="", price:string="", maxPrice:string = "", minPrice:string="", page:string="", pageSize:string="") => {
+  const res = await axiosInstance.get(`/products/get-all-products?category=${category}&maxPrice=${maxPrice}&minPrice=${minPrice}&sort=${sort}&search=${search}&price=${price}&page=${page}&pageSize=${pageSize}`);
   if (res && res.data.products) {
     return res.data.products;
   } 
@@ -36,3 +36,10 @@ export const fetchReviewByProductId = async (productId : string) => {
   }
 };
 
+
+export const fetchProductCount = async()=>{
+  const res = await axiosInstance.get(`/products/get-product-count`)
+  if(res && res.data.productCount){
+    return res.data.productCount
+  }
+}
