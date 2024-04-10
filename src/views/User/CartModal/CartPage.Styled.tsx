@@ -23,6 +23,7 @@ export const CartContent = styled.div`
   display: flex;
   justify-content: space-evenly;
   padding: 1vh 1vw 1vh 1vw;
+  border-radius:10px;
   border-bottom: 2px solid #f0f0f0;
   gap: 380px;
   margin-bottom: 2.5vh;
@@ -63,6 +64,7 @@ export const CartleftcontainerImg = styled.div`
 
 export const CartleftcontainerText = styled.div`
   display: block;
+  /* margin-bottom: 0.5vh; */
 
   .productHeading {
     /* border: 1px solid green; */
@@ -77,6 +79,7 @@ export const CartleftcontainerText = styled.div`
     font-size: 1vw;
     color: var(--price-green-color);
   }
+  
 
   .sourceShop{
     font-size: 1vw;
@@ -90,7 +93,7 @@ export const CartleftcontainerText = styled.div`
   font-weight: 600;
   color:var(--orange-color);
   padding-right: 2vw;
-  margin-bottom: 3vh;
+  margin-bottom: 2vh;
  }
 
 `;
@@ -123,7 +126,7 @@ export const CartUpdateAndDeleteBtns = styled.div`
   /* border: 1px solid red; */
 display: flex;
 justify-content: space-between;
-margin-top: 12.5vh;
+margin-top: 12vh;
 /* margin-bottom: -3vh; */
 
 .delete-item-button{
