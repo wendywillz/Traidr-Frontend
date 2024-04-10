@@ -11,6 +11,7 @@ export const SortByModalContainer = styled.div`
         position: absolute;
         top: 17.5vh;
         right: 7.5rem;
+        z-index:10;
 
         .sort-by-filter{
             font-size: 1vw;
