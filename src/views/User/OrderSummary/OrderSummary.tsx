@@ -5,19 +5,19 @@ import {
   OrderSummaryOverView,
   OrderSummaryPaymentAndDeliverySection,
   OrderSummaryInformationCard,
-  OrderSummaryNavigateButton,
   DownloadButtonsContainer,
 } from "./OrderSummary.Styled";
 
 import Header from "../../../components/Header/Header";
 import OrderSummaryRow from "./OrderSummaryRow";
+import traiderLogo from "../../../assets/traidr-logo-orange.png"
 
 import { SaleSummary } from "../../../interfaces/saleInterfaces";
 
 //package and tool imports
 import { useState, useEffect, useRef } from "react";
 import { fetchSpecifiedOrderHistory } from "../../../api/order";
-import { Link, useParams } from "react-router-dom";
+import {useParams } from "react-router-dom";
 import html2canvas from "html2canvas";
 import imagesLoaded from 'imagesloaded';
 import ReactToPrint from "react-to-print";
@@ -90,6 +90,7 @@ useEffect(()=>{
           <button onClick={downloadAsJPG}>Download as JPG</button>
         </DownloadButtonsContainer>
         <OrderSummaryMain ref={componentRef}>
+        <div className="traidr-logo-container"><img src={traiderLogo} className="traidr-logo-image"/></div>
           <h2 className="order-summary-page-title">ORDER SUMMARY</h2>
           <OrderSummaryOverView>
             <p className="order-overview-title">Order Overview</p>
@@ -173,14 +174,21 @@ useEffect(()=>{
             </OrderSummaryInformationCard>
           </OrderSummaryPaymentAndDeliverySection>
         </OrderSummaryMain>
-        <OrderSummaryNavigateButton>
-            <Link to="/dashboard" className="order-summary-link">
-              Back to my dashboard
-            </Link>
-          </OrderSummaryNavigateButton>
+      
       </OrderSummaryMainContainer>
     </OrderSummaryWholeContainer>
   );
 };
 
 export default OrderSummary;
+
+
+
+
+//Deleted item
+
+  /* <OrderSummaryNavigateButton>
+            <Link to="/dashboard" className="order-summary-link">
+              Back to my dashboard
+            </Link>
+          </OrderSummaryNavigateButton> */

@@ -26,7 +26,7 @@ const closeModal = ()=>{
     <MultipurposeModalMainWrapper>
       <div className="modal">
         <div className="modal-content">
-          { cancelButton && <p className="modal-cancel-button" onClick={closeModal}>X</p>}
+          { cancelButton && <p className="modal-cancel-button" onClick={closeModal}>x</p>}
           <h4 className="modal-title">{title}</h4>
           <div className="modal-icon">
             <img src={icon} alt="send symobol" />

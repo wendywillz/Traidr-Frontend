@@ -22,11 +22,20 @@ export const OrderSummaryMain = styled.div`
     border-radius: 10px;
     background-color: white;
     
+    .traidr-logo-container{
+        margin-top:-3vh;
+        margin-bottom:-5vh;
+        margin-left: 23vw;
+    }
+    .traidr-logo-image{
+        width: 7vw;
+    }
 
     .order-summary-page-title{
         font-size: 2vw;
         font-weight:700;
         margin-bottom: 2vh;
+        padding-left:1vw;
     }
 
     .order-items-list-title{
@@ -34,6 +43,7 @@ export const OrderSummaryMain = styled.div`
         margin-top: 2vh;
         font-size: 1.3vw;
         font-weight:700;
+        padding-left:1vw;
     }
 
     .order-items{
@@ -47,6 +57,9 @@ export const OrderSummaryMain = styled.div`
 
 export const OrderSummaryOverView = styled.div`
     border:1px solid grey;
+    padding: 1vw;
+
+    
 
     .order-overview-title{
         font-size: 1.3vw;
@@ -146,6 +159,7 @@ export const OrderSummaryRowContainer = styled.div `
     border-bottom: 1px solid grey;
     display: flex;
     flex-direction: row;
+    padding-left: 0.5vw;
     /* justify-content: space-between; */
 
     .order-summary-product-image{
@@ -155,7 +169,7 @@ export const OrderSummaryRowContainer = styled.div `
 `
 
 export const OrderSummaryProductDescription = styled.div `
-    margin-left: 0.5vw;
+    margin-left: 1vw;
     /* border: 1px solid yellow; */
 
     .order-summary-product-name{

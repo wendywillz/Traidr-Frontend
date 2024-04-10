@@ -154,7 +154,7 @@ const DeliveryPage = () => {
                 type="tel"
                 id="recipientPhoneNumberInput"
                 name="recipientPhoneNumber"
-                placeholder="Enter phone number"
+                placeholder="08073061294"
                 value={deliveryDetails.recipientPhoneNumber}
                 onChange={handleChange}
               />
