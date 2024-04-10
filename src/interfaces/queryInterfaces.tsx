@@ -5,4 +5,6 @@ export interface QueryParams{
     price: string;
     maxPrice: string;
     minPrice: string;
+    page: string;
+    pageSize:string;
   }

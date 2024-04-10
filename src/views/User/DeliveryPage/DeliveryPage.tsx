@@ -48,10 +48,9 @@ const DeliveryPage = () => {
   const [proceedModalVisibility, setProceedModalVisibility] = useState(false);
   const proceedModalTitle = `PROCEED TO PAYMENT`;
   const proceedModalMessage = `Proceed to Paystack Payment`;
-  const proceedModalButtonAction = () => {
-    window.location.href = "https://paystack.com/pay/traidr";
-    //navigate("/order/payment");
-  };
+  const toggleProccedModal = ()=>{
+    setProceedModalVisibility(!proceedModalVisibility)
+  }
 
   const [deliveryDetails, setDeliveryDetails] = useState<DeliveryDetailsData>({
     recipientName: "",
@@ -74,7 +73,7 @@ const DeliveryPage = () => {
       );
       if (res) {
         console.log(`Delivery details have been added`);
-        setProceedModalVisibility(true);
+        window.location.href = "https://paystack.com/pay/traidr";
       }
     } catch (error) {
       console.log(`Problem sending delivery details. Reason:`, error);
@@ -117,7 +116,7 @@ const DeliveryPage = () => {
         <MultipurposeModal
           title={proceedModalTitle}
           message={proceedModalMessage}
-          onClickAction={proceedModalButtonAction}
+          onClickAction={handleCheckout}
           cancelButton={true}
         />
       )}
@@ -200,7 +199,7 @@ const DeliveryPage = () => {
               </DeliveryPageButton>
               <DeliveryPageButton
                 className="delivery-form-checkout-button"
-                onClick={handleCheckout}
+                onClick={toggleProccedModal}
               >
                 CHECKOUT
               </DeliveryPageButton>

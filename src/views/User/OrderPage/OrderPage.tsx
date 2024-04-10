@@ -55,9 +55,9 @@ const OrderPage = () => {
   const [proceedModalVisibility, setProceedModalVisibility] = useState(false);
   const proceedModalTitle = `PROCEED TO PAYMENT`;
   const proceedModalMessage = `Click to continue begin checkout`;
-  const proceedModalButtonAction = () => {
-    navigate("/order/delivery-details");
-  };
+  const toggleProceedModal = ()=>{
+    setProceedModalVisibility(!proceedModalVisibility)
+  }
 
   const [orderItems, setOrderItems] = useState<OrderProductDetail[]>();
 
@@ -102,7 +102,7 @@ const OrderPage = () => {
       if (res) {
         // navigate('/delivery-details')
         console.log(`SALE CREATED`);
-        setProceedModalVisibility(true);
+        navigate("/order/delivery-details");
       }
     } catch (error) {
       console.log(`Error creating order. Reason:`, error);
@@ -134,7 +134,7 @@ const OrderPage = () => {
         <MultipurposeModal
           title={proceedModalTitle}
           message={proceedModalMessage}
-          onClickAction={proceedModalButtonAction}
+          onClickAction={createSale}
           cancelButton={true}
         />
       )}
@@ -160,7 +160,7 @@ const OrderPage = () => {
             ₦{orderTotal?.toLocaleString()}
           </div>
         </OrderTotal>
-        <PayNowButton onClick={createSale}>CHECKOUT</PayNowButton>
+        <PayNowButton onClick={toggleProceedModal}>CHECKOUT</PayNowButton>
         <CancelOrderButton onClick={toggleConfirmationModal}>
           CANCEL ORDER
         </CancelOrderButton>
