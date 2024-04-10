@@ -108,16 +108,20 @@ animation: modal-animation 0.3s ease-in-out;
 }
 
 .modal-cancel-button{
-  color: var(--orange-color);
-  border: 1px solid var(--orange-color);
-  margin-left: 30vw;
-  font-size: 0.9vw;
+  color: grey;
+  /* border: 1px solid var(--orange-color); */
+  /* margin-top:-3.7vh; */
+  /* margin-bottom:6vh; */
+  margin-left: 33vw;
+  font-size: 1.3vw;
   font-weight: 500;
-  padding: 1vh 1vw;
+  /* padding: 1vh 1vw; */
   border-radius: 60px;
+  cursor: pointer;
   &:hover{
-    background-color:var(--orange-color);
-    color: white;
+    /* background-color:var(--orange-color);
+    color: white; */
+    font-size: 1.4vw;
   }
 }
 

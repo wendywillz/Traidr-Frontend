@@ -13,7 +13,7 @@ export const DeliveryPageWholeContainer = styled.div`
 
 export const DeliveryPageMainContainer = styled.div`
     /* border: 1px solid red; */
-    padding: 1vh 24vw;
+    padding: 0vh 24vw;
     
 
 `
@@ -27,6 +27,9 @@ export const DeliveryPageFormContainer = styled.div`
     background-color: white;
     /* padding: 0vh 1vw; */
     padding: 2vh 4.8vw 4vh 4.8vw;
+    margin-bottom: 2vh;
+    margin-top: -3vh;
+    margin-left: 2vw;
 
     .delivery-form-title{
         font-size: 1.5vw;

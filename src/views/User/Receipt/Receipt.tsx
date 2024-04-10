@@ -18,6 +18,7 @@ import ReceiptRow from "./ReceiptRow";
 import Header from "../../../components/Header/Header";
 import PageLoader from "../../../components/PageLoader/PageLoader";
 import { SaleSummary } from "../../../interfaces/saleInterfaces";
+import traiderLogo from "../../../assets/traidr-logo-orange.png"
 
 //package and tool imports
 import { useState, useEffect, useRef } from "react";
@@ -91,6 +92,8 @@ useEffect(()=>{
         </DownloadButtonsContainer>
         <OrderSummaryMain ref={componentRef}>
           <Text>
+              <div className="traidr-logo-container"><img src={traiderLogo} className="traidr-logo-image"/></div>
+              
             <h2 className="order-summary-page-title">RECEIPT</h2>
           </Text>
           <OrderSummaryOverView>

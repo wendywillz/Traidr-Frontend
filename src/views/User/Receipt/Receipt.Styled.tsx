@@ -22,6 +22,14 @@ export const OrderSummaryMain = styled.div`
     border-radius: 10px;
     background-color: white;
     
+    .traidr-logo-container{
+        margin-top:-3vh;
+        margin-bottom:-5vh;
+        margin-left: 23vw;
+    }
+    .traidr-logo-image{
+        width: 7vw;
+    }
 
     .order-summary-page-title{
         font-size: 2vw;
@@ -47,6 +55,8 @@ export const OrderSummaryMain = styled.div`
 
 export const OrderSummaryOverView = styled.div`
     border:1px solid grey;
+
+    
 
     .order-overview-title{
         font-size: 1.3vw;
