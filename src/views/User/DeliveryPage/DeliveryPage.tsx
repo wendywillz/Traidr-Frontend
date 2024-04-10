@@ -21,6 +21,7 @@ import DeliveryDetailsData from "../../../interfaces/deliveryInterfaces";
 import { useState, ChangeEvent } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import BackButton from "../../../components/BackButton/BackButton";
 
 const DeliveryPage = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -122,6 +123,7 @@ const DeliveryPage = () => {
       )}
 
       <Header />
+      <BackButton linkTo={"/order/new-order"}/>
       <DeliveryPageMainContainer>
         <DeliveryPageFormContainer>
           <p className="delivery-form-title">ORDER DELIVERY DETAILS</p>

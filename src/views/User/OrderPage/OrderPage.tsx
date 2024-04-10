@@ -22,6 +22,7 @@ import { useState, useEffect } from "react";
 import { fetchOrderItems } from "../../../api/order";
 import axiosInstance from "../../../utils/axiosInstance";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import BackButton from "../../../components/BackButton/BackButton";
 
 //import axiosInstance from '../../../utils/axiosInstance'
 
@@ -139,6 +140,7 @@ const OrderPage = () => {
       )}
 
       <Header />
+      <BackButton linkTo={"/user/my-cart"}/>
       <OrderPageMain>
         <h2 className="order-page-Title">Your Order</h2>
         <div>

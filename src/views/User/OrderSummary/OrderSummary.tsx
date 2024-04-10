@@ -22,6 +22,7 @@ import html2canvas from "html2canvas";
 import imagesLoaded from 'imagesloaded';
 import ReactToPrint from "react-to-print";
 import PageLoader from "../../../components/PageLoader/PageLoader"
+import BackButton from "../../../components/BackButton/BackButton";
 
 const OrderSummary = () => {
   const { saleId } = useParams();
@@ -79,6 +80,7 @@ useEffect(()=>{
     <OrderSummaryWholeContainer>
       {isLoading && <PageLoader/>}
       <Header />
+      <BackButton linkTo={"/user/my-orders"}/>
       <OrderSummaryMainContainer>
       <DownloadButtonsContainer>
           <ReactToPrint

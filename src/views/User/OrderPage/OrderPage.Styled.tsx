@@ -77,7 +77,7 @@ export const OrderTotal = styled.div`
     .order-total-amount{
         font-size: 1.5vw;
         font-weight: 800;
-        color: var(--price-green-color);
+        color: grey;
     }
 
 `

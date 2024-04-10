@@ -33,6 +33,7 @@ interface UserDetails {
 }
 
 import userData from "../../../../interfaces/userInterface";
+import BackButton from "../../../../components/BackButton/BackButton";
 
 export const ProfileSettings = () => {
   //fetching the user
@@ -124,8 +125,8 @@ export const ProfileSettings = () => {
 
   return (
     <ProfileSettingsPageContainer>
-      <Header />
-
+      <Header/>
+      <BackButton linkTo={"/dashboard"}/>
       <ProfileFormsContainer>
         <ProfileNavigation />
         <ChangePictureForm>

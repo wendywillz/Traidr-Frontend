@@ -9,6 +9,7 @@ import { fetchWishListItems } from "../../../api/wishlist";
 import { useEffect, useState } from "react";
 import { WishListProductDetail } from "../../../interfaces/wishListInterface";
 import axiosInstance from "../../../utils/axiosInstance"; 
+import BackButton from "../../../components/BackButton/BackButton";
 
 
 export default function Wishlist() {
@@ -43,7 +44,8 @@ useEffect(()=>{
 
   return (
     <>
-      <Header />
+      <Header/>
+      <BackButton linkTo={"/dashboard"}/>
       <WishlistContainer>
         <WishlistText>
             Wishlist
