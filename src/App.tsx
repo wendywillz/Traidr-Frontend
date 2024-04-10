@@ -29,7 +29,6 @@ import Receipt from "./views/User/Receipt/Receipt";
 import OrderHistoryList from "./views/User/OrderHistoryList/OrderHistoryList";
 import OrderSummary from "./views/User/OrderSummary/OrderSummary";
 import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineChart";
-import BackButton from "./components/BackButton/BackButton";
 
 function App() {
   return (
@@ -120,7 +119,7 @@ function App() {
       <Route path="/otp-verification" element={<EnterOtpPage />} />
 
       <Route path="/success-modal" element={<SuccessModal />} />
-      <Route path="/btn" element={<BackButton linkTo={"/dashboard"}/>}/>
+    
       
 
       {/*USER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME*/}

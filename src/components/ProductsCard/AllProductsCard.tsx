@@ -46,7 +46,7 @@ function AllProductsCard({ product }: ProductProps) {
         </div>
         <p className="each-product-title">{product.productTitle}</p>
         <p className="each-product-description">
-          {product.productDescription.substring(0, 25)}
+          {product.productDescription.substring(0, 37)}
           {product.productDescription.length >= 25 ? "..." : ""}
         </p>
        
