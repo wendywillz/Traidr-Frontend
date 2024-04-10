@@ -10,7 +10,7 @@ export const AddToCartComponentContainer = styled.div`
 `
 
 export const ButtonWholeContainer = styled.div`
-.altered{
+.alternate-add-to-cart-button{
   color:var(--orange-color);
   background-color: white;
   border: 1px solid var(--orange-color);
