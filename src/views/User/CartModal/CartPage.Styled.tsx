@@ -19,7 +19,7 @@ export const CartHeaderContainer = styled.div`
 
 export const CartContent = styled.div`
   /* border: 1px solid blue; */
-  box-shadow:  -5px 0px 10px 4px rgba(0, 0, 0, 0.1);
+  box-shadow:  0px 0px 17px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-evenly;
   padding: 1vh 1vw 1vh 1vw;

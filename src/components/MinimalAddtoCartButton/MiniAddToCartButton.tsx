@@ -23,7 +23,7 @@ const MiniAddToCartButton = ({productId}: ButtonProps) => {
   return (
     <MiniAddToCartContainer>
     {!quantityModalVisibility && (
-        <BsBagPlus size={27} onClick={toggleQuantityModal} className="add-to-cart-icon"/>
+        <BsBagPlus size={22} onClick={toggleQuantityModal} className="add-to-cart-icon"/>
     ) }
 
     <div className="quantity-modal">{quantityModalVisibility && <AddQuantityModal productId={productId} toggleVisibility={toggleQuantityModal}/>}</div>

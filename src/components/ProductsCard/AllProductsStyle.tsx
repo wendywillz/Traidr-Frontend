@@ -18,8 +18,8 @@ export const AllProductsWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
-  min-height: 380px;
-  max-height: 380px;
+  /* min-height: 300px;
+  max-height: 300px; */
   margin: 1rem 0;
   cursor: pointer;
   max-width: 450px;
@@ -35,7 +35,7 @@ export const AllProductsWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f2f2f2;
+    background-color: #f2f2f28c;;
     border-radius: 5px;
     overflow: hidden;
     // padding: 5rem;
@@ -53,14 +53,18 @@ export const AllProductsWrapper = styled.div`
 
   .each-product-title {
     font-weight: 600;
+    font-size: 1.3vw;
+    margin-top: 0.5vh;
   }
   .each-product-description {
-    margin-top: 0.5rem;
+    font-size:1vw;
+    margin-top: 0vh;
     color: var(--normal-text-color);
   }
   .each-product-price {
     color: var(--price-green-color);
     font-weight: 600;
+    font-size: 1.2vw;
   }
 `;
 

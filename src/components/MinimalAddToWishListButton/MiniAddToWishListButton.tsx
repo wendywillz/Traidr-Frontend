@@ -56,11 +56,11 @@ const MiniAddToWishListButton = ({productId, isInWishList, onClickAction}: Butto
   return (
     <>
    {!isInWishList && <MiniAddToWishListContainer onClick={handleAdd}>
-        <BsHeart size={22} className="add-to-wishlist-icon"/>
+        <BsHeart size={20} className="add-to-wishlist-icon"/>
     </MiniAddToWishListContainer>}
 
     {isInWishList && <MiniAddToWishListContainer onClick ={handleDelete}>
-      <BsHeartFill size={22} color="var(--orange-color)" className="add-to-wishlist-icon"/>
+      <BsHeartFill size={20} color="var(--orange-color)" className="add-to-wishlist-icon"/>
     </MiniAddToWishListContainer>}
     </>
   )
