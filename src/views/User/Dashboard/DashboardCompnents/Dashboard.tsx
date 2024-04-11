@@ -28,11 +28,12 @@ const Dashboard = () => {
     category: "",
     search: "",
     sort: "",
+    color:"",
     price: "",
     maxPrice: "",
     minPrice: "",
     page:"1",
-    pageSize:"9"
+    pageSize:"12"
   });
    const [totalPages, setTotalPages] = useState<number>(1)
   // const productsPerPage = 9;
@@ -44,6 +45,7 @@ const Dashboard = () => {
       queryParams.category,
       queryParams.search,
       queryParams.sort,
+      queryParams.color,
       queryParams.price,
       queryParams.maxPrice,
       queryParams.minPrice,
@@ -72,7 +74,21 @@ const Dashboard = () => {
     setQueryParams({ ...queryParams, [event.target.name]: selectedCategory });
   };
 
-  
+  const handleReset = (event:any)=>{
+    event.preventDefault()
+    setQueryParams({
+      category: "",
+      search: "",
+      sort: "",
+      color:"",
+      price: "",
+      maxPrice: "",
+      minPrice: "",
+      page:"1",
+      pageSize:"12"
+    })
+  }
+
 
   const nextPage = ()=>{
     setQueryParams({...queryParams, page:(+queryParams.page + 1).toString()})
@@ -88,7 +104,7 @@ const Dashboard = () => {
     <>
       <Header />
       <DashboardContainer>
-        <SideBar handleFilterChange={handleFilterChange} />
+        <SideBar handleFilterChange={handleFilterChange} handleReset={handleReset} />
         <DashboardMain>
           <SearchBar handleFilterChange={handleFilterChange} />
 
