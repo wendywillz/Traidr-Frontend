@@ -82,8 +82,18 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
               />
             </div>
           ) : (
-            <div className="shop-profile-header-icon">
-              <FaUser />
+            <div
+              style={{
+                borderRadius: "50%",
+                overflow: "hidden",
+                height: "3rem",
+                width: "3rem",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <FaUser style={{ fontSize: "2rem" }} />
             </div>
           )}
           {/* <img src={userIcon} className="user-profile-modal-user-image" /> */}

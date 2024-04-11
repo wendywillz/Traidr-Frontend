@@ -15,9 +15,9 @@ import { GenderPieChart } from "./PieChart/GenderPieChart/GenderPieChart";
 export const UserAnalytics = () => {
   return (
     <AdminPageContainer>
+      <AdminHeader />
       <AdminSideBar />
       <AdminPageMain>
-        <AdminHeader />
         <AdminPageContent>
           <AdminPageTitle>User Analytics</AdminPageTitle>
           {/* <TestLineChart/> */}

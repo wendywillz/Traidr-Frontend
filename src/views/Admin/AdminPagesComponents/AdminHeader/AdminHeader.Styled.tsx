@@ -8,20 +8,29 @@ const HeaderStyle = styled.header`
   z-index: 100;
   top: 0;
   align-items: center;
+  width: 100%;
+  oveflow-x: hidden !important;
   padding: 0rem 3rem;
   height: 4rem;
-  margin-bottom: 2rem;
+  z-index: 1000;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
   .header-inner {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     flex-basis: 100%;
     width: 100%;
     @media (min-width: 1500px) {
       max-width: 1500px;
     }
+  }
+  .header-logo-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-basis: 20%;
+    width: 20%;
   }
   .search-wrapper {
     flex-basis: 50%;

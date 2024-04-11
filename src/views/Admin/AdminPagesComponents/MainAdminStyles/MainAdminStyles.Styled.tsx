@@ -4,16 +4,20 @@ export const AdminPageContainer = styled.div`
   width: 100vw;
   justify-content: space-between;
   display: flex;
+  flex-direction: column;
+  oveflow-x: hidden !important;
 `;
 
 export const AdminPageMain = styled.div`
   background-color: #f9fafb;
   width: 80%;
   margin-left: 20%;
+  oveflow-x: hidden !important;
 `;
 export const AdminPageTitle = styled.h2`
   background: none;
   color: black;
+  margin-top: 2rem;
   font-size: 2.5vw;
   font-weight: 600;
 `;

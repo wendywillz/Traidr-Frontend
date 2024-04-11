@@ -6,6 +6,7 @@ export const AllDataCards = styled.div`
   gap: 2rem;
   margin-top: 2rem;
   padding: 0;
+  overflow-x: hidden;
 `;
 
 export const UserGreeting = styled.p`

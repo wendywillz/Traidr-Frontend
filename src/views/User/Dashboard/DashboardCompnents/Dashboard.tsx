@@ -3,7 +3,7 @@ import {
   DashboardContainer,
   DashBoardTitle,
   DasboardPageButtonContainer,
-  DashboardChangePageButton
+  DashboardChangePageButton,
 } from "../DashboardStyles/Dashboard.styled";
 import SearchBar from "./SearchBar";
 import SideBar from "./SideBar";
@@ -31,13 +31,12 @@ const Dashboard = () => {
     price: "",
     maxPrice: "",
     minPrice: "",
-    page:"1",
-    pageSize:"9"
+    page: "1",
+    pageSize: "9",
   });
-   const [totalPages, setTotalPages] = useState<number>(1)
+  const [totalPages, setTotalPages] = useState<number>(1);
   // const productsPerPage = 9;
-  
-  
+
   //{category, search, sort, price, maxPrice, minPrice}
   useEffect(() => {
     fetchAllProducts(
@@ -57,32 +56,34 @@ const Dashboard = () => {
       }
     });
 
-    fetchProductCount().then((res)=>{
-      if(res){
-        setTotalPages(Math.ceil(res.totalProductCount/9))
+    fetchProductCount().then((res) => {
+      if (res) {
+        setTotalPages(Math.ceil(res.totalProductCount / 9));
       }
-    })
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryParams]);
 
- 
   //CATEGORY FILTERING
   const handleFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedCategory = event.target.value as string;
     setQueryParams({ ...queryParams, [event.target.name]: selectedCategory });
   };
 
-  
-
-  const nextPage = ()=>{
-    setQueryParams({...queryParams, page:(+queryParams.page + 1).toString()})
-  }
-  const previousPage = ()=>{
-    if(+queryParams.page > 1){
-    setQueryParams({...queryParams, page:(+queryParams.page - 1).toString()})}
-  }
-
-
+  const nextPage = () => {
+    setQueryParams({
+      ...queryParams,
+      page: (+queryParams.page + 1).toString(),
+    });
+  };
+  const previousPage = () => {
+    if (+queryParams.page > 1) {
+      setQueryParams({
+        ...queryParams,
+        page: (+queryParams.page - 1).toString(),
+      });
+    }
+  };
 
   return (
     <>
@@ -102,24 +103,32 @@ const Dashboard = () => {
               })}
           </AllProductsContainer>
           <DasboardPageButtonContainer>
-            
-            
-        <DashboardChangePageButton onClick={previousPage} disabled={+queryParams.page===1} className="prev-button">
+            <DashboardChangePageButton
+              onClick={previousPage}
+              disabled={+queryParams.page === 1}
+              className="prev-button"
+            >
+              <BsChevronLeft
+                size={20}
+                className="dashboard-page-previous-button"
+              />
+            </DashboardChangePageButton>
 
-        <BsChevronLeft size={20}className="dashboard-page-previous-button"/>
+            <span className="dashboard-current-page-text">
+              Page {+queryParams.page} of {totalPages}
+            </span>
 
-        </DashboardChangePageButton>
-
-
-        <span className="dashboard-current-page-text">Page {+queryParams.page} of {totalPages}</span>
-
-
-        <DashboardChangePageButton onClick={nextPage} disabled={+queryParams.page===totalPages} className="next-button">
-
-        <BsChevronRight size={20}  className="dashboard-page-next-button" />
-
-        </DashboardChangePageButton>
-      </DasboardPageButtonContainer>
+            <DashboardChangePageButton
+              onClick={nextPage}
+              disabled={+queryParams.page === totalPages}
+              className="next-button"
+            >
+              <BsChevronRight
+                size={20}
+                className="dashboard-page-next-button"
+              />
+            </DashboardChangePageButton>
+          </DasboardPageButtonContainer>
         </DashboardMain>
       </DashboardContainer>
     </>
@@ -127,5 +136,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-

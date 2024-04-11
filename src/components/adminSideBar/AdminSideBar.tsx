@@ -5,7 +5,7 @@ import AdminDashboardStyle from "./AdminSideBarStyle";
 import tenantIcn from "../../assets/Admin-side-bar/Tenant.png";
 import useranalyticsIcon from "../../assets/Admin-side-bar/user.png";
 import productIcon from "../../assets/Admin-side-bar/product.png";
-import settingsIcon from "../../assets/Admin-side-bar/settings.png";
+// import settingsIcon from "../../assets/Admin-side-bar/settings.png";
 import logoutIcon from "../../assets/Admin-side-bar/logout.png";
 // import { useState } from "react";
 
@@ -61,7 +61,7 @@ function AdminSideBar() {
           <span>Product Metrics</span>
         </NavLink>
 
-        <NavLink
+        {/* <NavLink
           to="/admin/dashboard"
           className={`admin-side-bar-each-content ${
             location.pathname.includes("/settings") ? "active-link" : ""
@@ -69,7 +69,7 @@ function AdminSideBar() {
         >
           <img src={settingsIcon} alt="" />
           <span>Settings</span>
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="/admin/dashboard"
           className="admin-side-bar-each-content"

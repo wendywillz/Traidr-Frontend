@@ -9,7 +9,7 @@ import {
 import { TenantsDBContainer } from "./TenantsDB.styled";
 
 //COMPONENT IMPORTS
-import AdminHeader  from "../../AdminPagesComponents/AdminHeader/AdminHeader";
+import AdminHeader from "../../AdminPagesComponents/AdminHeader/AdminHeader";
 import AdminSideBar from "../../../../components/adminSideBar/AdminSideBar";
 
 //PACKAGE IMPORTS
@@ -124,10 +124,9 @@ function TenantsDataBase() {
 
   return (
     <AdminPageContainer>
+      <AdminHeader />
       <AdminSideBar />
       <AdminPageMain>
-        <AdminHeader />
-
         <AdminPageContent>
           <AdminPageTitle>Tenants Database</AdminPageTitle>
           <TenantsDBContainer>

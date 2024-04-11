@@ -13,9 +13,9 @@ import MonthlyActiveUser from "./MonthlyActiveUser/MonthlyActiveUserChart";
 function ProductMetrics() {
   return (
     <AdminPageContainer>
+      <AdminHeader />
       <AdminSideBar />
       <AdminPageMain>
-        <AdminHeader />
         <AdminPageContent>
           <AdminPageTitle>Product Metrics</AdminPageTitle>
           <AdminPageContentChartWrapper>

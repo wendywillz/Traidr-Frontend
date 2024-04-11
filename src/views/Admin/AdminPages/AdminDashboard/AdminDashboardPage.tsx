@@ -14,7 +14,7 @@ import DataCard from "./AdminDashboardComponents/DataCard/DataCard";
 import MonthlyTrendLineChart from "../MonthlyTrend/LineChart";
 import AdminSideBar from "../../../../components/adminSideBar/AdminSideBar";
 //PACKAGE IMPORTS
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchAdminDataSummary } from "../../../../api/admin";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../app/store";
@@ -26,27 +26,26 @@ interface AdminDataSummary {
 }
 
 const AdminDashboardPage = () => {
-  
   const [adminDataSummary, setAdminDataSummary] = useState<AdminDataSummary>({
     totalOrders: 0,
     totalTenants: 0,
     totalRevenue: 0,
   });
 
-useEffect(()=>{
-  fetchAdminDataSummary().then((res)=>{
-    if (res){
-      setAdminDataSummary(res)
-    }
-  })
-}, [])
+  useEffect(() => {
+    fetchAdminDataSummary().then((res) => {
+      if (res) {
+        setAdminDataSummary(res);
+      }
+    });
+  }, []);
 
   const userData = useSelector((state: RootState) => state.user);
   return (
     <AdminPageContainer>
+      <AdminHeader />
       <AdminSideBar />
       <AdminPageMain>
-        <AdminHeader />
         <AdminDashboardPageStyle>
           <AdminPageTitle>Dashboard</AdminPageTitle>
           <UserGreeting>Welcome {userData.name}</UserGreeting>
