@@ -20,6 +20,19 @@ interface Props {
 const SideBar = ({ handleFilterChange, handleReset }: Props) => {
   const [categories, setCategories] = useState([]);
   const [colors, setColors] = useState([])
+  const [dealsVisibility, setDealsVisibility] = useState<boolean>(true)
+  const [colorsVisibility, setColorsVisibility]= useState<boolean>(true)
+  const [priceVisibility, setPriceVisibility]= useState<boolean>(true)
+const toggleDealsVisibility = ()=>{
+  setDealsVisibility(!dealsVisibility)
+}
+const toggleColorsVisibility = ()=>{
+  setColorsVisibility(!colorsVisibility)
+}
+const togglePriceVisibility = ()=>{
+  setPriceVisibility(!priceVisibility)
+}
+
 
   // fetching shop categories
   useEffect(() => {
@@ -42,11 +55,11 @@ const SideBar = ({ handleFilterChange, handleReset }: Props) => {
         <SideBarCategoryTitle>
           <h2 className="sidebar-category-filter-title">Deals</h2>
           <div className="sidebar-filter-arrow">
-            <img src={arrow} />
+            <img src={arrow} onClick={toggleDealsVisibility}/>
           </div>
         </SideBarCategoryTitle>
         <form>
-          {categories.map((category: string, index: number) => {
+          {dealsVisibility && categories.map((category: string, index: number) => {
             return (
               <fieldset key={index}>
                 <input
@@ -58,7 +71,7 @@ const SideBar = ({ handleFilterChange, handleReset }: Props) => {
                   onChange={handleFilterChange}
                 />
                 <label className="sidebar-filter-selection-label">
-                  {category}
+                {category===""? `None`: category}
                 </label>
               </fieldset>
             );
@@ -74,10 +87,10 @@ const SideBar = ({ handleFilterChange, handleReset }: Props) => {
           <SideBarCategoryTitle>
             <h2 className="sidebar-category-filter-title">Price</h2>
             <div className="sidebar-filter-arrow">
-              <img src={arrow} />
+              <img src={arrow} onClick={togglePriceVisibility} />
             </div>
           </SideBarCategoryTitle>
-
+          {priceVisibility &&
           <fieldset>
             <input
               className="sidebar-price-range"
@@ -95,7 +108,7 @@ const SideBar = ({ handleFilterChange, handleReset }: Props) => {
               placeholder="max"
               onChange={handleFilterChange}
             />
-          </fieldset>
+          </fieldset>}
           {/* <div className="sidebar-filter-selection-show-more-continer">
             <p className="sidebar-filter-selection-show-more-text">Show more</p>
             <img
@@ -107,11 +120,11 @@ const SideBar = ({ handleFilterChange, handleReset }: Props) => {
           <SideBarCategoryTitle>
             <h2 className="sidebar-category-filter-title">Colour</h2>
             <div className="sidebar-filter-arrow">
-              <img src={arrow} />
+              <img src={arrow} onClick={toggleColorsVisibility}/>
             </div>
           </SideBarCategoryTitle>
 
-          {colors.map((color: string, index: number) => {
+          {colorsVisibility && colors.map((color: string, index: number) => {
             return (
               <fieldset key={index}>
                 <input
@@ -123,7 +136,7 @@ const SideBar = ({ handleFilterChange, handleReset }: Props) => {
                   onChange={handleFilterChange}
                 />
                 <label className="sidebar-filter-selection-label">
-                  {color}
+                  {color===""? `None`: color}
                 </label>
               </fieldset>
             );
