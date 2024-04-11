@@ -96,3 +96,18 @@ export const SideBarCategory = styled.div`
   }
 
 `;
+
+export const SidebarResetButton = styled.div`
+  width: 7vw;
+  height: 5vh;
+  font-size: 1vw;
+  font-weight: 500;
+  color: var(--orange-color);
+  background-color: white;
+  border: 1px solid var(--orange-color);
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 1vh;
+  margin-top: 2vh;
+  margin-left: 4vw;
+`

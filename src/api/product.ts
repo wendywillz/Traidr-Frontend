@@ -1,6 +1,6 @@
 import axiosInstance from "../utils/axiosInstance";
-export const fetchAllProducts = async (category:string = "", search:string = "", sort:string="", price:string="", maxPrice:string = "", minPrice:string="", page:string="", pageSize:string="") => {
-  const res = await axiosInstance.get(`/products/get-all-products?category=${category}&maxPrice=${maxPrice}&minPrice=${minPrice}&sort=${sort}&search=${search}&price=${price}&page=${page}&pageSize=${pageSize}`);
+export const fetchAllProducts = async (category:string = "", search:string = "", sort:string="", color:string="", price:string="", maxPrice:string = "", minPrice:string="", page:string="", pageSize:string="") => {
+  const res = await axiosInstance.get(`/products/get-all-products?category=${category}&maxPrice=${maxPrice}&minPrice=${minPrice}&sort=${sort}&color=${color}&search=${search}&price=${price}&page=${page}&pageSize=${pageSize}`);
   if (res && res.data.products) {
     return res.data.products;
   } 
@@ -28,6 +28,13 @@ export const fetchProductsCategories = async () => {
     return res.data.productCategories;
   }
 };
+
+export const fetchProductsColors = async()=>{
+  const res = await axiosInstance.get(`/products/get-products-colors`);
+  if (res && res.data.productColors) {
+    return res.data.productColors;
+  }
+}
 
 export const fetchReviewByProductId = async (productId : string) => {
   const res = await axiosInstance.get(`/reviews/get-product-review/${productId}`);
