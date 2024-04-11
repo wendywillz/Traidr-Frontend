@@ -4,25 +4,33 @@ import {
   SideBarMinorTitle,
   SideBarCategory,
   SideBarCategoryTitle,
+  SidebarResetButton
 } from "../DashboardStyles/SideBar.styled";
 import arrow from "../../../../assets/dashboard-assets/inverted_caret.png";
 // import orangeArrow from "../../../../assets/dashboard-assets/orange_inverted_caret.png";
-import { fetchProductsCategories } from "../../../../api/product";
+import { fetchProductsCategories, fetchProductsColors } from "../../../../api/product";
 import { ChangeEvent, useEffect, useState } from "react";
 
 //Prop declaration:
 interface Props {
   handleFilterChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleReset: (event:any)=>void;
 }
 
-const SideBar = ({ handleFilterChange }: Props) => {
+const SideBar = ({ handleFilterChange, handleReset }: Props) => {
   const [categories, setCategories] = useState([]);
+  const [colors, setColors] = useState([])
 
   // fetching shop categories
   useEffect(() => {
     fetchProductsCategories().then((res) => {
       setCategories(res);
     });
+    
+    fetchProductsColors().then((res)=>{
+      setColors(res)
+    })
+
   }, []);
   return (
     <SideBarContainer>
@@ -103,51 +111,23 @@ const SideBar = ({ handleFilterChange }: Props) => {
             </div>
           </SideBarCategoryTitle>
 
-          <fieldset>
-            <input
-              className="sidebar-filter-selection"
-              type="radio"
-              value={"green"}
-              name="colour"
-            />
-            <label className="sidebar-filter-selection-label">Green</label>
-          </fieldset>
-          <fieldset>
-            <input
-              className="sidebar-filter-selection"
-              type="radio"
-              value={"blue"}
-              name="colour"
-            />
-            <label className="sidebar-filter-selection-label">Blue</label>
-          </fieldset>
-          <fieldset>
-            <input
-              className="sidebar-filter-selection"
-              type="radio"
-              value={"red"}
-              name="colour"
-            />
-            <label className="sidebar-filter-selection-label">Red</label>
-          </fieldset>
-          <fieldset>
-            <input
-              className="sidebar-filter-selection"
-              type="radio"
-              value={"orange"}
-              name="colour"
-            />
-            <label className="sidebar-filter-selection-label">Orange</label>
-          </fieldset>
-          <fieldset>
-            <input
-              className="sidebar-filter-selection"
-              type="radio"
-              value={"yellow"}
-              name="colour"
-            />
-            <label className="sidebar-filter-selection-label">Yellow</label>
-          </fieldset>
+          {colors.map((color: string, index: number) => {
+            return (
+              <fieldset key={index}>
+                <input
+                  className="sidebar-filter-selection"
+                  type="radio"
+                  name={`color`}
+                  id={index.toString()}
+                  value={color}
+                  onChange={handleFilterChange}
+                />
+                <label className="sidebar-filter-selection-label">
+                  {color}
+                </label>
+              </fieldset>
+            );
+          })}
           {/* <div className="sidebar-filter-selection-show-more-continer">
             <p className="sidebar-filter-selection-show-more-text">Show more</p>
             <img
@@ -155,6 +135,7 @@ const SideBar = ({ handleFilterChange }: Props) => {
               src={orangeArrow}
             />
           </div> */}
+          <SidebarResetButton onClick={handleReset}>RESET</SidebarResetButton>
         </form>
       </SideBarCategory>
     </SideBarContainer>

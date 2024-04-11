@@ -28,6 +28,7 @@ const Dashboard = () => {
     category: "",
     search: "",
     sort: "",
+    color:"",
     price: "",
     maxPrice: "",
     minPrice: "",
@@ -43,6 +44,7 @@ const Dashboard = () => {
       queryParams.category,
       queryParams.search,
       queryParams.sort,
+      queryParams.color,
       queryParams.price,
       queryParams.maxPrice,
       queryParams.minPrice,
@@ -84,12 +86,28 @@ const Dashboard = () => {
       });
     }
   };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleReset = (event:any)=>{
+    event.preventDefault()
+    setQueryParams({
+      category: "",
+      search: "",
+      sort: "",
+      color:"",
+      price: "",
+      maxPrice: "",
+      minPrice: "",
+      page:"1",
+      pageSize:"12"
+    })
+  }
+
 
   return (
     <>
       <Header />
       <DashboardContainer>
-        <SideBar handleFilterChange={handleFilterChange} />
+        <SideBar handleFilterChange={handleFilterChange} handleReset={handleReset} />
         <DashboardMain>
           <SearchBar handleFilterChange={handleFilterChange} />
 
