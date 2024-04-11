@@ -39,3 +39,10 @@ export const fetchAdminDataSummary = async()=>{
     return res.data.adminDataSummary
   }
 }
+
+export const fetchTenantDatabase = async()=>{
+  const res = await axiosInstance.get(`/admin/get-tenant-db`)
+  if (res && res.data){
+    return res.data.tenantsShopDetails
+  }
+}

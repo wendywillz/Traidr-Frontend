@@ -6,121 +6,52 @@ import {
   AdminPageMain,
   AdminPageContent,
 } from "../../AdminPagesComponents/MainAdminStyles/MainAdminStyles.Styled";
-import { TenantsDBContainer } from "./TenantsDB.styled";
+import { TenantsDBContainer, TenantsDBTable, TenantsDBHeaderRow, TenantsDBDataRow, TenantsDBHeaderCell, TenantsDBDataCell  } from "./TenantsDB.styled";
 
 //COMPONENT IMPORTS
 import AdminHeader  from "../../AdminPagesComponents/AdminHeader/AdminHeader";
 import AdminSideBar from "../../../../components/adminSideBar/AdminSideBar";
 
 //PACKAGE IMPORTS
-import { ChangeEvent, useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchTenantDatabase } from "../../../../api/admin";
 
 interface TenantsDataBase {
-  userID: string;
-  username: string;
-  age: string;
-  gender: string;
-  dateCreated: string;
-  shopName: string;
-  [key: string]: string; // Add index signature
+  userId: string;
+  name: string;
+  gender:string;
+  age: number;
+  shopName:string;
+  shopCreatedAt:string;
 }
+
 //INTERFACE DECLARATIONS
-interface TenantsDataBase {
-  userID: string;
-  username: string;
-  age: string;
-  gender: string;
-  dateCreated: string;
-  shopName: string;
-  [key: string]: string; // Add index signature
-}
+
 function TenantsDataBase() {
-  const [TenantsDataBase, setTenantsDataBase] = useState([
-    {
-      userID: "",
-      username: "",
-      age: "",
-      gender: "",
-      dateCreated: "",
-      shopName: "",
-    },
-    {
-      userID: "",
-      username: "",
-      age: "",
-      gender: "",
-      dateCreated: "",
-      shopName: "",
-    },
-    {
-      userID: "",
-      username: "",
-      age: "",
-      gender: "",
-      dateCreated: "",
-      shopName: "",
-    },
-    {
-      userID: "",
-      username: "",
-      age: "",
-      gender: "",
-      dateCreated: "",
-      shopName: "",
-    },
-    {
-      userID: "",
-      username: "",
-      age: "",
-      gender: "",
-      dateCreated: "",
-      shopName: "",
-    },
-    {
-      userID: "",
-      username: "",
-      age: "",
-      gender: "",
-      dateCreated: "",
-      shopName: "",
-    },
-    {
-      userID: "",
-      username: "",
-      age: "",
-      gender: "",
-      dateCreated: "",
-      shopName: "",
-    },
-    {
-      userID: "",
-      username: "",
-      age: "",
-      gender: "",
-      dateCreated: "",
-      shopName: "",
-    },
-    {
-      userID: "",
-      username: "",
-      age: "",
-      gender: "",
-      dateCreated: "",
-      shopName: "",
-    },
-  ]);
+  const [tenantsDataBase, setTenantsDataBase] = useState<TenantsDataBase[]>();
 
-  const handleInputChange = (
-    _e: ChangeEvent<HTMLInputElement>,
-    _rowIndex: number,
-    _key: string
-  ) => {
-    const updatedData = [...TenantsDataBase];
+  // const handleInputChange = (
+  //   _e: ChangeEvent<HTMLInputElement>,
+  //   _rowIndex: number,
+  //   _key: string
+  // ) => {
+  //   const updatedData = [...TenantsDataBase];
 
-    // Rest of the code...
+  //   // Rest of the code...
 
-    setTenantsDataBase(updatedData);
-  };
+  //   setTenantsDataBase(updatedData);
+  // };
+
+
+useEffect(()=>{
+  fetchTenantDatabase().then((res:TenantsDataBase[])=>{
+    if(res){
+      setTenantsDataBase(res)
+    }
+  })
+  
+},[])
+
 
   return (
     <AdminPageContainer>
@@ -131,72 +62,36 @@ function TenantsDataBase() {
         <AdminPageContent>
           <AdminPageTitle>Tenants Database</AdminPageTitle>
           <TenantsDBContainer>
-            <table>
+            <TenantsDBTable>
               <thead>
-                <tr>
-                  <th>userID</th>
-                  <th>username</th>
-                  <th>age</th>
-                  <th>gender</th>
-                  <th>date created</th>
-                  <th>shop name</th>
-                </tr>
+                <TenantsDBHeaderRow>
+                  <TenantsDBHeaderCell id="header-row-id">User ID</TenantsDBHeaderCell>
+                  <TenantsDBHeaderCell>User Name</TenantsDBHeaderCell>
+                  <TenantsDBHeaderCell>Age</TenantsDBHeaderCell>
+                  <TenantsDBHeaderCell>Gender</TenantsDBHeaderCell>
+                  <TenantsDBHeaderCell>Shop Name</TenantsDBHeaderCell>
+                  <TenantsDBHeaderCell>Date Created</TenantsDBHeaderCell>
+                  
+                </TenantsDBHeaderRow>
               </thead>
               <tbody>
-                {TenantsDataBase.map((row, index) => (
-                  <tr key={index}>
-                    <td>
-                      <input
-                        type="text"
-                        value={row.userID}
-                        onChange={(e) => handleInputChange(e, index, "userID")}
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        value={row.username}
-                        onChange={(e) =>
-                          handleInputChange(e, index, "username")
-                        }
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        value={row.age}
-                        onChange={(e) => handleInputChange(e, index, "age")}
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        value={row.gender}
-                        onChange={(e) => handleInputChange(e, index, "gender")}
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        value={row.dateCreated}
-                        onChange={(e) =>
-                          handleInputChange(e, index, "dateCreated")
-                        }
-                      />
-                    </td>
-                    <td>
-                      <input
-                        type="text"
-                        value={row.shopName}
-                        onChange={(e) =>
-                          handleInputChange(e, index, "shopName")
-                        }
-                      />
-                    </td>
-                  </tr>
-                ))}
+                
+                  {tenantsDataBase?.map((tenant)=>{
+                    return(
+                      <TenantsDBDataRow>
+
+                      <TenantsDBDataCell>{tenant.userId.substring(0, 29)}...</TenantsDBDataCell>
+                      <TenantsDBDataCell>{tenant.name}</TenantsDBDataCell>
+                      <TenantsDBDataCell>{tenant.age}</TenantsDBDataCell>
+                      <TenantsDBDataCell>{tenant.gender}</TenantsDBDataCell>
+                      <TenantsDBDataCell>{tenant.shopName}</TenantsDBDataCell>
+                      <TenantsDBDataCell>{tenant.shopCreatedAt}</TenantsDBDataCell>
+
+                      </TenantsDBDataRow>
+                    )
+                  })}
               </tbody>
-            </table>
+            </TenantsDBTable>
           </TenantsDBContainer>
         </AdminPageContent>
       </AdminPageMain>

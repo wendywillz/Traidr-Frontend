@@ -1,37 +1,37 @@
 import styled from "styled-components";
 
 export const TenantsDBContainer = styled.div`
-  width: 100%;
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
+/* border: 1px solid blue;   */
+`
 
-  justify-content: center;
+export const TenantsDBTable = styled.table`
+  /* border: 1px solid green; */
+  border-collapse:collapse;
+  width: 73vw;
+`
 
-  .table-container {
-    margin: 20px;
+export const TenantsDBHeaderRow = styled.tr`
+  /* border: 1px solid orange; */
+  height: 6vh;
+  font-size: 1.2vw;
+  font-weight:600;
+
+  #header-row-id{
+    width:20vw;
   }
+`
+export const TenantsDBHeaderCell = styled.th`
+  /* color: gold; */
+  text-align:left;
+`
 
-  table {
-    width: 70%;
-    border-collapse: collapse;
-    height: 90vh;
-  }
+export const TenantsDBDataRow = styled.tr`
+/* border: 1px solid yellow; */
+height: 6vh;
+font-size: 1vw;
+  font-weight:400;
+`
 
-  th,
-  td {
-    padding: 10px;
-    text-align: left;
-  }
-
-  th {
-    background-color: #f2f2f2;
-  }
-
-  td input {
-    width: 100%;
-    border: none;
-    padding: 5px;
-    outline: none;
-  }
-`;
+export const TenantsDBDataCell = styled.td`
+  /* color: purple; */
+`
