@@ -31,7 +31,7 @@ export const CartContent = styled.div`
 export const CartPageTitle = styled.p`
   font-size: 2.3vw;
   font-weight: 600;
- 
+  
 `;
 
 export const CartTotal = styled.p`
