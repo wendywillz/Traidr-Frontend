@@ -21,7 +21,6 @@ import DeliveryDetailsData from "../../../interfaces/deliveryInterfaces";
 import { useState, ChangeEvent } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import BackButton from "../../../components/BackButton/BackButton";
 
 const DeliveryPage = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -32,7 +31,7 @@ const DeliveryPage = () => {
   const confirmCancelModalTitle = `CONFRIM ORDER CANCELLATION`;
   const confirmCancelModalmessage = `Please confirm you want to cancel your order`;
   const toggleConfirmCancelModal = () => {
-    setConfirmCancelModalVisibility(!confirmCancelModalVisibility);
+    setConfirmCancelModalVisibility(true);
   };
 
   //HANDLING THE ORDER CANCELLED MODAL
@@ -48,9 +47,10 @@ const DeliveryPage = () => {
   const [proceedModalVisibility, setProceedModalVisibility] = useState(false);
   const proceedModalTitle = `PROCEED TO PAYMENT`;
   const proceedModalMessage = `Proceed to Paystack Payment`;
-  const toggleProccedModal = ()=>{
-    setProceedModalVisibility(!proceedModalVisibility)
-  }
+  const proceedModalButtonAction = () => {
+    window.location.href = "https://paystack.com/pay/traidr";
+    //navigate("/order/payment");
+  };
 
   const [deliveryDetails, setDeliveryDetails] = useState<DeliveryDetailsData>({
     recipientName: "",
@@ -73,7 +73,7 @@ const DeliveryPage = () => {
       );
       if (res) {
         console.log(`Delivery details have been added`);
-        window.location.href = "https://paystack.com/pay/traidr";
+        setProceedModalVisibility(true);
       }
     } catch (error) {
       console.log(`Problem sending delivery details. Reason:`, error);
@@ -92,6 +92,22 @@ const DeliveryPage = () => {
     }
   };
 
+  const [recipientNameError, setRecipientNameError] = useState(false);
+  const [recipientPhoneNumberError, setRecipientPhoneNumberError] =
+    useState(false);
+  const [deliveryAddressError, setDeliveryAddressError] = useState(false);
+
+  const handlerChange = (
+    e: ChangeEvent<HTMLFormElement | HTMLInputElement | HTMLTextAreaElement>
+   ) => {
+    setDeliveryDetails({ ...deliveryDetails, [e.target.name]: e.target.value });
+    // Reset error states
+    setRecipientNameError(false);
+    setRecipientPhoneNumberError(false);
+    setDeliveryAddressError(false);
+   };
+   
+
   return (
     <DeliveryPageWholeContainer>
       {confirmCancelModalVisibility && (
@@ -99,7 +115,6 @@ const DeliveryPage = () => {
           title={confirmCancelModalTitle}
           message={confirmCancelModalmessage}
           onClickAction={handleCancel}
-          cancelButton={true}
         />
       )}
 
@@ -108,7 +123,6 @@ const DeliveryPage = () => {
           title={orderCancelledModalTitle}
           message={orderCancelledModalMessage}
           onClickAction={orderCancelledmodalButtonAction}
-          cancelButton={true}
         />
       )}
 
@@ -116,13 +130,11 @@ const DeliveryPage = () => {
         <MultipurposeModal
           title={proceedModalTitle}
           message={proceedModalMessage}
-          onClickAction={handleCheckout}
-          cancelButton={true}
+          onClickAction={proceedModalButtonAction}
         />
       )}
 
       <Header />
-      <BackButton linkTo={"/order/new-order"}/>
       <DeliveryPageMainContainer>
         <DeliveryPageFormContainer>
           <p className="delivery-form-title">ORDER DELIVERY DETAILS</p>
@@ -139,10 +151,12 @@ const DeliveryPage = () => {
                 name="recipientName"
                 placeholder="Jane Doe"
                 value={deliveryDetails.recipientName}
-                onChange={handleChange}
+                onChange={handlerChange}
               />
+              {recipientNameError && (
+                <p className="error-message">Please fill in this field.</p>
+              )}
             </DeliveryFormField>
-
             <DeliveryFormField>
               <RequiredLabel htmlFor="recipientPhoneNumberInput">
                 RECIPIENT PHONE NUMBER
@@ -153,10 +167,11 @@ const DeliveryPage = () => {
                 type="tel"
                 id="recipientPhoneNumberInput"
                 name="recipientPhoneNumber"
-                placeholder="08073061294"
+                placeholder="Enter phone number"
                 value={deliveryDetails.recipientPhoneNumber}
-                onChange={handleChange}
+                onChange={handlerChange}
               />
+              {recipientPhoneNumberError && <p className="error-message">Please fill in this field.</p>}
             </DeliveryFormField>
 
             <DeliveryFormField>
@@ -170,8 +185,10 @@ const DeliveryPage = () => {
                 name="deliveryAddress"
                 placeholder="32, Rasaq Eletu Street, Osapa London, Lagos"
                 value={deliveryDetails.deliveryAddress}
-                onChange={handleChange}
-              ></textarea>
+                onChange={handlerChange}
+              >
+              </textarea>
+              {deliveryAddressError && <p className="error-message">Please fill in this field.</p>}
             </DeliveryFormField>
             <DeliveryFormField>
               <label
@@ -199,7 +216,21 @@ const DeliveryPage = () => {
               </DeliveryPageButton>
               <DeliveryPageButton
                 className="delivery-form-checkout-button"
-                onClick={toggleProccedModal}
+                onClick={() => {
+                  if (
+                    deliveryDetails.recipientName &&
+                    deliveryDetails.recipientPhoneNumber &&
+                    deliveryDetails.deliveryAddress
+                  ) {
+                    handleCheckout();
+                  } else {
+                    setRecipientNameError(!deliveryDetails.recipientName);
+                    setRecipientPhoneNumberError(
+                      !deliveryDetails.recipientPhoneNumber
+                    );
+                    setDeliveryAddressError(!deliveryDetails.deliveryAddress);
+                  }
+                }}
               >
                 CHECKOUT
               </DeliveryPageButton>
