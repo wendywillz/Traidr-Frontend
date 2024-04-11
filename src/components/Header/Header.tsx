@@ -4,11 +4,10 @@ import "./HeaderStyle.tsx";
 import HeaderStyle from "./HeaderStyle.tsx";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { BsBell } from "react-icons/bs";
 import { useEffect, useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
-
+import { MdKeyboardArrowDown } from "react-icons/md";
 import UserProfileModal from "../UserProfileModal/UserProfileModal.tsx";
 import { fetchUserShopDetails } from "../../api/users.ts";
 
@@ -18,10 +17,11 @@ interface userState {
 export default function Header() {
   // const reviewer = useSelector((state: userDataInterface) => state.userId);
 
-  const [notificationCount, setNotificationCount] = useState(0);
+  // const [notificationCount, setNotificationCount] = useState(0);
   const token = localStorage.getItem("token");
   const isSeller = useSelector((state: userState) => state.user.isSeller);
   const [shopIdFromBackend, setShopIdFromBackend] = useState("");
+  const [isRotate, setIsRotate] = useState(false);
   useEffect(() => {
     if (isSeller) {
       fetchUserShopDetails().then((res) => {
@@ -29,9 +29,9 @@ export default function Header() {
       });
     }
   }, []);
-  const handleNotificationClick = () => {
-    setNotificationCount(0);
-  };
+  // const handleNotificationClick = () => {
+  //   setNotificationCount(0);
+  // };
   const location = useLocation();
   const userData = useSelector((state: userState) => state.user);
   // useEffect(() => {
@@ -41,6 +41,7 @@ export default function Header() {
   const [profileModalVisibility, setProfileModalVisibility] = useState(false);
 
   const toggleProfileModal = () => {
+    setIsRotate(!isRotate);
     setProfileModalVisibility(!profileModalVisibility);
   };
 
@@ -65,7 +66,7 @@ export default function Header() {
             {location.pathname.includes("dashboard") ||
             location.pathname.includes("user") ? (
               <>
-                <div
+                {/* <div
                   className="shop-profile-notification-wrapper"
                   onClick={handleNotificationClick}
                 >
@@ -75,19 +76,41 @@ export default function Header() {
                       {notificationCount}
                     </div>
                   )}
-                </div>
-                <div className="user-profile-img-wrapper">
-                  {userData && userData.profileImage ? (
-                    <img
-                      src={userData?.profileImage}
-                      alt=""
-                      onClick={toggleProfileModal}
-                    />
+                </div> */}
+                <div
+                  className="user-profile-img-wrapper"
+                  onClick={toggleProfileModal}
+                >
+                  {userData &&
+                  userData.profileImage &&
+                  !userData.profileImage?.toString().includes("undefined") ? (
+                    <div
+                      style={{
+                        borderRadius: "50%",
+                        overflow: "hidden",
+                        height: "100%",
+                        width: "100%",
+                      }}
+                    >
+                      <img
+                        src={userData?.profileImage}
+                        alt=""
+                        onClick={toggleProfileModal}
+                      />
+                    </div>
                   ) : (
                     <div className="shop-profile-header-icon">
-                      <FaUserCircle onClick={toggleProfileModal} />
+                      <FaUser />
                     </div>
                   )}
+                  <span className="user-drop-down-icon">
+                    <MdKeyboardArrowDown
+                      style={{
+                        transform: isRotate ? "rotate(180deg)" : "rotate(0deg)",
+                        transition: "transform 0.3s ease-in-out",
+                      }}
+                    />
+                  </span>
                 </div>
                 {shopIdFromBackend.trim() ? (
                   <Link
@@ -109,28 +132,41 @@ export default function Header() {
               token ? (
                 <>
                   <div
-                    className="shop-profile-notification-wrapper"
-                    onClick={handleNotificationClick}
+                    className="user-profile-img-wrapper"
+                    onClick={toggleProfileModal}
                   >
-                    <BsBell />
-                    {notificationCount > 0 && (
-                      <div className="notification-badge">
-                        {notificationCount}
+                    {userData &&
+                    userData.profileImage &&
+                    !userData.profileImage?.toString().includes("undefined") ? (
+                      <div
+                        style={{
+                          borderRadius: "50%",
+                          overflow: "hidden",
+                          height: "100%",
+                          width: "100%",
+                        }}
+                      >
+                        <img
+                          src={userData?.profileImage}
+                          alt=""
+                          onClick={toggleProfileModal}
+                        />
                       </div>
-                    )}
-                  </div>
-                  <div className="user-profile-img-wrapper">
-                    {userData && userData.profileImage ? (
-                      <img
-                        src={userData?.profileImage}
-                        alt=""
-                        onClick={toggleProfileModal}
-                      />
                     ) : (
                       <div className="shop-profile-header-icon">
-                        <FaUserCircle onClick={toggleProfileModal} />
+                        <FaUser />
                       </div>
                     )}
+                    <span className="user-drop-down-icon">
+                      <MdKeyboardArrowDown
+                        style={{
+                          transform: isRotate
+                            ? "rotate(180deg)"
+                            : "rotate(0deg)",
+                          transition: "transform 0.3s ease-in-out",
+                        }}
+                      />
+                    </span>
                   </div>
                   {isSeller ? (
                     <Link
@@ -169,28 +205,39 @@ export default function Header() {
             ) : (
               <>
                 <div
-                  className="shop-profile-notification-wrapper"
-                  onClick={handleNotificationClick}
+                  className="user-profile-img-wrapper"
+                  onClick={toggleProfileModal}
                 >
-                  <BsBell />
-                  {notificationCount > 0 && (
-                    <div className="notification-badge">
-                      {notificationCount}
+                  {userData &&
+                  userData.profileImage &&
+                  !userData.profileImage?.toString().includes("undefined") ? (
+                    <div
+                      style={{
+                        borderRadius: "50%",
+                        overflow: "hidden",
+                        height: "100%",
+                        width: "100%",
+                      }}
+                    >
+                      <img
+                        src={userData?.profileImage}
+                        alt=""
+                        onClick={toggleProfileModal}
+                      />
                     </div>
-                  )}
-                </div>
-                <div className="user-profile-img-wrapper">
-                  {userData && userData.profileImage ? (
-                    <img
-                      src={userData?.profileImage}
-                      alt=""
-                      onClick={toggleProfileModal}
-                    />
                   ) : (
                     <div className="shop-profile-header-icon">
-                      <FaUserCircle />
+                      <FaUser />
                     </div>
                   )}
+                  <span className="user-drop-down-icon">
+                    <MdKeyboardArrowDown
+                      style={{
+                        transform: isRotate ? "rotate(180deg)" : "rotate(0deg)",
+                        transition: "transform 0.3s ease-in-out",
+                      }}
+                    />
+                  </span>
                 </div>
                 {token ? (
                   <Link

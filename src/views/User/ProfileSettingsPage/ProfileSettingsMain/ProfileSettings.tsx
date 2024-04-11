@@ -14,11 +14,14 @@ import Header from "../../../../components/Header/Header";
 
 //package imports
 import { BsCameraFill, BsPersonCircle } from "react-icons/bs";
-import { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import axiosInstance from "../../../../utils/axiosInstance";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../app/store";
-
+import { useDispatch } from "react-redux";
+import { setProfilePics } from "../../../../app/features/userAuth/userAuthSlice";
+import { ReactNode } from "react";
+import ConfirmationModalMainWrapper from "../../../../components/ConfirmationModal/ConfirmationModalMainWrapper";
 //Interface declaration
 interface UserDetails {
   firstName: string;
@@ -26,14 +29,13 @@ interface UserDetails {
   email: string;
   phoneNumber: string;
   gender: string;
-  dateOfBirth: string;
   address: string;
-  shopName: string;
   profilePic: string | Blob | null | File;
 }
 
 import userData from "../../../../interfaces/userInterface";
-import BackButton from "../../../../components/BackButton/BackButton";
+// import BackButton from "../../../../components/BackButton/BackButton";
+import SmallButton from "../../../../components/button/smallButton/smallButton";
 
 export const ProfileSettings = () => {
   //fetching the user
@@ -42,29 +44,51 @@ export const ProfileSettings = () => {
 
   //Logic for Handling User Details
   const [userDetails, setUserDetails] = useState<UserDetails>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    gender: "",
-    dateOfBirth: "",
-    address: "",
-    shopName: "",
-    profilePic: "",
+    firstName: currentUser.name.split(" ")[0],
+    lastName: currentUser.name.split(" ")[1],
+    email: currentUser.email,
+    phoneNumber: currentUser.phoneNumber,
+    gender: currentUser.gender,
+    address: currentUser.address,
+    profilePic: currentUser.profileImage,
   });
+  const dispatch = useDispatch();
 
-  //submitting the  user details
-  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  //Logic for handling photo upload and changing the displayed picture
+  const [displayedProfilePic, setDisplayedProfilePic] = useState<
+    string | ReactNode
+  >(currentUser.profileImage);
+  console.log("displayedProfilePic", displayedProfilePic);
+  const [, setPhotoFile] = useState<File | null>(null);
+  const [, setDisplayUploadedPhotoName] = useState<string>();
+  const [, setPhotoDisplayError] = useState<string>();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleDeleteProfilePic = async () => {
+    setDisplayedProfilePic(<BsPersonCircle size={"9vw"} />);
+    setUserDetails({ ...userDetails, profilePic: null });
+    const formData = new FormData();
 
     try {
-      const res = await axiosInstance.post(`/users/edit-profile`, userDetails);
-      if (res && res.data.success) location.reload();
+      for (const key in userDetails) {
+        formData.append(key, userDetails[key as keyof UserDetails] as string);
+      }
+      const res = await axiosInstance.post(`/users/edit-profile`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (res && res.data.updatedUser) {
+        if (res.data.updatedUser.profilePic) {
+          dispatch(setProfilePics(res.data.updatedUser.profilePic));
+        }
+        setIsOpen(false);
+        location.reload();
+      }
     } catch (error) {
       return error;
     }
   };
-
   //Handling the input changes on the rest of the form
   const handleChange = (
     e: ChangeEvent<
@@ -74,15 +98,11 @@ export const ProfileSettings = () => {
       | HTMLSelectElement
     >
   ) => {
-    setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
+    setUserDetails({
+      ...userDetails,
+      [e.target.name as keyof UserDetails]: e.target.value,
+    });
   };
-
-  //Logic for handling photo upload and changing the displayed picture
-  const [displayedProfilePic, setDisplayedProfilePic] = useState<string>("");
-
-  const [, setPhotoFile] = useState<File | null>(null);
-  const [, setDisplayUploadedPhotoName] = useState<string>();
-  const [, setPhotoDisplayError] = useState<string>();
 
   const handleChangeProfilePic = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
@@ -96,7 +116,7 @@ export const ProfileSettings = () => {
 
     if (uploadedPhoto) {
       setPhotoFile(uploadedPhoto);
-      setUserDetails({ ...userDetails, profilePic: uploadedPhoto as Blob });
+      setUserDetails({ ...userDetails, profilePic: uploadedPhoto });
       setDisplayUploadedPhotoName(uploadedPhoto.name);
     }
 
@@ -109,235 +129,301 @@ export const ProfileSettings = () => {
       reader.readAsDataURL(displayedPhoto);
     }
   };
+  //submitting the  user details
+  const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData();
+
+    try {
+      for (const key in userDetails) {
+        formData.append(key, userDetails[key as keyof UserDetails] as string);
+      }
+      const res = await axiosInstance.post(`/users/edit-profile`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (res && res.data.updatedUser) {
+        if (res.data.updatedUser.profilePic) {
+          dispatch(setProfilePics(res.data.updatedUser.profilePic));
+        }
+        location.reload();
+      }
+    } catch (error) {
+      return error;
+    }
+  };
 
   ////////////////////////////////////////////////////////////////////////////////////////////
   //Logic for hanling userphoto upload
 
-  // checking if the displayUploadedVideoName is in the local storage
-  useEffect(() => {
-    const storedUploadedPhotoName = localStorage.getItem(
-      "displayUploadedPhotoName"
-    );
-    if (storedUploadedPhotoName) {
-      setDisplayUploadedPhotoName(JSON.parse(storedUploadedPhotoName));
-    }
-  }, []);
-
   return (
-    <ProfileSettingsPageContainer>
-      <Header/>
-      <BackButton linkTo={"/dashboard"}/>
-      <ProfileFormsContainer>
-        <ProfileNavigation />
-        <ChangePictureForm>
-          <div className="profile-settings-user-image-and-camera-icon-container">
-            {displayedProfilePic ? (
-              <img
-                src={displayedProfilePic}
-                className="profile-settings-user-image"
-              />
-            ) : (
-              <BsPersonCircle size={"9vw"} />
-            )}
-            {/* <BsPersonCircle size={"9vw"} /> */}
-            <label
-              htmlFor="profilePictureInput"
-              className="profile-settings-change-photo-label"
+    <>
+      <ConfirmationModalMainWrapper
+        isOpen={isOpen}
+        modalText="Are you sure you want to remove your profile Image?"
+        handleDelete={handleDeleteProfilePic}
+        setIsOpen={() => setIsOpen(false)}
+      />
+      <ProfileSettingsPageContainer>
+        <Header />
+        {/* <BackButton linkTo={"/dashboard"} /> */}
+        <ProfileFormsContainer>
+          <ProfileNavigation />
+
+          <UserDetailsForm onSubmit={handleFormSubmit}>
+            <ChangePictureForm>
+              <div className="profile-settings-user-image-and-camera-icon-container">
+                {displayedProfilePic &&
+                !displayedProfilePic?.toString().includes("undefined") ? (
+                  <img
+                    src={displayedProfilePic as string}
+                    className="profile-settings-user-image"
+                  />
+                ) : (
+                  <BsPersonCircle size={"9vw"} />
+                )}
+
+                <label
+                  htmlFor="profilePictureInput"
+                  className="profile-settings-change-photo-label"
+                >
+                  <BsCameraFill
+                    style={{
+                      color: "#ffffff",
+                      fontSize: "1rem",
+                      cursor: "pointer",
+                    }}
+                  />
+                </label>
+                <input
+                  id="profilePictureInput"
+                  name="profilePic"
+                  type="file"
+                  accept="image/*"
+                  className="profile-settings-change-photo-input"
+                  onChange={handleChangeProfilePic}
+                />
+              </div>
+
+              <div className="profile-settings-change-photo-buttons-container">
+                <button
+                  className="profile-settings-page-upload-photo-button"
+                  style={{ position: "relative" }}
+                  type="button"
+                >
+                  <input
+                    id="profilePictureInput"
+                    name="profilePic"
+                    type="file"
+                    accept="image/*"
+                    style={{
+                      opacity: 0,
+                      height: "100%",
+                      width: "100%",
+                      position: "absolute",
+                      cursor: "pointer",
+                      top: 0,
+                      left: 0,
+                    }}
+                    onChange={handleChangeProfilePic}
+                  />
+                  Upload New
+                </button>
+                <button
+                  className="profile-settings-page-delete-photo-button"
+                  onClick={() => setIsOpen(true)}
+                  style={{ cursor: "pointer" }}
+                  type="button"
+                >
+                  Delete Photo
+                </button>
+              </div>
+            </ChangePictureForm>
+            <UserDetailsSection>
+              {/*LEFT SIDE OF FORM */}
+              <FormSectionContainer>
+                <div className="profile-settings-form-label-and-input-container">
+                  <label
+                    htmlFor="firstNameInput"
+                    className="profile-settings-form-label"
+                  >
+                    First Name
+                  </label>
+                  <br />
+                  <input
+                    id="firstNameInput"
+                    name="firstName"
+                    type="text"
+                    className="profile-seetings-form-input"
+                    value={userDetails.firstName}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="profile-settings-form-label-and-input-container">
+                  <label
+                    htmlFor="emailInput"
+                    className="profile-settings-form-label"
+                  >
+                    Email
+                  </label>
+                  <br />
+                  <input
+                    id="emailInput"
+                    name="email"
+                    type="email"
+                    value={userDetails.email}
+                    className="profile-seetings-form-input"
+                    onChange={handleChange}
+                    disabled
+                    style={{ cursor: "not-allowed" }}
+                  />
+                </div>
+                <div className="profile-settings-form-label-and-input-container">
+                  <label
+                    htmlFor="genderInput"
+                    className="profile-settings-form-label"
+                  >
+                    Gender
+                  </label>
+                  <br />
+                  <select
+                    id="genderInput"
+                    name="gender"
+                    className="profile-seetings-form-input"
+                    value={userDetails.gender}
+                    onChange={handleChange}
+                  >
+                    <option value="">{userDetails.gender}</option>
+                    {userDetails.gender == "male" ? (
+                      <option value="female">Female</option>
+                    ) : (
+                      <option value="male">Male</option>
+                    )}
+                  </select>
+                </div>
+                <div className="profile-settings-form-label-and-input-container">
+                  <label
+                    htmlFor="shopNameInput"
+                    className="profile-settings-form-label"
+                  >
+                    Shop name
+                  </label>
+                  <br />
+                  <input
+                    id="shopNameInput"
+                    name="shopName"
+                    type="text"
+                    placeholder={
+                      currentUser.shopName
+                        ? currentUser.shopName
+                        : "You're not yet a seller, click on start selling above"
+                    }
+                    className="profile-seetings-form-input"
+                    value={currentUser.shopName}
+                    disabled
+                    onChange={handleChange}
+                    style={{ cursor: "not-allowed" }}
+                  />
+                </div>
+              </FormSectionContainer>
+              {/*RIGHT SIDE OF FORM */}
+              <FormSectionContainer>
+                <div className="profile-settings-form-label-and-input-container">
+                  <label
+                    htmlFor="lastNameInput"
+                    className="profile-settings-form-label"
+                  >
+                    Last Name
+                  </label>
+                  <br />
+                  <input
+                    id="lastNameInput"
+                    name="lastName"
+                    type="text"
+                    value={userDetails.lastName}
+                    className="profile-seetings-form-input"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="profile-settings-form-label-and-input-container">
+                  <label
+                    htmlFor="phoneNumberInput"
+                    className="profile-settings-form-label"
+                  >
+                    Mobile Number
+                  </label>
+                  <br />
+                  <input
+                    id="phoneNumberInput"
+                    name="phoneNumber"
+                    type="tel"
+                    placeholder={
+                      userDetails.phoneNumber
+                        ? userDetails.phoneNumber
+                        : "Enter your phone number"
+                    }
+                    className="profile-seetings-form-input"
+                    value={userDetails.phoneNumber}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="profile-settings-form-label-and-input-container">
+                  <label
+                    htmlFor="dateOfBirthInput"
+                    className="profile-settings-form-label"
+                  >
+                    Date of Birth
+                  </label>
+                  <br />
+                  <input
+                    id="dateOfBirthInput"
+                    name="dateOfBirth"
+                    type="text"
+                    disabled
+                    className="profile-seetings-form-input"
+                    value={currentUser.dateOfBirth}
+                    onChange={handleChange}
+                    style={{ cursor: "not-allowed" }}
+                  />
+                </div>
+
+                <div className="profile-settings-form-label-and-input-container">
+                  <label
+                    htmlFor="addressInput"
+                    className="profile-settings-form-label"
+                  >
+                    Residential Address
+                  </label>
+                  <br />
+                  <textarea
+                    id="addressInput"
+                    name="address"
+                    placeholder="32, Rasaq Eletu Street, Osapa London, Lagos"
+                    className="profile-seetings-form-textarea"
+                    value={userDetails.address}
+                    onChange={handleChange}
+                  ></textarea>
+                </div>
+              </FormSectionContainer>
+            </UserDetailsSection>
+
+            <div
+              className="profile-settings-user-details-form-buttons"
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                width: "40%",
+                gap: "1rem",
+              }}
             >
-              <BsCameraFill size={"1.7vw"} color="white" />
-            </label>
-            <input
-              id="profilePictureInput"
-              name="profilePicture"
-              type="file"
-              accept="image/*"
-              className="profile-settings-change-photo-input"
-              onChange={handleChangeProfilePic}
-            />
-          </div>
-
-          <div className="profile-settings-change-photo-buttons-container">
-            <button className="profile-settings-page-upload-photo-button">
-              Upload New
-            </button>
-            <button className="profile-settings-page-delete-photo-button">
-              Delete Photo
-            </button>
-          </div>
-        </ChangePictureForm>
-
-        {/* <p>{currentUserName} and {currentUserId}</p> */}
-
-        <UserDetailsForm onSubmit={handleFormSubmit}>
-          <UserDetailsSection>
-            {/*LEFT SIDE OF FORM */}
-            <FormSectionContainer>
-              <div className="profile-settings-form-label-and-input-container">
-                <label
-                  htmlFor="firstNameInput"
-                  className="profile-settings-form-label"
-                >
-                  First Name
-                </label>
-                <br />
-                <input
-                  id="firstNameInput"
-                  name="firstName"
-                  type="text"
-                  placeholder={currentUser.name.split(" ")[0]}
-                  className="profile-seetings-form-input"
-                  value={userDetails.firstName}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="profile-settings-form-label-and-input-container">
-                <label
-                  htmlFor="emailInput"
-                  className="profile-settings-form-label"
-                >
-                  Email
-                </label>
-                <br />
-                <input
-                  id="emailInput"
-                  name="email"
-                  type="email"
-                  placeholder={currentUser.email}
-                  className="profile-seetings-form-input"
-                  value={userDetails.email}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="profile-settings-form-label-and-input-container">
-                <label
-                  htmlFor="genderInput"
-                  className="profile-settings-form-label"
-                >
-                  Gender
-                </label>
-                <br />
-                <select
-                  id="genderInput"
-                  name="gender"
-                  className="profile-seetings-form-input"
-                  value={userDetails.gender}
-                  onChange={handleChange}
-                >
-                  <option value="">--select--</option>
-                  <option value="female">Female</option>
-                  <option value="male">Male</option>
-                </select>
-              </div>
-              <div className="profile-settings-form-label-and-input-container">
-                <label
-                  htmlFor="shopNameInput"
-                  className="profile-settings-form-label"
-                >
-                  Shop name
-                </label>
-                <br />
-                <input
-                  id="shopNameInput"
-                  name="shopName"
-                  type="text"
-                  placeholder="Awesomeness Shop"
-                  className="profile-seetings-form-input"
-                  value={userDetails.shopName}
-                  onChange={handleChange}
-                />
-              </div>
-            </FormSectionContainer>
-            {/*RIGHT SIDE OF FORM */}
-            <FormSectionContainer>
-              <div className="profile-settings-form-label-and-input-container">
-                <label
-                  htmlFor="lastNameInput"
-                  className="profile-settings-form-label"
-                >
-                  Last Name
-                </label>
-                <br />
-                <input
-                  id="lastNameInput"
-                  name="lastName"
-                  type="text"
-                  placeholder={currentUser.name.split(" ")[1]}
-                  className="profile-seetings-form-input"
-                  value={userDetails.lastName}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="profile-settings-form-label-and-input-container">
-                <label
-                  htmlFor="phoneNumberInput"
-                  className="profile-settings-form-label"
-                >
-                  Mobile Number
-                </label>
-                <br />
-                <input
-                  id="phoneNumberInput"
-                  name="phoneNumber"
-                  type="tel"
-                  placeholder="07034249775"
-                  className="profile-seetings-form-input"
-                  value={userDetails.phoneNumber}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="profile-settings-form-label-and-input-container">
-                <label
-                  htmlFor="dateOfBirthInput"
-                  className="profile-settings-form-label"
-                >
-                  Date of Birth
-                </label>
-                <br />
-                <input
-                  id="dateOfBirthInput"
-                  name="dateOfBirth"
-                  type="date"
-                  placeholder=""
-                  className="profile-seetings-form-input"
-                  value={userDetails.dateOfBirth}
-                  onChange={handleChange}
-                />
-              </div>
-
-              <div className="profile-settings-form-label-and-input-container">
-                <label
-                  htmlFor="addressInput"
-                  className="profile-settings-form-label"
-                >
-                  Residential Address
-                </label>
-                <br />
-                <textarea
-                  id="addressInput"
-                  name="address"
-                  placeholder="32, Rasaq Eletu Street, Osapa London, Lagos"
-                  className="profile-seetings-form-textarea"
-                  value={userDetails.address}
-                  onChange={handleChange}
-                ></textarea>
-              </div>
-            </FormSectionContainer>
-          </UserDetailsSection>
-
-          <div className="profile-settings-user-details-form-buttons">
-            <button
-              className="profile-settings-page-save-button"
-              onClick={() => handleFormSubmit}
-            >
-              Save Changes
-            </button>
-            <button className="profile-settings-page-cancel-button">
-              Cancel
-            </button>
-          </div>
-        </UserDetailsForm>
-      </ProfileFormsContainer>
-    </ProfileSettingsPageContainer>
+              <SmallButton button_text="Save changes" type="submit" />
+              <SmallButton button_text="Cancel" type="button" whiteBg={true} />
+            </div>
+          </UserDetailsForm>
+        </ProfileFormsContainer>
+      </ProfileSettingsPageContainer>
+    </>
   );
 };
 export default ProfileSettings;

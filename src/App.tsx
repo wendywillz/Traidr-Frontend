@@ -57,28 +57,27 @@ function App() {
                   element={<Description />}
                 />
                 <Route path="user/edit-profile" element={<ProfileSettings />} />
-                
               </Routes>
             </ProtectedRoute>
           </AverageUSageTime>
         }
       />
 
-<Route
+      <Route
         path="/user/*"
         element={
           <AverageUSageTime>
             <ProtectedRoute>
               <Routes>
-              <Route path="my-wishlist" element={<Wishlist />} />
-              <Route path="my-cart" element={<CartPage />} />
-              <Route path="my-orders" element={<OrderHistoryList />} />
-              <Route path="my-orders/:saleId" element={<OrderSummary />} />
+                <Route path="my-wishlist" element={<Wishlist />} />
+                <Route path="my-cart" element={<CartPage />} />
+                <Route path="my-orders" element={<OrderHistoryList />} />
+                <Route path="my-orders/:saleId" element={<OrderSummary />} />
               </Routes>
             </ProtectedRoute>
           </AverageUSageTime>
-        } />
-
+        }
+      />
 
       <Route
         path="/order/*"
@@ -86,15 +85,15 @@ function App() {
           <AverageUSageTime>
             <ProtectedRoute>
               <Routes>
-              <Route path="new-order" element={<OrderPage />} />
-              <Route path="delivery-details" element={<DeliveryPage />} />
-              <Route path="payment" element={<PaymentPage />} />
-              <Route path="receipt" element={<Receipt />} />
+                <Route path="new-order" element={<OrderPage />} />
+                <Route path="delivery-details" element={<DeliveryPage />} />
+                <Route path="payment" element={<PaymentPage />} />
+                <Route path="receipt" element={<Receipt />} />
               </Routes>
             </ProtectedRoute>
           </AverageUSageTime>
-        } />
-
+        }
+      />
 
       <Route
         path="/admin/dashboard/*"
@@ -111,7 +110,6 @@ function App() {
         }
       ></Route>
 
-
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/traidr/admin/signup" element={<AdminSignupPage />} />
@@ -119,17 +117,8 @@ function App() {
       <Route path="/otp-verification" element={<EnterOtpPage />} />
 
       <Route path="/success-modal" element={<SuccessModal />} />
-  
-    
-      
 
       {/*USER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME*/}
-
-      
-
-
-      
-      
     </Routes>
   );
 }

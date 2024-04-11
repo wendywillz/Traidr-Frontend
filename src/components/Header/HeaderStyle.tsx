@@ -36,13 +36,14 @@ const HeaderStyle = styled.header`
     width: 6rem;
   }
   .user-profile-img-wrapper {
-    height: 4rem;
-    width: 4rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    cursor: pointer;
+    position: relative;
   }
 
   .user-profile-img-wrapper img {
     max-width: 100%;
-    height: 100%;
     object-fit: contain;
   }
   .header-right-btn-wrapper {
@@ -103,6 +104,22 @@ const HeaderStyle = styled.header`
   .shop-profile-notification-wrapper > *,
   .shop-profile-header-icon > * {
     cursor: pointer;
+  }
+
+  .user-drop-down-icon {
+    position: absolute;
+    bottom: 2%;
+    right: -20%;
+    font-size: 1.4rem;
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffff;
+    background-color: var(--orange-color);
+    drop-shadow: 10px 10px 10px red;
   }
   .notification-badge {
     position: absolute;

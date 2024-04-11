@@ -14,8 +14,11 @@ const userAuthSlice = createSlice({
     logout: (state) => {
       return Object.assign(state, {} as userDataInterface);
     },
+    setProfilePics: (state, action) => {
+      state.profileImage = action.payload;
+    },
   },
 });
 
-export const { login, logout } = userAuthSlice.actions;
+export const { login, logout, setProfilePics } = userAuthSlice.actions;
 export default userAuthSlice.reducer;

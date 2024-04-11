@@ -7,12 +7,11 @@ import {
 } from "./UserProfileModal.styled";
 
 //media imports
-import userIcon from "../../assets/user-profile-modal-assets/user-pic-icon.png";
 import editProfileIcon from "../../assets/user-profile-modal-assets/edit-profile-icon.png";
 import myShopIcon from "../../assets/user-profile-modal-assets/my-shop-icon.png";
 import cartIcon from "../../assets/user-profile-modal-assets/cart-icon.png";
 //import messagingIcon from "../../assets/user-profile-modal-assets/messaging-icon.png";
-import orderListIcon from "../../assets/user-profile-modal-assets/purchase_order_icon.png"
+import orderListIcon from "../../assets/user-profile-modal-assets/purchase_order_icon.png";
 import logouticon from "../../assets/user-profile-modal-assets/logout-icon.png";
 import { BsHeart } from "react-icons/bs";
 
@@ -22,6 +21,9 @@ import { useSelector } from "react-redux";
 import userData from "../../interfaces/userInterface";
 import { useEffect, useState } from "react";
 import { fetchUserShopDetails } from "../../api/users";
+import { RootState } from "../../app/store";
+import { FaUser } from "react-icons/fa";
+
 interface userProfileProps {
   toggleVissiblity: () => void;
 }
@@ -39,6 +41,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
 
   // const { shopId } = useParams();
   // if(shopId) return null
+  const userData = useSelector((state: RootState) => state.user);
   const isSeller = useSelector((state: userState) => state.user.isSeller);
   const userName = useSelector((state: userState) => state.user.name);
   const [shopIdFromBackend, setShopIdFromBackend] = useState("");
@@ -54,7 +57,36 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
     <UserProfileModalContainer>
       <ModalHeader>
         <div className="user-profile-modal-user-image-container">
-          <img src={userIcon} className="user-profile-modal-user-image" />
+          {userData &&
+          userData.profileImage &&
+          !userData.profileImage?.toString().includes("undefined") ? (
+            <div
+              style={{
+                borderRadius: "50%",
+                overflow: "hidden",
+                height: "3rem",
+                width: "3rem",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img
+                src={userData?.profileImage}
+                alt=""
+                style={{
+                  objectFit: "contain",
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                }}
+              />
+            </div>
+          ) : (
+            <div className="shop-profile-header-icon">
+              <FaUser />
+            </div>
+          )}
+          {/* <img src={userIcon} className="user-profile-modal-user-image" /> */}
         </div>
         <div className="user-profile-modal-user-info-container">
           <p className="user-profile-modal-user-name">
@@ -63,10 +95,15 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
           <Link
             to={token ? "/dashboard/user/edit-profile" : "/"}
             onClick={toggleVissiblity}
+            style={{
+              fontSize: "0.9rem",
+              fontWeight: "500",
+              color: "#ffffff",
+              textDecoration: "none",
+              margin: 0,
+            }}
           >
-            <p className="user-profile-modal-user-visit-profile">
-              Visit your Profile
-            </p>
+            Visit your Profile
           </Link>
         </div>
       </ModalHeader>
@@ -109,10 +146,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
             </div>
           </Link>
 
-          <Link
-            to={token ? "/user/my-orders" : "/"}
-            onClick={toggleVissiblity}
-          >
+          <Link to={token ? "/user/my-orders" : "/"} onClick={toggleVissiblity}>
             <div className="user-profile-modal-link-text-and-icon-container">
               <img
                 src={orderListIcon}

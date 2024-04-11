@@ -71,6 +71,11 @@ export default function SignupPage() {
           setError(res.data.unableToCreateUser);
           setEmail("");
           setPassword("");
+        } else {
+          setIsLoading(false);
+          setError("Internal Server Error");
+          setEmail("");
+          setPassword("");
         }
       } else {
         setError("Internal Server Error");

@@ -23,20 +23,19 @@ import BackButton from "../../../components/BackButton/BackButton";
 const CartPage = () => {
   const navigate: NavigateFunction = useNavigate();
 
-
   //Toggling the loader
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   //Functions dealing with the modal
   const [modalVisibility, setModalVisibility] = useState(false);
   const orderSuccessModalTitle = `ORDER CREATED`;
   const orderSucessModalMessage = `Your order has successfully been created`;
-  const modalButtonAction = () => {
-    navigate('/order/new-order');
+  // const modalButtonAction = () => {
+  //   navigate('/order/new-order');
+  // };
+  const toggleModalVisibility = () => {
+    setModalVisibility(!modalVisibility);
   };
-  const toggleModalVisibility = ()=>{
-    setModalVisibility(!modalVisibility)
-  }
 
   const [cartProducts, setCartProducts] = useState<CartProductDetail[]>();
   const [cartTotal, setCartTotal] = useState<number | undefined>(0);
@@ -50,7 +49,7 @@ const CartPage = () => {
           0
         );
         setCartTotal(total);
-        setIsLoading(false)
+        setIsLoading(false);
       }
     });
   }, [cartProducts]);
@@ -74,8 +73,7 @@ const CartPage = () => {
     try {
       const res = await axiosInstance.post(`/order/create-order`);
       if (res.data.success || res.data.message) {
-        navigate('/order/new-order');
-        
+        navigate("/order/new-order");
       }
     } catch (error) {
       return error;
@@ -84,7 +82,7 @@ const CartPage = () => {
 
   return (
     <>
-    {isLoading && <PageLoader/>}
+      {isLoading && <PageLoader />}
       {modalVisibility && (
         <MultipurposeModal
           title={orderSuccessModalTitle}
@@ -94,7 +92,7 @@ const CartPage = () => {
         />
       )}
       <Header />
-      <BackButton linkTo={"/dashboard"}/>
+      <BackButton linkTo={"/dashboard"} />
       <CartContainer>
         <CartHeaderContainer>
           <CartPageTitle>Cart Total</CartPageTitle>

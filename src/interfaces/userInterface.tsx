@@ -3,12 +3,12 @@ export default interface userData {
   name: string;
   email: string;
   profileImage: string;
-  phoneNumber: number;
+  phoneNumber: string;
   isAdmin: string;
   isSeller: string;
   gender: string;
   age: number;
+  dateOfBirth: string;
   address: string;
   shopName: string;
-  profilePic: string| Blob| null| File
 }
