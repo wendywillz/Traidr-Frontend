@@ -54,7 +54,7 @@ const ShopProfile = () => {
   return (
     <>
       <Header />
-      <BackButton linkTo={"/dashboard"}/>
+      <BackButton linkTo={"/dashboard"} />
 
       <ShopProfileMainWrapper>
         <div className="shop-profile-product-logo">
@@ -96,7 +96,7 @@ const ShopProfile = () => {
           <h3>Upload Images</h3>
         </div>
         <div className="shop-profile-product-uploads-inner">
-          <h3>Photos</h3>
+          <h3 className="product-list-title">Photos</h3>
           <div className="shop-profile-product-uploads-inner-each">
             {products?.length === 0 && (
               <div className="shop-profile-product-uploads-list">
@@ -135,8 +135,14 @@ const ShopProfile = () => {
                       src={product.productImages[0]}
                       alt="take-photo-of-products"
                     />
-                    <p>
-                      {product.productTitle} <br />₦{product.productPrice}
+                    <p id="shop-profile-product-title">
+                      
+                      {product.productTitle.substring(0, 21)}
+                      {product.productTitle.length >= 22 ? "..." : ""}
+                    </p>
+                    <p id="shop-profile-product-price">
+
+                      ₦{product.productPrice.toLocaleString()}
                     </p>
                   </div>
                 ))}

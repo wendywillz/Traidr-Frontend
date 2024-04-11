@@ -52,7 +52,7 @@ export const ShopProfileMainWrapper = styled.div`
     h3 {
       color: var(--black-color);
       font-weight: 200;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
   }
 
@@ -63,6 +63,7 @@ export const ShopProfileMainWrapper = styled.div`
     h3 {
       color: var(--black-color);
       font-weight: 200;
+      margin-bottom: 1rem;
     }
   }
 
@@ -103,21 +104,43 @@ export const ShopProfileMainWrapper = styled.div`
     border-radius: 5px;
     flex-direction: column;
     outline: 1px solid var(--normal-text-color);
+    height: 30vh;
+    padding: 1vh 0vw;
     img {
-      flex-basis: 90%;
-      max-width: 100%;
+      object-fit:contain;
+      /* flex-basis: 90%; */
+      /* max-width: 100%; */
+      width: 100%;
       height: 80%;
-      min-height: 80%;
-      max-height: 80%;
-      flex: 1;
+      /* border: 1px solid pink; */
+      /* min-height: 80%;
+      max-height: 80%; */
+      /* flex: 1; */
     }
-    p {
+    /* p {
       font-size: 1rem;
       margin-left: 0.3rem;
-    }
+    } */
   }
 
+
+  #shop-profile-product-title{
+    font-size: 1.1vw;
+    font-weight: 600;
+    margin-bottom:0vh;
+    margin-left:5vw;
+  }
+
+  #shop-profile-product-price{
+    font-size: 1vw;
+    font-weight: 500;
+    color: var(--price-green-color);
+    margin-left:8vw;
+  }
+
+
   .shop-profile-photos-each-2 {
+    height: 30vh;
     padding: 2.5rem;
     border-radius: 5px;
     outline: 1px solid var(--normal-text-color);
@@ -171,4 +194,7 @@ export const ShopProfileMainWrapper = styled.div`
       justify-content: center;
     }
   }
+
+ 
+
 `
