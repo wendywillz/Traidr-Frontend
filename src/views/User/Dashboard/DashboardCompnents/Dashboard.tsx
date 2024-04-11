@@ -61,7 +61,7 @@ const Dashboard = () => {
 
     fetchProductCount().then((res)=>{
       if(res){
-        setTotalPages(Math.ceil(res.totalProductCount/9))
+        setTotalPages(Math.ceil(res.totalProductCount/+queryParams.pageSize))
       }
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps

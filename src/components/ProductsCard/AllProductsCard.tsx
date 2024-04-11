@@ -44,10 +44,13 @@ function AllProductsCard({ product }: ProductProps) {
             <img src={product.productImages[0]} alt={product.productTitle} className="dashboard-product-image"/>
           )}
         </div>
-        <p className="each-product-title">{product.productTitle}</p>
+        <p className="each-product-title">
+        {product.productTitle.substring(0, 21)}
+          {product.productTitle.length >= 22 ? "..." : ""}
+        </p>
         <p className="each-product-description">
-          {product.productDescription.substring(0, 37)}
-          {product.productDescription.length >= 25 ? "..." : ""}
+          {product.productDescription.substring(0, 25)}
+          {product.productDescription.length >= 27 ? "..." : ""}
         </p>
        
         <span className="each-product-price">

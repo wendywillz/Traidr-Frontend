@@ -41,10 +41,10 @@ const CartPage = () => {
   const [cartTotal, setCartTotal] = useState<number | undefined>(0);
 
   useEffect(() => {
-    fetchCartItems().then((res) => {
+    fetchCartItems().then((res: CartProductDetail[]) => {
       if (res) {
         setCartProducts(res);
-        const total = cartProducts?.reduce(
+        const total = res?.reduce(
           (acc, curr) => acc + curr.productPrice * curr.productQuantity,
           0
         );

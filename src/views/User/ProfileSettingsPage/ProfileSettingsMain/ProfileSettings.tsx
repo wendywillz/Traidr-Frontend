@@ -36,6 +36,7 @@ interface UserDetails {
 import userData from "../../../../interfaces/userInterface";
 // import BackButton from "../../../../components/BackButton/BackButton";
 import SmallButton from "../../../../components/button/smallButton/smallButton";
+import BackButton from "../../../../components/BackButton/BackButton";
 
 export const ProfileSettings = () => {
   //fetching the user
@@ -167,7 +168,7 @@ export const ProfileSettings = () => {
       />
       <ProfileSettingsPageContainer>
         <Header />
-        {/* <BackButton linkTo={"/dashboard"} /> */}
+        <BackButton linkTo={"/dashboard"} />
         <ProfileFormsContainer>
           <ProfileNavigation />
 

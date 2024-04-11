@@ -48,12 +48,12 @@ export const AllProductsWrapper = styled.div`
 
   .dashboard-product-image{
     width: 100vw;
-    height: 30vh
+    height: 25vh
   }
 
   .each-product-title {
     font-weight: 600;
-    font-size: 1.3vw;
+    font-size: 1.2vw;
     margin-top: 0.5vh;
   }
   .each-product-description {
