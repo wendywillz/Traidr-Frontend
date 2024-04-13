@@ -4,5 +4,5 @@ export const fetchCartItems = async()=>{
    const res = await axiosInstance.get(`/cart/get-cart-items`) 
    if (res && res.data.cartProductDetails) {
     return res.data.cartProductDetails;
-  }
+  } else{return}
 }

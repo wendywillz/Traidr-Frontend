@@ -6,6 +6,12 @@ export const CartContainer = styled.div`
   padding: 0 5rem;
   justify-content: center;
   align-items: center;
+
+  .empty-cart-notice{
+    font-size: 1.3vw;
+    font-weight: 500;
+    margin-left: 40vw;
+  }
   
 `;
 
@@ -15,6 +21,7 @@ export const CartHeaderContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 2vh;
+
 `
 
 export const CartContent = styled.div`
@@ -25,7 +32,7 @@ export const CartContent = styled.div`
   padding: 1vh 1vw 1vh 1vw;
   border-radius:10px;
   border-bottom: 2px solid #f0f0f0;
-  gap: 380px;
+  /* gap: 380px; */
   margin-bottom: 2.5vh;
 `;
 export const CartPageTitle = styled.p`
@@ -103,6 +110,7 @@ export const CartleftcontainerText = styled.div`
  width: 40vw;
  display: flex;
  flex-direction: column;
+ margin-right:5vw;
  /* padding-bottom: 2vh; */
 
  
@@ -124,14 +132,15 @@ padding: 0vh 0vw 0vh 0vw;
 
 export const CartUpdateAndDeleteBtns = styled.div`
   /* border: 1px solid red; */
+  width: 40rem;
 display: flex;
 justify-content: space-between;
-margin-top: 12vh;
+margin-top: 13vh;
 /* margin-bottom: -3vh; */
 
 .delete-item-button{
   display: flex;
-    width: 10.5rem;
+  width: 10.5rem;
     height: 3.6rem;
     border-radius: 5px;
     border: 1px solid gainsboro;
@@ -144,11 +153,33 @@ margin-top: 12vh;
     background-color: #F2F2F2;
     cursor: pointer;
     &:hover {
-font-size: 1.1rem;
+  font-size: 1.1rem;
   width: 10.6rem;
   height: 3.7rem;
 } 
  }
+
+.move-to-wishlist-button{
+  display: flex;
+  width: 10.5rem;
+    height: 3.6rem;
+    border-radius: 5px;
+    border: 1px solid gainsboro;
+    margin-top: 1rem;
+    font-size: 1rem;
+    justify-content: center;
+    text-decoration: none;
+    text-align:center;
+    align-items: center;
+    color: black;
+    background-color: white;
+    cursor: pointer;
+    &:hover {
+  font-size: 1.1rem;
+  width: 10.6rem;
+  height: 3.7rem;
+} 
+}
 `
 
 export const OrderButton = styled.div`
