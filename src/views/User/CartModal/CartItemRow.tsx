@@ -12,9 +12,10 @@ import { useState } from "react";
 interface CartItemProps {
     cartItem: CartProductDetail ;
     handleDelete: (productId:string)=>void;
+    handleMoveToWishList: (productId:string)=>void;
   }
 
-const CartItemRow = ({cartItem, handleDelete}: CartItemProps) => {
+const CartItemRow = ({cartItem, handleDelete, handleMoveToWishList}: CartItemProps) => {
 
 
 
@@ -50,8 +51,10 @@ const toggleQuantityModal = () => {
 
          <CartRightContainer>
         <CartUpdateAndDeleteBtns>
+        <div className="move-to-wishlist-button" onClick={()=>handleMoveToWishList(cartItem.productId)}>Move To WishList</div>
         <AlternateAddToCartButton buttonText={`UPDATE`} productId={cartItem.productId} toggleVisibility={toggleQuantityModal}/>
          <div className='delete-item-button' onClick={()=>handleDelete(cartItem.productId)}>Remove</div>
+        
         </CartUpdateAndDeleteBtns>
          
           

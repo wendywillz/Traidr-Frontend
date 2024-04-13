@@ -39,6 +39,7 @@ const CartPage = () => {
 
   const [cartProducts, setCartProducts] = useState<CartProductDetail[]>();
   const [cartTotal, setCartTotal] = useState<number | undefined>(0);
+  const [cartEmpty, setCartEmpty] = useState<boolean>(false)
 
   useEffect(() => {
     fetchCartItems().then((res: CartProductDetail[]) => {
@@ -50,6 +51,9 @@ const CartPage = () => {
         );
         setCartTotal(total);
         setIsLoading(false);
+      } else{
+        setCartEmpty(true)
+        setIsLoading(false)
       }
     });
   }, [cartProducts]);
@@ -65,9 +69,23 @@ const CartPage = () => {
       );
       if (res && res.data.success) location.reload();
     } catch (error) {
-      /* empty */
+      console.log(`error deleting item from cart. reason:`, error);
     }
   };
+  const handleMoveToWishList = async(productId:string)=>{
+    const selectedProductDetail = {
+      productId: productId,
+    };
+    try {
+      const res = await axiosInstance.post(
+        `/cart/move-to-wishlist`,
+        selectedProductDetail
+      );
+      if (res && res.data.success) location.reload();
+    } catch (error) {
+      console.log(`error moving item from cart to wishlist. reason:`, error);
+    }
+  }
 
   const handleOrder = async () => {
     try {
@@ -98,6 +116,7 @@ const CartPage = () => {
           <CartPageTitle>Cart Total</CartPageTitle>
           <CartTotal>₦{cartTotal?.toLocaleString()}</CartTotal>
         </CartHeaderContainer>
+        {cartEmpty &&<p className="empty-cart-notice">No Items in Cart.</p>}
 
         <div>
           {cartProducts?.map((product) => {
@@ -106,6 +125,7 @@ const CartPage = () => {
                 cartItem={product}
                 key={product.productId}
                 handleDelete={handleDelete}
+                handleMoveToWishList={handleMoveToWishList}
               />
             );
           })}
