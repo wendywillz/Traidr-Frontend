@@ -104,7 +104,7 @@ export default function Header() {
                     </div>
                   )}
                   <span className="user-drop-down-icon">
-                    <MdKeyboardArrowDown
+                    <MdKeyboardArrowDown 
                       style={{
                         transform: isRotate ? "rotate(180deg)" : "rotate(0deg)",
                         transition: "transform 0.3s ease-in-out",

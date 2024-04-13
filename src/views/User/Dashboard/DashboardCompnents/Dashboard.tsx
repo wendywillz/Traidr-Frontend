@@ -33,7 +33,7 @@ const Dashboard = () => {
     maxPrice: "",
     minPrice: "",
     page: "1",
-    pageSize: "9",
+    pageSize: "12",
   });
   const [totalPages, setTotalPages] = useState<number>(1);
   // const productsPerPage = 9;
@@ -60,7 +60,7 @@ const Dashboard = () => {
 
     fetchProductCount().then((res) => {
       if (res) {
-        setTotalPages(Math.ceil(res.totalProductCount / 9));
+        setTotalPages(Math.ceil(res.totalProductCount / +queryParams.pageSize));
       }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

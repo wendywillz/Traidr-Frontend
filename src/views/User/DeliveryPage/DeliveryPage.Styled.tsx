@@ -13,23 +13,20 @@ export const DeliveryPageWholeContainer = styled.div`
 
 export const DeliveryPageMainContainer = styled.div`
     /* border: 1px solid red; */
-    padding: 0vh 24vw;
-    
+    padding: 1vh 24vw;
+    height: 100vh;
 
 `
 
 export const DeliveryPageFormContainer = styled.div`
     /* border: 1px solid blue; */
     box-shadow: 2px 8px 20px 4px rgba(0, 0, 0, 0.1);
-    height: 85vh;
+    height: 88vh;
     width: 50vw;
     border-radius:10px;
     background-color: white;
     /* padding: 0vh 1vw; */
     padding: 2vh 4.8vw 4vh 4.8vw;
-    margin-bottom: 2vh;
-    margin-top: -3vh;
-    margin-left: 2vw;
 
     .delivery-form-title{
         font-size: 1.5vw;
@@ -51,6 +48,10 @@ export const DeliveryFormField = styled.div`
     .delivery-form-label{
         font-size: 1.05vw;
         font-weight: 550;
+    }
+    .error-message{
+        color: red;
+        font-size: 0.7vw;
     }
     .delivery-form-input{
         height: 4.3vh;

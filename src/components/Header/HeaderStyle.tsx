@@ -110,7 +110,7 @@ const HeaderStyle = styled.header`
     position: absolute;
     bottom: 2%;
     right: -20%;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     border-radius: 50%;
     height: 15px;
     width: 15px;
@@ -119,6 +119,7 @@ const HeaderStyle = styled.header`
     align-items: center;
     color: #ffff;
     background-color: var(--orange-color);
+    stroke-width:10;
     drop-shadow: 10px 10px 10px red;
   }
   .notification-badge {
