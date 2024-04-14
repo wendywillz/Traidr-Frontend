@@ -38,6 +38,7 @@ export const SideBarCategoryTitle = styled.div`
   .sidebar-filter-arrow {
     margin-top: 1vh;
     margin-right: 1.5rem;
+    cursor: pointer;
   }
 `;
 
@@ -58,6 +59,7 @@ export const SideBarCategory = styled.div`
     border: 1px solid grey;
     /* background-color: pink; */
     accent-color: #e04f16;
+    cursor: pointer;
   }
 
   .sidebar-filter-selection-show-more-continer {
@@ -95,6 +97,11 @@ export const SideBarCategory = styled.div`
     margin: 0 0.2vw;
   }
 
+  #colorInput{
+    height: 3vh;
+    padding: 1vw;
+  }
+
 `;
 
 export const SidebarResetButton = styled.div`
@@ -110,6 +117,7 @@ export const SidebarResetButton = styled.div`
   padding-top: 1.4vh;
   margin-top: 2vh;
   margin-left: 4vw;
+  cursor:pointer;
   &:hover{
     font-size: 1vw;
     width: 7.05vw;
