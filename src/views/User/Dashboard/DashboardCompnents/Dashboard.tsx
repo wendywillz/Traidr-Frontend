@@ -13,6 +13,7 @@ import { useState, useEffect, ChangeEvent } from "react";
 import { shopProductsInterface } from "../../../../interfaces/shopInterfaces";
 import { QueryParams } from "../../../../interfaces/queryInterfaces";
 import { fetchAllProducts, fetchProductCount } from "../../../../api/product";
+import { fetchWishListItemIds } from "../../../../api/wishlist";
 import { AllProductsContainer } from "../DashboardStyles/Product.styled";
 import AllProductsCard from "../../../../components/ProductsCard/AllProductsCard";
 //import { useSelector } from "react-redux";
@@ -38,6 +39,7 @@ const Dashboard = () => {
   const [totalPages, setTotalPages] = useState<number>(1);
   // const productsPerPage = 9;
   
+  const [wishListItemIds, setWishListItemIds] = useState<string[]>()
 
   //{category, search, sort, price, maxPrice, minPrice}
   useEffect(() => {
@@ -64,6 +66,12 @@ const Dashboard = () => {
         setTotalPages(Math.ceil(res.totalProductCount / +queryParams.pageSize));
       }
     });
+
+    fetchWishListItemIds().then((res)=>{
+      if(res){
+        setWishListItemIds(res)
+      }
+    })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryParams]);
@@ -118,7 +126,7 @@ const Dashboard = () => {
             {displayedProducts &&
               displayedProducts.map((product) => {
                 return (
-                  <AllProductsCard product={product} key={product.productId} />
+                  <AllProductsCard product={product} key={product.productId} wishListIds={wishListItemIds} />
                 );
               })}
           </AllProductsContainer>
