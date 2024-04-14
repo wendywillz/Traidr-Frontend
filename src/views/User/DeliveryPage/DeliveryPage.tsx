@@ -11,7 +11,7 @@ import {
 } from "./DeliveryPage.Styled";
 
 //component imports
-import Header from "../../../components/Header/Header";
+
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
 
 //Interface imports
@@ -134,7 +134,7 @@ const DeliveryPage = () => {
         />
       )}
 
-      {/* <Header /> */}
+      
       <DeliveryPageMainContainer>
         <DeliveryPageFormContainer>
           <p className="delivery-form-title">ORDER DELIVERY DETAILS</p>

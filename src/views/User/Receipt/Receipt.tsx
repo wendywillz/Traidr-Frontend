@@ -15,7 +15,6 @@ import {
 
 //component imports
 import ReceiptRow from "./ReceiptRow";
-import Header from "../../../components/Header/Header";
 import PageLoader from "../../../components/PageLoader/PageLoader";
 import { SaleSummary } from "../../../interfaces/saleInterfaces";
 import traiderLogo from "../../../assets/traidr-logo-orange.png"
@@ -81,7 +80,6 @@ useEffect(()=>{
   return (
     <OrderSummaryWholeContainer>
       {isLoading && <PageLoader/>}
-      {/* <Header /> */}
       <OrderSummaryMainContainer>
         <DownloadButtonsContainer>
           <ReactToPrint

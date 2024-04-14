@@ -51,7 +51,9 @@ function TopDescription({ ...props }: shopProductsInterface) {
             <div>
               <p className="views-time"> 3 Views in the last 2 minutes </p>
               <p className="price">₦{props.productPrice}</p>
-              <p className="store">{props.shopName}</p>
+            <Link to={`/dashboard/shop/${props.shopId}`}>
+            <p className="store">{props.shopName}</p>
+              </Link> 
               <p className="hens-product">{props.productTitle}</p>
             </div>
 

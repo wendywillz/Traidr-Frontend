@@ -29,6 +29,7 @@ import Receipt from "./views/User/Receipt/Receipt";
 import OrderHistoryList from "./views/User/OrderHistoryList/OrderHistoryList";
 import OrderSummary from "./views/User/OrderSummary/OrderSummary";
 import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineChart";
+import Shop from "./views/User/Shop/Shop";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
                 />
                 <Route path="change-password" element={<ChangePassword />} />
                 <Route path="shop-profile/:shopId" element={<ShopProfile />} />
+                <Route path="shop/:shopId" element={<Shop/>} />
                 <Route
                   path="stock-your-shop/:shopId"
                   element={<StockYourShop />}

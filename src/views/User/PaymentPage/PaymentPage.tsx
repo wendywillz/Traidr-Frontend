@@ -7,7 +7,7 @@ import {
   PaymentPageButton,
 } from "./PaymentPage.Styled";
 
-import Header from "../../../components/Header/Header";
+
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
 import paystackLogo from "../../../assets/paystack_icon.png";
 import { useState } from "react";
@@ -100,7 +100,7 @@ const PaymentPage = () => {
         />
       )}
 
-      {/* <Header /> */}
+      
       <PaymentPageMainContainer>
         <PaymentPageContentContainer>
           <PaymentPageContent>
