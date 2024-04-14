@@ -11,6 +11,7 @@ import {
 //component imports
 import OrderItemRow from "./OrderItemRow";
 import Header from "../../../components/Header/Header";
+import traiderLogo from "../../../assets/traidr-logo-orange.png"
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
 import PageLoader from "../../../components/PageLoader/PageLoader";
 
@@ -139,9 +140,10 @@ const OrderPage = () => {
         />
       )}
 
-      <Header />
-      <BackButton linkTo={"/user/my-cart"}/>
+      {/* <Header /> */}
+      <div className="backButton-container"><BackButton linkTo={"/user/my-cart"}/></div>
       <OrderPageMain>
+        <div className="order-page-traidr-logo-container"><img src={traiderLogo} className="order-page-traidr-logo"/></div>
         <h2 className="order-page-Title">Your Order</h2>
         <div>
           {orderItems?.map((orderItem) => {
@@ -152,7 +154,7 @@ const OrderPage = () => {
               </div>
             );
           })}
-        </div>
+        </div> 
 
         <OrderTotal>
           <div className="order-total-text">ORDER TOTAL</div>

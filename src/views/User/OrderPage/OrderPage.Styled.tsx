@@ -1,19 +1,52 @@
 import styled from "styled-components";
+import formBackground from "../../../assets/form-background-image.png";
 
 
 export const OrderPageContainer = styled.div`
+
 /* border: 1px solid red; */
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-image: url(${formBackground});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    padding: 10vh 20vw 0vh 20vw;
+    overflow: scroll;
+
+    .backButton-container{
+        position:fixed;
+        margin-top: -4vh;
+        left: 0vw;
+
+    }
 
 `
 export const OrderPageMain = styled.div`
-    /* border: 1px solid blue; */
-    padding: 0 10vw;
+    border: 1px solid gainsboro;
+    border-radius:10px;
+    background-color: white;
+    overflow: scroll;
+    padding: 0vh 2vw 4vh 2vw;
+    
+
+    .order-page-traidr-logo-container{
+        margin-left: 25vw;
+    }
+
+    .order-page-traidr-logo{
+        width: 6vw;
+    }
 
     .order-page-Title{
-        font-size: 2vw;
+        font-size: 2.3vw;
         font-weight: 500;
-        margin-bottom: 2.5vh;
+        margin-bottom: 4vh;
+        margin-left: 1.5vw;
+        margin-top:-3vh;
     }
+
   
 `
 
@@ -25,7 +58,10 @@ export const OrderItemRowContiner = styled.div`
     background-color: white;
     /* border-left: 1px solid black;
     border-right: 1px solid black; */
-    border-top: 1px solid black;
+    /* border-top: 1px solid black; */
+    margin-bottom: 2vh;
+    padding: 0vh 1.5vw 0vh 1.5vw;
+    box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 `
 
 export const ProductDetail = styled.div`
@@ -59,25 +95,25 @@ export const OrderTotal = styled.div`
     justify-content: space-between;
     background-color: white;
     color: var(--price-green-color);
-    margin-top: 1vh;
+    margin-top: 4vh;
     margin-bottom: 2vh;
     height: 6vh;
     /* border-radius: 10px; */
-    padding: 1vh 0vw 0vh 1vw;
-    border-bottom: 2px solid var(--price-green-color);
-    border-top: 2px solid var(--price-green-color);
+    padding: 1.5vh 1.5vw 0vh 1.5vw;
+    /* border-bottom: 2px solid var(--price-green-color);
+    border-top: 2px solid var(--price-green-color); */
 
 
     .order-total-text{
         font-size: 1.5vw;
-        font-weight: 600;
+        font-weight: 700;
         color: black;
     }
 
     .order-total-amount{
-        font-size: 1.5vw;
-        font-weight: 800;
-        color: grey;
+        font-size: 1.6vw;
+        font-weight: 900;
+        color: var(--price-green-color);
     }
 
 `

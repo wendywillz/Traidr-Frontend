@@ -3,24 +3,25 @@ import styled from "styled-components";
 import formBackground from "../../../assets/form-background-image.png";
 
 export const OrderSummaryWholeContainer = styled.div`
-    border: 1px solid red;  
-    /* background-image: url(${formBackground}); */
-  /* background-size: cover;
+    /* border: 1px solid red;   */
+    background-image: url(${formBackground});
+   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat; */
+  background-repeat: no-repeat;
 `
    
-export const OrderSummaryMainContainer = styled.div`
+export const OrderSummaryMainContainer = styled.div` 
     /* border: 1px solid red; */
-    padding: 0vh 20vw 3vh 20vw; 
+    padding: 5vh 20vw 3vh 20vw; 
 `
 
 export const OrderSummaryMain = styled.div`
     /* border: 1px solid blue; */
     box-shadow:  -5px 0px 10px 4px rgba(0, 0, 0, 0.1);
-    padding: 2vh 2vw;
+    padding: 2vh 3vw 3vh 3vw;
     border-radius: 10px;
     background-color: white;
+    
     
     .traidr-logo-container{
         margin-top:-3vh;
@@ -35,6 +36,7 @@ export const OrderSummaryMain = styled.div`
         font-size: 2vw;
         font-weight:700;
         margin-bottom: 2vh;
+        margin-left: 1vw;
     }
 
     .order-items-list-title{
@@ -42,6 +44,7 @@ export const OrderSummaryMain = styled.div`
         margin-top: 2vh;
         font-size: 1.3vw;
         font-weight:700;
+        margin-left: 1vw;
     }
 
     .order-items{
@@ -55,6 +58,7 @@ export const OrderSummaryMain = styled.div`
 
 export const OrderSummaryOverView = styled.div`
     border:1px solid grey;
+    padding: 1vh 0vw 1vh 1vw;
 
     
 
@@ -97,6 +101,7 @@ export const OrderSummaryPaymentAndDeliverySection = styled.div`
 export const OrderSummaryInformationCard = styled.div`
     border: 1px solid grey;
     height: 40vh;
+    width: 23vw;
     
 
     .order-summary-info-title{
@@ -156,6 +161,7 @@ export const OrderSummaryRowContainer = styled.div `
     border-bottom: 1px solid grey;
     display: flex;
     flex-direction: row;
+    padding: 1vh 0vw 1vh 1vw;
     /* justify-content: space-between; */
 
     .order-summary-product-image{

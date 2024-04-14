@@ -100,7 +100,7 @@ const PaymentPage = () => {
         />
       )}
 
-      <Header />
+      {/* <Header /> */}
       <PaymentPageMainContainer>
         <PaymentPageContentContainer>
           <PaymentPageContent>

@@ -11,7 +11,7 @@ import {
   PrintStyledComponent, // Import the PrintStyledComponent
   Text, // Import the Text styled component
   // BorderedDiv, // Import the BorderedDiv styled component
-} from "./Receipt.Styled";
+} from "./Receipt.Styled"; 
 
 //component imports
 import ReceiptRow from "./ReceiptRow";
@@ -81,7 +81,7 @@ useEffect(()=>{
   return (
     <OrderSummaryWholeContainer>
       {isLoading && <PageLoader/>}
-      <Header />
+      {/* <Header /> */}
       <OrderSummaryMainContainer>
         <DownloadButtonsContainer>
           <ReactToPrint

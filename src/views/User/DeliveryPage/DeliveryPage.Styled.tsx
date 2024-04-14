@@ -15,6 +15,7 @@ export const DeliveryPageMainContainer = styled.div`
     /* border: 1px solid red; */
     padding: 1vh 24vw;
     height: 100vh;
+    margin-top: 7vh;
 
 `
 
@@ -42,7 +43,7 @@ export const DeliveryPageForm = styled.form`
     /* width: 50vw; */
 `
 export const DeliveryFormField = styled.div`
-    /* border: 1px solid pink; */
+    /* border: 1px solid pink; */ 
     margin-bottom: 2vh;
 
     .delivery-form-label{
