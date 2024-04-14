@@ -37,6 +37,7 @@ const Dashboard = () => {
   });
   const [totalPages, setTotalPages] = useState<number>(1);
   // const productsPerPage = 9;
+  
 
   //{category, search, sort, price, maxPrice, minPrice}
   useEffect(() => {
@@ -63,6 +64,7 @@ const Dashboard = () => {
         setTotalPages(Math.ceil(res.totalProductCount / +queryParams.pageSize));
       }
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryParams]);
 

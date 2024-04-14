@@ -9,27 +9,50 @@ import MiniAddToCartButton from "../MinimalAddtoCartButton/MiniAddToCartButton";
 import MiniAddToWishListButton from "../MinimalAddToWishListButton/MiniAddToWishListButton";
 import dummyProducts from "../../assets/products/dummy.png";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchWishListItemIds } from "../../api/wishlist";
 interface ProductProps {
   product: shopProductsInterface;
 }
 
 function AllProductsCard({ product }: ProductProps) {
+  const [wishListItemIds, setWishListItemIds] = useState<string[]>()
+  
+
+  useEffect(()=>{
+    fetchWishListItemIds().then((res)=>{
+      if(res){
+        setWishListItemIds(res)
+      }
+    })
+  },[wishListItemIds])
+
+
   const navigate = useNavigate();
   const handleProductClick = (productId: string) => {
     navigate(`/dashboard/description/${productId}`);
   };
 
+
+  const [isInWishList, setIsInWishList] = useState<boolean>(false)
+  const toggleIsInWishList = ()=>{
+    setIsInWishList(!isInWishList)
+  }
+
+    const checkIsInWishList = ()=>{
+      if(wishListItemIds?.includes(product?.productId)){
+      return true
+    } else return false
+    }
+    
+  
   // const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
 
   // const toggleQuantityModal = () => {
   //   setQuantityModalVisibility(!quantityModalVisibility);
   // };
 
-  const [isInWishList, setIsInWishList] = useState<boolean>(false)
-  const toggleIsInWishList = ()=>{
-    setIsInWishList(!isInWishList)
-  }
+  
 
   return (
     <AllProductsCardContainer>
@@ -69,7 +92,7 @@ function AllProductsCard({ product }: ProductProps) {
         /> */}
         <CartWishlistBtns>
           <MiniAddToCartButton productId={product.productId}/>
-          <MiniAddToWishListButton productId={product.productId} onClickAction={toggleIsInWishList} isInWishList={isInWishList}/>
+          <MiniAddToWishListButton productId={product.productId} onClickAction={toggleIsInWishList} isInWishList={checkIsInWishList()}/>
 
         </CartWishlistBtns>
         
