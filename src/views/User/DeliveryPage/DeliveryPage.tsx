@@ -134,7 +134,7 @@ const DeliveryPage = () => {
         />
       )}
 
-      <Header />
+      {/* <Header /> */}
       <DeliveryPageMainContainer>
         <DeliveryPageFormContainer>
           <p className="delivery-form-title">ORDER DELIVERY DETAILS</p>
