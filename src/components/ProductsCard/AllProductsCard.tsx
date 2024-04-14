@@ -17,6 +17,10 @@ interface ProductProps {
 
 function AllProductsCard({ product }: ProductProps) {
   const [wishListItemIds, setWishListItemIds] = useState<string[]>()
+   const [isInWishList, setIsInWishList] = useState<boolean>(false)
+  const toggleIsInWishList = ()=>{
+    setIsInWishList(!isInWishList)
+  }
   
 
   useEffect(()=>{
@@ -24,6 +28,9 @@ function AllProductsCard({ product }: ProductProps) {
       if(res){
         setWishListItemIds(res)
       }
+      if (res.includes(product.productId)){
+        setIsInWishList(true)
+      } else{ setIsInWishList(false)}
     })
   },[wishListItemIds])
 
@@ -34,16 +41,9 @@ function AllProductsCard({ product }: ProductProps) {
   };
 
 
-  const [isInWishList, setIsInWishList] = useState<boolean>(false)
-  const toggleIsInWishList = ()=>{
-    setIsInWishList(!isInWishList)
-  }
+ 
 
-    const checkIsInWishList = ()=>{
-      if(wishListItemIds?.includes(product?.productId)){
-      return true
-    } else return false
-    }
+   
     
   
   // const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
@@ -92,7 +92,7 @@ function AllProductsCard({ product }: ProductProps) {
         /> */}
         <CartWishlistBtns>
           <MiniAddToCartButton productId={product.productId}/>
-          <MiniAddToWishListButton productId={product.productId} onClickAction={toggleIsInWishList} isInWishList={checkIsInWishList()}/>
+          <MiniAddToWishListButton productId={product.productId} onClickAction={toggleIsInWishList} isInWishList={isInWishList}/>
 
         </CartWishlistBtns>
         
