@@ -10,7 +10,6 @@ import {
 
 //component imports
 import OrderItemRow from "./OrderItemRow";
-import Header from "../../../components/Header/Header";
 import traiderLogo from "../../../assets/traidr-logo-orange.png"
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
 import PageLoader from "../../../components/PageLoader/PageLoader";
@@ -140,7 +139,6 @@ const OrderPage = () => {
         />
       )}
 
-      {/* <Header /> */}
       <div className="backButton-container"><BackButton linkTo={"/user/my-cart"}/></div>
       <OrderPageMain>
         <div className="order-page-traidr-logo-container"><img src={traiderLogo} className="order-page-traidr-logo"/></div>
