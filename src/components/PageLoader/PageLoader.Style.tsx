@@ -6,7 +6,7 @@ export const PageLoaderWholeContainer =styled.div`
     width: 100vw;
     height: 100vh;
     padding: 14vh 25vw;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     background-color: white;
     
 `

@@ -112,7 +112,7 @@ const OrderPage = () => {
 
  return (
     <OrderPageContainer>
-      {isLoading && <PageLoader/>}
+      {isLoading && <div className="order-page-loader"><PageLoader/></div>}
       {confirmationModalVisibility && (
         <MultipurposeModal
           title={confirmationModalTitle}
@@ -127,7 +127,7 @@ const OrderPage = () => {
           title={orderCancelledModalTitle}
           message={orderCancelledModalMessage}
           onClickAction={orderCancelledmodalButtonAction}
-          cancelButton={true}
+          cancelButton={false}
         />
       )}
 

@@ -123,7 +123,7 @@ const togglePriceVisibility = ()=>{
               <img src={arrow} onClick={toggleColorsVisibility}/>
             </div>
           </SideBarCategoryTitle>
-
+          
           {colorsVisibility && colors.map((color: string, index: number) => {
             return (
               <fieldset key={index}>
@@ -141,6 +141,9 @@ const togglePriceVisibility = ()=>{
               </fieldset>
             );
           })}
+          <fieldset>
+            <input className="sidebar-filter-selection" id="colorInput" type="text" name={`color`} onChange={handleFilterChange} placeholder="Enter Color"/>
+          </fieldset>
           {/* <div className="sidebar-filter-selection-show-more-continer">
             <p className="sidebar-filter-selection-show-more-text">Show more</p>
             <img

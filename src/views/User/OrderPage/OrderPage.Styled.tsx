@@ -22,6 +22,12 @@ export const OrderPageContainer = styled.div`
 
     }
 
+    .order-page-loader{
+        position: fixed;
+        top:0vh;
+        left:0vw;
+    }
+
 `
 export const OrderPageMain = styled.div`
     border: 1px solid gainsboro;
@@ -60,7 +66,7 @@ export const OrderItemRowContiner = styled.div`
     border-right: 1px solid black; */
     /* border-top: 1px solid black; */
     margin-bottom: 2vh;
-    padding: 0vh 1.5vw 0vh 1.5vw;
+    padding: 1vh 1.5vw 1vh 1vw;
     box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 `
 
