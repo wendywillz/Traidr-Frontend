@@ -10,12 +10,13 @@ import MiniAddToWishListButton from "../MinimalAddToWishListButton/MiniAddToWish
 import dummyProducts from "../../assets/products/dummy.png";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchWishListItemIds } from "../../api/wishlist";
+
 interface ProductProps {
   product: shopProductsInterface;
+  wishListIds : string[] | undefined
 }
 
-function AllProductsCard({ product }: ProductProps) {
+function AllProductsCard({ product, wishListIds }: ProductProps) {
    const [isInWishList, setIsInWishList] = useState<boolean>(false)
   const toggleIsInWishList = ()=>{
     setIsInWishList(!isInWishList)
@@ -23,12 +24,10 @@ function AllProductsCard({ product }: ProductProps) {
   
 
   useEffect(()=>{
-    fetchWishListItemIds().then((res)=>{
-      if (res.includes(product.productId)){
-        setIsInWishList(true)
-      } else{ setIsInWishList(false)}
-    })
-  })
+   if(wishListIds?.includes(product.productId)){
+    setIsInWishList(true)
+   }else{setIsInWishList(false)}
+  }, [product, wishListIds])
 
 
   const navigate = useNavigate();
