@@ -7,3 +7,10 @@ export const fetchShopDetail = async (shopId: string) => {
   }
 };
 
+
+export const fetchShopOwnerDetails = async(shopId: string)=>{
+  const res = await axiosInstance.get(`/shop/get-shop-owner/${shopId}`)
+  if (res && res.data.shopOwner){
+    return res.data.shopOwner
+  }
+}
