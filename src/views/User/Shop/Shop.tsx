@@ -1,13 +1,14 @@
 import Header from "../../../components/Header/Header";
-import { ShopMainWrapper, ShopWholePageContainer } from "./Shop.Styled";
+import { ShopMainWrapper, ShopWholePageContainer, ShopOwnerContactDetails, ShopHeaderContainer } from "./Shop.Styled";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   shopInterface,
   shopProductsInterface,
+  ShopOwnerDetails
 } from "../../../interfaces/shopInterfaces";
 import SmallButton from "../../../components/button/smallButton/smallButton";
-import { fetchShopDetail } from "../../../api/shop";
+import { fetchShopDetail, fetchShopOwnerDetails } from "../../../api/shop";
 import { fetchProductsByShopId } from "../../../api/product";
 import BackButton from "../../../components/BackButton/BackButton";
 // import storeBackgroundplaceholder from "../../../assets/form-background-image.png"
@@ -18,6 +19,7 @@ const Shop = () => {
  // const [profileImage, setProfileImage] = useState<string | null>(null); // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [products, setProducts] = useState<shopProductsInterface[]>();
   const [shop, setShop] = useState<shopInterface>();
+  const [shopOwnerDetails, setShopOwnerDetails] = useState<ShopOwnerDetails>()
   const navigate = useNavigate();
 
   // fetch shop from database
@@ -38,6 +40,14 @@ const Shop = () => {
     });
   }, [shopId]);
 
+useEffect(()=>{
+  fetchShopOwnerDetails(shopId!).then((res:ShopOwnerDetails)=>{
+    if(res){
+      setShopOwnerDetails(res)
+    }
+  })
+},[shopId])
+
   const handleProductClick = (productId: string) => {
     navigate(`/dashboard/description/${productId}`);
   };
@@ -52,6 +62,11 @@ const Shop = () => {
 
       <ShopMainWrapper>
       {/* <div className="shop-profile-background-pic-container"><img src={storeBackgroundplaceholder} className="shop-profile-background-pic"/></div> */}
+      <ShopHeaderContainer>
+        <h1 className="shop-page-shop-name">{shop?.shopName}</h1>
+        <h4 className="shop-page-shop-description">{shop?.shopDescription}</h4>
+      </ShopHeaderContainer>
+      
         <div className="shop-profile-product-logo">
           <div className="shop-profile-productpicture">
             <img src={storeLogoplaceholder} className="shop-profile-logopimage"/>
@@ -59,16 +74,33 @@ const Shop = () => {
 
           <div className="shop-profile-productname">
             {shop && (
-              <>
-                <h3>{shop.shopName}</h3>
-                <span>{shop.shopDescription}</span>
-              </>
+              <div>
+                {/* <h3>{shop.shopName}</h3> */}
+                {/* <p className="shop-page-shop-description">{shop.shopDescription}</p> */}
+                <p className="shop-page-category">{shop.shopCategory}</p>
+                <p className="shop-address-info">{shop.shopStreetAddress}</p>
+                <p className="shop-address-info">{shop.shopCity}, {shop.shopState}</p>
+                <p className="shop-address-info">{shop.shopCountry}</p>
+              </div>
             )}
           </div>
+          <ShopOwnerContactDetails>
+            <p className="shop-owner-contact-title">Contact</p>
+            {shopOwnerDetails?.profilePic &&
+            <div className="shop-owner-profile-pic-container">
+              <img src={shopOwnerDetails?.profilePic}  id="shop-owner-profile-pic"/>
+              </div>}
+
+            <p className="shop-owner-name">{shopOwnerDetails?.name}</p>
+            <p className="shop-owner-email">{shopOwnerDetails?.email}</p>
+            {shopOwnerDetails?.phoneNumber && 
+            <p className="shop-owner-phoneNumber">Tel: 0{shopOwnerDetails?.phoneNumber}</p>
+            }
+          </ShopOwnerContactDetails>
         </div>
 
-        <div className="shop-profile-product-uploads">
-          <h3>Available Products</h3>
+        <div className="shop-product-uploads">
+          <h3 className="shop-page-title">Available Products</h3>
         </div>
         <div className="shop-profile-product-uploads-inner">
           <h3 className="product-list-title"></h3>

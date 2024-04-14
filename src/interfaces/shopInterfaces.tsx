@@ -65,3 +65,10 @@ export interface shopInterface {
   shopZipCode: string;
   shopOwner: string;
 }
+
+export interface ShopOwnerDetails{
+  email: string;
+  name:string;
+  phoneNumber:number|null;
+  profilePic: string|undefined|null;
+}

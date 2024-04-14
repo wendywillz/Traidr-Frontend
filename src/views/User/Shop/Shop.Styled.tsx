@@ -1,12 +1,35 @@
 import styled from "styled-components";
 
 export const ShopWholePageContainer = styled.div`
-  border: 1px solid blueviolet;
-
- 
-
+  /* border: 1px solid blueviolet; */
 `
 
+export const ShopHeaderContainer = styled.div`
+border: 2px solid black;
+border-radius: 15px;
+text-align: center;
+margin-top: 8vh;
+background-color: white;
+color: var(--orange-color);
+height: 10vw;
+padding-top: 3vh;
+
+.shop-page-shop-name{
+  font-size: 4vw;
+  font-family: 700;
+}
+
+.shop-page-shop-description{
+  margin-top:1vh;
+  font-size: 1.5vw;
+  font-weight: 500;
+  font-style: italic;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: black;
+}
+
+
+`
 
 export const ShopMainWrapper = styled.div`
   padding: 0rem 3rem;
@@ -71,18 +94,31 @@ export const ShopMainWrapper = styled.div`
     }
   }
 
+/* .shop-page-shop-description{
+  font-size: 1.5vw;
+  font-weight: 500;
+  font-style: italic;
+} */
+
+.shop-address-info{
+  font-size: 1vw;
+  font-weight:400;
+}
+
+
   .shop-profile-product-uploads {
-    h3 {
-      color: var(--black-color);
-      font-weight: 200;
-      margin-bottom: 1.5rem;
-    }
+   
+  }
+  .shop-page-title{
+    font-size:2.5vw;
+    font-weight: 400;
+    margin-bottom: 0vh;
   }
 
   .shop-profile-product-uploads-inner {
-    border: 1px solid var(--normal-text-color);
+    /* border: 1px solid var(--normal-text-color); */
     border-radius: 5px;
-    padding: 3rem 2rem 3rem 3rem;
+    padding: 1rem 2rem 3rem 0.5rem;
     h3 {
       color: var(--black-color);
       font-weight: 200;
@@ -129,6 +165,7 @@ export const ShopMainWrapper = styled.div`
     outline: 1px solid var(--normal-text-color);
     height: 30vh;
     padding: 1vh 0vw;
+    cursor: pointer;
     img {
       object-fit:contain;
       /* flex-basis: 90%; */
@@ -223,6 +260,60 @@ export const ShopMainWrapper = styled.div`
     }
   }
 
- 
+
+`
+
+
+export const ShopOwnerContactDetails = styled.div`
+/* border: 1px solid blue; */
+font-size: 1vw;
+font-weight: 400;
+margin-left: 43vw;
+margin-top: 5vh;
+
+.shop-owner-contact-title{
+  font-size: 1.5vw;
+  font-weight: 700;
+  color: var(--orange-color);
+  margin-bottom: 1vh;
+  text-align: center;
+  margin-left: 1.6vw;
+}
+
+.shop-owner-profile-pic-container{
+  margin-left: 3vw
+}
+
+#shop-owner-profile-pic{
+  /* object-position:center; */
+  object-fit: contain;
+  width: 10vw;
+  height: 11vh;
+  border-radius: 100%;
+  border:none;
+
+}
+
+.shop-owner-name{
+  font-size: 1vw;
+  font-weight: 700;
+  margin-left: 5vw;
+}
+
+.shop-owner-email{
+  font-size: 0.9vw;
+  font-weight: 500;
+  margin-left: 2vw
+}
+
+.shop-owner-phoneNumber{
+  font-size: 1vw;
+  font-weight: 500;
+  margin-left: 3vw
+}
+
+
+
+
 
 `
