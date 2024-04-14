@@ -16,7 +16,6 @@ interface ProductProps {
 }
 
 function AllProductsCard({ product }: ProductProps) {
-  const [wishListItemIds, setWishListItemIds] = useState<string[]>()
    const [isInWishList, setIsInWishList] = useState<boolean>(false)
   const toggleIsInWishList = ()=>{
     setIsInWishList(!isInWishList)
@@ -25,14 +24,11 @@ function AllProductsCard({ product }: ProductProps) {
 
   useEffect(()=>{
     fetchWishListItemIds().then((res)=>{
-      if(res){
-        setWishListItemIds(res)
-      }
       if (res.includes(product.productId)){
         setIsInWishList(true)
       } else{ setIsInWishList(false)}
     })
-  },[wishListItemIds])
+  })
 
 
   const navigate = useNavigate();
