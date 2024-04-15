@@ -1,5 +1,6 @@
 import userDataInterface from "../../interfaces/userInterface.tsx";
 import traidrLogo from "../../assets/traidr-logo-orange.png";
+import CartCounter from "../CartCounter/CartCounter.tsx";
 import "./HeaderStyle.tsx";
 import HeaderStyle from "./HeaderStyle.tsx";
 import { Link } from "react-router-dom";
@@ -10,6 +11,7 @@ import { useSelector } from "react-redux";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import UserProfileModal from "../UserProfileModal/UserProfileModal.tsx";
 import { fetchUserShopDetails } from "../../api/users.ts";
+
 
 interface userState {
   user: userDataInterface;
@@ -28,7 +30,8 @@ export default function Header() {
         setShopIdFromBackend(res);
       });
     }
-  }, []);
+   
+  },);
   // const handleNotificationClick = () => {
   //   setNotificationCount(0);
   // };
@@ -111,7 +114,9 @@ export default function Header() {
                       }}
                     />
                   </span>
+                 
                 </div>
+                 <div className="cart-count"><CartCounter/></div>
                 {shopIdFromBackend.trim() ? (
                   <Link
                     to={`/dashboard/shop-profile/${shopIdFromBackend}`}
@@ -168,6 +173,7 @@ export default function Header() {
                       />
                     </span>
                   </div>
+                  <div className="cart-count"><CartCounter/></div>
                   {isSeller ? (
                     <Link
                       to={`/dashboard/shop-profile/${shopIdFromBackend}`}
@@ -239,6 +245,7 @@ export default function Header() {
                     />
                   </span>
                 </div>
+                 <div className="cart-count"><CartCounter/></div>
                 {token ? (
                   <Link
                     to="/dashboard/shop-registration"
