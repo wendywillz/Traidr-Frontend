@@ -59,7 +59,6 @@ export const ProfileSettings = () => {
   const [displayedProfilePic, setDisplayedProfilePic] = useState<
     string | ReactNode
   >(currentUser.profileImage);
-  console.log("displayedProfilePic", displayedProfilePic);
   const [, setPhotoFile] = useState<File | null>(null);
   const [, setDisplayUploadedPhotoName] = useState<string>();
   const [, setPhotoDisplayError] = useState<string>();
@@ -145,11 +144,13 @@ export const ProfileSettings = () => {
         },
       });
       if (res && res.data.updatedUser) {
+        console.log("res.data", res.data);
         if (res.data.updatedUser.profilePic) {
           dispatch(setProfilePics(res.data.updatedUser.profilePic));
         }
         location.reload();
       }
+      console.log("res.data", res.data);
     } catch (error) {
       return error;
     }

@@ -6,7 +6,7 @@ import HeaderStyle from "./HeaderStyle.tsx";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { FaUser } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import UserProfileModal from "../UserProfileModal/UserProfileModal.tsx";
@@ -91,8 +91,8 @@ export default function Header() {
                       style={{
                         borderRadius: "50%",
                         overflow: "hidden",
-                        height: "100%",
-                        width: "100%",
+                        height: "2rem",
+                        width: "2rem",
                       }}
                     >
                       <img
@@ -103,11 +103,14 @@ export default function Header() {
                     </div>
                   ) : (
                     <div className="shop-profile-header-icon">
-                      <FaUser />
+                      <FaRegUser />
                     </div>
                   )}
+                  <span style={{ fontSize: "12px" }}>
+                    Hi, {userData.name.split(" ")[0]}
+                  </span>
                   <span className="user-drop-down-icon">
-                    <MdKeyboardArrowDown 
+                    <MdKeyboardArrowDown
                       style={{
                         transform: isRotate ? "rotate(180deg)" : "rotate(0deg)",
                         transition: "transform 0.3s ease-in-out",
@@ -159,7 +162,7 @@ export default function Header() {
                       </div>
                     ) : (
                       <div className="shop-profile-header-icon">
-                        <FaUser />
+                        <FaRegUser />
                       </div>
                     )}
                     <span className="user-drop-down-icon">
@@ -233,7 +236,7 @@ export default function Header() {
                     </div>
                   ) : (
                     <div className="shop-profile-header-icon">
-                      <FaUser />
+                      <FaRegUser />
                     </div>
                   )}
                   <span className="user-drop-down-icon">
