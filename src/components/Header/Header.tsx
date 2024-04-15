@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import userDataInterface from "../../interfaces/userInterface.tsx";
 import traidrLogo from "../../assets/traidr-logo-orange.png";
 import CartCounter from "../CartCounter/CartCounter.tsx";
