@@ -37,6 +37,7 @@ import userData from "../../../../interfaces/userInterface";
 // import BackButton from "../../../../components/BackButton/BackButton";
 import SmallButton from "../../../../components/button/smallButton/smallButton";
 import BackButton from "../../../../components/BackButton/BackButton";
+import { Link } from "react-router-dom";
 
 export const ProfileSettings = () => {
   //fetching the user
@@ -312,21 +313,36 @@ export const ProfileSettings = () => {
                     Shop name
                   </label>
                   <br />
-                  <input
-                    id="shopNameInput"
-                    name="shopName"
-                    type="text"
-                    placeholder={
-                      currentUser.shopName
-                        ? currentUser.shopName
-                        : "You're not yet a seller, click on start selling above"
-                    }
-                    className="profile-seetings-form-input"
-                    value={currentUser.shopName}
-                    disabled
-                    onChange={handleChange}
-                    style={{ cursor: "not-allowed" }}
-                  />
+                  {currentUser.shopName ? (
+                    <input
+                      id="shopNameInput"
+                      name="shopName"
+                      type="text"
+                      className="profile-seetings-form-input"
+                      value={currentUser.shopName}
+                      disabled
+                      onChange={handleChange}
+                      style={{ cursor: "not-allowed" }}
+                    />
+                  ) : (
+                    <p
+                      style={{
+                        fontSize: ".9rem",
+                        marginTop: "1rem",
+                        color: "grey",
+                        fontWeight: "500",
+                      }}
+                    >
+                      You have not set up a shop yet. Please click{" "}
+                      <Link
+                        to="/dashboard/shop-registration"
+                        style={{ color: "var(--orange-color)" }}
+                      >
+                        here
+                      </Link>{" "}
+                      to set up a shop
+                    </p>
+                  )}
                 </div>
               </FormSectionContainer>
               {/*RIGHT SIDE OF FORM */}

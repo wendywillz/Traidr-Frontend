@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const UserProfileModalContainer = styled.div`
   background-color: white;
   width: 20rem;
-  min-height: 45vh;
+  min-height: 5rem;
   border-radius: 4px;
   position: fixed;
   overflow: hidden;
@@ -78,14 +78,10 @@ export const ModalHeader = styled.div`
 
 export const ModalBody = styled.div`
   background-color: white;
-  height: 35vh;
-  padding: 1vh 1rem;
+  padding: 1rem;
   /* border: 3px solid gold; */
   a {
     text-decoration: none;
-  }
-  .user-profile-modal-link-container {
-    margin-bottom: 2vh;
   }
 
   .user-profile-modal-link-text-and-icon-container {

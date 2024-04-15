@@ -5,13 +5,12 @@ import CartCounter from "../CartCounter/CartCounter.tsx";
 import "./HeaderStyle.tsx";
 import HeaderStyle from "./HeaderStyle.tsx";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import UserProfileModal from "../UserProfileModal/UserProfileModal.tsx";
-import { fetchUserShopDetails } from "../../api/users.ts";
-
+// import { fetchUserShopDetails } from "../../api/users.ts";
 
 interface userState {
   user: userDataInterface;
@@ -21,17 +20,16 @@ export default function Header() {
 
   // const [notificationCount, setNotificationCount] = useState(0);
   const token = localStorage.getItem("token");
-  const isSeller = useSelector((state: userState) => state.user.isSeller);
-  const [shopIdFromBackend, setShopIdFromBackend] = useState("");
+  // const isSeller = useSelector((state: userState) => state.user.isSeller);
+  // const [shopIdFromBackend, setShopIdFromBackend] = useState("");
   const [isRotate, setIsRotate] = useState(false);
-  useEffect(() => {
-    if (isSeller) {
-      fetchUserShopDetails().then((res) => {
-        setShopIdFromBackend(res);
-      });
-    }
-   
-  },);
+  // useEffect(() => {
+  //   if (isSeller) {
+  //     fetchUserShopDetails().then((res) => {
+  //       setShopIdFromBackend(res);
+  //     });
+  //   }
+  // });
   // const handleNotificationClick = () => {
   //   setNotificationCount(0);
   // };
@@ -115,10 +113,11 @@ export default function Header() {
                       }}
                     />
                   </span>
-                 
                 </div>
-                 <div className="cart-count"><CartCounter/></div>
-                {shopIdFromBackend.trim() ? (
+                <div className="cart-count">
+                  <CartCounter />
+                </div>
+                {/* {shopIdFromBackend.trim() ? (
                   <Link
                     to={`/dashboard/shop-profile/${shopIdFromBackend}`}
                     className="header-right-signup-btn big-screen"
@@ -132,7 +131,7 @@ export default function Header() {
                   >
                     Start Selling
                   </Link>
-                )}
+                )} */}
               </>
             ) : (
               <>

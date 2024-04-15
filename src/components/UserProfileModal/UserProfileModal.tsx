@@ -133,19 +133,20 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
             </div>
           </Link>
 
-          <Link
-            to={
-              shopIdFromBackend.trim()
-                ? `/dashboard/shop-profile/${shopIdFromBackend}`
-                : `/dashboard/shop-registration`
-            }
-            onClick={toggleVissiblity}
-          >
-            <div className="user-profile-modal-link-text-and-icon-container">
-              <img src={myShopIcon} className="user-profile-modal-link-icon" />
-              <p className="user-profile-modal-link-text">My Shop</p>
-            </div>
-          </Link>
+          {shopIdFromBackend.trim() && (
+            <Link
+              to={`/dashboard/shop-profile/${shopIdFromBackend}`}
+              onClick={toggleVissiblity}
+            >
+              <div className="user-profile-modal-link-text-and-icon-container">
+                <img
+                  src={myShopIcon}
+                  className="user-profile-modal-link-icon"
+                />
+                <p className="user-profile-modal-link-text">My Shop</p>
+              </div>
+            </Link>
+          )}
         </div>
         <hr />
         <div className="user-profile-modal-link-container">
