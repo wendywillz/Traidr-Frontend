@@ -1,18 +1,29 @@
 // import { images } from "./index";
 import { IoIosTimer } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import "./TopDescription.css";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { MdOutlineChat } from "react-icons/md";
-import { shopProductsInterface } from "../../interfaces/shopInterfaces";
+import { shopProductsInterface, ShopOwnerDetails } from "../../interfaces/shopInterfaces";
 // import { useParams } from "react-router-dom";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
 import AddToWishListButton from "../AddToWishListButton/AddToWishListButton";
+import { fetchShopOwnerDetails } from "../../api/shop";
 
 function TopDescription({ ...props }: shopProductsInterface) {
+  const [shopOwnerDetails, setShopOwnerDetails] = useState<ShopOwnerDetails>()
   const [selectedOption, setSelectedOption] = useState("");
+
+  useEffect(()=>{
+    fetchShopOwnerDetails(props.shopId).then((res:ShopOwnerDetails)=>{
+    if(res){
+      setShopOwnerDetails(res)
+    }
+  })
+
+})
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(e.target.value);
@@ -105,7 +116,8 @@ function TopDescription({ ...props }: shopProductsInterface) {
 
             <div className="user-info">
             
-              <FaUserCircle style={{ width: "5rem", height: "5rem" }} />
+               {shopOwnerDetails?.profilePic? <img src={shopOwnerDetails.profilePic} className="shop-owner-profile-pic"/>:
+              <FaUserCircle style={{ width: "5rem", height: "5rem" }} />}
 
               <div className="data-group">
                 <p>{props.shopOwner}</p>
