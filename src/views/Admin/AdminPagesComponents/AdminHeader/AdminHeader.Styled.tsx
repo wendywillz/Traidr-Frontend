@@ -58,10 +58,20 @@ const HeaderStyle = styled.header`
     outline: none:
   }
   .user-profile-img-wrapper {
-    height: 4rem;
-    width: 4rem;
+height: 2.5rem;
+    min-width: 2.5rem;
+    cursor: pointer;
+    display: flex;
+    gap: .5rem;
+    color: #000000;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s;
   }
-
+  .user-profile-img-wrapper:hover {
+    color: var(--orange-color);
+    transition: all 0.3s;
+  }
   .user-profile-img-wrapper img {
     max-width: 100%;
     height: 100%;

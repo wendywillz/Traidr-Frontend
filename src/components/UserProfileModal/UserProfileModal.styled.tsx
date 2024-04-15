@@ -42,9 +42,6 @@ export const ModalHeader = styled.div`
   padding: 1rem;
 
   .user-profile-modal-user-image-container {
-    margin-top: 1vh;
-    background-color: grey;
-    height: 7vh;
     border-radius: 100%;
     margin-right: 1rem;
     /* border: 1px solid pink; */

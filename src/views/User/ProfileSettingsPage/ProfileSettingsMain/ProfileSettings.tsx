@@ -36,7 +36,6 @@ interface UserDetails {
 import userData from "../../../../interfaces/userInterface";
 // import BackButton from "../../../../components/BackButton/BackButton";
 import SmallButton from "../../../../components/button/smallButton/smallButton";
-import BackButton from "../../../../components/BackButton/BackButton";
 import { Link } from "react-router-dom";
 
 export const ProfileSettings = () => {
@@ -170,7 +169,6 @@ export const ProfileSettings = () => {
       />
       <ProfileSettingsPageContainer>
         <Header />
-        <BackButton linkTo={"/dashboard"} />
         <ProfileFormsContainer>
           <ProfileNavigation />
 
@@ -436,7 +434,9 @@ export const ProfileSettings = () => {
               }}
             >
               <SmallButton button_text="Save changes" type="submit" />
-              <SmallButton button_text="Cancel" type="button" whiteBg={true} />
+              <Link className="profile-cancel-btn" to="/dashboard">
+                Cancel
+              </Link>
             </div>
           </UserDetailsForm>
         </ProfileFormsContainer>

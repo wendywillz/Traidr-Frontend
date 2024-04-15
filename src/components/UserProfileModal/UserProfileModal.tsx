@@ -16,13 +16,13 @@ import logouticon from "../../assets/user-profile-modal-assets/logout-icon.png";
 import { BsHeart } from "react-icons/bs";
 
 //package imports
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import userData from "../../interfaces/userInterface";
 import { useEffect, useState } from "react";
 import { fetchUserShopDetails } from "../../api/users";
 import { RootState } from "../../app/store";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaUserCircle } from "react-icons/fa";
 
 interface userProfileProps {
   toggleVissiblity: () => void;
@@ -31,6 +31,7 @@ interface userState {
   user: userData;
 }
 const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
+  const location = useLocation();
   const token = localStorage.getItem("token");
   const handleLogout = () => {
     toggleVissiblity();
@@ -93,7 +94,11 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
                 alignItems: "center",
               }}
             >
-              <FaUser style={{ fontSize: "2rem" }} />
+              {location.pathname.startsWith("/admin") ? (
+                <FaUserCircle style={{ fontSize: "2rem" }} />
+              ) : (
+                <FaUser style={{ fontSize: "2rem" }} />
+              )}
             </div>
           )}
           {/* <img src={userIcon} className="user-profile-modal-user-image" /> */}
@@ -106,7 +111,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
             to={token ? "/dashboard/user/edit-profile" : "/"}
             onClick={toggleVissiblity}
             style={{
-              fontSize: "0.9rem",
+              fontSize: "0.7rem",
               fontWeight: "500",
               color: "#ffffff",
               textDecoration: "none",
@@ -148,39 +153,43 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
             </Link>
           )}
         </div>
-        <hr />
-        <div className="user-profile-modal-link-container">
-          <Link to={token ? "/user/my-cart" : "/"} onClick={toggleVissiblity}>
-            <div className="user-profile-modal-link-text-and-icon-container">
-              <img src={cartIcon} className="user-profile-modal-link-icon" />
-              <p className="user-profile-modal-link-text">Cart</p>
-            </div>
-          </Link>
 
-          <Link to={token ? "/user/my-orders" : "/"} onClick={toggleVissiblity}>
-            <div className="user-profile-modal-link-text-and-icon-container">
-              <img
-                src={orderListIcon}
-                className="user-profile-modal-link-icon"
-              />
-              <p className="user-profile-modal-link-text">Orders</p>
-            </div>
-          </Link>
+        {!location.pathname.startsWith("/admin") && (
+          <div className="user-profile-modal-link-container">
+            <Link to={token ? "/user/my-cart" : "/"} onClick={toggleVissiblity}>
+              <div className="user-profile-modal-link-text-and-icon-container">
+                <img src={cartIcon} className="user-profile-modal-link-icon" />
+                <p className="user-profile-modal-link-text">Cart</p>
+              </div>
+            </Link>
 
-          <Link
-            to={token ? "/user/my-wishlist" : "/login"}
-            onClick={toggleVissiblity}
-          >
-            <div className="user-profile-modal-link-text-and-icon-container">
-              <BsHeart
-                color="#E04F16"
-                className="user-profile-modal-link-icon"
-              />
-              <p className="user-profile-modal-link-text">Wishlist</p>
-            </div>
-          </Link>
-        </div>
-        <hr />
+            <Link
+              to={token ? "/user/my-orders" : "/"}
+              onClick={toggleVissiblity}
+            >
+              <div className="user-profile-modal-link-text-and-icon-container">
+                <img
+                  src={orderListIcon}
+                  className="user-profile-modal-link-icon"
+                />
+                <p className="user-profile-modal-link-text">Orders</p>
+              </div>
+            </Link>
+
+            <Link
+              to={token ? "/user/my-wishlist" : "/login"}
+              onClick={toggleVissiblity}
+            >
+              <div className="user-profile-modal-link-text-and-icon-container">
+                <BsHeart
+                  color="#E04F16"
+                  className="user-profile-modal-link-icon"
+                />
+                <p className="user-profile-modal-link-text">Wishlist</p>
+              </div>
+            </Link>
+          </div>
+        )}
         <div className="user-profile-modal-link-container">
           <Link to={"/"} onClick={handleLogout}>
             <div className="user-profile-modal-link-text-and-icon-container">

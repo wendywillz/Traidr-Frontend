@@ -3,6 +3,22 @@ import styled from "styled-components";
 export const ProfileSettingsPageContainer = styled.div`
   height: 100vh;
   width: 100vw;
+  .profile-cancel-btn {
+    background-color: #ffffff;
+    color: var(--orange-color);
+    font-size: 1rem;
+    border-radius: 5px;
+    width: 10rem;
+    height: 3rem;
+    cursor: pointer;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--orange-color);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+  }
 `;
 
 export const ProfileFormsContainer = styled.div`
