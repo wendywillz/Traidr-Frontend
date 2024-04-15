@@ -6,7 +6,6 @@ export const DescriptionWholePageContainer = styled.div`
     /* border: 1px solid blue;
     height: 0.1vh; */
 }
-
 `
 
 export const DescriptionContainer = styled.div`
