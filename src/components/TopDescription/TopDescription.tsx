@@ -31,10 +31,11 @@ function TopDescription({ ...props }: shopProductsInterface) {
       <section className="display">
         <div className="top-description-page-wrapper">
           <ul className="home-search">
-            <Link to="/">Home /</Link>
-            <Link to="/dashboard/">Search /</Link>
-            <Link to="">Home appliances</Link>
-            <Link to="">Home appliances</Link>
+            <Link to="/" className="description-page-link">Home /</Link>
+            <Link to="/dashboard/" className="description-page-link">Search /</Link>
+            <Link to="" className="description-page-link">{props.productCategory}/</Link>
+            <Link to={`/dashboard/shop/${props.shopId}`} className="description-page-link">{props.shopName}</Link>
+            
           </ul>
 
           <div className="product-description-image-wrapper">
@@ -50,8 +51,8 @@ function TopDescription({ ...props }: shopProductsInterface) {
           <div className="views">
             <div>
               <p className="views-time"> 3 Views in the last 2 minutes </p>
-              <p className="price">₦{props.productPrice}</p>
-            <Link to={`/dashboard/shop/${props.shopId}`}>
+              <p className="price">₦{props.productPrice.toLocaleString()}</p>
+            <Link to={`/dashboard/shop/${props.shopId}`} className="description-page-link">
             <p className="store">{props.shopName}</p>
               </Link> 
               <p className="hens-product">{props.productTitle}</p>
@@ -103,6 +104,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
             </div>
 
             <div className="user-info">
+            
               <FaUserCircle style={{ width: "5rem", height: "5rem" }} />
 
               <div className="data-group">

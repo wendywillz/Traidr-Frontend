@@ -9,12 +9,12 @@ import {
 import arrow from "../../../../assets/dashboard-assets/inverted_caret.png";
 // import orangeArrow from "../../../../assets/dashboard-assets/orange_inverted_caret.png";
 import { fetchProductsCategories, fetchProductsColors } from "../../../../api/product";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 
 //Prop declaration:
 interface Props {
   handleFilterChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  handleReset: (event:any)=>void;
+  handleReset: (event:MouseEvent)=>void;
 }
 
 const SideBar = ({ handleFilterChange, handleReset }: Props) => {

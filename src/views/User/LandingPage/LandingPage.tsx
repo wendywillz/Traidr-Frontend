@@ -133,6 +133,7 @@ export default function LandingPage() {
                     <AllProductsCard
                       key={product.productId}
                       product={product}
+                      wishListIds={undefined}
                     />
                   );
                 })

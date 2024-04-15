@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 
 interface ProductProps {
   product: shopProductsInterface;
-  wishListIds : string[] | undefined
+  wishListIds : string[] | undefined;
 }
 
 function AllProductsCard({ product, wishListIds }: ProductProps) {
