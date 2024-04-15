@@ -5,6 +5,12 @@
   align-items: center;
   width: 100%;
 }
+
+/* .description-page-link{
+  text-decoration: none;
+  color: black; 
+} */
+
 .top-description-page-wrapper {
   width: 100%;
 }
@@ -35,6 +41,7 @@
   list-style-type: none;
   gap: 3px;
   color: black;
+  margin-left: 1vw;
 }
 
 .sec-section {
@@ -42,6 +49,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  padding: 5vh 1vw 0vh 1vw;
 }
 
 .views-time {
@@ -54,7 +62,7 @@
   margin-bottom: 1rem;
   font-size: 2rem;
   font-weight: 700;
-  color: var(--black-color);
+  color: var(--price-green-color);
 }
 
 .store {
@@ -63,6 +71,7 @@
   height: 28px;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  text-decoration: none;
 }
 
 .hens-product {
