@@ -45,7 +45,7 @@ const AddQuantityModal = ({ productId, toggleVisibility }: ModalProps) => {
 
   useEffect(() => {
     setCartData({ ...cartData, productQuantity: quantity });
-  }, [quantity]);
+  }, [cartData, quantity]);
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
   };

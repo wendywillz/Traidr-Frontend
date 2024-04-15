@@ -8,6 +8,7 @@ import {
   ShopOwnerDetails
 } from "../../../interfaces/shopInterfaces";
 import SmallButton from "../../../components/button/smallButton/smallButton";
+import { BsPersonCircle } from "react-icons/bs";
 import { fetchShopDetail, fetchShopOwnerDetails } from "../../../api/shop";
 import { fetchProductsByShopId } from "../../../api/product";
 import BackButton from "../../../components/BackButton/BackButton";
@@ -68,28 +69,33 @@ useEffect(()=>{
       </ShopHeaderContainer>
       
         <div className="shop-profile-product-logo">
-          <div className="shop-profile-productpicture">
-            <img src={storeLogoplaceholder} className="shop-profile-logopimage"/>
-          </div>
-
-          <div className="shop-profile-productname">
-            {shop && (
-              <div>
-                {/* <h3>{shop.shopName}</h3> */}
-                {/* <p className="shop-page-shop-description">{shop.shopDescription}</p> */}
-                <p className="shop-page-category">{shop.shopCategory}</p>
-                <p className="shop-address-info">{shop.shopStreetAddress}</p>
-                <p className="shop-address-info">{shop.shopCity}, {shop.shopState}</p>
-                <p className="shop-address-info">{shop.shopCountry}</p>
-              </div>
-            )}
+          <div className="shop-owner-pic-and-details">
+            <div className="shop-profile-productpicture">
+              <img src={storeLogoplaceholder} className="shop-profile-logopimage"/>
+            </div>
+            <div className="shop-profile-productname">
+              {shop && (
+                <div>
+                  {/* <h3>{shop.shopName}</h3> */}
+                  {/* <p className="shop-page-shop-description">{shop.shopDescription}</p> */}
+                  <p className="shop-page-category">{shop.shopCategory}</p>
+                  <p className="shop-address-info">{shop.shopStreetAddress}</p>
+                  <p className="shop-address-info">{shop.shopCity}, {shop.shopState}</p>
+                  <p className="shop-address-info">{shop.shopCountry}</p>
+                </div>
+              )}
+            </div>
           </div>
           <ShopOwnerContactDetails>
             <p className="shop-owner-contact-title">Contact</p>
-            {shopOwnerDetails?.profilePic &&
+            {shopOwnerDetails?.profilePic?
             <div className="shop-owner-profile-pic-container">
               <img src={shopOwnerDetails?.profilePic}  id="shop-owner-profile-pic"/>
-              </div>}
+              </div>:
+              <div className="shop-owner-profile-pic-container">
+              <BsPersonCircle size={'7vw'}/>
+              </div>
+              }
 
             <p className="shop-owner-name">{shopOwnerDetails?.name}</p>
             <p className="shop-owner-email">{shopOwnerDetails?.email}</p>
