@@ -441,23 +441,27 @@ export const ProfileSettings = () => {
                   />
                 </div>
 
-                <div className="profile-settings-form-label-and-input-container">
-                  <label
-                    htmlFor="addressInput"
-                    className="profile-settings-form-label"
-                  >
-                    Residential Address
-                  </label>
-                  <br />
-                  <textarea
-                    id="addressInput"
-                    name="address"
-                    placeholder="32, Rasaq Eletu Street, Osapa London, Lagos"
-                    className="profile-seetings-form-textarea"
-                    value={userDetails.address}
-                    onChange={handleChange}
-                  ></textarea>
-                </div>
+                {!location.pathname.startsWith("/admin") ? (
+                  <div className="profile-settings-form-label-and-input-container">
+                    <label
+                      htmlFor="addressInput"
+                      className="profile-settings-form-label"
+                    >
+                      Residential Address
+                    </label>
+                    <br />
+                    <textarea
+                      id="addressInput"
+                      name="address"
+                      placeholder="32, Rasaq Eletu Street, Osapa London, Lagos"
+                      className="profile-seetings-form-textarea"
+                      value={userDetails.address}
+                      onChange={handleChange}
+                    ></textarea>
+                  </div>
+                ) : (
+                  ""
+                )}
               </FormSectionContainer>
             </UserDetailsSection>
 
