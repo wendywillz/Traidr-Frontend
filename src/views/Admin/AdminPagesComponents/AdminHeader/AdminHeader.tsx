@@ -17,7 +17,6 @@ export default function AdminHeader() {
     setIsRotate(!isRotate);
     setProfileModalVisibility(!profileModalVisibility);
   };
-
   return (
     <>
       {profileModalVisibility && (
@@ -36,15 +35,14 @@ export default function AdminHeader() {
               className="user-profile-img-wrapper"
               onClick={toggleProfileModal}
             >
-              {userData &&
-              userData.profilePic &&
-              !userData.profilePic?.toString().includes("undefined") ? (
+              {userData && userData.profilePic.trim() ? (
                 <div
                   style={{
                     borderRadius: "50%",
                     overflow: "hidden",
                     height: "2rem",
                     width: "2rem",
+                    backgroundColor: "red",
                   }}
                 >
                   <img

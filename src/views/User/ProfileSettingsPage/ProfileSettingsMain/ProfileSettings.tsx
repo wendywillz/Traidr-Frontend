@@ -86,7 +86,6 @@ export const ProfileSettings = () => {
       if (res && res.data.user) {
         dispatch(setProfilePics(res.data.user.profilePic));
         dispatch(login(res.data.user));
-        location.reload();
         setIsOpen(false);
         location.reload();
       }
