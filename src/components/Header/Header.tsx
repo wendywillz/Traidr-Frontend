@@ -4,7 +4,6 @@ import CartCounter from "../CartCounter/CartCounter.tsx";
 import "./HeaderStyle.tsx";
 import HeaderStyle from "./HeaderStyle.tsx";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
@@ -35,7 +34,6 @@ export default function Header() {
   // const handleNotificationClick = () => {
   //   setNotificationCount(0);
   // };
-  const location = useLocation();
   const userData = useSelector((state: userState) => state.user);
   // useEffect(() => {
 
