@@ -66,8 +66,7 @@ export default function Header() {
           </div>
           <div className="header-right-btn-wrapper">
             <i className="fa-solid fa-bars small-screen-icon"></i>
-            {location.pathname.includes("dashboard") ||
-            location.pathname.includes("user") ? (
+            {token ? (
               <>
                 {/* <div
                   className="shop-profile-notification-wrapper"
@@ -136,142 +135,17 @@ export default function Header() {
                   </Link>
                 )}
               </>
-            ) : location.pathname === "/" ? (
-              token ? (
-                <>
-                  <div
-                    className="user-profile-img-wrapper"
-                    onClick={toggleProfileModal}
-                  >
-                    {userData &&
-                    userData.profileImage &&
-                    !userData.profileImage?.toString().includes("undefined") ? (
-                      <div
-                        style={{
-                          borderRadius: "50%",
-                          overflow: "hidden",
-                          height: "100%",
-                          width: "100%",
-                        }}
-                      >
-                        <img
-                          src={userData?.profileImage}
-                          alt=""
-                          onClick={toggleProfileModal}
-                        />
-                      </div>
-                    ) : (
-                      <div className="shop-profile-header-icon">
-                        <FaRegUser />
-                      </div>
-                    )}
-                    <span className="user-drop-down-icon">
-                      <MdKeyboardArrowDown
-                        style={{
-                          transform: isRotate
-                            ? "rotate(180deg)"
-                            : "rotate(0deg)",
-                          transition: "transform 0.3s ease-in-out",
-                        }}
-                      />
-                    </span>
-                  </div>
-                  <div className="cart-count"><CartCounter/></div>
-                  {isSeller ? (
-                    <Link
-                      to={`/dashboard/shop-profile/${shopIdFromBackend}`}
-                      className="header-right-signup-btn big-screen"
-                    >
-                      Go to Shop
-                    </Link>
-                  ) : (
-                    <Link
-                      to="/dashboard/shop-registration"
-                      className="header-right-signup-btn big-screen"
-                    >
-                      Start Selling
-                    </Link>
-                  )}
-                </>
-              ) : (
-                <>
-                  <>
-                    <Link
-                      to="/login"
-                      className="header-right-login-btn big-screen"
-                    >
-                      Login
-                    </Link>
-                    <Link
-                      to="/signup"
-                      className="header-right-signup-btn big-screen"
-                    >
-                      Sign Up
-                    </Link>
-                  </>
-                </>
-              )
             ) : (
               <>
-                <div
-                  className="user-profile-img-wrapper"
-                  onClick={toggleProfileModal}
+                <Link to="/login" className="header-right-login-btn big-screen">
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="header-right-signup-btn big-screen"
                 >
-                  {userData &&
-                  userData.profileImage &&
-                  !userData.profileImage?.toString().includes("undefined") ? (
-                    <div
-                      style={{
-                        borderRadius: "50%",
-                        overflow: "hidden",
-                        height: "100%",
-                        width: "100%",
-                      }}
-                    >
-                      <img
-                        src={userData?.profileImage}
-                        alt=""
-                        onClick={toggleProfileModal}
-                      />
-                    </div>
-                  ) : (
-                    <div className="shop-profile-header-icon">
-                      <FaRegUser />
-                    </div>
-                  )}
-                  <span className="user-drop-down-icon">
-                    <MdKeyboardArrowDown
-                      style={{
-                        transform: isRotate ? "rotate(180deg)" : "rotate(0deg)",
-                        transition: "transform 0.3s ease-in-out",
-                      }}
-                    />
-                  </span>
-                </div>
-                 <div className="cart-count"><CartCounter/></div>
-                {token ? (
-                  <Link
-                    to="/dashboard/shop-registration"
-                    className="header-right-signup-btn big-screen"
-                  >
-                    Start Selling
-                  </Link>
-                ) : (
-                  <>
-                    <Link
-                      to="/login"
-                      className="header-right-login-btn big-screen"
-                    >
-                      Login
-                    </Link>
-                    <Link
-                      to="/signup"
-                      className="header-right-signup-btn big-screen"
-                    >
-                      Sign Up
-                    </Link>
-                  </>
-                )}
+                  Sign Up
+                </Link>
               </>
             )}
           </div>
