@@ -25,7 +25,7 @@ export default function Description() {
         return setProducts(res);
       }
     });
-  }, []);
+  }, [productId]);
   return (
     <DescriptionWholePageContainer>
       <Header />
