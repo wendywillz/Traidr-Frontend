@@ -56,7 +56,6 @@ export const ProfileSettings = () => {
     profilePic: currentUser.profilePic,
   });
   const dispatch = useDispatch();
-
   //Logic for handling photo upload and changing the displayed picture
   const [displayedProfilePic, setDisplayedProfilePic] = useState<
     string | ReactNode
@@ -68,22 +67,26 @@ export const ProfileSettings = () => {
 
   const handleDeleteProfilePic = async () => {
     setDisplayedProfilePic(<BsPersonCircle size={"9vw"} />);
-    setUserDetails({ ...userDetails, profilePic: null });
-    const formData = new FormData();
+    setUserDetails({ ...userDetails, profilePic: "" });
 
     try {
-      for (const key in userDetails) {
-        formData.append(key, userDetails[key as keyof UserDetails] as string);
+      const updatedUserDetails = { ...userDetails, profilePic: "" };
+      const formData = new FormData();
+      for (const key in updatedUserDetails) {
+        formData.append(
+          key,
+          updatedUserDetails[key as keyof UserDetails] as string
+        );
       }
       const res = await axiosInstance.post(`/users/edit-profile`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      if (res && res.data.updatedUser) {
-        if (res.data.updatedUser.profilePic) {
-          dispatch(setProfilePics(res.data.updatedUser.profilePic));
-        }
+      if (res && res.data.user) {
+        dispatch(setProfilePics(res.data.user.profilePic));
+        dispatch(login(res.data.user));
+        location.reload();
         setIsOpen(false);
         location.reload();
       }
