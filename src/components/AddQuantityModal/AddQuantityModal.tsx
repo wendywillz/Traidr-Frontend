@@ -65,6 +65,7 @@ const AddQuantityModal = ({ productId, toggleVisibility }: ModalProps) => {
       // event.preventDefault()
       try {
         await axiosInstance.post(`/cart/add-to-cart/`, cartData);
+        
       } catch (error) {
         return error;
       }
