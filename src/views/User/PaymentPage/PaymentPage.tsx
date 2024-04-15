@@ -7,7 +7,6 @@ import {
   PaymentPageButton,
 } from "./PaymentPage.Styled";
 
-
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
 import paystackLogo from "../../../assets/paystack_icon.png";
 import { useState } from "react";
@@ -43,7 +42,7 @@ const PaymentPage = () => {
   // const purchaseModalButtonAction = () => {
   //   navigate("/order/receipt");
   // };
-  
+
   // const togglePurchaseModal = ()=>{
   //   setPurchaseModalVisibility(!purchaseModalVisibility)
   // }
@@ -53,11 +52,10 @@ const PaymentPage = () => {
       const res = await axiosInstance.post(`/sale/complete-sale`);
       if (res) {
         setPurchaseModalVisibility(false);
-        navigate("/order/receipt")
-        console.log(`Payment complete. Sale processed`);
+        navigate("/order/receipt");
       }
     } catch (error) {
-      console.log(`Problem processing payment. Reason:`, error);
+      return error;
     }
   };
 
@@ -67,10 +65,9 @@ const PaymentPage = () => {
       if (res) {
         setConfirmCancelModalVisibility(false);
         setOrderCancelledModalVisibility(true);
-        console.log(`ORDER CANCELLED`);
       }
     } catch (error) {
-      console.log(`Problem canceling sale`, error);
+      return error;
     }
   };
 
@@ -100,7 +97,6 @@ const PaymentPage = () => {
         />
       )}
 
-      
       <PaymentPageMainContainer>
         <PaymentPageContentContainer>
           <PaymentPageContent>

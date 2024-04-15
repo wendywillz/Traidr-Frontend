@@ -37,8 +37,8 @@ export default function AdminHeader() {
               onClick={toggleProfileModal}
             >
               {userData &&
-              userData.profileImage &&
-              !userData.profileImage?.toString().includes("undefined") ? (
+              userData.profilePic &&
+              !userData.profilePic?.toString().includes("undefined") ? (
                 <div
                   style={{
                     borderRadius: "50%",
@@ -48,7 +48,7 @@ export default function AdminHeader() {
                   }}
                 >
                   <img
-                    src={userData?.profileImage}
+                    src={userData?.profilePic}
                     alt=""
                     onClick={toggleProfileModal}
                   />

@@ -11,15 +11,16 @@ const AdminDashboardStyle = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 0 2rem 2rem 2rem;
 
-  .admin-side-bar-logo-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  // .admin-side-bar-logo-wrapper {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  // }
   .admin-side-bar-content {
+    margin-top: 6rem;
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+
   }
 
   .admin-side-bar-each-content {

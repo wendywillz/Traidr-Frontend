@@ -16,7 +16,7 @@ import logouticon from "../../assets/user-profile-modal-assets/logout-icon.png";
 import { BsHeart } from "react-icons/bs";
 
 //package imports
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import userData from "../../interfaces/userInterface";
 import { useEffect, useState } from "react";
@@ -31,7 +31,6 @@ interface userState {
   user: userData;
 }
 const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
-  const location = useLocation();
   const token = localStorage.getItem("token");
   const handleLogout = () => {
     toggleVissiblity();
@@ -59,8 +58,8 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
       <ModalHeader>
         <div className="user-profile-modal-user-image-container">
           {userData &&
-          userData.profileImage &&
-          !userData.profileImage?.toString().includes("undefined") ? (
+          userData.profilePic &&
+          !userData.profilePic?.toString().includes("undefined") ? (
             <div
               style={{
                 borderRadius: "50%",
@@ -73,7 +72,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
               }}
             >
               <img
-                src={userData?.profileImage}
+                src={userData?.profilePic}
                 alt=""
                 style={{
                   objectFit: "contain",
@@ -94,7 +93,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
                 alignItems: "center",
               }}
             >
-              {location.pathname.startsWith("/admin") ? (
+              {userData.isAdmin ? (
                 <FaUserCircle style={{ fontSize: "2rem" }} />
               ) : (
                 <FaUser style={{ fontSize: "2rem" }} />
@@ -108,7 +107,11 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
             {userName.trim() ? userName : "userName"}
           </p>
           <Link
-            to={token ? "/dashboard/user/edit-profile" : "/"}
+            to={
+              token && userData.isAdmin
+                ? "/admin/dashboard/edit-profile"
+                : "/dashboard/user/edit-profile"
+            }
             onClick={toggleVissiblity}
             style={{
               fontSize: "0.7rem",
@@ -126,7 +129,11 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
       <ModalBody>
         <div className="user-profile-modal-link-container">
           <Link
-            to={token ? "/dashboard/user/edit-profile" : "/"}
+            to={
+              token && userData.isAdmin
+                ? "/admin/dashboard/edit-profile"
+                : "/dashboard/user/edit-profile"
+            }
             onClick={toggleVissiblity}
           >
             <div className="user-profile-modal-link-text-and-icon-container">
@@ -154,7 +161,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
           )}
         </div>
 
-        {!location.pathname.startsWith("/admin") && (
+        {!userData.isAdmin && (
           <div className="user-profile-modal-link-container">
             <Link to={token ? "/user/my-cart" : "/"} onClick={toggleVissiblity}>
               <div className="user-profile-modal-link-text-and-icon-container">

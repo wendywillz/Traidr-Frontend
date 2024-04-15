@@ -15,7 +15,7 @@ const userAuthSlice = createSlice({
       return Object.assign(state, {} as userDataInterface);
     },
     setProfilePics: (state, action) => {
-      state.profileImage = action.payload;
+      state.profilePic = action.payload;
     },
   },
 });

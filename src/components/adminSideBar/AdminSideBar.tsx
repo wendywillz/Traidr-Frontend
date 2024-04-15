@@ -1,11 +1,11 @@
 import { NavLink, useLocation } from "react-router-dom";
-import traidrLogo from "../../assets/traidr-logo-orange.png";
+// import traidrLogo from "../../assets/traidr-logo-orange.png";
 import homeIcon from "../../assets/Admin-side-bar/home.png";
 import AdminDashboardStyle from "./AdminSideBarStyle";
 import tenantIcn from "../../assets/Admin-side-bar/Tenant.png";
 import useranalyticsIcon from "../../assets/Admin-side-bar/user.png";
 import productIcon from "../../assets/Admin-side-bar/product.png";
-// import settingsIcon from "../../assets/Admin-side-bar/settings.png";
+import settingsIcon from "../../assets/Admin-side-bar/settings.png";
 import logoutIcon from "../../assets/Admin-side-bar/logout.png";
 // import { useState } from "react";
 
@@ -18,11 +18,11 @@ function AdminSideBar() {
   };
   return (
     <AdminDashboardStyle>
-      <div className="admin-side-bar-logo-wrapper">
+      {/* <div className="admin-side-bar-logo-wrapper">
         <NavLink to="/">
           <img src={traidrLogo} alt="" />
         </NavLink>
-      </div>
+      </div> */}
       <div className="admin-side-bar-content">
         <NavLink
           to="/admin/dashboard"
@@ -59,6 +59,15 @@ function AdminSideBar() {
         >
           <img src={productIcon} alt="" />
           <span>Product Metrics</span>
+        </NavLink>
+        <NavLink
+          to="/admin/dashboard/edit-profile"
+          className={`admin-side-bar-each-content ${
+            location.pathname.includes("/edit-profile") ? "active-link" : ""
+          }`}
+        >
+          <img src={settingsIcon} alt="" />
+          <span>Settings</span>
         </NavLink>
 
         {/* <NavLink

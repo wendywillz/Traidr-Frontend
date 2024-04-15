@@ -19,7 +19,10 @@ import axiosInstance from "../../../../utils/axiosInstance";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../app/store";
 import { useDispatch } from "react-redux";
-import { setProfilePics } from "../../../../app/features/userAuth/userAuthSlice";
+import {
+  login,
+  setProfilePics,
+} from "../../../../app/features/userAuth/userAuthSlice";
 import { ReactNode } from "react";
 import ConfirmationModalMainWrapper from "../../../../components/ConfirmationModal/ConfirmationModalMainWrapper";
 //Interface declaration
@@ -37,13 +40,12 @@ import userData from "../../../../interfaces/userInterface";
 // import BackButton from "../../../../components/BackButton/BackButton";
 import SmallButton from "../../../../components/button/smallButton/smallButton";
 import { Link } from "react-router-dom";
+import AdminHeader from "../../../Admin/AdminPagesComponents/AdminHeader/AdminHeader";
+import AdminSideBar from "../../../../components/adminSideBar/AdminSideBar";
 
 export const ProfileSettings = () => {
   //fetching the user
   const currentUser: userData = useSelector((state: RootState) => state.user);
-  //const currentUserName:string|null = useSelector((state: RootState)=> state.user.name)
-
-  //Logic for Handling User Details
   const [userDetails, setUserDetails] = useState<UserDetails>({
     firstName: currentUser.name.split(" ")[0],
     lastName: currentUser.name.split(" ")[1],
@@ -51,14 +53,14 @@ export const ProfileSettings = () => {
     phoneNumber: currentUser.phoneNumber,
     gender: currentUser.gender,
     address: currentUser.address,
-    profilePic: currentUser.profileImage,
+    profilePic: currentUser.profilePic,
   });
   const dispatch = useDispatch();
 
   //Logic for handling photo upload and changing the displayed picture
   const [displayedProfilePic, setDisplayedProfilePic] = useState<
     string | ReactNode
-  >(currentUser.profileImage);
+  >(currentUser.profilePic);
   const [, setPhotoFile] = useState<File | null>(null);
   const [, setDisplayUploadedPhotoName] = useState<string>();
   const [, setPhotoDisplayError] = useState<string>();
@@ -143,14 +145,11 @@ export const ProfileSettings = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      if (res && res.data.updatedUser) {
-        console.log("res.data", res.data);
-        if (res.data.updatedUser.profilePic) {
-          dispatch(setProfilePics(res.data.updatedUser.profilePic));
-        }
+      if (res && res.data.user) {
+        dispatch(setProfilePics(res.data.user.profilePic));
+        dispatch(login(res.data.user));
         location.reload();
       }
-      console.log("res.data", res.data);
     } catch (error) {
       return error;
     }
@@ -167,10 +166,44 @@ export const ProfileSettings = () => {
         handleDelete={handleDeleteProfilePic}
         setIsOpen={() => setIsOpen(false)}
       />
-      <ProfileSettingsPageContainer>
-        <Header />
-        <ProfileFormsContainer>
-          <ProfileNavigation />
+      <ProfileSettingsPageContainer
+        style={
+          location.pathname.startsWith("/admin")
+            ? {
+                backgroundColor: "#f9fafb",
+              }
+            : { backgroundColor: "none" }
+        }
+      >
+        {location.pathname.startsWith("/admin") ? <AdminHeader /> : <Header />}
+        {location.pathname.startsWith("/admin") && <AdminSideBar />}
+        <ProfileFormsContainer
+          style={
+            location.pathname.startsWith("/admin")
+              ? {
+                  marginLeft: "20%",
+                  marginTop: "1rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "2rem",
+                  padding: "2rem",
+                }
+              : { margin: "2rem auto" }
+          }
+        >
+          {location.pathname.startsWith("/admin") ? (
+            <h2
+              style={{
+                marginTop: "0",
+                fontSize: "2.5vw",
+                fontWeight: "600",
+              }}
+            >
+              Profile Settings
+            </h2>
+          ) : (
+            <ProfileNavigation />
+          )}
 
           <UserDetailsForm onSubmit={handleFormSubmit}>
             <ChangePictureForm>
@@ -303,45 +336,47 @@ export const ProfileSettings = () => {
                     )}
                   </select>
                 </div>
-                <div className="profile-settings-form-label-and-input-container">
-                  <label
-                    htmlFor="shopNameInput"
-                    className="profile-settings-form-label"
-                  >
-                    Shop name
-                  </label>
-                  <br />
-                  {currentUser.shopName ? (
-                    <input
-                      id="shopNameInput"
-                      name="shopName"
-                      type="text"
-                      className="profile-seetings-form-input"
-                      value={currentUser.shopName}
-                      disabled
-                      onChange={handleChange}
-                      style={{ cursor: "not-allowed" }}
-                    />
-                  ) : (
-                    <p
-                      style={{
-                        fontSize: ".9rem",
-                        marginTop: "1rem",
-                        color: "grey",
-                        fontWeight: "500",
-                      }}
+                {!currentUser.isAdmin && (
+                  <div className="profile-settings-form-label-and-input-container">
+                    <label
+                      htmlFor="shopNameInput"
+                      className="profile-settings-form-label"
                     >
-                      You have not set up a shop yet. Please click{" "}
-                      <Link
-                        to="/dashboard/shop-registration"
-                        style={{ color: "var(--orange-color)" }}
+                      Shop name
+                    </label>
+                    <br />
+                    {currentUser.shopName ? (
+                      <input
+                        id="shopNameInput"
+                        name="shopName"
+                        type="text"
+                        className="profile-seetings-form-input"
+                        value={currentUser.shopName}
+                        disabled
+                        onChange={handleChange}
+                        style={{ cursor: "not-allowed" }}
+                      />
+                    ) : (
+                      <p
+                        style={{
+                          fontSize: ".9rem",
+                          marginTop: "1rem",
+                          color: "grey",
+                          fontWeight: "500",
+                        }}
                       >
-                        here
-                      </Link>{" "}
-                      to set up a shop
-                    </p>
-                  )}
-                </div>
+                        You have not set up a shop yet. Please click{" "}
+                        <Link
+                          to="/dashboard/shop-registration"
+                          style={{ color: "var(--orange-color)" }}
+                        >
+                          here
+                        </Link>{" "}
+                        to set up a shop
+                      </p>
+                    )}
+                  </div>
+                )}
               </FormSectionContainer>
               {/*RIGHT SIDE OF FORM */}
               <FormSectionContainer>
@@ -434,7 +469,10 @@ export const ProfileSettings = () => {
               }}
             >
               <SmallButton button_text="Save changes" type="submit" />
-              <Link className="profile-cancel-btn" to="/dashboard">
+              <Link
+                className="profile-cancel-btn"
+                to={currentUser.isAdmin ? "/admin/dashboard" : "/dashboard"}
+              >
                 Cancel
               </Link>
             </div>

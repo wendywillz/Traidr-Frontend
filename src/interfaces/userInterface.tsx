@@ -2,7 +2,7 @@ export default interface userData {
   userId: string;
   name: string;
   email: string;
-  profileImage: string;
+  profilePic: string;
   phoneNumber: string;
   isAdmin: string;
   isSeller: string;

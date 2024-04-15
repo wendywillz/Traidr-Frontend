@@ -10,7 +10,7 @@ const CartCounter = () => {
     fetchCartCount().then((res) => {
       setCartCount(res.totalCartCount);
     });
-  });
+  }, []);
 
   return (
     <CartCounterWholecontainer>

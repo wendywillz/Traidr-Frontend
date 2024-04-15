@@ -72,11 +72,10 @@ const DeliveryPage = () => {
         deliveryDetails
       );
       if (res) {
-        console.log(`Delivery details have been added`);
         setProceedModalVisibility(true);
       }
     } catch (error) {
-      console.log(`Problem sending delivery details. Reason:`, error);
+      return error;
     }
   };
 
@@ -88,7 +87,7 @@ const DeliveryPage = () => {
         setOrderCancelledModalVisibility(true);
       }
     } catch (error) {
-      console.log(`Problem canceling sale`, error);
+      return error;
     }
   };
 
@@ -99,14 +98,13 @@ const DeliveryPage = () => {
 
   const handlerChange = (
     e: ChangeEvent<HTMLFormElement | HTMLInputElement | HTMLTextAreaElement>
-   ) => {
+  ) => {
     setDeliveryDetails({ ...deliveryDetails, [e.target.name]: e.target.value });
     // Reset error states
     setRecipientNameError(false);
     setRecipientPhoneNumberError(false);
     setDeliveryAddressError(false);
-   };
-   
+  };
 
   return (
     <DeliveryPageWholeContainer>
@@ -134,7 +132,6 @@ const DeliveryPage = () => {
         />
       )}
 
-      
       <DeliveryPageMainContainer>
         <DeliveryPageFormContainer>
           <p className="delivery-form-title">ORDER DELIVERY DETAILS</p>
@@ -171,7 +168,9 @@ const DeliveryPage = () => {
                 value={deliveryDetails.recipientPhoneNumber}
                 onChange={handlerChange}
               />
-              {recipientPhoneNumberError && <p className="error-message">Please fill in this field.</p>}
+              {recipientPhoneNumberError && (
+                <p className="error-message">Please fill in this field.</p>
+              )}
             </DeliveryFormField>
 
             <DeliveryFormField>
@@ -186,9 +185,10 @@ const DeliveryPage = () => {
                 placeholder="32, Rasaq Eletu Street, Osapa London, Lagos"
                 value={deliveryDetails.deliveryAddress}
                 onChange={handlerChange}
-              >
-              </textarea>
-              {deliveryAddressError && <p className="error-message">Please fill in this field.</p>}
+              ></textarea>
+              {deliveryAddressError && (
+                <p className="error-message">Please fill in this field.</p>
+              )}
             </DeliveryFormField>
             <DeliveryFormField>
               <label

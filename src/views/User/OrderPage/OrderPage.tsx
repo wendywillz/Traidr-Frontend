@@ -10,7 +10,7 @@ import {
 
 //component imports
 import OrderItemRow from "./OrderItemRow";
-import traiderLogo from "../../../assets/traidr-logo-orange.png"
+import traiderLogo from "../../../assets/traidr-logo-orange.png";
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
 import PageLoader from "../../../components/PageLoader/PageLoader";
 
@@ -30,8 +30,7 @@ const OrderPage = () => {
   const navigate: NavigateFunction = useNavigate();
 
   //Toggling the loader
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   //HANDLING THE CONFIRM CANCEL MODAL
   const [confirmationModalVisibility, setConfirmationModalVisibility] =
@@ -55,9 +54,9 @@ const OrderPage = () => {
   const [proceedModalVisibility, setProceedModalVisibility] = useState(false);
   const proceedModalTitle = `PROCEED TO PAYMENT`;
   const proceedModalMessage = `Click to continue begin checkout`;
-  const toggleProceedModal = ()=>{
-    setProceedModalVisibility(!proceedModalVisibility)
-  }
+  const toggleProceedModal = () => {
+    setProceedModalVisibility(!proceedModalVisibility);
+  };
 
   const [orderItems, setOrderItems] = useState<OrderProductDetail[]>();
 
@@ -73,7 +72,7 @@ const OrderPage = () => {
         );
         setOrderTotal(total);
         //   console.log(`The total is`, total);
-        setIsLoading(false)
+        setIsLoading(false);
       } else {
         navigate("/user/my-cart");
       }
@@ -86,10 +85,9 @@ const OrderPage = () => {
       if (res) {
         setConfirmationModalVisibility(false);
         setOrderCancelledModalVisibility(true);
-        console.log(`ORDER CANCELLED`);
       }
     } catch (error) {
-      console.log(`Error canceling order. Reason:`, error);
+      return error;
     }
   };
 
@@ -100,18 +98,20 @@ const OrderPage = () => {
     try {
       const res = await axiosInstance.post("sale/create-sale", info);
       if (res) {
-        // navigate('/delivery-details')
-        console.log(`SALE CREATED`);
         navigate("/order/delivery-details");
       }
     } catch (error) {
-      console.log(`Error creating order. Reason:`, error);
+      return error;
     }
   };
 
- return (
+  return (
     <OrderPageContainer>
-      {isLoading && <div className="order-page-loader"><PageLoader/></div>}
+      {isLoading && (
+        <div className="order-page-loader">
+          <PageLoader />
+        </div>
+      )}
       {confirmationModalVisibility && (
         <MultipurposeModal
           title={confirmationModalTitle}
@@ -139,9 +139,13 @@ const OrderPage = () => {
         />
       )}
 
-      <div className="backButton-container"><BackButton linkTo={"/user/my-cart"}/></div>
+      <div className="backButton-container">
+        <BackButton linkTo={"/user/my-cart"} />
+      </div>
       <OrderPageMain>
-        <div className="order-page-traidr-logo-container"><img src={traiderLogo} className="order-page-traidr-logo"/></div>
+        <div className="order-page-traidr-logo-container">
+          <img src={traiderLogo} className="order-page-traidr-logo" />
+        </div>
         <h2 className="order-page-Title">Your Order</h2>
         <div>
           {orderItems?.map((orderItem) => {
@@ -152,7 +156,7 @@ const OrderPage = () => {
               </div>
             );
           })}
-        </div> 
+        </div>
 
         <OrderTotal>
           <div className="order-total-text">ORDER TOTAL</div>

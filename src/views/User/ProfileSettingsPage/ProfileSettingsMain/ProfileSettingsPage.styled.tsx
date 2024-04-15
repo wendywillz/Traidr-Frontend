@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
 export const ProfileSettingsPageContainer = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
   .profile-cancel-btn {
     background-color: #ffffff;
     color: var(--orange-color);
@@ -23,7 +26,7 @@ export const ProfileSettingsPageContainer = styled.div`
 
 export const ProfileFormsContainer = styled.div`
   width: 60%;
-  margin: 0 auto;
+ 
 `;
 
 export const ChangePictureForm = styled.div`

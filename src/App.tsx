@@ -50,7 +50,7 @@ function App() {
                 />
                 <Route path="change-password" element={<ChangePassword />} />
                 <Route path="shop-profile/:shopId" element={<ShopProfile />} />
-                <Route path="shop/:shopId" element={<Shop/>} />
+                <Route path="shop/:shopId" element={<Shop />} />
                 <Route
                   path="stock-your-shop/:shopId"
                   element={<StockYourShop />}
@@ -108,6 +108,7 @@ function App() {
               <Route path="product-metrics" element={<ProductMetrics />} />
               <Route path="monthly-trend" element={<MonthlyTrendLineChart />} />
               <Route path="tenants-database" element={<TenantsDataBase />} />
+              <Route path="edit-profile" element={<ProfileSettings />} />
             </Routes>
           </AdminProtectedRoute>
         }
@@ -120,7 +121,7 @@ function App() {
       <Route path="/otp-verification" element={<EnterOtpPage />} />
 
       <Route path="/success-modal" element={<SuccessModal />} />
-      <Route path="/cc" element={<CartCounter/>}/>
+      <Route path="/cc" element={<CartCounter />} />
 
       {/*USER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME*/}
     </Routes>
