@@ -35,7 +35,7 @@ export default function AdminHeader() {
               className="user-profile-img-wrapper"
               onClick={toggleProfileModal}
             >
-              {userData && userData.profilePic.trim() ? (
+              {userData && userData?.profilePic?.trim() ? (
                 <div
                   style={{
                     borderRadius: "50%",
