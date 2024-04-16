@@ -44,7 +44,7 @@ useEffect(()=>{
   const options = {
     plugins: {
       legend: {
-        display:true,
+        display:false,
         
       },
     },
@@ -54,6 +54,7 @@ useEffect(()=>{
 
   return (
     <TenantsSalesPieChartContainer style={{width: 400}}>
+        <p className="chart-title">Tenant Sales</p>
         <Pie data={salesDetails} options={options}/>
     </TenantsSalesPieChartContainer>
   )

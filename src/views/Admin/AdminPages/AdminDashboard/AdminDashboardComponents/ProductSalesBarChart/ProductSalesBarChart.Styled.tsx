@@ -8,7 +8,7 @@ padding: 1vw;
 margin-bottom: 2vh;
 
 .chart-title{
-    margin: 1vh 0vw 2vh 0vw;
+    margin: 1vh 0vw 2vh 15vw;
 }
 
 `
