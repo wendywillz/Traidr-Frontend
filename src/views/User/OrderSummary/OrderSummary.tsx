@@ -42,7 +42,7 @@ const OrderSummary = () => {
         //   console.log(`The total is`, total);
       } else { /* empty */ }
     });
-  }, []);
+  }, [saleId]);
   //Toggling the loader
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
@@ -57,7 +57,7 @@ useEffect(()=>{
         setIsLoading(false)
         }else{ /* empty */ }
       })
-},[])
+},[saleId])
 
 
   const componentRef = useRef<HTMLDivElement>(null);
@@ -121,7 +121,7 @@ useEffect(()=>{
               <div className="order-summary-info-subsection">
                 <p className="order-summary-subsection-title">Payment Method</p>
                 <p className="order-summary-subsection-text">
-                  Paid with bank transfer via Paystck
+                  Paid with bank transfer via Paystack
                 </p>
               </div>
               <div className="order-summary-info-subsection">

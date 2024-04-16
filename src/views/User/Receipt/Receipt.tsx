@@ -133,7 +133,7 @@ useEffect(()=>{
               <div className="order-summary-info-subsection">
               <Text><p className="order-summary-subsection-title">Payment Method</p></Text>
               <Text><p className="order-summary-subsection-text">
-                  Paid with bank transfer via Paystck
+                  Paid with bank transfer via Paystack
                 </p></Text>
               </div>
               <div className="order-summary-info-subsection">
