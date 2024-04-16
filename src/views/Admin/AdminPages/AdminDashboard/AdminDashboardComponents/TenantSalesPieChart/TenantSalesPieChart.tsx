@@ -44,7 +44,7 @@ useEffect(()=>{
   const options = {
     plugins: {
       legend: {
-        display:false,
+        display:true,
         
       },
     },
