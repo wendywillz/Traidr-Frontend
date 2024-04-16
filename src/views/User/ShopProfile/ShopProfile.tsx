@@ -23,6 +23,7 @@ const ShopProfile = () => {
   useEffect(() => {
     fetchShopDetail(shopId!).then((res) => {
       if (res) {
+        console.log(res);
         setShop(res);
       }
     });
