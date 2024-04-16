@@ -74,10 +74,6 @@ useEffect(()=>{
       },
       x: {
          display: false,
-        title: {
-          display: true,
-          align: 'center',
-        },
         grid:{
             display: false,
         },
