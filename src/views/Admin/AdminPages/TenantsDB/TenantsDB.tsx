@@ -79,7 +79,7 @@ useEffect(()=>{
                     return(
                       <TenantsDBDataRow>
 
-                      <TenantsDBDataCell>{tenant.userId.substring(0, 29)}...</TenantsDBDataCell>
+                      <TenantsDBDataCell id="data-row-id">{tenant.userId.substring(0, 25)}...</TenantsDBDataCell>
                       <TenantsDBDataCell>{tenant.name}</TenantsDBDataCell>
                       <TenantsDBDataCell>{tenant.age}</TenantsDBDataCell>
                       <TenantsDBDataCell>{tenant.gender}</TenantsDBDataCell>
