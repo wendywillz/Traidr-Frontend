@@ -18,7 +18,7 @@ const DataCard = ({ cardTitle, displayedValue, reportLink }: Props) => {
       <div className="data-card-report-link-container">
         {" "}
         <Link to={reportLink} className="data-card-report-link">
-          View report
+          {/* View report */}
         </Link>{" "}
       </div>
     </DataCardContainer>

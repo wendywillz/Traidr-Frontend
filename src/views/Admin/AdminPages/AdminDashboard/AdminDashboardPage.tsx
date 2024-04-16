@@ -25,6 +25,7 @@ interface AdminDataSummary {
   totalOrders: number;
   totalTenants: number;
   totalRevenue: number;
+  totalProductSold: number
 }
 
 const AdminDashboardPage = () => {
@@ -32,6 +33,7 @@ const AdminDashboardPage = () => {
     totalOrders: 0,
     totalTenants: 0,
     totalRevenue: 0,
+    totalProductSold:0
   });
 
   useEffect(() => {
@@ -54,8 +56,8 @@ const AdminDashboardPage = () => {
 
           <AllDataCards>
             <DataCard
-              cardTitle={"Total Orders Made"}
-              displayedValue={adminDataSummary.totalOrders.toString()}
+              cardTitle={"Total Products Sold"}
+              displayedValue={adminDataSummary.totalProductSold.toString()}
               reportLink={"/admin/dashboard"}
             />
 

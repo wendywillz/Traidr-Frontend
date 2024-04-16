@@ -77,7 +77,7 @@ useEffect(()=>{
         grid:{
             display: false,
         },
-        max: 6,
+        max: 6, 
       },
     },
     plugins: {
@@ -96,7 +96,7 @@ useEffect(()=>{
 
   return (
     <ProductSalesBarChartContainer>
-        <p className="chart-title">Product Sales</p>
+        <p className="chart-title">Highest Selling Products</p>
         <Bar data={salesDetails} options={options}/>
     </ProductSalesBarChartContainer>
   )

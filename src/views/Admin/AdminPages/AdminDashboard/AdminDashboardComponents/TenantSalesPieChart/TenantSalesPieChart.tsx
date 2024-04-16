@@ -11,6 +11,17 @@ interface TenantSalesDetails{
     totalRevenue: number
 }
 
+interface PieChartLegend{
+display: boolean;
+position: "bottom"|"top"|"right"|"left"|"center"|"chartArea"
+}
+interface PieChartOptions{
+  plugins: {
+    legend:PieChartLegend
+  }
+  
+}
+
 
 const TenantSalesPieChart = () => {
 const [tenantSalesDetails, setTenantSalesDetails] = useState<TenantSalesDetails[]>()
@@ -20,7 +31,8 @@ const [salesDetails, setSalesDetails] = useState({
     datasets:[{
         label: "Traidr Product Revenue",
         data: tenantSalesDetails?.map((details)=> details.totalRevenue),
-        backgroundColor: ["tomato", "green", "grey"]
+        backgroundColor: ["tomato", "green", "grey"],
+        
     }]
 })
 
@@ -34,18 +46,19 @@ useEffect(()=>{
         datasets:[{
         label: "Traidr Product Revenue",
         data: res?.map((details)=> details.totalRevenue),
-        backgroundColor: ["#2D9CDB", "#B4C150", "grey"]
+        backgroundColor: ["#2D9CDB", "#B4C150", "grey"],
+        
     }] })
         }
 
     })
 },[tenantSalesDetails, salesDetails])
 
-  const options = {
+  const options:PieChartOptions = {
     plugins: {
       legend: {
-        display:true,
-        
+         display:true,
+         position: "right",
       },
     },
   };
@@ -53,7 +66,7 @@ useEffect(()=>{
 
 
   return (
-    <TenantsSalesPieChartContainer style={{width: 400}}>
+    <TenantsSalesPieChartContainer>
         <p className="chart-title">Tenant Sales</p>
         <Pie data={salesDetails} options={options}/>
     </TenantsSalesPieChartContainer>
