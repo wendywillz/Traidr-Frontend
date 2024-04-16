@@ -13,7 +13,8 @@ import { fetchShopDetail, fetchShopOwnerDetails } from "../../../api/shop";
 import { fetchProductsByShopId } from "../../../api/product";
 import BackButton from "../../../components/BackButton/BackButton";
 // import storeBackgroundplaceholder from "../../../assets/form-background-image.png"
-import storeLogoplaceholder from "../../../assets/dashboard-assets/blue_chair.png"
+
+import shopBagIcon from "../../../assets/shop-profile-assets/shopping-bag.png"
 
 const Shop = () => {
   const { shopId } = useParams();
@@ -70,9 +71,16 @@ useEffect(()=>{
       
         <div className="shop-profile-product-logo">
           <div className="shop-owner-pic-and-details">
-            <div className="shop-profile-productpicture">
-              <img src={storeLogoplaceholder} className="shop-profile-logopimage"/>
+            {shop?.shopImageURL? 
+            <div className="shop-profile-shop-logo-container">
+              <img src={shop?.shopImageURL} className="shop-profile-shop-logo"/>
+            </div> 
+            :
+            <div className="shop-profile-shop-logo-container">
+              <img src={shopBagIcon} className="shop-profile-shop-bag-icon"/>
             </div>
+            }
+            
             <div className="shop-profile-productname">
               {shop && (
                 <div>

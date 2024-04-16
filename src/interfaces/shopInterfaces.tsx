@@ -58,6 +58,7 @@ export interface shopInterface {
   shopCurrency: string;
   shopDescription: string;
   shopCategory: string;
+  shopImageURL: string;
   shopCountry: string;
   shopStreetAddress: string;
   shopCity: string;
