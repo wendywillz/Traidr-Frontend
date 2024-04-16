@@ -12,7 +12,7 @@ import testData from "../testData"
 //         data: [600, 700, 600],
 //         backgroundColor: ["pink"]
 //     }]
-// }
+// } 
 
 const TestBarChart = () => {
     const [userDetails, _setUserDetails] = useState({

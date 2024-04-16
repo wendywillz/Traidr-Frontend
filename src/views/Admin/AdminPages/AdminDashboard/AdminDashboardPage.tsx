@@ -11,8 +11,10 @@ import { UserGreeting, AllDataCards } from "./AdminDashboardPage.Styled";
 //COMPONENT IMPORTS - includes charts
 import AdminHeader from "../../AdminPagesComponents/AdminHeader/AdminHeader";
 import DataCard from "./AdminDashboardComponents/DataCard/DataCard";
-import MonthlyTrendLineChart from "../MonthlyTrend/LineChart";
+//import MonthlyTrendLineChart from "../MonthlyTrend/LineChart";
 import AdminSideBar from "../../../../components/adminSideBar/AdminSideBar";
+import ProductSalesBarChart from "./AdminDashboardComponents/ProductSalesBarChart/ProductSalesBarChart";
+import TenantSalesPieChart from "./AdminDashboardComponents/TenantSalesPieChart/TenantSalesPieChart";
 //PACKAGE IMPORTS
 import { useEffect, useState } from "react";
 import { fetchAdminDataSummary } from "../../../../api/admin";
@@ -69,7 +71,9 @@ const AdminDashboardPage = () => {
               reportLink={"/admin/dashboard/"}
             />
           </AllDataCards>
-          <MonthlyTrendLineChart />
+          {/* <MonthlyTrendLineChart /> */}
+          <ProductSalesBarChart/>
+          <TenantSalesPieChart/>
         </AdminDashboardPageStyle>
       </AdminPageMain>
     </AdminPageContainer>
