@@ -46,3 +46,17 @@ export const fetchTenantDatabase = async()=>{
     return res.data.tenantsShopDetails
   }
 }
+
+export const fetchProductSalesDetails = async()=>{
+  const res = await axiosInstance.get(`/admin/get-product-revenue`)
+  if(res && res.data){
+    return res.data.sortedProductNameSales
+  }
+}
+
+export const fetchTenantSalesDetails = async()=>{
+  const res = await axiosInstance.get(`/admin/get-tenant-revenue`)
+  if(res && res.data){
+    return res.data.allTenantSalesDetails
+  }
+}
