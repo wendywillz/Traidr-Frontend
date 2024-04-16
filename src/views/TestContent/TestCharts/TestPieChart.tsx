@@ -17,7 +17,7 @@ const TestPieChart = () => {
             backgroundColor: ["pink", "aqua"]
         }]
     })
-
+ 
   return (
    <div style={{width: 300}}>
         <Pie data={userDetails}/>
