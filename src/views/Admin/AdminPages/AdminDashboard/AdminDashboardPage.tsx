@@ -54,7 +54,7 @@ const AdminDashboardPage = () => {
             <DataCard
               cardTitle={"Total Orders Made"}
               displayedValue={adminDataSummary.totalOrders.toString()}
-              reportLink={"/admin/dashboard/order-report"}
+              reportLink={"/admin/dashboard"}
             />
 
             <DataCard
@@ -66,7 +66,7 @@ const AdminDashboardPage = () => {
             <DataCard
               cardTitle={"Total Revenue"}
               displayedValue={`₦${adminDataSummary.totalRevenue.toLocaleString()}`}
-              reportLink={"/admin/dashboard/revenue-report"}
+              reportLink={"/admin/dashboard/"}
             />
           </AllDataCards>
           <MonthlyTrendLineChart />
