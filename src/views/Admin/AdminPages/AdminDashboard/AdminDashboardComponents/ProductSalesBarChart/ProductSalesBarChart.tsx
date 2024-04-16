@@ -66,15 +66,14 @@ useEffect(()=>{
   const options = {
     scales: {
       y: {
-        beginAtZero: true,
+        // beginAtZero: true,
         title: {
           display: true,
           text: "Total Revenue",
-        },
-        
+        }, 
       },
       x: {
-        display: false,
+         display: false,
         title: {
           display: true,
           align: 'center',
