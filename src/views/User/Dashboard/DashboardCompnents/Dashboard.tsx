@@ -97,8 +97,8 @@ const Dashboard = () => {
     }
   };
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleReset = (event:any)=>{
-    event.preventDefault()
+  const handleReset = ()=>{
+    // event.preventDefault()
     setQueryParams({
       category: "",
       search: "",

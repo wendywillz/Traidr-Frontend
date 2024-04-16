@@ -151,7 +151,7 @@ const togglePriceVisibility = ()=>{
               src={orangeArrow}
             />
           </div> */}
-          <SidebarResetButton onClick={handleReset}>RESET</SidebarResetButton>
+          <SidebarResetButton onClick={handleReset} type="reset">RESET</SidebarResetButton>
         </form>
       </SideBarCategory>
     </SideBarContainer>
