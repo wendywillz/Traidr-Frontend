@@ -104,7 +104,7 @@ export const SideBarCategory = styled.div`
 
 `;
 
-export const SidebarResetButton = styled.div`
+export const SidebarResetButton = styled.button`
   width: 7vw;
   height: 5vh;
   font-size: 0.9vw;
@@ -114,9 +114,9 @@ export const SidebarResetButton = styled.div`
   border: 1px solid var(--orange-color);
   border-radius: 10px;
   text-align: center;
-  padding-top: 1.4vh;
+  /* padding-top: 1.4vh; */
   margin-top: 2vh;
-  margin-left: 4vw;
+  margin-left: 2vw;
   cursor:pointer;
   &:hover{
     font-size: 1vw;
