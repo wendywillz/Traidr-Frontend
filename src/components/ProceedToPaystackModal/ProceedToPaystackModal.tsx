@@ -44,7 +44,7 @@ const closeModal = ()=>{
           <p className="modal-message">
             {message}
           </p>
-          <PaystackCheckout email={userEmail} amount={saleTotal} publicKey={paystackPublicKey}/>
+          <PaystackCheckout email={userEmail} amount={saleTotal*100} publicKey={paystackPublicKey}/>
         </div>
       </div>
     </ProceedModalMainWrapper>
