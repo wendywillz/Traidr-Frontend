@@ -70,6 +70,24 @@ export const ShopMainWrapper = styled.div`
   display:flex;
 }
 
+.shop-profile-shop-logo-container{
+  border: 1px solid grey;
+  height: 30vh;
+  width: 17vw;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+}
+
+#shop-profile-shop-bag-icon{
+  object-fit: contain;
+  width: 40%;
+  height: 40%;
+  margin: 8vh 0vw 0vh 5vw;
+  border:none;
+}
+
+
+
   .shop-profile-productname {
     margin-left: 2rem;
     align-self: center;

@@ -25,7 +25,7 @@ export const PaystackWholeContainer = styled.div`
   font-size: 1rem;
   border: none;
   border-radius: 5px;
-  width: 100%;
+  width: 20rem;
   height: 3rem;
   cursor: pointer;
   margin: 0.5rem 0;

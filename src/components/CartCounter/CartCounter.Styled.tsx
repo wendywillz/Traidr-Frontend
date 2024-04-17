@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const CartCounterWholecontainer = styled.div`
   display: flex;
   position: relative;
+  cursor: pointer;
 
   .cart-counter-icon-container {
   }

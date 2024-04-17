@@ -34,7 +34,7 @@ const PaystackCheckout: React.FC<PaystackCheckoutProps> = ({ email, amount, publ
 
  return (
    <PaystackWholeContainer>
-   <PaystackButton {...componentProps} className='paystack-button' />;
+   <PaystackButton {...componentProps} className='paystack-button' />
    </PaystackWholeContainer>
  )
 };

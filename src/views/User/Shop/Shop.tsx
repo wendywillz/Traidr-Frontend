@@ -73,11 +73,11 @@ useEffect(()=>{
           <div className="shop-owner-pic-and-details">
             {shop?.shopImageURL? 
             <div className="shop-profile-shop-logo-container">
-              <img src={shop?.shopImageURL} className="shop-profile-shop-logo"/>
+              <img src={shop?.shopImageURL} id="shop-profile-shop-logo"/>
             </div> 
             :
             <div className="shop-profile-shop-logo-container">
-              <img src={shopBagIcon} className="shop-profile-shop-bag-icon"/>
+              <img src={shopBagIcon} id="shop-profile-shop-bag-icon"/>
             </div>
             }
             
