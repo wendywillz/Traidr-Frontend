@@ -13,14 +13,16 @@ import {
 //component imports
 
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
+import ProceedToPaystackModal from "../../../components/ProceedToPaystackModal/ProceedToPaystackModal";
 
 //Interface imports
 import DeliveryDetailsData from "../../../interfaces/deliveryInterfaces";
 
 //package and tools imports
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { fetchSaleTotal } from "../../../api/sale";
 
 const DeliveryPage = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -47,10 +49,11 @@ const DeliveryPage = () => {
   const [proceedModalVisibility, setProceedModalVisibility] = useState(false);
   const proceedModalTitle = `PROCEED TO PAYMENT`;
   const proceedModalMessage = `Proceed to Paystack Payment`;
-  const proceedModalButtonAction = () => {
-    window.location.href = "https://paystack.com/pay/traidr";
-    //navigate("/order/payment");
-  };
+  // const proceedModalButtonAction = () => {
+  //   // window.location.href = "https://paystack.com/pay/traidr";
+  //   //navigate("/order/payment");
+  //   console.log(`Payment`);
+  // };
 
   const [deliveryDetails, setDeliveryDetails] = useState<DeliveryDetailsData>({
     recipientName: "",
@@ -106,6 +109,17 @@ const DeliveryPage = () => {
     setDeliveryAddressError(false);
   };
 
+const [saleTotal, setSaleTotal] = useState<number>(0)
+
+useEffect(()=>{
+    fetchSaleTotal().then((res)=>{
+        if(res){
+            setSaleTotal(res. saleTotal)
+            console.log(res);
+        }
+    })
+},[])
+
   return (
     <DeliveryPageWholeContainer>
       {confirmCancelModalVisibility && (
@@ -125,10 +139,16 @@ const DeliveryPage = () => {
       )}
 
       {proceedModalVisibility && (
-        <MultipurposeModal
-          title={proceedModalTitle}
-          message={proceedModalMessage}
-          onClickAction={proceedModalButtonAction}
+        // <MultipurposeModal
+        //   title={proceedModalTitle}
+        //   message={proceedModalMessage}
+        //   onClickAction={proceedModalButtonAction}
+        // />
+        <ProceedToPaystackModal
+        title={proceedModalTitle}
+        message={proceedModalMessage}
+        // onClickAction={proceedModalButtonAction}
+        saleTotal={saleTotal}
         />
       )}
 
