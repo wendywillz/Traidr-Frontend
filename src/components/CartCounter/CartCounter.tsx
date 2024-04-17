@@ -14,7 +14,7 @@ const CartCounter = () => {
 
   useEffect(() => {
     fetchCartCount().then((res) => {
-      if (res) setCartCount(res);
+      if (res) setCartCount(res.totalCartCount);
     });
   }, [cartCount]);
 

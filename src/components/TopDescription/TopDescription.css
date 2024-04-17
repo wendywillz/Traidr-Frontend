@@ -6,10 +6,7 @@
   width: 100%;
 }
 
-/* .description-page-link{
-  text-decoration: none;
-  color: black; 
-} */
+
 
 .top-description-page-wrapper {
   width: 100%;
@@ -25,15 +22,21 @@
   width: 100%;
 }
 
-.product-description-image {
+.product-description-image-container {
   background-color: #f2f2f2;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 25vw;
+  height: 40vh;
+  /* border: 1px solid blue; */
 }
-.product-description-image img {
-  max-width: 100%;
+
+.product-description-image-container img {
+  /* max-width: 100%; */
   object-fit: contain;
+  width: 100%;
+  height: 90%;
 }
 .home-search {
   display: flex;
@@ -42,6 +45,18 @@
   gap: 3px;
   color: black;
   margin-left: 1vw;
+  margin-bottom: 4vh;
+}
+
+.description-page-link{
+  text-decoration: none;
+  color: grey; 
+  font-size: 1.1vw; 
+
+  &:hover{
+    font-size: 1.115vw;
+    color: var(--orange-color); 
+  }
 }
 
 .sec-section {
@@ -67,11 +82,15 @@
 
 .store {
   color: #828282;
-  font-size: 18px;
-  height: 28px;
+  font-size: 1.5vw;
   margin-top: 1rem;
   margin-bottom: 1rem;
   text-decoration: none;
+
+  &:hover{
+    font-size: 1.51vw;
+    color: var(--orange-color)
+  }
 }
 
 .hens-product {

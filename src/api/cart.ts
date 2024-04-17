@@ -12,5 +12,5 @@ export const fetchCartCount = async()=>{
 
   if (res && res.data.cartCount) {
     return res.data.cartCount
-  }
+  } else{return}
 }
