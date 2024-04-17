@@ -40,7 +40,7 @@ const CartPage = () => {
 
   const [cartProducts, setCartProducts] = useState<CartProductDetail[]>();
   const [cartTotal, setCartTotal] = useState<number | undefined>(0);
-  const [cartEmpty, setCartEmpty] = useState<boolean>(false);
+  const [, setCartEmpty] = useState<boolean>(false);
 
   console.log("cartProducts", cartProducts);
   useEffect(() => {
@@ -116,27 +116,31 @@ const CartPage = () => {
       <Header />
       <BackButton linkTo={"/dashboard"} />
       {cartProducts && cartProducts.length > 0 ? (
-       <CartContainer>
-        <CartHeaderContainer>
-          <CartPageTitle>Cart Total</CartPageTitle>
-          <CartTotal>₦{cartTotal?.toLocaleString()}</CartTotal>
-        </CartHeaderContainer>
+        <CartContainer>
+          <CartHeaderContainer>
+            <CartPageTitle>Cart Total</CartPageTitle>
+            <CartTotal>₦{cartTotal?.toLocaleString()}</CartTotal>
+          </CartHeaderContainer>
 
-        <div>
-          {cartProducts?.map((product) => {
-            return (
-              <CartItemRow
-                cartItem={product}
-                key={product.productId}
-                handleDelete={handleDelete}
-                handleMoveToWishList={handleMoveToWishList}
-              />
-            );
-          })}
-        </div>
-        <OrderButton onClick={toggleModalVisibility}>PLACE ORDER</OrderButton>
-      </CartContainer> 
-      ): <p style={{margin: "25% auto", textAlign: "center"}}>No item in your cart</p>}
+          <div>
+            {cartProducts?.map((product) => {
+              return (
+                <CartItemRow
+                  cartItem={product}
+                  key={product.productId}
+                  handleDelete={handleDelete}
+                  handleMoveToWishList={handleMoveToWishList}
+                />
+              );
+            })}
+          </div>
+          <OrderButton onClick={toggleModalVisibility}>PLACE ORDER</OrderButton>
+        </CartContainer>
+      ) : (
+        <p style={{ margin: "25% auto", textAlign: "center" }}>
+          No item in your cart
+        </p>
+      )}
     </>
   );
 };
