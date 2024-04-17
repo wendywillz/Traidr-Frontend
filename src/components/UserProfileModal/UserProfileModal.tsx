@@ -116,7 +116,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
             style={{
               fontSize: "0.7rem",
               fontWeight: "500",
-              color: "#ffffff",
+              color: "#f3f3f3",
               textDecoration: "none",
               margin: 0,
             }}
@@ -145,7 +145,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
             </div>
           </Link>
 
-          {shopIdFromBackend.trim() && (
+          {shopIdFromBackend?.trim() && (
             <Link
               to={`/dashboard/shop-profile/${shopIdFromBackend}`}
               onClick={toggleVissiblity}
@@ -161,7 +161,7 @@ const UserProfileModal = ({ toggleVissiblity }: userProfileProps) => {
           )}
         </div>
 
-        {!userData.isAdmin && (
+        {!userData?.isAdmin && (
           <div className="user-profile-modal-link-container">
             <Link to={token ? "/user/my-cart" : "/"} onClick={toggleVissiblity}>
               <div className="user-profile-modal-link-text-and-icon-container">

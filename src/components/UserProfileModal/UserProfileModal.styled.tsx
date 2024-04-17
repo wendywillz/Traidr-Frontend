@@ -59,6 +59,7 @@ export const ModalHeader = styled.div`
     margin-bottom: 0;
     font-weight: 700;
     font-size: 1.1rem;
+    color: #ffffff
   }
 
   .user-profile-modal-user-visit-profile {

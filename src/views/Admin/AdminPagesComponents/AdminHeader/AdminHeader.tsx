@@ -57,7 +57,7 @@ export default function AdminHeader() {
                 </div>
               )}
               <span style={{ fontSize: "12px" }}>
-                Hi, {userData.name.split(" ")[0]}
+                Hi, {userData?.name.split(" ")[0]}
               </span>
               <span className="user-drop-down-icon">
                 <MdKeyboardArrowDown

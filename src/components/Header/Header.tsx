@@ -81,8 +81,8 @@ export default function Header() {
                   onClick={toggleProfileModal}
                 >
                   {userData &&
-                  userData.profilePic &&
-                  !userData.profilePic?.toString().includes("undefined") ? (
+                  userData?.profilePic &&
+                  !userData?.profilePic?.toString().includes("undefined") ? (
                     <div
                       style={{
                         borderRadius: "50%",
@@ -103,7 +103,7 @@ export default function Header() {
                     </div>
                   )}
                   <span style={{ fontSize: "12px" }}>
-                    Hi, {userData.name.split(" ")[0]}
+                    Hi, {userData?.name?.split(" ")[0]}
                   </span>
                   <span className="user-drop-down-icon">
                     <MdKeyboardArrowDown

@@ -14,8 +14,7 @@ const CartCounter = () => {
 
   useEffect(() => {
     fetchCartCount().then((res) => {
-      setCartCount(res.totalCartCount);
-    
+      if (res) setCartCount(res);
     });
   }, [cartCount]);
 
@@ -23,7 +22,7 @@ const CartCounter = () => {
     <CartCounterWholecontainer onClick={()=>navigate(`/user/my-cart`)}>
       <BsCart className="cart-counter-icon" />
 
-      <div className="cart-counter-number">{cartCount}</div>
+      <div className="cart-counter-number">{cartCount ? cartCount : 0}</div>
     </CartCounterWholecontainer>
   );
 };

@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Header from "../../../components/Header/Header";
 import { ShopProfileMainWrapper } from "./ShopProfilePageStle";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   shopInterface,
@@ -10,24 +11,33 @@ import SmallButton from "../../../components/button/smallButton/smallButton";
 import { fetchShopDetail } from "../../../api/shop";
 import { fetchProductsByShopId } from "../../../api/product";
 import BackButton from "../../../components/BackButton/BackButton";
+import axiosInstance from "../../../utils/axiosInstance";
+import PageLoader from "../../../components/PageLoader/PageLoader";
+import { setShopProfileImage } from "../../../app/features/shopProfileImage/shopProfileImage";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../../app/store";
 // import {  fetchProductsByShopId } from "../../api/product";
 
 const ShopProfile = () => {
   const { shopId } = useParams();
-  const [profileImage, setProfileImage] = useState<string | null>(null); // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dispatch = useDispatch();
+  const [, setPhotoFile] = useState<File | null>(null);
   const [products, setProducts] = useState<shopProductsInterface[]>();
   const [shop, setShop] = useState<shopInterface>();
+  const displayedProfilePic = useSelector(
+    (state: RootState) => state.shopProfileImage.shopProfileImage
+  );
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-
+  const [, setPhotoDisplayError] = useState("");
   // fetch shop from database
   useEffect(() => {
     fetchShopDetail(shopId!).then((res) => {
       if (res) {
-        console.log(res);
+        setIsLoading(false);
         setShop(res);
       }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -37,16 +47,41 @@ const ShopProfile = () => {
       }
     });
   }, []);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleProfileImage = (e: any) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
 
-    reader.onload = () => {
-      setProfileImage(reader.result as string);
-    };
+  const handleProfileImage = async (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files) return;
+    const maxSize = 3 * 1024 * 1024;
+    const displayedPhoto = event.target.files[0];
+    const uploadedPhoto = event.target.files[0];
+    if (uploadedPhoto.size > maxSize || displayedPhoto.size > maxSize) {
+      setPhotoDisplayError("File size exceeds 10mb");
+      return;
+    }
 
-    reader.readAsDataURL(file);
+    if (uploadedPhoto) {
+      setPhotoFile(uploadedPhoto);
+      const formData = new FormData();
+
+      try {
+        formData.append("shopLogo", uploadedPhoto);
+        formData.append("shopId", shopId!);
+        formData.append("shopName", shop!.shopName);
+        const res = await axiosInstance.post(
+          `/shop/change-shop-logo`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        if (res && res.data.shopDetail) {
+          dispatch(setShopProfileImage(res.data.shopDetail.shopImageURL));
+        }
+      } catch (error) {
+        return error;
+      }
+    }
   };
   const handleNavigate = () => {
     navigate(`/dashboard/stock-your-shop/${shopId}`);
@@ -54,6 +89,7 @@ const ShopProfile = () => {
 
   return (
     <>
+      {isLoading && <PageLoader />}
       <Header />
       <BackButton linkTo={"/dashboard"} />
 
@@ -64,14 +100,14 @@ const ShopProfile = () => {
               className="upload-box-content"
               onClick={() => document.getElementById("fileInput")?.click()}
             >
-              {!profileImage ? (
+              {displayedProfilePic?.trim() ? (
+                <img src={shop?.shopImageURL} alt="shop-profile-image" />
+              ) : (
                 <div>
                   <span style={{ fontSize: "2rem" }}>+</span>
                   <br />
                   <span>Add New Photo</span>
                 </div>
-              ) : (
-                <img src={profileImage} alt="shop-profile-image" />
               )}
             </div>
             <input
@@ -137,12 +173,10 @@ const ShopProfile = () => {
                       alt="take-photo-of-products"
                     />
                     <p id="shop-profile-product-title">
-                      
                       {product.productTitle.substring(0, 21)}
                       {product.productTitle.length >= 22 ? "..." : ""}
                     </p>
                     <p id="shop-profile-product-price">
-
                       ₦{product.productPrice.toLocaleString()}
                     </p>
                   </div>
@@ -159,5 +193,4 @@ const ShopProfile = () => {
     </>
   );
 };
-
 export default ShopProfile;

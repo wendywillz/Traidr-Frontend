@@ -47,13 +47,13 @@ export const ProfileSettings = () => {
   //fetching the user
   const currentUser: userData = useSelector((state: RootState) => state.user);
   const [userDetails, setUserDetails] = useState<UserDetails>({
-    firstName: currentUser.name.split(" ")[0],
-    lastName: currentUser.name.split(" ")[1],
-    email: currentUser.email,
-    phoneNumber: currentUser.phoneNumber,
-    gender: currentUser.gender,
-    address: currentUser.address,
-    profilePic: currentUser.profilePic,
+    firstName: currentUser?.name.split(" ")[0],
+    lastName: currentUser?.name.split(" ")[1],
+    email: currentUser?.email,
+    phoneNumber: currentUser?.phoneNumber,
+    gender: currentUser?.gender,
+    address: currentUser?.address,
+    profilePic: currentUser?.profilePic,
   });
   const dispatch = useDispatch();
   //Logic for handling photo upload and changing the displayed picture
@@ -327,18 +327,18 @@ export const ProfileSettings = () => {
                     id="genderInput"
                     name="gender"
                     className="profile-seetings-form-input"
-                    value={userDetails.gender}
+                    value={userDetails?.gender}
                     onChange={handleChange}
                   >
-                    <option value="">{userDetails.gender}</option>
-                    {userDetails.gender == "male" ? (
+                    <option value="">{userDetails?.gender}</option>
+                    {userDetails?.gender == "male" ? (
                       <option value="female">Female</option>
                     ) : (
                       <option value="male">Male</option>
                     )}
                   </select>
                 </div>
-                {!currentUser.isAdmin && (
+                {!currentUser?.isAdmin && (
                   <div className="profile-settings-form-label-and-input-container">
                     <label
                       htmlFor="shopNameInput"
@@ -347,13 +347,13 @@ export const ProfileSettings = () => {
                       Shop name
                     </label>
                     <br />
-                    {currentUser.shopName ? (
+                    {currentUser?.shopName ? (
                       <input
                         id="shopNameInput"
                         name="shopName"
                         type="text"
                         className="profile-seetings-form-input"
-                        value={currentUser.shopName}
+                        value={currentUser?.shopName}
                         disabled
                         onChange={handleChange}
                         style={{ cursor: "not-allowed" }}

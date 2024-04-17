@@ -10,7 +10,7 @@ export const fetchCartItems = async()=>{
 export const fetchCartCount = async()=>{
   const res = await axiosInstance.get(`/cart/get-cart-count`)
 
-  if(res && res.data.cartCount){
+  if (res && res.data.cartCount) {
     return res.data.cartCount
-  } else {return}
+  }
 }
