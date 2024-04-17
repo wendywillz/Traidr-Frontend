@@ -47,20 +47,28 @@ const DeliveryPage = () => {
 
   //HANDLING THE PROCEED TO PAYMENT MODAL
   const [proceedModalVisibility, setProceedModalVisibility] = useState(false);
-  const proceedModalTitle = `PROCEED TO PAYMENT`;
-  const proceedModalMessage = `Proceed to Paystack Payment`;
+  const proceedModalTitle = `CONFIRM ORDER PAYMENT`;
+  const proceedModalMessage = `Please confirm you want to continue to pay`;
+  const toggleProceedModal = ()=>{
+    setProceedModalVisibility(!proceedModalVisibility)
+  }
   // const proceedModalButtonAction = () => {
   //   // window.location.href = "https://paystack.com/pay/traidr";
   //   //navigate("/order/payment");
   //   console.log(`Payment`);
   // };
 
+//HANDLING THE PAYSTACK MODAL
+const [paystackModalVisibility, setPaystackModalVisibility] = useState(false)
+const paystackModalTitle = `PAY WITH PAYSTACK`
+const paystackModalMessage = "Click to Pay with paystack"
   const [deliveryDetails, setDeliveryDetails] = useState<DeliveryDetailsData>({
     recipientName: "",
     recipientPhoneNumber: 0,
     deliveryAddress: "",
     deliveryInstructions: "",
   });
+ 
 
   const handleChange = (
     e: ChangeEvent<HTMLFormElement | HTMLInputElement | HTMLTextAreaElement>
@@ -75,7 +83,8 @@ const DeliveryPage = () => {
         deliveryDetails
       );
       if (res) {
-        setProceedModalVisibility(true);
+        // setProceedModalVisibility(false)
+        setPaystackModalVisibility(true)
       }
     } catch (error) {
       return error;
@@ -127,6 +136,7 @@ useEffect(()=>{
           title={confirmCancelModalTitle}
           message={confirmCancelModalmessage}
           onClickAction={handleCancel}
+          cancelButton={true}
         />
       )}
 
@@ -139,18 +149,23 @@ useEffect(()=>{
       )}
 
       {proceedModalVisibility && (
-        // <MultipurposeModal
-        //   title={proceedModalTitle}
-        //   message={proceedModalMessage}
-        //   onClickAction={proceedModalButtonAction}
-        // />
-        <ProceedToPaystackModal
-        title={proceedModalTitle}
-        message={proceedModalMessage}
+        <MultipurposeModal
+          title={proceedModalTitle}
+          message={proceedModalMessage}
+          onClickAction={handleCheckout}
+          cancelButton={true}
+        />
+       
+      )}
+
+      {paystackModalVisibility &&
+       <ProceedToPaystackModal
+        title={paystackModalTitle}
+        message={paystackModalMessage}
         // onClickAction={proceedModalButtonAction}
         saleTotal={saleTotal}
         />
-      )}
+      }
 
       <DeliveryPageMainContainer>
         <DeliveryPageFormContainer>
@@ -242,7 +257,7 @@ useEffect(()=>{
                     deliveryDetails.recipientPhoneNumber &&
                     deliveryDetails.deliveryAddress
                   ) {
-                    handleCheckout();
+                    toggleProceedModal();
                   } else {
                     setRecipientNameError(!deliveryDetails.recipientName);
                     setRecipientPhoneNumberError(
