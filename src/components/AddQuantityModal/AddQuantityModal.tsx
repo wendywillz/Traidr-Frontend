@@ -11,7 +11,8 @@ import {
 //package imports
 import { ChangeEvent, useState, useEffect } from "react";
 import axiosInstance from "../../utils/axiosInstance";
-
+import { useDispatch } from "react-redux";
+import { setCartCount } from "../../app/features/cart/cartSlice";
 interface CartDetails {
   currentProductId: string | undefined | null;
   productQuantity: number;
@@ -33,6 +34,7 @@ const AddQuantityModal = ({ productId, toggleVisibility }: ModalProps) => {
     currentProductId: productId,
     productQuantity: 0,
   });
+  const dispatch = useDispatch();
   // const [quantityModalVisibility, setQuantityModalVisibility] = useState(false);
 
   //function to make modal visible
@@ -44,8 +46,9 @@ const AddQuantityModal = ({ productId, toggleVisibility }: ModalProps) => {
   //functions to change quantity with buttons and input field
 
   useEffect(() => {
+    console.log("cartData", cartData);
     setCartData({ ...cartData, productQuantity: quantity });
-  }, [cartData, quantity]);
+  }, [quantity]);
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
   };
@@ -64,7 +67,10 @@ const AddQuantityModal = ({ productId, toggleVisibility }: ModalProps) => {
     if (quantity > 0) {
       // event.preventDefault()
       try {
-        await axiosInstance.post(`/cart/add-to-cart/`, cartData);
+        const res = await axiosInstance.post(`/cart/add-to-cart/`, cartData);
+        if (res && res.data.success) {
+          dispatch(setCartCount(quantity));
+        }
         // location.reload()
       } catch (error) {
         return error;

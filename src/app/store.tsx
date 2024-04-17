@@ -8,6 +8,8 @@ import shopSecurityReducer from "./features/shopRegistration/shopSecuritySlice";
 import tellUsAboutYourShopReducer from "./features/shopRegistration/tellUsAboutYourShopSlice";
 import formStepperReducer from "./features/formStepper/formStepperSlice";
 import shopProfileImageReducer from "./features/shopProfileImage/shopProfileImage";
+import cartReducer from "./features/cart/cartSlice";
+
 const persistConfig = {
   key: "root",
   storage,
@@ -23,6 +25,7 @@ const persistedReducer = persistReducer(
     tellUsAboutYourShop: tellUsAboutYourShopReducer,
     formStepper: formStepperReducer,
     shopProfileImage: shopProfileImageReducer,
+    cart: cartReducer,
   })
 );
 
