@@ -13,16 +13,16 @@ import {
 //component imports
 
 import MultipurposeModal from "../../../components/MultipurposeModal/MultipurposeModal";
-import ProceedToPaystackModal from "../../../components/ProceedToPaystackModal/ProceedToPaystackModal";
+
 
 //Interface imports
 import DeliveryDetailsData from "../../../interfaces/deliveryInterfaces";
 
 //package and tools imports
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, ChangeEvent } from "react";
 import axiosInstance from "../../../utils/axiosInstance";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { fetchSaleTotal } from "../../../api/sale";
+
 
 const DeliveryPage = () => {
   const navigate: NavigateFunction = useNavigate();
@@ -59,9 +59,8 @@ const DeliveryPage = () => {
   // };
 
 //HANDLING THE PAYSTACK MODAL
-const [paystackModalVisibility, setPaystackModalVisibility] = useState(false)
-const paystackModalTitle = `PAY WITH PAYSTACK`
-const paystackModalMessage = "Click to Pay with paystack"
+
+
   const [deliveryDetails, setDeliveryDetails] = useState<DeliveryDetailsData>({
     recipientName: "",
     recipientPhoneNumber: 0,
@@ -83,8 +82,7 @@ const paystackModalMessage = "Click to Pay with paystack"
         deliveryDetails
       );
       if (res) {
-        // setProceedModalVisibility(false)
-        setPaystackModalVisibility(true)
+        window.location.href = "https://paystack.com/pay/traidr";
       }
     } catch (error) {
       return error;
@@ -118,16 +116,6 @@ const paystackModalMessage = "Click to Pay with paystack"
     setDeliveryAddressError(false);
   };
 
-const [saleTotal, setSaleTotal] = useState<number>(0)
-
-useEffect(()=>{
-    fetchSaleTotal().then((res)=>{
-        if(res){
-            setSaleTotal(res. saleTotal)
-            console.log(res);
-        }
-    })
-},[])
 
   return (
     <DeliveryPageWholeContainer>
@@ -158,14 +146,6 @@ useEffect(()=>{
        
       )}
 
-      {paystackModalVisibility &&
-       <ProceedToPaystackModal
-        title={paystackModalTitle}
-        message={paystackModalMessage}
-        // onClickAction={proceedModalButtonAction}
-        saleTotal={saleTotal}
-        />
-      }
 
       <DeliveryPageMainContainer>
         <DeliveryPageFormContainer>

@@ -86,6 +86,11 @@ export const ShopMainWrapper = styled.div`
   border:none;
 }
 
+#shop-profile-shop-logo{
+  border:none;
+  padding: 0.1vh 0vw 0vh 0.1vw;
+}
+
 
 
   .shop-profile-productname {
