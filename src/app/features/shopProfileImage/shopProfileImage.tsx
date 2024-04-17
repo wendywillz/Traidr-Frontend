@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    shopProfileImage: "",
+    shopLogo: "",
 
 }
 
@@ -10,7 +10,7 @@ const shopProfileImage = createSlice({
   initialState,
   reducers: {
     setShopProfileImage: (state, action) => {
-      state.shopProfileImage = action.payload;
+      state.shopLogo = action.payload;
     },
   },
 });

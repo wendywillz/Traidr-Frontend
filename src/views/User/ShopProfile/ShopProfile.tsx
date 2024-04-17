@@ -25,9 +25,10 @@ const ShopProfile = () => {
   const [products, setProducts] = useState<shopProductsInterface[]>();
   const [shop, setShop] = useState<shopInterface>();
   const displayedProfilePic = useSelector(
-    (state: RootState) => state.shopProfileImage.shopProfileImage
+    (state: RootState) => state.shopProfileImage.shopLogo
   );
   const [isLoading, setIsLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
   const navigate = useNavigate();
   const [, setPhotoDisplayError] = useState("");
   // fetch shop from database
@@ -50,6 +51,7 @@ const ShopProfile = () => {
 
   const handleProfileImage = async (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) return;
+    setUploading(true);
     const maxSize = 3 * 1024 * 1024;
     const displayedPhoto = event.target.files[0];
     const uploadedPhoto = event.target.files[0];
@@ -76,7 +78,10 @@ const ShopProfile = () => {
           }
         );
         if (res && res.data.shopDetail) {
-          dispatch(setShopProfileImage(res.data.shopDetail.shopImageURL));
+          setUploading(false);
+          dispatch(setShopProfileImage(res.data.shopDetail));
+        } else {
+          setUploading(false);
         }
       } catch (error) {
         return error;
@@ -95,7 +100,10 @@ const ShopProfile = () => {
 
       <ShopProfileMainWrapper>
         <div className="shop-profile-product-logo">
-          <div className="shop-profile-productpicture">
+          <div
+            className="shop-profile-productpicture"
+            style={{ cursor: "pointer", position: "relative" }}
+          >
             <div
               className="upload-box-content"
               onClick={() => document.getElementById("fileInput")?.click()}
@@ -117,6 +125,24 @@ const ShopProfile = () => {
               accept="image/*"
               onChange={handleProfileImage}
             />
+            {uploading && (
+              <div
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#282828",
+                  color: "#ffffff",
+                }}
+              >
+                <span>uploading..</span>
+              </div>
+            )}
           </div>
 
           <div className="shop-profile-productname">
