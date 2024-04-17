@@ -16,7 +16,10 @@ const cartSlice = createSlice({
         state.cartCount += action.payload.quantity;
       }
        else if (action.payload.type == "remove") {
-         state.cartCount -= action.payload.quantity;
+         if(state.cartCount > 0){
+           state.cartCount -= action.payload.quantity;
+        }
+        
        }
     }
   }
