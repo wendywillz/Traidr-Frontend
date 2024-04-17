@@ -31,6 +31,8 @@ import OrderSummary from "./views/User/OrderSummary/OrderSummary";
 import MonthlyTrendLineChart from "./views/Admin/AdminPages/MonthlyTrend/LineChart";
 import Shop from "./views/User/Shop/Shop";
 import CartCounter from "./components/CartCounter/CartCounter";
+import Test from "./views/User/Test/Test";
+
 
 function App() {
   return (
@@ -122,6 +124,7 @@ function App() {
 
       <Route path="/success-modal" element={<SuccessModal />} />
       <Route path="/cc" element={<CartCounter />} />
+      <Route path="/tt" element={<Test/>} />
 
       {/*USER PATHS: WRAP IN PROTECTED ROUTES AND AVERAGE USER TIME*/}
     </Routes>
