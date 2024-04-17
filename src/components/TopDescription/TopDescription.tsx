@@ -51,7 +51,7 @@ function TopDescription({ ...props }: shopProductsInterface) {
 
           <div className="product-description-image-wrapper">
             {props.productImages.map((product, index) => (
-              <div key={index} className="product-description-image">
+              <div key={index} className="product-description-image-container">
                 <img src={product} alt={product} />
               </div>
             ))}
