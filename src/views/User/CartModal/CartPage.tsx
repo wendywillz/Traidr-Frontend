@@ -19,10 +19,11 @@ import axiosInstance from "../../../utils/axiosInstance";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import PageLoader from "../../../components/PageLoader/PageLoader";
 import BackButton from "../../../components/BackButton/BackButton";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../app/features/cart/cartSlice";
 const CartPage = () => {
   const navigate: NavigateFunction = useNavigate();
-
+  const dispatch = useDispatch();
   //Toggling the loader
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -41,6 +42,7 @@ const CartPage = () => {
   const [cartTotal, setCartTotal] = useState<number | undefined>(0);
   const [cartEmpty, setCartEmpty] = useState<boolean>(false);
 
+  console.log("cartProducts", cartProducts);
   useEffect(() => {
     fetchCartItems().then((res: CartProductDetail[]) => {
       if (res) {
@@ -67,7 +69,9 @@ const CartPage = () => {
         `/cart/delete-cart-item`,
         selectedProductDetail
       );
-      if (res && res.data.success) location.reload();
+      if (res && res.data.success) {
+        dispatch(addToCart({ productId, type: "remove" }));
+      }
     } catch (error) {
       return error;
     }
@@ -111,12 +115,12 @@ const CartPage = () => {
       )}
       <Header />
       <BackButton linkTo={"/dashboard"} />
-      <CartContainer>
+      {cartProducts && cartProducts.length > 0 ? (
+       <CartContainer>
         <CartHeaderContainer>
           <CartPageTitle>Cart Total</CartPageTitle>
           <CartTotal>₦{cartTotal?.toLocaleString()}</CartTotal>
         </CartHeaderContainer>
-        {cartEmpty && <p className="empty-cart-notice">No Items in Cart.</p>}
 
         <div>
           {cartProducts?.map((product) => {
@@ -131,7 +135,8 @@ const CartPage = () => {
           })}
         </div>
         <OrderButton onClick={toggleModalVisibility}>PLACE ORDER</OrderButton>
-      </CartContainer>
+      </CartContainer> 
+      ): <p style={{margin: "25% auto", textAlign: "center"}}>No item in your cart</p>}
     </>
   );
 };

@@ -12,7 +12,7 @@ import {
 import { ChangeEvent, useState, useEffect } from "react";
 import axiosInstance from "../../utils/axiosInstance";
 import { useDispatch } from "react-redux";
-import { setCartCount } from "../../app/features/cart/cartSlice";
+import { addToCart } from "../../app/features/cart/cartSlice";
 interface CartDetails {
   currentProductId: string | undefined | null;
   productQuantity: number;
@@ -46,7 +46,6 @@ const AddQuantityModal = ({ productId, toggleVisibility }: ModalProps) => {
   //functions to change quantity with buttons and input field
 
   useEffect(() => {
-    console.log("cartData", cartData);
     setCartData({ ...cartData, productQuantity: quantity });
   }, [quantity]);
   const increaseQuantity = () => {
@@ -69,7 +68,8 @@ const AddQuantityModal = ({ productId, toggleVisibility }: ModalProps) => {
       try {
         const res = await axiosInstance.post(`/cart/add-to-cart/`, cartData);
         if (res && res.data.success) {
-          dispatch(setCartCount(quantity));
+          console.log("cartData", { productId, quantity });
+          dispatch(addToCart({ productId, quantity, type: "add" }));
         }
         // location.reload()
       } catch (error) {

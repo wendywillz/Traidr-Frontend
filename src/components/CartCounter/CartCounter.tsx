@@ -14,16 +14,15 @@ import { useEffect } from "react";
 const CartCounter = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cartCount = useSelector((state: RootState) => state.cart.cartCount);
-  // const [cartCount, setCartCount] = useState<number>(count);
-console.log("cartCountIcon", cartCount);
+  const cartItems = useSelector((state: RootState) => state.cart.cartItem);
+  const cartCount = cartItems?.length
+    ? cartItems?.reduce((acc, item) => (acc += Number(item.productQuantity)), 0)
+    : 0;
   useEffect(() => {
     fetchCartCount().then((res) => {
-      if (res) {
-        dispatch(setCartCount(res));
-      }
+      dispatch(setCartCount(res));
     });
-  }, []);
+  }, [cartItems]);
 
   return (
     <CartCounterWholecontainer onClick={() => navigate(`/user/my-cart`)}>

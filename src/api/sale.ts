@@ -10,7 +10,6 @@ export const fetchReceipt = async()=>{
 export const fetchSaleTotal = async()=>{
   const res = await axiosInstance.get(`/sale/sale-total`)
   if(res && res.data.responseData){
-    console.log(res.data.responseData);
     return res.data.responseData
   }
 }
