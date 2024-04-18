@@ -46,7 +46,7 @@ useEffect(()=>{
         datasets:[{
         label: "Traidr Product Revenue",
         data: res?.map((details)=> details.totalRevenue),
-        backgroundColor: ["#2D9CDB", "#B4C150", "grey"],
+        backgroundColor: ["#2D9CDB", "#B4C150", "grey", "tomato", "aqua", "violet"],
         
     }] })
         }

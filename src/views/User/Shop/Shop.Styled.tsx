@@ -336,7 +336,13 @@ margin-top: 5vh;
 .shop-owner-email{
   font-size: 0.9vw;
   font-weight: 500;
-  margin-left: 1vw
+  margin-left: 1vw;
+  width: 13vw;
+  overflow-wrap: break-word;
+  /* text-overflow:clip;
+  display:flex;
+  flex-wrap: wrap; */
+  /* border: 1px solid blue; */
 }
 
 .shop-owner-phoneNumber{
